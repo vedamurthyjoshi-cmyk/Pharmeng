@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fluid Energy Mill — Pharmaceutical Engineering</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f0f4f8;color:#222;}
+header{background:#1B4F72;color:white;padding:16px 20px;}
+header h1{font-size:1.3em;} header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
+nav{background:#2E86C1;padding:10px 20px;}
+nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}
+.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}
+.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
+.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}
+.panel.active{display:block;}
+.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
+canvas{border-radius:8px;background:#0d1117;}
+.controls{margin-top:14px;}
+.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}
+.btn:hover{background:#2E86C1;}
+.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}
+.theory-box ul{padding-left:22px;margin-top:8px;}
+.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;font-size:0.97em;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
+.opt:hover{background:#EBF5FB;border-color:#1B4F72;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}
+.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:24px;background:white;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-top:10px;}
+footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>🌀 Fluid Energy Mill (Microniser) — Ultrafine Grinding</h1>
+  <p>Pharmaceutical Engineering BP304T · Chapter 1 — Size Reduction</p>
+</header>
+<nav><a href="../../index.html">🏠 Home</a></nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="760" height="380"></canvas>
+  <div class="controls">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+  </div>
+</div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>High-pressure gas (air or steam) enters through nozzles tangentially around the oval loop. Drug particles are fed in and accelerate to near-sonic velocity. Particles collide with each other (inter-particle impact) — <strong>no metal contact</strong>. Small particles (<5 µm) exit through the central outlet by centrifugal classification; large particles remain in the loop for further grinding.</p>
+  <div class="key-fact">🔑 The Fluid Energy Mill is the only commonly used mill that produces <strong>no heat</strong> (gas expands on entering → cools down) — ideal for thermolabile drugs including steroids and antibiotics for inhalation therapy.</div>
+</div>
+</div>
+
+<div id="theory" class="panel">
+  <div class="theory-box">
+    <h3>Principle</h3>
+    <p>The Fluid Energy Mill (Microniser/Jet Mill) uses high-velocity compressed gas (air or steam at 7–10 bar) to accelerate particles to near-sonic speed inside an oval or circular loop. Particles collide with each other at high energy → <strong>inter-particle impact</strong> → size reduction. No grinding media contact — no metal contamination. Size classification is built in: centrifugal force keeps large particles circulating in the loop; small particles (1–10 µm) migrate to the centre and exit through the product outlet.</p>
+  </div>
+  <div class="theory-box">
+    <h3>Construction</h3>
+    <ul>
+      <li><strong>Loop (racetrack):</strong> Oval or circular flattened tube, 25–200 mm diameter</li>
+      <li><strong>Gas jets:</strong> Multiple nozzles positioned tangentially around the loop; high-pressure gas creates circulating vortex</li>
+      <li><strong>Feed inlet:</strong> Drug powder fed into the high-velocity gas stream through a Venturi feed nozzle</li>
+      <li><strong>Product outlet:</strong> Central port — fine particles exit by inertial classification</li>
+      <li><strong>Gas supply:</strong> Air compressor (7–10 bar) or steam; gas is filtered before entry (no contamination)</li>
+    </ul>
+  </div>
+  <div class="theory-box">
+    <h3>Pharmaceutical Applications</h3>
+    <ul>
+      <li><strong>Inhalation drugs:</strong> Salbutamol, budesonide, fluticasone — must be 1–5 µm for deep lung deposition; fluid energy mill is the standard method</li>
+      <li><strong>Steroids:</strong> Prednisolone, beclomethasone — thermolabile; only jet milling safe</li>
+      <li><strong>Antibiotics:</strong> Griseofulvin, amphotericin B — heat-sensitive; jet milled</li>
+      <li><strong>BCS Class II drugs:</strong> Improving dissolution by particle size reduction without heat degradation</li>
+    </ul>
+    <div class="key-fact">🔑 Particle size range: 1–10 µm (micronised). For inhalation therapy (MDI, DPI), 1–5 µm particles required to reach alveoli. Particles > 10 µm deposit in throat; < 0.5 µm exhaled without deposition.</div>
+  </div>
+  <div class="theory-box">
+    <h3>Advantages and Disadvantages</h3>
+    <ul>
+      <li>✅ No heat generation (Joule-Thomson cooling as gas expands) — ideal for thermolabile drugs</li>
+      <li>✅ No metal contamination — no grinding media contact</li>
+      <li>✅ Produces very fine particles (1–10 µm) — finest of all common mills</li>
+      <li>✅ Self-classifying — no separate sieving needed</li>
+      <li>✅ Sterile operation possible (filtered compressed air)</li>
+      <li>❌ High energy cost (compressed gas)</li>
+      <li>❌ Low throughput — not for large volume production</li>
+      <li>❌ Not suitable for waxy, sticky, or moisture-sensitive materials</li>
+    </ul>
+  </div>
+</div>
+
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. The unique advantage of the Fluid Energy Mill (Jet Mill) over Ball Mill and Hammer Mill is:</div>
+    <button class="opt" onclick="choose(this,false)">A) It produces the coarsest particle size of all mills</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) No heat generated — compressed gas expands and cools (Joule-Thomson effect) — safe for thermolabile drugs; also no metal contamination</button>
+    <button class="opt" onclick="choose(this,false)">C) It uses the least energy of all size reduction methods</button>
+    <button class="opt" onclick="choose(this,false)">D) It can mill both dry and wet materials simultaneously</button>
+    <div class="explanation">✅ Joule-Thomson effect: when compressed gas (7–10 bar) expands through nozzles → temperature drops (cooling). Net result: the milling zone is actually cooled by the expanding gas — opposite of Ball/Hammer mills which heat the product. This makes jet milling the standard method for heat-sensitive inhalation drugs (steroids, bronchodilators) where particle size must be 1–5 µm.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. Why must salbutamol (albuterol) for MDI inhalers be micronised to 1–5 µm using a fluid energy mill?</div>
+    <button class="opt" onclick="choose(this,false)">A) Larger particles dissolve faster in the lung</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Only particles 1–5 µm reach the alveoli (deep lung); larger particles deposit in the throat and are swallowed; smaller particles are exhaled without deposition</button>
+    <button class="opt" onclick="choose(this,false)">C) Micronisation improves salbutamol chemical stability</button>
+    <button class="opt" onclick="choose(this,false)">D) The 1–5 µm size matches the airway diameter for maximum speed</button>
+    <div class="explanation">✅ Aerodynamic diameter determines deposition site in lungs: > 10 µm → upper airways/throat (inertial impaction); 5–10 µm → large bronchi; 1–5 µm → small bronchi and alveoli (target for bronchodilators and inhaled steroids); < 0.5 µm → exhaled. Fluid energy mill achieves 1–5 µm range without heat → no degradation of thermolabile steroid or beta-agonist. This is why jet milling is THE standard process for inhalation API manufacturing.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q3. Size classification in the Fluid Energy Mill is achieved by:</div>
+    <button class="opt" onclick="choose(this,false)">A) A screen at the product outlet — particles must be smaller than screen aperture</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Centrifugal force — large particles stay in outer loop (higher centrifugal force outweighs gas drag); small particles migrate inward and exit through central outlet</button>
+    <button class="opt" onclick="choose(this,false)">C) A filter bag that captures large particles</button>
+    <button class="opt" onclick="choose(this,false)">D) Temperature — larger particles melt and drop out</button>
+    <div class="explanation">✅ Built-in classification: the circulating vortex inside the oval loop creates centrifugal force. Larger particles (higher mass) experience greater centrifugal force → stay in outer circulation → continue grinding. Smaller particles (lower mass) → gas drag force > centrifugal force → migrate toward centre → exit through product outlet. This automatic size selection means no separate sieving is needed after fluid energy milling.</div>
+  </div>
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
+  </div>
+</div>
+<footer>© 2025 Pharmaceutical Engineering BP304T · Fluid Energy Mill</footer>
+<script>
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+let score=0,answered=0;
+const total=document.querySelectorAll('.mcq-card').length;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');score++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';answered++;if(answered===total){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+score+' / '+total;}}
+function resetMCQ(){score=0;answered=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+// Animation
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+const W=canvas.width,H=canvas.height;
+const cx=W/2,cy=H/2;
+let running=true,speedMult=1,t=0;
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';}
+function setSpeed(s){speedMult=s;}
+// Particles along oval path
+const particles=[];
+const N=60;
+for(let i=0;i<N;i++){
+  const progress=i/N;
+  const r=5+Math.random()*8;
+  particles.push({
+    progress,
+    r,
+    col:r>9?'#E74C3C':r>6?'#F39C12':'#2ECC71', // large=red, med=orange, small=green
+    speed:(0.003+Math.random()*0.004)*(r<6?1.5:0.8)
+  });
+}
+
+function ovalPos(progress){
+  // Oval path
+  const a=Math.PI*2*progress;
+  const rx=260,ry=130;
+  return {x:cx+Math.cos(a)*rx,y:cy+Math.sin(a)*ry};
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#0d1117';ctx.fillRect(0,0,W,H);
+
+  // Draw oval track
+  ctx.strokeStyle='rgba(74,144,217,0.3)';
+  ctx.lineWidth=50;
+  ctx.beginPath();
+  ctx.ellipse(cx,cy,260,130,0,0,Math.PI*2);
+  ctx.stroke();
+
+  ctx.strokeStyle='rgba(74,144,217,0.6)';
+  ctx.lineWidth=3;
+  ctx.beginPath();
+  ctx.ellipse(cx,cy,285,155,0,0,Math.PI*2);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.ellipse(cx,cy,235,105,0,0,Math.PI*2);
+  ctx.stroke();
+
+  // Nozzles (6 tangential jets)
+  for(let i=0;i<6;i++){
+    const a=i*Math.PI/3;
+    const jx=cx+Math.cos(a)*285;
+    const jy=cy+Math.sin(a)*155;
+    ctx.fillStyle='#F39C12';
+    ctx.beginPath();ctx.arc(jx,jy,8,0,Math.PI*2);ctx.fill();
+    // Gas jet stream
+    ctx.strokeStyle='rgba(243,156,18,0.4)';
+    ctx.lineWidth=3;
+    ctx.beginPath();
+    ctx.moveTo(jx,jy);
+    const tangX=jx-Math.sin(a)*30;
+    const tangY=jy+Math.cos(a)*30;
+    ctx.lineTo(tangX,tangY);
+    ctx.stroke();
+  }
+
+  // Product outlet (centre)
+  ctx.fillStyle='#2ECC71';
+  ctx.beginPath();ctx.arc(cx,cy,25,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='white';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='white';ctx.font='bold 10px Arial';ctx.textAlign='center';
+  ctx.fillText('FINE',cx,cy-3);
+  ctx.fillText('OUT',cx,cy+10);
+
+  // Feed inlet
+  const feedPos=ovalPos(0.55);
+  ctx.fillStyle='#9B59B6';
+  ctx.beginPath();ctx.arc(feedPos.x,feedPos.y,12,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='white';ctx.font='9px Arial';
+  ctx.fillText('FEED',feedPos.x,feedPos.y+4);
+
+  // Draw particles
+  particles.forEach(p=>{
+    const pos=ovalPos(p.progress);
+    // Small particles drift inward
+    const inward=p.r<6?0.85:1.0;
+    const px=cx+(pos.x-cx)*inward;
+    const py=cy+(pos.y-cy)*inward;
+    ctx.beginPath();ctx.arc(px,py,p.r*0.8,0,Math.PI*2);
+    ctx.fillStyle=p.col;ctx.globalAlpha=0.8;ctx.fill();ctx.globalAlpha=1;
+  });
+
+  // Labels
+  ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(10,10,220,95);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';
+  ctx.fillText('🌀 Fluid Energy Mill',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Gas pressure: 7–10 bar',18,48);
+  ctx.fillText('Particle size: 1–10 µm',18,64);
+  ctx.fillStyle='#2ECC71';
+  ctx.fillText('● Small particles exit (fine)',18,80);
+  ctx.fillStyle='#E74C3C';
+  ctx.fillText('● Large particles recirculate',18,96);
+}
+
+function step(){
+  t+=speedMult;
+  particles.forEach(p=>{
+    p.progress=(p.progress+p.speed*speedMult)%1;
+    // Gradually reduce size
+    if(Math.random()<0.005*speedMult&&p.r>3) p.r-=0.3;
+    // Reset large particles
+    if(p.r<2){p.r=7+Math.random()*5;p.col='#E74C3C';}
+    // Update colour by size
+    if(p.r>8) p.col='#E74C3C';
+    else if(p.r>5) p.col='#F39C12';
+    else p.col='#2ECC71';
+  });
+}
+function loop(){if(running)step();draw();requestAnimationFrame(loop);}
+loop();
+</script>
+</body>
+</html>
