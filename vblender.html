@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V-Blender — Pharmaceutical Engineering</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f0f4f8;color:#222;}
+header{background:#1B4F72;color:white;padding:16px 20px;}
+header h1{font-size:1.3em;}
+header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
+nav{background:#2E86C1;padding:10px 20px;}
+nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}
+.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}
+.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
+.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}
+.panel.active{display:block;}
+.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
+canvas{border-radius:8px;background:#1a1a2e;}
+.controls{margin-top:14px;}
+.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}
+.btn:hover{background:#2E86C1;}
+.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}
+.theory-box ul{padding-left:22px;margin-top:8px;}
+.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;font-size:0.97em;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
+.opt:hover{background:#EBF5FB;border-color:#1B4F72;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}
+.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:24px;background:white;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-top:10px;}
+footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>🔄 V-Blender — Tumbling Mixer</h1>
+  <p>Pharmaceutical Engineering BP304T · Chapter 2 — Mixing</p>
+</header>
+<nav>
+  <a href="index.html">🏠 Home</a>
+  <a href="index.html">← All Topics</a>
+</nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="760" height="380"></canvas>
+  <div class="controls">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <button class="btn" onclick="setSpeed(0.4)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  </div>
+</div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>The V-shaped shell rotates end-over-end about a horizontal axis. The two arms of the V alternately split the powder and recombine it — this tumbling action achieves uniform mixing. Red and blue particles represent two components that blend together.</p>
+  <div class="key-fact">🔑 The V-blender achieves mixing purely by tumbling — no moving parts inside the blender. This makes it ideal for fragile granules that would break in a high-shear mixer.</div>
+</div>
+</div>
+
+<div id="theory" class="panel">
+  <div class="theory-box">
+    <h3>Principle</h3>
+    <p>The V-blender is a <strong>tumbling mixer</strong>. The V-shaped (twin-shell) vessel rotates about a horizontal axis. As it rotates, the powder alternately splits into the two arms of the V (diverging) and recombines at the junction (converging). This continuous split-and-recombine action distributes particles uniformly — <strong>convective mixing</strong>.</p>
+  </div>
+  <div class="theory-box">
+    <h3>Construction</h3>
+    <ul>
+      <li><strong>Shell:</strong> Two cylindrical arms joined at an angle (typically 75–80°) forming a V or Y shape; stainless steel 316L (pharmaceutical grade)</li>
+      <li><strong>Rotation axis:</strong> Horizontal shaft through the apex of the V; driven by gearmotor at 6–25 rpm</li>
+      <li><strong>Loading ports:</strong> Hinged covers at the top of each arm for loading powder</li>
+      <li><strong>Discharge port:</strong> Ball valve at the apex of the V for discharge</li>
+      <li><strong>Intensifier bar (optional):</strong> Internal rotating bar with pins breaks agglomerates during mixing — converts V-blender to high-shear V-blender</li>
+      <li><strong>Capacity:</strong> Laboratory (2–10 L) to production (500–2000 L)</li>
+    </ul>
+  </div>
+  <div class="theory-box">
+    <h3>Pharmaceutical Applications</h3>
+    <ul>
+      <li>Pre-mixing of API with excipients before granulation or direct compression</li>
+      <li>Blending lubricated granules with lubricant (MgSt) before tabletting</li>
+      <li>Mixing dry powder formulations for capsule filling</li>
+      <li>Blending of dry powders for sachets (oral rehydration salts, effervescent powders)</li>
+    </ul>
+    <div class="key-fact">🔑 Fill level for V-blender: 50–60% of total shell volume. Below 40%: insufficient particle contact; poor mixing. Above 70%: particles cannot move freely; poor mixing efficiency.</div>
+  </div>
+  <div class="theory-box">
+    <h3>Advantages and Disadvantages</h3>
+    <ul>
+      <li>✅ Gentle mixing — no particle attrition or degradation; ideal for fragile granules</li>
+      <li>✅ Easy loading and discharge; good GMP design</li>
+      <li>✅ Easy to clean (CIP/WIP compatible)</li>
+      <li>✅ No dead spots — complete discharge</li>
+      <li>❌ Not suitable for wet or cohesive materials</li>
+      <li>❌ Slow mixing — 15–30 minutes typically needed</li>
+      <li>❌ May segregate after mixing if not properly closed (density differences between components)</li>
+      <li>❌ Large footprint for big production blenders</li>
+    </ul>
+  </div>
+</div>
+
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. The V-blender achieves mixing by which primary mechanism?</div>
+    <button class="opt" onclick="choose(this,false)">A) Diffusion — random particle movement due to Brownian motion</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Convection — bulk movement of powder as the shell tumbles and splits/recombines the powder mass</button>
+    <button class="opt" onclick="choose(this,false)">C) High-shear mixing — blades cut and mix the powder</button>
+    <button class="opt" onclick="choose(this,false)">D) Fluidisation — air suspends particles for mixing</button>
+    <div class="explanation">✅ V-blender = convective mixing. The split-and-recombine tumbling action moves large masses of powder (convective transport). No internal moving parts — gentle, low-shear. Also some diffusion occurs at particle interfaces. Compare with Ribbon blender (convection + shear) and Sigma mixer (high-shear).</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. The recommended fill level for a V-blender is:</div>
+    <button class="opt" onclick="choose(this,false)">A) 20–30% — low fill for more free space</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) 50–60% of total shell volume — optimal for split-recombine mixing action</button>
+    <button class="opt" onclick="choose(this,false)">C) 80–90% — near-full for maximum batch size</button>
+    <button class="opt" onclick="choose(this,false)">D) 100% — completely full for best mixing</button>
+    <div class="explanation">✅ 50–60% fill: sufficient powder mass for effective convective transport; sufficient empty space for powder to move and tumble. Below 40%: powder clusters in one arm; inadequate split-recombine. Above 70%: powder cannot move freely between arms; poor mixing. This fill range is a critical process parameter (CPP) for V-blender mixing operations.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q3. The V-blender is preferred over a Ribbon Blender for blending lubricant (Magnesium Stearate) with tablet granules because:</div>
+    <button class="opt" onclick="choose(this,true)" data-correct>A) Gentle tumbling action coats granules with MgSt without over-lubricating; ribbon blender's higher shear could over-lubricate, reducing tablet hardness</button>
+    <button class="opt" onclick="choose(this,false)">B) V-blender operates at higher temperature, melting MgSt for better coating</button>
+    <button class="opt" onclick="choose(this,false)">C) V-blender can handle larger volumes of MgSt</button>
+    <button class="opt" onclick="choose(this,false)">D) V-blender produces more uniform granule size</button>
+    <div class="explanation">✅ MgSt lubrication is critical: too little = tablet sticking to punch faces; too much = hydrophobic MgSt film on granule surfaces → poor wettability → slow dissolution → reduced bioavailability. V-blender's gentle tumbling applies thin MgSt coating with low shear — minimising over-lubrication risk. Mixing time for MgSt is also strictly controlled (typically 3–5 minutes only).</div>
+  </div>
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
+  </div>
+</div>
+<footer>© 2025 Pharmaceutical Engineering BP304T · V-Blender</footer>
+
+<script>
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+let score=0,answered=0;
+const total=document.querySelectorAll('.mcq-card').length;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');score++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';answered++;if(answered===total){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+score+' / '+total;}}
+function resetMCQ(){score=0;answered=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+let running=true,angle=0,speedMult=1;
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';}
+function setSpeed(s){speedMult=s;}
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+const W=canvas.width,H=canvas.height;
+const cx=W/2,cy=H/2;
+// Particles
+let particles=[];
+for(let i=0;i<120;i++) particles.push({offset:{x:(Math.random()-0.5)*50,y:(Math.random()-0.5)*100+30},col:i<60?'#E74C3C':'#3498DB',arm:i<60?0:1});
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  const bg=ctx.createLinearGradient(0,0,0,H);
+  bg.addColorStop(0,'#1a1a2e');bg.addColorStop(1,'#0d0d1a');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+
+  ctx.save();
+  ctx.translate(cx,cy);
+  ctx.rotate(angle);
+
+  // V arms
+  const armLen=160,armW=55;
+  const armAngle=Math.PI*0.35; // angle of each arm from vertical
+
+  // Left arm
+  ctx.save();
+  ctx.rotate(-armAngle);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=12;
+  ctx.fillStyle='rgba(74,144,217,0.12)';
+  ctx.beginPath();
+  ctx.roundRect(-armW/2,-armLen,armW,armLen,8);
+  ctx.fill();ctx.stroke();
+  // Particles in left arm
+  particles.filter(p=>p.arm===0).forEach(p=>{
+    ctx.beginPath();ctx.arc(p.offset.x*0.6,p.offset.y,4,0,Math.PI*2);
+    ctx.fillStyle=p.col;ctx.globalAlpha=0.85;ctx.fill();ctx.globalAlpha=1;
+  });
+  ctx.restore();
+
+  // Right arm
+  ctx.save();
+  ctx.rotate(armAngle);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=12;
+  ctx.fillStyle='rgba(74,144,217,0.12)';
+  ctx.beginPath();
+  ctx.roundRect(-armW/2,-armLen,armW,armLen,8);
+  ctx.fill();ctx.stroke();
+  particles.filter(p=>p.arm===1).forEach(p=>{
+    ctx.beginPath();ctx.arc(p.offset.x*0.6,p.offset.y,4,0,Math.PI*2);
+    ctx.fillStyle=p.col;ctx.globalAlpha=0.85;ctx.fill();ctx.globalAlpha=1;
+  });
+  ctx.restore();
+
+  // Junction / apex
+  ctx.fillStyle='#2C3E50';
+  ctx.beginPath();ctx.arc(0,0,22,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=3;ctx.stroke();
+
+  ctx.restore();
+
+  // Rotation axis
+  ctx.strokeStyle='rgba(255,255,255,0.15)';ctx.lineWidth=2;
+  ctx.setLineDash([6,6]);
+  ctx.beginPath();ctx.moveTo(100,cy);ctx.lineTo(W-100,cy);ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Labels
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,200,80);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';
+  ctx.fillText('🔄 V-Blender',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Rotation: 6–25 RPM',18,48);
+  ctx.fillText('Mechanism: Convective tumbling',18,64);
+  ctx.fillStyle='#F9E79F';
+  ctx.fillText('Fill level: 50–60%',18,80);
+}
+
+function physicsStep(){
+  angle+=0.012*speedMult;
+  // Mix particles gradually (simulate blending)
+  particles.forEach(p=>{
+    if(Math.random()<0.008*speedMult){
+      p.arm=p.arm===0?1:0; // swap arm
+      p.col=Math.random()<0.5?'#E74C3C':'#3498DB'; // gradually randomise color
+    }
+    p.offset.x+=(Math.random()-0.5)*0.3*speedMult;
+    p.offset.y+=(Math.random()-0.5)*0.3*speedMult;
+    p.offset.x=Math.max(-24,Math.min(24,p.offset.x));
+    p.offset.y=Math.max(5,Math.min(90,p.offset.y));
+  });
+}
+
+function loop(){if(running)physicsStep();draw();requestAnimationFrame(loop);}
+loop();
+</script>
+</body>
+</html>

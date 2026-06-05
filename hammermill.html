@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hammer Mill — Pharmaceutical Engineering</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f0f4f8;color:#222;}
+header{background:#1B4F72;color:white;padding:16px 20px;}
+header h1{font-size:1.3em;}
+header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
+nav{background:#2E86C1;padding:10px 20px;}
+nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}
+.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}
+.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
+.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}
+.panel.active{display:block;}
+.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
+canvas{border-radius:8px;}
+.controls{margin-top:14px;}
+.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}
+.btn:hover{background:#2E86C1;}
+.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}
+.theory-box ul{padding-left:22px;margin-top:8px;}
+.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;font-size:0.97em;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
+.opt:hover{background:#EBF5FB;border-color:#1B4F72;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}
+.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:24px;background:white;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-top:10px;}
+footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>🔨 Hammer Mill — Impact Grinding</h1>
+  <p>Pharmaceutical Engineering BP304T · Chapter 1</p>
+</header>
+<nav>
+  <a href="index.html">🏠 Home</a>
+  <a href="index.html">← All Topics</a>
+</nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="760" height="380"></canvas>
+  <div class="controls">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  </div>
+</div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>The central rotor spins at high speed (2000–8000 rpm). Swinging hammers strike incoming feed particles by <strong>impact</strong>. Broken particles hit the breaker plates (walls) for further size reduction by <strong>attrition</strong>. Particles only exit through the screen when small enough.</p>
+  <div class="key-fact">🔑 Size control: The screen aperture size determines the final particle size. Smaller screen = finer product. Typical range: 50–1000 µm.</div>
+</div>
+</div>
+
+<div id="theory" class="panel">
+  <div class="theory-box">
+    <h3>Principle</h3>
+    <p>The Hammer Mill reduces particle size primarily by <strong>impact</strong>. A high-speed rotating disc (rotor) carries a series of hammers (rectangular metal bars). Feed material enters from the top, is struck by hammers and broken. Particles bounce off breaker plates (further attrition) and circulate until small enough to pass through a screen at the bottom.</p>
+  </div>
+  <div class="theory-box">
+    <h3>Construction</h3>
+    <ul>
+      <li><strong>Rotor:</strong> Central shaft with disc; rotates at 2000–8000 rpm driven by electric motor</li>
+      <li><strong>Hammers:</strong> Rectangular steel bars, pivoted or fixed to rotor disc; 4–16 hammers per mill; swing freely (swing-hammer type) or fixed (rigid)</li>
+      <li><strong>Breaker plates:</strong> Corrugated steel plates lining the mill casing; particles bounce off these for additional size reduction by attrition</li>
+      <li><strong>Screen:</strong> Perforated metal screen at the bottom; particles only exit when diameter less than screen aperture</li>
+      <li><strong>Feed hopper:</strong> Top inlet for material feed; gravity-fed or force-fed</li>
+    </ul>
+  </div>
+  <div class="theory-box">
+    <h3>Pharmaceutical Applications</h3>
+    <ul>
+      <li>Granulation — breaking dried granules to the correct size before tablet compression</li>
+      <li>Milling of herbs and plant material</li>
+      <li>Production of powders from compacted solids</li>
+      <li>Breaking of agglomerates in dried spray-dried powders</li>
+    </ul>
+    <div class="key-fact">🔑 The Hammer Mill is the most widely used milling equipment in pharmaceutical tablet manufacturing — particularly for granule sizing after wet or dry granulation.</div>
+  </div>
+  <div class="theory-box">
+    <h3>Advantages and Disadvantages</h3>
+    <ul>
+      <li>✅ High throughput — fast continuous operation</li>
+      <li>✅ Easy to change particle size — just change screen</li>
+      <li>✅ Easy to clean and maintain</li>
+      <li>✅ Handles wide variety of materials — hard, soft, fibrous</li>
+      <li>❌ Generates heat — not suitable for heat-sensitive drugs</li>
+      <li>❌ Creates dust — needs dust collection system</li>
+      <li>❌ Screen may blind (clog) with sticky or moist material</li>
+      <li>❌ Wide particle size distribution — not for very narrow specifications</li>
+    </ul>
+  </div>
+</div>
+
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. The primary mechanism of size reduction in a Hammer Mill is:</div>
+    <button class="opt" onclick="choose(this,false)">A) Compression between two rollers</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Impact — high-speed hammers strike particles; attrition against breaker plates</button>
+    <button class="opt" onclick="choose(this,false)">C) Cutting by sharp blades</button>
+    <button class="opt" onclick="choose(this,false)">D) Ultrasonic vibration causing particle fracture</button>
+    <div class="explanation">✅ Hammer Mill = Impact + Attrition. Impact: hammers strike particles at 2000–8000 rpm → high kinetic energy → fracture. Attrition: broken particles bounce off corrugated breaker plates → further size reduction by rubbing. Compare with Ball Mill (also impact + attrition but slower; cascade mechanism).</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. Particle size from a Hammer Mill is controlled by:</div>
+    <button class="opt" onclick="choose(this,false)">A) Rotor speed only</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Screen aperture size — particles exit only when smaller than screen holes; smaller screen = finer product</button>
+    <button class="opt" onclick="choose(this,false)">C) Feed rate of material</button>
+    <button class="opt" onclick="choose(this,false)">D) Number of hammers on the rotor</button>
+    <div class="explanation">✅ Screen (sieve) at bottom of hammer mill is the size-control mechanism. Material recirculates inside mill until particles are small enough to pass through screen apertures. Changing screen size (50 µm to 5 mm) changes product particle size. This makes the hammer mill very flexible for different particle size specifications.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q3. In pharmaceutical tablet manufacturing, the Hammer Mill is most commonly used for:</div>
+    <button class="opt" onclick="choose(this,false)">A) Micronising API to submicron particle size</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Sizing dried granules to uniform particle size before tablet compression</button>
+    <button class="opt" onclick="choose(this,false)">C) Sterilising powder by impact at high velocity</button>
+    <button class="opt" onclick="choose(this,false)">D) Mixing tablet granulation with lubricant</button>
+    <div class="explanation">✅ Granule sizing: after wet granulation and drying (in fluid bed dryer or tray oven), dried granules are passed through a Hammer Mill to break down oversized granules to uniform size (typically 250–850 µm for tablets). Uniform granule size = uniform die filling = consistent tablet weight = good content uniformity.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q4. The Hammer Mill is NOT suitable for which type of material?</div>
+    <button class="opt" onclick="choose(this,false)">A) Hard minerals like calcium phosphate</button>
+    <button class="opt" onclick="choose(this,false)">B) Fibrous plant material</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>C) Heat-sensitive drugs like enzymes and proteins — hammer mill generates substantial frictional heat</button>
+    <button class="opt" onclick="choose(this,false)">D) Dried spray-dried granules</button>
+    <div class="explanation">✅ Heat generation in hammer mill: at 5000+ rpm, hammers generate significant friction and impact heat. Temperature rise of 20–40°C possible for difficult materials. Thermolabile APIs (proteins, enzymes, some vitamins) would denature. Solution: cryogenic milling (liquid nitrogen cooling) or use fluid energy mill (compressed gas — minimal heat).</div>
+  </div>
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
+  </div>
+</div>
+<footer>© 2025 Pharmaceutical Engineering BP304T · Hammer Mill</footer>
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+let score=0,answered=0;
+const total=document.querySelectorAll('.mcq-card').length;
+function choose(el,correct){
+  const card=el.closest('.mcq-card');
+  if(card.querySelector('.correct')||card.querySelector('.wrong')) return;
+  if(correct){el.classList.add('correct');score++;}
+  else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}
+  card.querySelector('.explanation').style.display='block';
+  answered++;
+  if(answered===total){
+    document.getElementById('score').style.display='block';
+    document.getElementById('scoreText').textContent='🎯 Score: '+score+' / '+total+(score===total?' — Perfect! 🌟':' — Review explanations and try again.');
+  }
+}
+function resetMCQ(){score=0;answered=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+
+// Animation
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+const W=canvas.width,H=canvas.height;
+let rot=0,running=true,speedMult=1;
+const cx=W/2,cy=H/2+20;
+const NUM_HAMMERS=6;
+// Particles flying around
+let particles=[];
+for(let i=0;i<18;i++) particles.push({x:cx+(Math.random()-0.5)*160,y:cy+(Math.random()-0.5)*160,vx:(Math.random()-0.5)*3,vy:(Math.random()-0.5)*3,r:3+Math.random()*5,col:'#C8B560'});
+
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';}
+function setSpeed(s){speedMult=s;}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  // BG
+  ctx.fillStyle='#1a1a2e';
+  ctx.fillRect(0,0,W,H);
+
+  // Casing
+  ctx.strokeStyle='#4A90D9';
+  ctx.lineWidth=14;
+  ctx.beginPath();
+  ctx.arc(cx,cy,170,0,Math.PI*2);
+  ctx.stroke();
+
+  // Breaker plates (corrugated look)
+  ctx.strokeStyle='#2C6E9A';
+  ctx.lineWidth=5;
+  for(let i=0;i<16;i++){
+    const a=i*Math.PI/8;
+    ctx.beginPath();
+    ctx.moveTo(cx+Math.cos(a)*155,cy+Math.sin(a)*155);
+    ctx.lineTo(cx+Math.cos(a+0.1)*163,cy+Math.sin(a+0.1)*163);
+    ctx.stroke();
+  }
+
+  // Screen at bottom (arc)
+  ctx.strokeStyle='#F39C12';
+  ctx.lineWidth=6;
+  ctx.setLineDash([8,6]);
+  ctx.beginPath();
+  ctx.arc(cx,cy,155,Math.PI*0.6,Math.PI*2.4);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Rotor disc
+  ctx.save();
+  ctx.translate(cx,cy);
+  ctx.rotate(rot);
+  ctx.fillStyle='#2C3E50';
+  ctx.beginPath();
+  ctx.arc(0,0,28,0,Math.PI*2);
+  ctx.fill();
+
+  // Hammers
+  for(let i=0;i<NUM_HAMMERS;i++){
+    const a=i*(Math.PI*2/NUM_HAMMERS);
+    ctx.save();
+    ctx.rotate(a);
+    // Swing arm
+    ctx.strokeStyle='#85929E';
+    ctx.lineWidth=6;
+    ctx.beginPath();
+    ctx.moveTo(0,28);
+    ctx.lineTo(0,85);
+    ctx.stroke();
+    // Hammer head
+    ctx.fillStyle='#AAB7B8';
+    ctx.fillRect(-12,88,24,22);
+    ctx.strokeStyle='#7F8C8D';
+    ctx.lineWidth=1;
+    ctx.strokeRect(-12,88,24,22);
+    ctx.restore();
+  }
+  ctx.restore();
+
+  // Feed arrow (top)
+  ctx.fillStyle='rgba(46,204,113,0.8)';
+  ctx.beginPath();
+  ctx.moveTo(cx-15,cy-195);
+  ctx.lineTo(cx+15,cy-195);
+  ctx.lineTo(cx+15,cy-175);
+  ctx.lineTo(cx+25,cy-175);
+  ctx.lineTo(cx,cy-158);
+  ctx.lineTo(cx-25,cy-175);
+  ctx.lineTo(cx-15,cy-175);
+  ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle='white';
+  ctx.font='bold 11px Arial';
+  ctx.textAlign='center';
+  ctx.fillText('FEED',cx,cy-200);
+
+  // Particles
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=p.col;
+    ctx.fill();
+  });
+
+  // Product arrow (bottom)
+  ctx.fillStyle='rgba(231,76,60,0.8)';
+  ctx.beginPath();
+  ctx.moveTo(cx-15,cy+160);
+  ctx.lineTo(cx+15,cy+160);
+  ctx.lineTo(cx+15,cy+180);
+  ctx.lineTo(cx+25,cy+180);
+  ctx.lineTo(cx,cy+200);
+  ctx.lineTo(cx-25,cy+180);
+  ctx.lineTo(cx-15,cy+180);
+  ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle='white';
+  ctx.font='bold 11px Arial';
+  ctx.textAlign='center';
+  ctx.fillText('PRODUCT',cx,cy+215);
+
+  // Labels
+  ctx.fillStyle='rgba(0,0,0,0.65)';
+  ctx.fillRect(10,10,185,75);
+  ctx.fillStyle='white';
+  ctx.font='12px Arial';
+  ctx.textAlign='left';
+  ctx.fillText('🔨 Hammer Mill',18,30);
+  ctx.fillStyle='#AED6F1';
+  ctx.font='10px Arial';
+  ctx.fillText('Rotor: 2000–8000 RPM',18,48);
+  ctx.fillText('Mechanism: Impact + Attrition',18,64);
+  ctx.fillStyle='#F9E79F';
+  ctx.fillText('Screen controls particle size',18,80);
+
+  ctx.textAlign='center';
+}
+
+function physicsStep(){
+  rot+=0.06*speedMult;
+  particles.forEach(p=>{
+    p.x+=p.vx*speedMult;
+    p.y+=p.vy*speedMult;
+    // Bounce inside casing
+    const dx=p.x-cx,dy=p.y-cy;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist>145-p.r){
+      const nx=dx/dist,ny=dy/dist;
+      p.x=cx+nx*(145-p.r);
+      p.y=cy+ny*(145-p.r);
+      p.vx-=2.2*(p.vx*nx+p.vy*ny)*nx;
+      p.vy-=2.2*(p.vx*nx+p.vy*ny)*ny;
+      p.vx*=0.75; p.vy*=0.75;
+      // Shrink particle slightly (simulates grinding)
+      if(p.r>1.5) p.r-=0.08;
+      else p.r=4+Math.random()*4; // reset
+    }
+    // Hammer impact (simplified: if close to rotor, add random velocity)
+    const drc=Math.sqrt((p.x-cx)**2+(p.y-cy)**2);
+    if(drc<95){
+      p.vx+=(Math.random()-0.5)*6*speedMult;
+      p.vy+=(Math.random()-0.5)*6*speedMult;
+    }
+  });
+}
+
+function loop(){
+  if(running) physicsStep();
+  draw();
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>

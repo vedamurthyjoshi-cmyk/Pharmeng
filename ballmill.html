@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ball Mill — Pharmaceutical Engineering</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f0f4f8;color:#222;}
+header{background:#1B4F72;color:white;padding:16px 20px;}
+header h1{font-size:1.3em;}
+header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
+nav{background:#2E86C1;padding:10px 20px;}
+nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}
+.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}
+.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
+.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}
+.panel.active{display:block;}
+.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
+canvas{border-radius:8px;background:#1a1a2e;}
+.controls{margin-top:14px;}
+.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}
+.btn:hover{background:#2E86C1;}
+.speed-label{color:#555;font-size:0.9em;margin:0 8px;}
+.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}
+.theory-box ul{padding-left:22px;margin-top:8px;}
+.eq{background:#EBF5FB;border-left:4px solid #1B4F72;padding:10px 16px;font-family:monospace;font-size:1em;margin:12px 0;border-radius:0 6px 6px 0;}
+.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;font-size:0.97em;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
+.opt:hover{background:#EBF5FB;border-color:#1B4F72;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}
+.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:24px;background:white;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-top:10px;}
+footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚙️ Ball Mill — Size Reduction</h1>
+  <p>Pharmaceutical Engineering BP304T · Chapter 1</p>
+</header>
+<nav>
+  <a href="index.html">🏠 Home</a>
+  <a href="index.html">← All Topics</a>
+</nav>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+
+<!-- ANIMATION TAB -->
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="760" height="360"></canvas>
+  <div class="controls">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <span class="speed-label">Speed:</span>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+    <br><br>
+    <span class="speed-label">Fill Level: <span id="fillLbl">30%</span></span>
+    <input type="range" min="15" max="50" value="30" id="fillSlider" oninput="setFill(this.value)" style="width:140px;vertical-align:middle;">
+  </div>
+</div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>The cylinder rotates. Steel balls are lifted by the cylinder wall (cascading). At the critical speed, balls fall in a parabolic arc and impact the drug particles — <strong>impact and attrition</strong> cause size reduction. Drag the speed slider to see how ball behaviour changes.</p>
+  <div class="key-fact">🔑 Critical Speed: N<sub>c</sub> = 54.19 / √R (rpm). Run at 65–75% of N<sub>c</sub> for optimal grinding. Above N<sub>c</sub>, balls centrifuge and NO grinding occurs.</div>
+</div>
+</div>
+
+<!-- THEORY TAB -->
+<div id="theory" class="panel">
+  <div class="theory-box">
+    <h3>Definition and Principle</h3>
+    <p>A Ball Mill is a type of grinder used to reduce pharmaceutical materials to fine powder. It consists of a hollow cylindrical shell rotating about its horizontal axis, partially filled (30–50%) with grinding media — steel or ceramic balls.</p>
+    <p style="margin-top:10px;"><strong>Mechanism:</strong> As the cylinder rotates, balls are lifted along the cylinder wall due to friction. When they reach a certain height, gravity overcomes friction and they cascade (fall) in a parabolic arc, impacting material at the bottom. Size reduction occurs by two mechanisms:</p>
+    <ul>
+      <li><strong>Impact</strong> — balls drop onto drug particles from a height → high-energy impact → particle fracture</li>
+      <li><strong>Attrition</strong> — sliding and rolling of balls over particles → abrasion → gradual size reduction</li>
+    </ul>
+  </div>
+  <div class="theory-box">
+    <h3>Critical Speed</h3>
+    <div class="eq">N_c = 54.19 / √R  (rpm)  where R = inner radius of mill (metres)</div>
+    <p>At critical speed, centrifugal force exactly balances gravity → balls cling to the mill wall and rotate with it → NO cascading → NO size reduction.</p>
+    <p style="margin-top:8px;"><strong>Optimal operating speed:</strong> 65–75% of N<sub>c</sub>. At this speed, balls cascade in parabolic arcs → maximum impact energy → most efficient size reduction.</p>
+    <div class="key-fact">🔑 Exam fact: A mill with internal radius 0.5 m has N<sub>c</sub> = 54.19/√0.5 = 54.19/0.707 = 76.6 rpm. Operate at 65% = 49.8 rpm.</div>
+  </div>
+  <div class="theory-box">
+    <h3>Construction</h3>
+    <ul>
+      <li><strong>Shell:</strong> Steel cylinder, 1–3 m diameter, horizontally mounted, driven by motor through gears or direct drive</li>
+      <li><strong>Liners:</strong> Rubber or steel liners inside shell — protect shell, enhance lifting action, replaceable</li>
+      <li><strong>Grinding media:</strong> Steel balls 1–5 cm diameter; fill 30–50% of mill volume; harder than material being ground</li>
+      <li><strong>Inlet/Outlet:</strong> Material fed through hollow trunnion at one end; finished product exits through screen at other end (continuous mills) or discharged by opening mill (batch mills)</li>
+    </ul>
+  </div>
+  <div class="theory-box">
+    <h3>Pharmaceutical Applications</h3>
+    <ul>
+      <li>Fine grinding of APIs (active pharmaceutical ingredients) — particle size 5–200 µm</li>
+      <li>Grinding of excipients — lactose, calcium phosphate, starch</li>
+      <li>Preparation of suspensions and ointments requiring fine powder</li>
+      <li>Grinding of herbs and botanical extracts in herbal formulation</li>
+      <li>Production of dry granules in tableting</li>
+    </ul>
+  </div>
+  <div class="theory-box">
+    <h3>Advantages and Disadvantages</h3>
+    <ul>
+      <li>✅ Produces very fine powder (5–200 µm) — finer than most other mills</li>
+      <li>✅ Can be operated continuously or in batch mode</li>
+      <li>✅ Grinding carried out in closed system — no dust contamination</li>
+      <li>✅ Suitable for dry and wet grinding</li>
+      <li>✅ Easy to sterilise — used for sterile powder grinding</li>
+      <li>❌ Slow — long grinding times (hours)</li>
+      <li>❌ Heavy machine — large space requirement; high capital cost</li>
+      <li>❌ Contamination from grinding media (metal contamination)</li>
+      <li>❌ Noise and vibration during operation</li>
+      <li>❌ Not suitable for heat-sensitive drugs — friction generates heat</li>
+    </ul>
+  </div>
+</div>
+
+<!-- MCQ TAB -->
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. The critical speed of a ball mill is the speed at which:</div>
+    <button class="opt" onclick="choose(this,false)">A) Grinding efficiency is maximum</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Centrifugal force equals gravity — balls stick to the wall and no grinding occurs</button>
+    <button class="opt" onclick="choose(this,false)">C) Balls cascade most effectively in parabolic arcs</button>
+    <button class="opt" onclick="choose(this,false)">D) The mill consumes minimum energy</button>
+    <div class="explanation">✅ At critical speed, centrifugal force = gravity → balls rotate with the cylinder wall → no cascading → no grinding. The mill must operate at 65–75% of N_c for optimal grinding. Formula: N_c = 54.19/√R (rpm).</div>
+  </div>
+
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. Size reduction in a ball mill occurs by which two mechanisms?</div>
+    <button class="opt" onclick="choose(this,false)">A) Compression and cutting</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Impact (balls dropping from height) and Attrition (rolling/sliding of balls over particles)</button>
+    <button class="opt" onclick="choose(this,false)">C) Shear and ultrasonic vibration</button>
+    <button class="opt" onclick="choose(this,false)">D) Compression and explosion</button>
+    <div class="explanation">✅ Ball mill uses: (1) Impact — balls cascade and fall in parabolic arc → high-energy impact on drug particles → fracture; (2) Attrition — balls roll and slide over each other and over drug particles → gradual abrasion → fine particle production.</div>
+  </div>
+
+  <div class="mcq-card">
+    <div class="mcq-q">Q3. A ball mill with internal radius R = 0.25 m has a critical speed of:</div>
+    <button class="opt" onclick="choose(this,false)">A) 38.3 rpm</button>
+    <button class="opt" onclick="choose(this,false)">B) 76.6 rpm</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>C) 108.4 rpm — N_c = 54.19/√0.25 = 54.19/0.5 = 108.4 rpm</button>
+    <button class="opt" onclick="choose(this,false)">D) 54.2 rpm</button>
+    <div class="explanation">✅ N_c = 54.19/√R = 54.19/√0.25 = 54.19/0.5 = 108.4 rpm. Optimal operating speed = 65–75% of 108.4 = 70–81 rpm. Remember: smaller radius → higher critical speed (smaller mill rotates faster).</div>
+  </div>
+
+  <div class="mcq-card">
+    <div class="mcq-q">Q4. Which of the following drugs should NOT be ground in a ball mill?</div>
+    <button class="opt" onclick="choose(this,false)">A) Calcium phosphate (excipient for tablets)</button>
+    <button class="opt" onclick="choose(this,false)">B) Lactose monohydrate (tablet diluent)</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>C) Insulin (heat-sensitive protein — ball mill generates heat by friction)</button>
+    <button class="opt" onclick="choose(this,false)">D) Aspirin (thermally stable at process temperatures)</button>
+    <div class="explanation">✅ Ball mills generate heat by friction — unsuitable for thermolabile (heat-sensitive) drugs like proteins, enzymes, vitamins. Insulin would denature (lose activity). Alternatives for heat-sensitive APIs: cryogenic grinding (liquid nitrogen cooling) or fluid energy mill (no heat generated).</div>
+  </div>
+
+  <div class="mcq-card">
+    <div class="mcq-q">Q5. The optimal fill level of grinding balls in a ball mill is:</div>
+    <button class="opt" onclick="choose(this,false)">A) 10–15% of mill volume</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) 30–50% of mill volume — below this, too few impacts; above this, balls cushion each other</button>
+    <button class="opt" onclick="choose(this,false)">C) 60–70% of mill volume</button>
+    <button class="opt" onclick="choose(this,false)">D) 80–90% of mill volume</button>
+    <div class="explanation">✅ 30–50% fill is optimal. Below 30%: insufficient ball mass for adequate grinding energy; poor efficiency. Above 50%: balls cushion the impact of other balls; cascading disrupted; grinding efficiency drops. Material fill is additional (on top of balls): typically 100% of ball void space.</div>
+  </div>
+
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
+  </div>
+</div>
+
+<footer>© 2025 Pharmaceutical Engineering BP304T · Ball Mill · QR Code Resource</footer>
+
+<script>
+// Tab switching
+function showTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// MCQ logic
+let score=0,answered=0;
+const total=document.querySelectorAll('.mcq-card').length;
+function choose(el,correct){
+  const card=el.closest('.mcq-card');
+  if(card.querySelector('.correct')||card.querySelector('.wrong')) return;
+  if(correct){el.classList.add('correct');score++;}
+  else{
+    el.classList.add('wrong');
+    card.querySelector('[data-correct]').classList.add('correct');
+  }
+  card.querySelector('.explanation').style.display='block';
+  answered++;
+  if(answered===total){
+    document.getElementById('score').style.display='block';
+    document.getElementById('scoreText').textContent='🎯 Score: '+score+' / '+total+(score===total?' — Perfect! 🌟':score>=3?' — Well done!':' — Review the explanations and try again.');
+  }
+}
+function resetMCQ(){
+  score=0;answered=0;
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));
+  document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');
+  document.getElementById('score').style.display='none';
+}
+
+// ANIMATION
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+const W=canvas.width, H=canvas.height;
+const cx=W/2, cy=H/2+20;
+const R=140; // mill radius in px
+let angle=0, running=true, speedMult=1, fillPct=0.3;
+
+// Generate balls
+function makeBalls(fill){
+  const balls=[];
+  const n=Math.floor(fill*60);
+  for(let i=0;i<n;i++){
+    const a=Math.random()*Math.PI*2;
+    const r=Math.random()*(R-18);
+    balls.push({
+      x:cx+Math.cos(a)*r,
+      y:cy+Math.sin(a)*r,
+      vx:(Math.random()-0.5)*2,
+      vy:(Math.random()-0.5)*2,
+      r:7+Math.random()*4,
+      col:'#'+['C0C0C0','A0A0A0','808080','D0D0D0'][Math.floor(Math.random()*4)]
+    });
+  }
+  return balls;
+}
+
+let balls=makeBalls(fillPct);
+
+function setFill(v){
+  fillPct=v/100;
+  document.getElementById('fillLbl').textContent=v+'%';
+  balls=makeBalls(fillPct);
+}
+
+function togglePlay(){
+  running=!running;
+  document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';
+}
+
+function setSpeed(s){speedMult=s;}
+
+function drawMill(rot){
+  // Outer body
+  ctx.save();
+  ctx.translate(cx,cy);
+  ctx.strokeStyle='#4A90D9';
+  ctx.lineWidth=18;
+  ctx.beginPath();
+  ctx.arc(0,0,R,0,Math.PI*2);
+  ctx.stroke();
+
+  // Mill interior fill (material)
+  ctx.fillStyle='rgba(139,90,43,0.18)';
+  ctx.beginPath();
+  ctx.arc(0,0,R-9,0,Math.PI*2);
+  ctx.fill();
+
+  // Rotating liner plates
+  ctx.strokeStyle='#2C6E9A';
+  ctx.lineWidth=4;
+  for(let i=0;i<8;i++){
+    const a=rot+i*Math.PI/4;
+    ctx.beginPath();
+    ctx.moveTo(Math.cos(a)*(R-18),Math.sin(a)*(R-18));
+    ctx.lineTo(Math.cos(a)*(R-9),Math.sin(a)*(R-9));
+    ctx.stroke();
+  }
+
+  // Trunnions
+  ctx.fillStyle='#2C3E50';
+  ctx.beginPath(); ctx.arc(-R-12,0,10,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(R+12,0,10,0,Math.PI*2); ctx.fill();
+
+  ctx.restore();
+}
+
+function physicsStep(dt){
+  const rotSpeed=0.008*speedMult;
+  angle+=rotSpeed;
+
+  balls.forEach(b=>{
+    // Gravity
+    b.vy+=0.18*speedMult;
+    // Friction with wall (simulate lifting)
+    const dx=b.x-cx, dy=b.y-cy;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    const wallDist=R-18-b.r;
+
+    if(dist>wallDist){
+      // Push inside
+      const nx=dx/dist, ny=dy/dist;
+      b.x=cx+nx*wallDist;
+      b.y=cy+ny*wallDist;
+      // Reflect velocity
+      const dot=b.vx*nx+b.vy*ny;
+      b.vx-=1.6*dot*nx;
+      b.vy-=1.6*dot*ny;
+      // Wall friction — impart some rotation
+      b.vx+=Math.cos(angle+Math.PI/2)*rotSpeed*40*speedMult;
+      b.vy+=Math.sin(angle+Math.PI/2)*rotSpeed*40*speedMult;
+      // Damping
+      b.vx*=0.82;
+      b.vy*=0.82;
+    }
+
+    b.x+=b.vx*speedMult;
+    b.y+=b.vy*speedMult;
+
+    // Ball-ball collisions (simplified)
+    balls.forEach(b2=>{
+      if(b===b2) return;
+      const ddx=b.x-b2.x, ddy=b.y-b2.y;
+      const dd=Math.sqrt(ddx*ddx+ddy*ddy);
+      if(dd<b.r+b2.r+1){
+        const nx2=ddx/dd, ny2=ddy/dd;
+        const sep=(b.r+b2.r+1-dd)/2;
+        b.x+=nx2*sep; b.y+=ny2*sep;
+        b2.x-=nx2*sep; b2.y-=ny2*sep;
+        const dv=(b.vx-b2.vx)*nx2+(b.vy-b2.vy)*ny2;
+        if(dv<0){
+          b.vx-=dv*nx2; b.vy-=dv*ny2;
+          b2.vx+=dv*nx2; b2.vy+=dv*ny2;
+        }
+      }
+    });
+  });
+}
+
+function drawBalls(){
+  balls.forEach(b=>{
+    const grad=ctx.createRadialGradient(b.x-2,b.y-2,1,b.x,b.y,b.r);
+    grad.addColorStop(0,'#e8e8e8');
+    grad.addColorStop(1,b.col);
+    ctx.beginPath();
+    ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+    ctx.fillStyle=grad;
+    ctx.fill();
+    ctx.strokeStyle='#666';
+    ctx.lineWidth=0.5;
+    ctx.stroke();
+  });
+}
+
+function drawLabels(){
+  ctx.fillStyle='rgba(0,0,0,0.6)';
+  ctx.fillRect(10,10,200,110);
+  ctx.fillStyle='white';
+  ctx.font='12px Arial';
+  ctx.fillText('⚙️ Ball Mill Animation',18,30);
+  ctx.fillStyle='#AED6F1';
+  ctx.font='11px Arial';
+  ctx.fillText('Speed: '+(speedMult===0.5?'Slow':speedMult===1?'Normal':'Fast'),18,50);
+  ctx.fillText('Fill: '+Math.round(fillPct*100)+'%',18,68);
+  ctx.fillText('Mechanism: Impact + Attrition',18,86);
+  ctx.fillStyle='#F9E79F';
+  ctx.fillText('Optimal speed: 65-75% of N_c',18,104);
+
+  // Arrow label
+  ctx.fillStyle='white';
+  ctx.font='bold 11px Arial';
+  ctx.fillText('← Drug particles being ground →',cx-110,H-12);
+}
+
+function loop(){
+  ctx.clearRect(0,0,W,H);
+  // Background
+  const bg=ctx.createRadialGradient(cx,cy,10,cx,cy,300);
+  bg.addColorStop(0,'#1a1a2e');
+  bg.addColorStop(1,'#0d0d1a');
+  ctx.fillStyle=bg;
+  ctx.fillRect(0,0,W,H);
+
+  if(running) physicsStep(1);
+  drawMill(angle);
+  drawBalls();
+  drawLabels();
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>

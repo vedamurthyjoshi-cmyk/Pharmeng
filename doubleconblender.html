@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Double Cone Blender — Pharmaceutical Engineering</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;color:#222;}
+header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
+.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
+.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
+canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
+.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
+.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
+.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
+.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:24px;background:white;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-top:10px;}
+footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+</style>
+</head>
+<body>
+<header><h1>🔁 Double Cone Blender — Tumbling Mixer</h1><p>Pharmaceutical Engineering BP304T · Chapter 2 — Mixing</p></header>
+<nav><a href="index.html">🏠 Home</a><a href="index.html">← All Topics</a></nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="720" height="360"></canvas>
+  <div style="margin-top:14px;">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  </div>
+</div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>The double cone shell rotates end-over-end about a horizontal axis through its middle. Powder alternately collects in each cone and transfers to the other — gentle convective mixing without any internal moving parts. Red and blue particles represent two components blending together.</p>
+  <div class="key-fact">🔑 The Double Cone Blender is similar to the V-Blender but has a different geometry — the double cone provides a larger central mixing zone and is easier to clean. Both are tumbling (convective) mixers.</div>
+</div>
+</div>
+<div id="theory" class="panel">
+  <div class="theory-box"><h3>Principle</h3><p>The Double Cone Blender is a tumbling mixer consisting of two cones joined at their bases (widest diameter) forming a biconical shape. It rotates about a horizontal axis through the central joint. As it rotates, powder flows from one cone into the other — creating convective mixing without shear. The conical ends focus powder toward the centre for efficient transfer.</p></div>
+  <div class="theory-box"><h3>Comparison with V-Blender</h3>
+    <ul>
+      <li><strong>Shape:</strong> Double cone (two cones joined at widest point) vs V-shape (two cylinders at angle)</li>
+      <li><strong>Central mixing zone:</strong> Double cone has larger central volume — better for large batches</li>
+      <li><strong>Cleaning:</strong> Double cone easier to clean — smooth internal surfaces, no corners</li>
+      <li><strong>Fill level:</strong> Both optimal at 50–60% of total volume</li>
+      <li><strong>Mixing mechanism:</strong> Both are convective tumbling mixers — same principle</li>
+      <li><strong>Applications:</strong> Both used for dry powder blending in tablet manufacturing</li>
+    </ul>
+    <div class="key-fact">🔑 In pharmaceutical manufacturing, Double Cone Blenders are common in capacities of 100–2000 litres for large-scale tablet granulation blending. V-Blenders preferred for smaller batches and laboratory scale.</div>
+  </div>
+  <div class="theory-box"><h3>Pharmaceutical Applications</h3>
+    <ul>
+      <li>Blending of API with excipients in tablet and capsule manufacturing</li>
+      <li>Final blending of granules with disintegrant and lubricant before compression</li>
+      <li>Blending of dry powder inhalation (DPI) formulations</li>
+      <li>Mixing of dry granules for effervescent tablets (acid + bicarbonate components)</li>
+    </ul>
+  </div>
+</div>
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. The Double Cone Blender and V-Blender are both classified as:</div>
+    <button class="opt" onclick="choose(this,false)">A) High-shear mixers — intense mixing action</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Tumbling (convective) mixers — no internal moving parts; mixing by rotation of the entire shell</button>
+    <button class="opt" onclick="choose(this,false)">C) Fluidised bed mixers — air suspends particles</button>
+    <button class="opt" onclick="choose(this,false)">D) Ribbon blenders — helical ribbon moves material</button>
+    <div class="explanation">✅ Both Double Cone and V-Blender are tumbling (gravity) mixers. The shell rotates → powder tumbles → convective transport. No moving internal parts → no shear → gentle mixing → suitable for fragile granules and materials sensitive to mechanical stress.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. An advantage of the Double Cone Blender over the V-Blender for large-scale pharmaceutical manufacturing is:</div>
+    <button class="opt" onclick="choose(this,false)">A) Faster mixing time</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Easier cleaning (smooth, seamless internal surfaces — no corners or joints inside) and larger usable volume for same footprint</button>
+    <button class="opt" onclick="choose(this,false)">C) Can blend wet granules</button>
+    <button class="opt" onclick="choose(this,false)">D) Generates more shear for difficult-to-mix powders</button>
+    <div class="explanation">✅ Pharmaceutical GMP cleaning: Double Cone smooth internal profile → CIP (Clean-in-Place) nozzles clean all surfaces effectively → less manual cleaning → less downtime between batches → higher productivity. V-Blender junction angle can accumulate powder → more thorough cleaning required. For production batches of 500+ kg, double cone blenders are preferred.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q3. For blending a potent API at very low concentration (0.1% w/w) with excipients, which pre-treatment improves blend uniformity in a double cone blender?</div>
+    <button class="opt" onclick="choose(this,false)">A) Increase rotation speed to 50 rpm</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Pre-mix the API with a small portion of excipient first (geometric dilution) before adding to the blender — reduces risk of API clustering and ensures uniform distribution</button>
+    <button class="opt" onclick="choose(this,false)">C) Add the API last — on top of all excipients</button>
+    <button class="opt" onclick="choose(this,false)">D) Reduce blending time to prevent segregation</button>
+    <div class="explanation">✅ Geometric dilution: for potent low-dose APIs, blend API with equal volume of excipient → double volume → add another equal volume → double again → repeat until all excipient incorporated. This ensures API is uniformly distributed before entering the blender. In the blender, blend uniformity monitored by near-infrared (NIR) spectroscopy (PAT) — samples from multiple locations checked for API content uniformity.</div>
+  </div>
+  <div class="score-box" id="score" style="display:none"><h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2><button class="btn" onclick="resetMCQ()">🔄 Try Again</button></div>
+</div>
+<footer>© 2025 Pharmaceutical Engineering BP304T · Double Cone Blender</footer>
+<script>
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+let _score=0,_answered=0;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_score++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_answered++;const t=document.querySelectorAll('.mcq-card').length;if(_answered===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+_score+' / '+t;}}
+function resetMCQ(){_score=0;_answered=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+let running=true,speedMult=1,angle=0;
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';}
+function setSpeed(s){speedMult=s;}
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;const cx=W/2,cy=H/2;
+const particles=[];
+for(let i=0;i<100;i++) particles.push({ox:(Math.random()-0.5)*80,oy:(Math.random()-0.5)*120,col:i<50?'#E74C3C':'#3498DB'});
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  const bg=ctx.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#1a1a2e');bg.addColorStop(1,'#0d0d1a');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+  ctx.save();ctx.translate(cx,cy);ctx.rotate(angle);
+  // Double cone shape
+  ctx.fillStyle='rgba(74,144,217,0.15)';ctx.strokeStyle='#4A90D9';ctx.lineWidth=8;
+  ctx.beginPath();
+  ctx.moveTo(0,-160);ctx.lineTo(140,0);ctx.lineTo(0,160);ctx.lineTo(-140,0);ctx.closePath();
+  ctx.fill();ctx.stroke();
+  // Central band
+  ctx.strokeStyle='#2E86C1';ctx.lineWidth=4;
+  ctx.beginPath();ctx.ellipse(0,0,140,30,0,0,Math.PI*2);ctx.stroke();
+  // Particles
+  particles.forEach(p=>{
+    const px=p.ox*Math.cos(angle*0.3)-p.oy*Math.sin(angle*0.3);
+    const py=p.ox*Math.sin(angle*0.3)+p.oy*Math.cos(angle*0.3);
+    ctx.beginPath();ctx.arc(px,py,4,0,Math.PI*2);
+    ctx.fillStyle=p.col;ctx.globalAlpha=0.85;ctx.fill();ctx.globalAlpha=1;
+  });
+  ctx.restore();
+  // Axis line
+  ctx.strokeStyle='rgba(255,255,255,0.15)';ctx.lineWidth=2;ctx.setLineDash([6,6]);
+  ctx.beginPath();ctx.moveTo(80,cy);ctx.lineTo(W-80,cy);ctx.stroke();ctx.setLineDash([]);
+  // Info
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,210,70);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🔁 Double Cone Blender',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Speed: 6–20 RPM',18,48);ctx.fillText('Mechanism: Convective tumbling',18,64);
+}
+function step(){
+  angle+=0.011*speedMult;
+  particles.forEach(p=>{
+    if(Math.random()<0.006*speedMult){p.col=Math.random()<0.5?'#E74C3C':'#3498DB';}
+    p.ox+=(Math.random()-0.5)*0.4*speedMult;p.oy+=(Math.random()-0.5)*0.4*speedMult;
+    p.ox=Math.max(-70,Math.min(70,p.ox));p.oy=Math.max(-130,Math.min(130,p.oy));
+  });
+}
+function loop(){if(running)step();draw();requestAnimationFrame(loop);}
+loop();
+</script>
+</body>
+</html>

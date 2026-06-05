@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colloid Mill — Pharmaceutical Engineering</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f0f4f8;color:#222;}
+header{background:#1B4F72;color:white;padding:16px 20px;}
+header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
+nav{background:#2E86C1;padding:10px 20px;}
+nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}
+.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}
+.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
+.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}
+.panel.active{display:block;}
+.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
+canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
+.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}
+.btn:hover{background:#2E86C1;}
+.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}
+.theory-box ul{padding-left:22px;margin-top:8px;}
+.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
+.opt:hover{background:#EBF5FB;border-color:#1B4F72;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}
+.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:24px;background:white;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-top:10px;}
+footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>💧 Colloid Mill — Shear Milling</h1>
+  <p>Pharmaceutical Engineering BP304T · Chapter 1 — Size Reduction</p>
+</header>
+<nav><a href="index.html">🏠 Home</a><a href="index.html">← All Topics</a></nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="720" height="360"></canvas>
+  <div style="margin-top:14px;">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+    <br><br>
+    <label style="color:#555;font-size:0.9em;">Gap size: <span id="gapLbl">0.05 mm</span></label><br>
+    <input type="range" min="1" max="10" value="5" id="gapSlider" oninput="setGap(this.value)" style="width:160px;margin-top:6px;">
+  </div>
+</div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>The rotor (inner cone) spins at 3000–20,000 rpm inside the stator (outer cone). Material is fed from the top through the tiny adjustable gap between rotor and stator. The intense <strong>shear force</strong> in the gap breaks droplets and particles to colloidal size (1–25 µm). Adjust the gap slider to see how gap size affects material flow.</p>
+  <div class="key-fact">🔑 The Colloid Mill works primarily by <strong>shear</strong> — unlike Ball Mill (impact + attrition) and Hammer Mill (impact). This makes it ideal for liquid-liquid and solid-liquid systems — emulsions, suspensions, and ointments.</div>
+</div>
+</div>
+
+<div id="theory" class="panel">
+  <div class="theory-box">
+    <h3>Principle</h3>
+    <p>The Colloid Mill reduces particle/droplet size by subjecting the material to intense <strong>hydraulic shear</strong> in the narrow gap (0.025–5 mm, adjustable) between a high-speed rotor and a fixed stator. Both rotor and stator have corrugated or grooved surfaces to increase turbulence. Material is fed from the top, passes through the gap under centrifugal force, and exits at the bottom.</p>
+  </div>
+  <div class="theory-box">
+    <h3>Construction</h3>
+    <ul>
+      <li><strong>Rotor:</strong> Truncated cone; high-speed motor 3000–20,000 rpm; hardened stainless steel 316L</li>
+      <li><strong>Stator:</strong> Fixed outer cone; same material as rotor; grooved/corrugated surface</li>
+      <li><strong>Gap adjustment:</strong> Micrometer screw moves rotor axially; gap 0.025–5 mm; smaller gap = finer product</li>
+      <li><strong>Hopper:</strong> Feed hopper above the rotor-stator gap; gravity or pressure fed</li>
+      <li><strong>Jacketed housing:</strong> Water cooling jacket around stator — prevents heat build-up in the gap</li>
+    </ul>
+    <div class="key-fact">🔑 The gap is the most important parameter — smaller gap = higher shear = finer product. But smaller gap also = higher heat generation. Water-jacketed cooling is essential.</div>
+  </div>
+  <div class="theory-box">
+    <h3>Pharmaceutical Applications</h3>
+    <ul>
+      <li><strong>Emulsions:</strong> O/W and W/O pharmaceutical emulsions — colloid mill reduces oil droplet size to 1–5 µm → stable emulsion</li>
+      <li><strong>Suspensions:</strong> Reducing particle size of insoluble drugs in suspension (e.g., calamine lotion, zinc oxide suspension)</li>
+      <li><strong>Ointments and creams:</strong> Breaking down agglomerates in semi-solid preparations for smooth texture</li>
+      <li><strong>Cell disruption:</strong> Breaking cell walls of plant material for extracting active compounds</li>
+    </ul>
+  </div>
+  <div class="theory-box">
+    <h3>Advantages and Disadvantages</h3>
+    <ul>
+      <li>✅ Ideal for viscous, semi-solid, and liquid-liquid systems</li>
+      <li>✅ Produces very fine particle size (1–25 µm)</li>
+      <li>✅ Continuous operation; easy gap adjustment during operation</li>
+      <li>✅ Handles high-viscosity materials (ointments, creams) — impossible in ball/hammer mill</li>
+      <li>❌ Generates significant heat — water cooling essential; not for very thermolabile materials</li>
+      <li>❌ Not suitable for dry powders — needs liquid or semi-liquid feed</li>
+      <li>❌ Metal contamination possible from rotor-stator wear</li>
+    </ul>
+  </div>
+</div>
+
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. The primary mechanism of size reduction in a Colloid Mill is:</div>
+    <button class="opt" onclick="choose(this,false)">A) Impact — high-speed rotor strikes particles</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Shear — intense hydraulic shear force in the narrow adjustable gap between rotor and stator</button>
+    <button class="opt" onclick="choose(this,false)">C) Compression — rotor compresses particles against stator</button>
+    <button class="opt" onclick="choose(this,false)">D) Attrition — particles rub against each other in suspension</button>
+    <div class="explanation">✅ Colloid Mill = shear mechanism. The tiny gap (0.025–5 mm) between the fast-spinning rotor (3000–20,000 rpm) and fixed stator creates extreme velocity gradient → intense shear stress on droplets/particles → size reduction. Compare: Ball Mill (impact + attrition), Hammer Mill (impact), Fluid Energy Mill (inter-particle impact). Each mechanism produces different particle shapes and size distributions.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. The Colloid Mill is MOST suitable for which pharmaceutical operation?</div>
+    <button class="opt" onclick="choose(this,false)">A) Fine grinding of crystalline API powder</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Preparation of stable O/W emulsions — reducing oil droplet size to 1–5 µm for pharmaceutical creams and lotions</button>
+    <button class="opt" onclick="choose(this,false)">C) Micronisation of inhalation drugs to 1–5 µm</button>
+    <button class="opt" onclick="choose(this,false)">D) Blending of dry tablet granules with lubricant</button>
+    <div class="explanation">✅ Colloid Mill's ideal application = emulsification. The shear force in the narrow gap breaks oil droplets into very fine droplets (1–5 µm) dispersed in the aqueous phase → stable O/W emulsion. Used for: cold creams, medicated lotions, calamine lotion, emulsified ointment bases. Dry grinding is impossible in a colloid mill — it requires liquid or semi-liquid feed.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q3. Why does the Colloid Mill have a water-jacketed housing around the stator?</div>
+    <button class="opt" onclick="choose(this,false)">A) To heat the material for better flow through the gap</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) To remove heat generated by the intense shear in the gap — prevents product overheating and protects thermolabile drugs and emulsion stability</button>
+    <button class="opt" onclick="choose(this,false)">C) To sterilise the mill during operation</button>
+    <button class="opt" onclick="choose(this,false)">D) To prevent the rotor from touching the stator</button>
+    <div class="explanation">✅ Heat generation in colloid mill: the enormous shear rate (velocity gradient = rotor speed / gap width) generates significant frictional heat in the gap. Without cooling: product temperature rises → thermolabile drug degradation; emulsion instability (coalescence accelerated at high T); viscosity changes alter gap flow. Water jacket (at 15–20°C) removes heat continuously → product temperature maintained within specification.</div>
+  </div>
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
+  </div>
+</div>
+<footer>© 2025 Pharmaceutical Engineering BP304T · Colloid Mill</footer>
+
+<script>
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+let _score=0,_answered=0;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_score++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_answered++;const t=document.querySelectorAll('.mcq-card').length;if(_answered===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+_score+' / '+t;}}
+function resetMCQ(){_score=0;_answered=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+let running=true,speedMult=1,gapSize=5;
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';}
+function setSpeed(s){speedMult=s;}
+function setGap(v){gapSize=v;document.getElementById('gapLbl').textContent=(v*0.01).toFixed(2)+' mm';}
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+const W=canvas.width,H=canvas.height;
+const cx=W/2,cy=H/2;
+let rotAngle=0;
+// Droplets
+const drops=[];
+for(let i=0;i<40;i++) drops.push({x:cx+(Math.random()-0.5)*30,y:50+Math.random()*30,vy:1+Math.random()*2,r:4+Math.random()*6,col:i%3===0?'#E74C3C':i%3===1?'#F39C12':'#3498DB',phase:'above'});
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+  // Stator (outer cone)
+  ctx.fillStyle='#2C3E50';
+  ctx.beginPath();
+  ctx.moveTo(cx-200,80);ctx.lineTo(cx+200,80);
+  ctx.lineTo(cx+100,H-60);ctx.lineTo(cx-100,H-60);
+  ctx.closePath();ctx.fill();
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.stroke();
+  // Rotor (inner cone — rotates)
+  ctx.save();ctx.translate(cx,cy);
+  const gapPx=gapSize*3;
+  const rW=160-gapPx,rH=220;
+  ctx.rotate(rotAngle);
+  ctx.fillStyle='#1B4F72';
+  ctx.beginPath();
+  ctx.moveTo(-rW/2,-rH/2);ctx.lineTo(rW/2,-rH/2);
+  ctx.lineTo(rW/2*0.5,rH/2);ctx.lineTo(-rW/2*0.5,rH/2);
+  ctx.closePath();ctx.fill();
+  ctx.strokeStyle='#2E86C1';ctx.lineWidth=3;ctx.stroke();
+  // Grooves on rotor
+  ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=2;
+  for(let i=-3;i<=3;i++){ctx.beginPath();ctx.moveTo(i*22,-rH/2);ctx.lineTo(i*11,rH/2);ctx.stroke();}
+  ctx.restore();
+  // Feed hopper
+  ctx.fillStyle='#27AE60';ctx.beginPath();
+  ctx.moveTo(cx-40,20);ctx.lineTo(cx+40,20);ctx.lineTo(cx+20,80);ctx.lineTo(cx-20,80);
+  ctx.closePath();ctx.fill();
+  ctx.fillStyle='white';ctx.font='11px Arial';ctx.textAlign='center';
+  ctx.fillText('FEED',cx,55);
+  // Product outlet
+  ctx.fillStyle='#E74C3C';
+  ctx.fillRect(cx-50,H-55,100,20);
+  ctx.fillStyle='white';ctx.font='11px Arial';
+  ctx.fillText('PRODUCT (1–25 µm)',cx,H-42);
+  // Droplets
+  drops.forEach(d=>{
+    ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+    ctx.fillStyle=d.col;ctx.globalAlpha=0.8;ctx.fill();ctx.globalAlpha=1;
+  });
+  // Gap label
+  ctx.fillStyle='rgba(255,255,200,0.9)';ctx.font='bold 11px Arial';ctx.textAlign='left';
+  ctx.fillText('← Gap: '+(gapSize*0.01).toFixed(2)+' mm →',cx+110,cy);
+  // Info box
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,200,70);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';
+  ctx.fillText('💧 Colloid Mill',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Speed: 3000–20,000 RPM',18,48);
+  ctx.fillText('Mechanism: Shear in gap',18,65);
+}
+
+function step(){
+  rotAngle+=0.08*speedMult;
+  drops.forEach(d=>{
+    d.y+=d.vy*speedMult;
+    d.x+=Math.sin(d.y*0.05)*0.5;
+    // Shrink as it passes through gap zone
+    if(d.y>cy-20&&d.y<cy+20&&d.r>1.5) d.r-=0.15*speedMult;
+    if(d.y>H-60){d.y=50+Math.random()*20;d.x=cx+(Math.random()-0.5)*30;d.r=4+Math.random()*6;}
+  });
+}
+function loop(){if(running)step();draw();requestAnimationFrame(loop);}
+loop();
+</script>
+</body>
+</html>
