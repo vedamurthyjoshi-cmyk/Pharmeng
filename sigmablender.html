@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sigma Blade Mixer — Pharmaceutical Engineering</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}</style>
+</head>
+<body>
+<header><h1>Σ Sigma Blade Mixer — High-Shear Kneading</h1><p>Pharmaceutical Engineering BP304T · Chapter 2 — Mixing</p></header>
+<nav><a href="index.html">🏠 Home</a></nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="720" height="360"></canvas>
+  <div style="margin-top:14px;">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  </div>
+</div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>Two sigma (Σ-shaped) blades rotate toward each other at slightly different speeds (typically 2:3 ratio) inside a W-shaped trough. Material is squeezed, stretched, and folded between the blades — intense <strong>kneading and shear</strong>. This action is essential for viscous, cohesive materials that cannot be mixed by tumbling or ribbon blenders.</p>
+  <div class="key-fact">🔑 The Sigma Blade Mixer is the standard mixer for high-viscosity pharmaceutical preparations — wet granulation masses, rubber-based preparations, ointments, and suppository bases. The two blades at different speeds create differential shear — more intensive than same-speed mixing.</div>
+</div>
+</div>
+<div id="theory" class="panel">
+  <div class="theory-box"><h3>Principle</h3><p>Two sigma (Σ) shaped blades rotate in opposite directions at slightly different speeds (front blade slightly faster) inside a W-shaped (double-trough) bowl. Material is caught between the blades and intensively kneaded by compression, stretching, and folding — high-shear mixing. Suitable for viscous, sticky, and cohesive materials.</p></div>
+  <div class="theory-box"><h3>Construction</h3><ul>
+    <li><strong>Bowl:</strong> W-shaped (two semi-circular troughs joined) — matches the two sigma blade profile</li>
+    <li><strong>Sigma blades:</strong> Two Σ-shaped blades; each fits closely in one half of the W-trough; counter-rotating; front blade faster (ratio 3:2 or 2:1)</li>
+    <li><strong>Jacketed bowl (optional):</strong> Steam or water jacket for temperature control during mixing</li>
+    <li><strong>Tilting mechanism:</strong> Entire mixer bowl tilts for discharge of viscous product</li>
+    <li><strong>Speed:</strong> 15–60 rpm; heavy-duty motor for high-viscosity materials</li>
+  </ul></div>
+  <div class="theory-box"><h3>Pharmaceutical Applications</h3><ul>
+    <li>Wet granulation of high-viscosity granulation masses</li>
+    <li>Manufacturing rubber-based pharmaceutical preparations</li>
+    <li>Mixing of suppository bases (theobroma oil, PEG bases) with drugs</li>
+    <li>Ointment manufacturing — especially thick, stiff ointments</li>
+    <li>Industrial: manufacturing of chewing gum bases, adhesive plasters, medicated gums</li>
+  </ul><div class="key-fact">🔑 The key characteristic of Sigma Blade Mixer: handles materials too viscous and cohesive for ANY other pharmaceutical mixer — if the material does not flow, the sigma blade can still knead it.</div></div>
+</div>
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. Why do the two sigma blades in a Sigma Blade Mixer rotate at different speeds?</div>
+    <button class="opt" onclick="choose(this,false)">A) To prevent the motor from overheating</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Different speeds create differential shear — material is not just squeezed but also subjected to velocity gradient between faster and slower blade surfaces — more intense kneading than equal-speed blades</button>
+    <button class="opt" onclick="choose(this,false)">C) One blade heats the material while the other cools it</button>
+    <button class="opt" onclick="choose(this,false)">D) To allow one blade to be replaced while the other keeps mixing</button>
+    <div class="explanation">✅ Differential speed mechanics: with blades at ratio 2:1 (front:rear), material caught between them experiences relative velocity difference — one surface moves faster than the other → velocity gradient → shear stress across material thickness → stretching and folding. This is more effective than equal-speed counter-rotation (which simply squeezes without velocity gradient). The differential creates a more thorough kneading action similar to manual bread kneading between palms moving at different speeds.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. The Sigma Blade Mixer is chosen over a Ribbon Blender for pharmaceutical ointment manufacturing because:</div>
+    <button class="opt" onclick="choose(this,false)">A) Ribbon blenders are too fast for ointments</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Ointments are high-viscosity semi-solids — too thick and sticky to flow or circulate in a ribbon blender; sigma blades can knead viscous materials by direct blade contact and pressure</button>
+    <button class="opt" onclick="choose(this,false)">C) Ribbon blenders contaminate ointments with metal particles</button>
+    <button class="opt" onclick="choose(this,false)">D) Sigma blade produces finer particle size in the ointment</button>
+    <div class="explanation">✅ Viscosity limit of ribbon blender: ribbons work by moving material through the trough — requires material to flow (viscosity < ~50,000 mPa·s practical limit). Ointments, suppository masses, rubber preparations: viscosity 100,000+ mPa·s — will not flow at all. Sigma blades: direct mechanical contact with material → force applied regardless of viscosity → kneads material by deformation, not flow. This is why sigma mixers are called "kneaders" rather than "blenders."</div>
+  </div>
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
+  </div>
+</div>
+<footer>© 2025 Pharmaceutical Engineering BP304T · Sigma Blade Mixer</footer>
+<script>
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+let _s=0,_a=0;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+_s+' / '+t;}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');
+const W=canvas.width,H=canvas.height;
+const cx=W/2,cy=H/2+20;
+let running=true,speedMult=1,a1=0,a2=0;
+const particles=[];
+for(let i=0;i<80;i++) particles.push({x:cx-60+(Math.random()-0.5)*180,y:cy+(Math.random()-0.5)*80,r:5,col:i<40?'#E74C3C':'#3498DB'});
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';if(running)loop();}
+function setSpeed(s){speedMult=s;}
+function drawSigma(x,y,angle,col){
+  ctx.save();ctx.translate(x,y);ctx.rotate(angle);
+  ctx.strokeStyle=col;ctx.lineWidth=10;ctx.lineCap='round';
+  ctx.beginPath();
+  ctx.moveTo(-30,-40);ctx.lineTo(30,-40);
+  ctx.arc(10,-20,20,Math.PI*1.5,Math.PI*0.5,true);
+  ctx.arc(-10,20,20,Math.PI*1.5,Math.PI*0.5,false);
+  ctx.moveTo(-30,40);ctx.lineTo(30,40);
+  ctx.stroke();ctx.restore();
+}
+function step(){
+  a1+=0.04*speedMult;a2-=0.028*speedMult;
+  const b1x=cx-65,b1y=cy,b2x=cx+65,b2y=cy;
+  particles.forEach(p=>{
+    const d1=Math.sqrt((p.x-b1x)**2+(p.y-b1y)**2);
+    const d2=Math.sqrt((p.x-b2x)**2+(p.y-b2y)**2);
+    if(d1<35||d2<35){
+      p.x+=(Math.random()-0.5)*4*speedMult;
+      p.y+=(Math.random()-0.5)*4*speedMult;
+      if(Math.random()<0.015*speedMult)p.col=Math.random()<0.5?'#E74C3C':'#3498DB';
+    }
+    p.x=Math.max(cx-180,Math.min(cx+180,p.x));
+    p.y=Math.max(cy-80,Math.min(cy+80,p.y));
+  });
+}
+function draw(){
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+  // W-shaped trough
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=8;
+  ctx.beginPath();
+  ctx.moveTo(cx-200,cy-110);
+  ctx.arc(cx-65,cy,80,Math.PI,0);
+  ctx.arc(cx+65,cy,80,Math.PI,0);
+  ctx.lineTo(cx+200,cy-110);
+  ctx.stroke();
+  ctx.fillStyle='rgba(44,62,80,0.4)';
+  ctx.beginPath();
+  ctx.moveTo(cx-196,cy-110);
+  ctx.arc(cx-65,cy,76,Math.PI,0);
+  ctx.arc(cx+65,cy,76,Math.PI,0);
+  ctx.lineTo(cx+196,cy-110);
+  ctx.fill();
+  // Particles
+  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.8;ctx.fill();ctx.globalAlpha=1;});
+  // Sigma blades
+  drawSigma(cx-65,cy,a1,'#85929E');
+  drawSigma(cx+65,cy,a2,'#AAB7B8');
+  // Info
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,215,80);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Σ Sigma Blade Mixer',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Speed: 15–60 RPM',18,48);ctx.fillText('Blade ratio: 2:1 or 3:2',18,64);ctx.fillStyle='#F9E79F';ctx.fillText('Mechanism: High-shear kneading',18,80);
+}
+function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+loop();
+</script>
+</body>
+</html>

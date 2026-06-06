@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Filter Press — Pharmaceutical Engineering</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;color:#222;}
+*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
 nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
 .tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
@@ -26,16 +26,17 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 </style>
 </head>
 <body>
-<header><h1>🗜️ Filter Press</h1><p>Pharmaceutical Engineering BP304T · Chapter 3 — Filtration</p></header>
-<nav><a href="index.html">🏠 Home</a><a href="index.html">← All Topics</a></nav>
+<header><h1>🗜️ Filter Press — Pressure Filtration</h1><p>Pharmaceutical Engineering BP304T · Chapter 3 — Filtration</p></header>
+<nav><a href="index.html">🏠 Home</a></nav>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
   <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
   <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
 </div>
+
 <div id="anim" class="panel active">
 <div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
+  <canvas id="c" width="720" height="380"></canvas>
   <div style="margin-top:14px;">
     <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
     <button class="btn" onclick="setSpeed(0.5)">Slow</button>
@@ -43,401 +44,190 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
     <button class="btn" onclick="setSpeed(2)">Fast</button>
   </div>
 </div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>Slurry (blue particles) is pumped under pressure from the left. It enters chambers between filter plates. Liquid passes through the filter cloth (yellow lines) and exits as clear filtrate (green arrows). Solid particles are retained and build up as a <strong>filter cake</strong> (brown layer) between the plates. When cake is thick enough, the press is opened and cake discharged.</p>
+  <div class="key-fact">🔑 Filter Press = pressure filtration. The pump provides 2–8 bar pressure to push liquid through the filter cloth. Higher pressure = faster filtration rate but thicker, drier cake. No moving parts during filtration — reliable and simple.</div>
 </div>
+</div>
+
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Filter Press — Theory</h3><p>Complete theory for this equipment is covered in your textbook Chapter. This page focuses on the interactive animation and MCQ practice. Key points are summarised below.</p></div>
-  <div class="theory-box"><h3>Key Points to Remember</h3>
-    <ul id="keypoints"></ul>
+  <div class="theory-box"><h3>Principle</h3>
+    <p>The Filter Press forces slurry through a filter medium (cloth) under pressure (2–8 bar from a pump). Liquid (filtrate) passes through the cloth and is collected; solids are retained on the cloth surface, building up as a filter cake. As cake thickness increases, filtration resistance rises — when resistance becomes too high, filtration is stopped, plates opened, and cake discharged.</p>
+  </div>
+  <div class="theory-box"><h3>Construction</h3>
+    <ul>
+      <li><strong>Frame:</strong> Horizontal steel frame with end plates — holds plates under compression</li>
+      <li><strong>Filter plates:</strong> Recessed or flush plates; grooved surfaces support filter cloth and allow filtrate drainage</li>
+      <li><strong>Filter cloth:</strong> Woven fabric (cotton, polypropylene, nylon) stretched over each plate; acts as filter medium</li>
+      <li><strong>Feed inlet:</strong> Slurry pumped through central port in one end plate</li>
+      <li><strong>Filtrate outlets:</strong> Each plate has drain cock — clear filtrate exits individually or through common manifold</li>
+      <li><strong>Hydraulic closer:</strong> Tightens all plates together under pressure before filtration begins</li>
+    </ul>
+  </div>
+  <div class="theory-box"><h3>Pharmaceutical Applications</h3>
+    <ul>
+      <li>Isolation of API after crystallisation from mother liquor</li>
+      <li>Removal of activated charcoal (decolourisation) from pharmaceutical solutions</li>
+      <li>Clarification of large volumes of pharmaceutical intermediates</li>
+      <li>Separation of catalyst from reaction mixture in API synthesis</li>
+    </ul>
+    <div class="key-fact">🔑 Filter Press produces the driest cake of common batch filters — because high pressure squeezes residual liquid from cake pores. Useful when API must be as dry as possible before final drying step.</div>
   </div>
 </div>
+
 <div id="mcq" class="panel">
-  <div id="mcqContainer"></div>
-  <div class="score-box" id="score" style="display:none"><h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2><button class="btn" onclick="resetMCQ()">🔄 Try Again</button></div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. The driving force for filtration in a Filter Press is:</div>
+    <button class="opt" onclick="choose(this,false)">A) Gravity — liquid drains through cloth by gravity alone</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Applied pump pressure (2–8 bar) — pushes slurry through filter cloth; higher pressure = faster filtration and drier cake</button>
+    <button class="opt" onclick="choose(this,false)">C) Vacuum — suction from below the filter cloth</button>
+    <button class="opt" onclick="choose(this,false)">D) Centrifugal force — plates spin during filtration</button>
+    <div class="explanation">✅ Darcy's Law governs filter press: Q = (ΔP × A) / (μ × R_total) where Q = filtration rate, ΔP = pressure drop, A = filter area, μ = viscosity, R_total = resistance of cloth + cake. Higher ΔP (pump pressure) → higher Q (faster filtration). As cake builds: R_cake increases → Q decreases even at constant pressure. Filter press typically operates at constant pressure (pump) — filtration rate declines over the batch as cake thickens.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. The filter cake in a Filter Press is washed before discharge to:</div>
+    <button class="opt" onclick="choose(this,false)">A) Cool the cake before handling</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Displace mother liquor (containing impurities) trapped in the cake pores — washing with fresh solvent improves API purity by removing by-products and excess reagents from the cake</button>
+    <button class="opt" onclick="choose(this,false)">C) Make the cake softer for easier discharge</button>
+    <button class="opt" onclick="choose(this,false)">D) Sterilise the API before further processing</button>
+    <div class="explanation">✅ Cake washing in filter press: after filtration, cake pores contain mother liquor rich in impurities, by-products, excess reagents. Wash procedure: close cake in press → pump wash solvent (water, methanol) through cake → wash liquor displaces mother liquor → collected separately (as wash fraction). Number of wash volumes = wash ratio. Higher wash ratio = purer cake = better API quality (fewer impurities). Wash liquor may be recycled for solvent recovery. Essential step in pharmaceutical API isolation to meet purity specification.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q3. A filter press is classified as which type of filter?</div>
+    <button class="opt" onclick="choose(this,false)">A) Continuous filter — operates without interruption</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Batch filter — filtration must be stopped periodically to open the press and discharge the accumulated cake; then press closed and filtration restarted</button>
+    <button class="opt" onclick="choose(this,false)">C) Semi-continuous filter — alternates between two chambers</button>
+    <button class="opt" onclick="choose(this,false)">D) Gravity filter — no pressure or vacuum applied</button>
+    <div class="explanation">✅ Batch nature of filter press: as cake builds, resistance increases → at some point, filtration rate becomes too slow to be economical → must stop. Open press → pull plates apart → cake discharged by scraping or dropping → press reassembled → new filtration cycle. Typical batch time: 2–8 hours depending on slurry concentration and target cake dryness. For continuous filtration: use Rotary Drum Filter instead — all stages happen simultaneously as drum rotates.</div>
+  </div>
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
+  </div>
 </div>
 <footer>© 2025 Pharmaceutical Engineering BP304T · Filter Press</footer>
+
 <script>
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-let _score=0,_answered=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_score++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_answered++;const t=document.querySelectorAll('.mcq-card').length;if(_answered===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+_score+' / '+t;}}
-function resetMCQ(){_score=0;_answered=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-let running=true,speedMult=1;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';}
-function setSpeed(s){speedMult=s;}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-// Equipment-specific content loaded below
-const SLUG='filterpress';
-loadContent(SLUG);
-function loadContent(s){
-  const data=EQUIPMENT_DATA[s];
-  if(!data) return;
-  // Key points
-  const kp=document.getElementById('keypoints');
-  data.points.forEach(p=>{const li=document.createElement('li');li.textContent=p;li.style.marginBottom='8px';kp.appendChild(li);});
-  // MCQs
-  const mc=document.getElementById('mcqContainer');
-  data.mcqs.forEach((q,qi)=>{
-    const div=document.createElement('div');div.className='mcq-card';
-    let html='<div class="mcq-q">Q'+(qi+1)+'. '+q.q+'</div>';
-    q.opts.forEach((o,oi)=>{html+='<button class="opt" onclick="choose(this,'+(oi===q.correct)+')"'+(oi===q.correct?' data-correct':'')+'>'+o+'</button>';});
-    html+='<div class="explanation">'+q.exp+'</div>';
-    div.innerHTML=html;mc.appendChild(div);
-  });
-  // Start animation
-  data.anim(ctx,W,H,()=>running,()=>speedMult);
+let _s=0,_a=0;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+_s+' / '+t+(_s===t?' — Perfect! 🌟':' — Review and try again.');}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+const W=canvas.width,H=canvas.height;
+let running=true,speedMult=1,frameN=0,cakeThick=2;
+
+// Slurry particles moving right
+const slurryParts=[];
+for(let i=0;i<40;i++){
+  slurryParts.push({x:60+Math.random()*80,y:100+Math.random()*200,vx:0.8+Math.random()*0.5,vy:(Math.random()-0.5)*0.3,r:3+Math.random()*3,blocked:false,chamber:Math.floor(Math.random()*4)});
 }
-const EQUIPMENT_DATA = {
-  traydryer:{
-    points:['Hot air (40–80°C) blown over trays containing wet granules or material','Moisture evaporates from surface of material into air stream','Disadvantages: slow (8–24 hours); non-uniform drying (outside dry, inside wet); manual loading/unloading','Advantages: simple, inexpensive, handles delicate materials; batch flexibility','Used for: wet granules, crude drugs, heat-stable APIs','Inlet temperature (IT) and outlet temperature (OT) are critical — OT shows when drying complete'],
-    mcqs:[
-      {q:'The tray dryer is said to have non-uniform drying. This means:',opts:['A) Each tray dries at different temperature','B) The outside of the granule dries first and forms a crust — trapping moisture inside (case hardening) — requiring longer drying time and potential moisture redistribution on cooling','C) Air distribution is unequal across different trays','D) Some granules are larger than others'],correct:1,exp:'✅ Case hardening in tray dryer: surface dries quickly → hard dry crust → moisture trapped inside → longer drying time needed; on cooling, moisture migrates outward → soft spots → potential mould growth. Solutions: lower temperature, higher air velocity, turn/stir granules during drying. Compare: Fluidised Bed Dryer (FBD) — individual particle exposure — no case hardening.'},
-      {q:'The Tray Dryer is preferred over the Fluid Bed Dryer for drying:',opts:['A) Granules requiring rapid drying in < 30 minutes','B) Sticky, cohesive, or heat-sensitive materials that cannot be fluidised; or materials in large irregular pieces (crude drugs)','C) Very fine powders that require pneumatic conveying','D) Materials requiring sterile drying conditions'],correct:1,exp:'✅ FBD requires material to fluidise (particles must be liftable by air stream). Sticky granules clump → cannot fluidise → must use tray dryer. Large pieces (crude drug slices) — too heavy to fluidise → tray dryer. Delicate materials → tray dryer (lower mechanical stress than FBD). Heat-sensitive → lower T possible in tray dryer. Tray dryers also preferred for initial development when batch size is uncertain.'},
-    ],
-    anim:(ctx,W,H,isRunning,getSpeed)=>{
-      let t=0;
-      const trays=[{y:100},{y:180},{y:260}];
-      const particles=[];
-      for(let i=0;i<60;i++) particles.push({x:120+Math.random()*480,tray:Math.floor(Math.random()*3),wet:Math.random(),vx:(Math.random()-0.5)});
-      function step(){
-        if(!isRunning())return;
-        t+=getSpeed();
-        particles.forEach(p=>{
-          if(p.wet>0) p.wet-=0.0005*getSpeed();
-          p.x+=p.vx*getSpeed();
-          if(p.x<120||p.x>600){p.vx*=-1;}
-        });
+
+// Filtrate drops
+const filtrate=[];
+for(let i=0;i<20;i++) filtrate.push({x:200+Math.floor(Math.random()*4)*100+50,y:320+Math.random()*30,vy:0.5+Math.random(),alpha:0.7});
+
+const PLATES=[190,290,390,490,590];
+
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';if(running)loop();}
+function setSpeed(s){speedMult=s;}
+
+function step(){
+  frameN++;
+  // Grow cake slowly
+  if(cakeThick<18) cakeThick+=0.005*speedMult;
+
+  slurryParts.forEach(p=>{
+    if(p.blocked) return;
+    p.x+=p.vx*speedMult;
+    p.y+=p.vy*speedMult;
+    // Check if hits plate cloth
+    for(let pi=0;pi<PLATES.length;pi++){
+      if(p.x>PLATES[pi]-5&&p.x<PLATES[pi]+5){
+        p.blocked=true;
+        // Snap to cake layer
+        p.x=PLATES[pi]-5-cakeThick-Math.random()*4;
+        break;
       }
-      function draw(){
-        ctx.clearRect(0,0,W,H);
-        ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-        // Cabinet
-        ctx.strokeStyle='#4A90D9';ctx.lineWidth=6;
-        ctx.strokeRect(100,60,520,280);
-        ctx.fillStyle='rgba(74,144,217,0.05)';
-        ctx.fillRect(100,60,520,280);
-        // Trays
-        trays.forEach((tr,i)=>{
-          ctx.fillStyle='#2C3E50';
-          ctx.fillRect(120,tr.y,480,18);
-          // Granules on tray
-          particles.filter(p=>p.tray===i).forEach(p=>{
-            const col=p.wet>0.5?'#3498DB':p.wet>0.2?'#F39C12':'#E67E22';
-            ctx.beginPath();ctx.arc(p.x,tr.y-6,4,0,Math.PI*2);
-            ctx.fillStyle=col;ctx.fill();
-          });
-        });
-        // Hot air arrows (left side inlet)
-        ctx.fillStyle='rgba(231,76,60,0.7)';
-        for(let i=0;i<3;i++){
-          const ay=90+i*80;
-          ctx.beginPath();
-          ctx.moveTo(100,ay);ctx.lineTo(150,ay);
-          ctx.lineTo(140,ay-8);ctx.moveTo(150,ay);ctx.lineTo(140,ay+8);
-          ctx.stroke();
-        }
-        ctx.strokeStyle='rgba(231,76,60,0.6)';ctx.lineWidth=2;
-        // Exhaust arrow (right side)
-        ctx.strokeStyle='rgba(149,165,166,0.7)';ctx.lineWidth=3;
-        for(let i=0;i<3;i++){
-          const ay=90+i*80;
-          ctx.beginPath();ctx.moveTo(580,ay);ctx.lineTo(620,ay);ctx.stroke();
-        }
-        // Labels
-        ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,200,80);
-        ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🌡️ Tray Dryer',18,30);
-        ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
-        ctx.fillText('Temp: 40–80°C',18,48);ctx.fillText('Time: 8–24 hours',18,64);
-        ctx.fillStyle='#3498DB';ctx.fillText('● Wet  ',18,80);ctx.fillStyle='#E67E22';ctx.fillText('● Dry',60,80);
-        requestAnimationFrame(()=>{step();draw();});
-      }
-      draw();
     }
-  },
-  fluidbeddryer:{
-    points:['Hot air blown upward through perforated base fluidises granules','Each particle individually exposed to hot air — very efficient, uniform drying','Drying time: 20–40 minutes (vs 8–24 hours tray dryer)','Inlet air temperature: 50–80°C; outlet temperature rises as product dries','Can also granulate and coat in FBD (multi-functional equipment)','Not suitable for very fine powders (entrainment) or sticky/cohesive materials'],
-    mcqs:[
-      {q:'The Fluid Bed Dryer dries granules faster than the Tray Dryer primarily because:',opts:['A) It uses higher drying temperatures','B) Each individual granule particle is surrounded and contacted by hot air from all sides — maximum surface area exposure — efficient heat and mass transfer','C) It uses more trays than a tray dryer','D) It uses steam instead of hot air'],correct:1,exp:'✅ FBD mechanism: hot air velocity exceeds minimum fluidisation velocity → granules lifted and suspended → each particle surrounded by air → 360° exposure → rapid moisture evaporation. Compare with tray dryer where granules in a static bed on a tray — air contacts only the top surface layer → much slower drying. FBD = 20–40 min; Tray dryer = 8–24 hours for same granulation.'},
-      {q:'The outlet temperature of a Fluid Bed Dryer during drying first stays constant then rises sharply. What does the rising outlet temperature indicate?',opts:['A) The dryer is overheating — danger','B) Drying is complete — all free moisture removed — the energy from inlet air is no longer used for evaporation but heats the product','C) Inlet air temperature has been increased','D) The filter bags are clogging'],correct:1,exp:'✅ FBD drying curve: constant rate period → outlet T = wet-bulb temperature (constant; energy used for evaporation). Falling rate period → moisture supply decreasing. End point → no more moisture to evaporate → outlet T rises toward inlet T (no evaporative cooling). In GMP manufacturing: outlet temperature endpoint (e.g., outlet T reaches 45°C) triggers sampling and LOD (Loss On Drying) test to confirm moisture content meets specification.'},
-    ],
-    anim:(ctx,W,H,isRunning,getSpeed)=>{
-      const particles=[];
-      for(let i=0;i<80;i++) particles.push({x:180+Math.random()*360,y:100+Math.random()*200,vx:(Math.random()-0.5)*3,vy:-1-Math.random()*2,wet:0.8+Math.random()*0.2});
-      function step(){
-        if(!isRunning())return;
-        particles.forEach(p=>{
-          p.vy+=0.15*getSpeed();
-          p.x+=p.vx*getSpeed();
-          p.y+=p.vy*getSpeed();
-          if(p.y>280){p.y=280;p.vy=-Math.abs(p.vy)*0.6-(0.5+Math.random())*2*getSpeed();}
-          if(p.x<180||p.x>540){p.vx*=-0.8;}
-          if(p.y<60) p.y=60;
-          if(p.wet>0) p.wet-=0.001*getSpeed();
-        });
-      }
-      function draw(){
-        ctx.clearRect(0,0,W,H);
-        ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-        // Chamber
-        ctx.strokeStyle='#4A90D9';ctx.lineWidth=6;
-        ctx.beginPath();ctx.moveTo(160,60);ctx.lineTo(160,300);ctx.lineTo(560,300);ctx.lineTo(560,60);ctx.stroke();
-        // Perforated base
-        ctx.strokeStyle='#F39C12';ctx.lineWidth=4;
-        ctx.beginPath();ctx.moveTo(160,280);ctx.lineTo(560,280);ctx.stroke();
-        ctx.fillStyle='#F39C12';
-        for(let x=175;x<560;x+=20){ctx.beginPath();ctx.arc(x,280,3,0,Math.PI*2);ctx.fill();}
-        // Air arrows (bottom)
-        ctx.strokeStyle='rgba(231,76,60,0.6)';ctx.lineWidth=2;
-        for(let x=200;x<540;x+=40){
-          ctx.beginPath();ctx.moveTo(x,320);ctx.lineTo(x,285);
-          ctx.moveTo(x,285);ctx.lineTo(x-6,295);ctx.moveTo(x,285);ctx.lineTo(x+6,295);
-          ctx.stroke();
-        }
-        // Particles
-        particles.forEach(p=>{
-          const col=p.wet>0.5?'#3498DB':p.wet>0.2?'#F39C12':'#E67E22';
-          ctx.beginPath();ctx.arc(p.x,p.y,5,0,Math.PI*2);
-          ctx.fillStyle=col;ctx.globalAlpha=0.85;ctx.fill();ctx.globalAlpha=1;
-        });
-        // Exhaust top
-        ctx.strokeStyle='rgba(149,165,166,0.7)';ctx.lineWidth=3;
-        ctx.beginPath();ctx.moveTo(340,60);ctx.lineTo(340,30);ctx.stroke();
-        ctx.fillStyle='#888';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('Moist air out',340,22);
-        // Labels
-        ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,210,80);
-        ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🌬️ Fluid Bed Dryer',18,30);
-        ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
-        ctx.fillText('Inlet temp: 50–80°C',18,48);ctx.fillText('Drying time: 20–40 min',18,64);
-        ctx.fillStyle='#3498DB';ctx.fillText('● Wet',18,80);ctx.fillStyle='#E67E22';ctx.fillText('● Dry',55,80);
-        requestAnimationFrame(()=>{step();draw();});
-      }
-      draw();
+    // Wrap around
+    if(p.x>640){p.x=60+Math.random()*30;p.blocked=false;}
+    if(p.y<80) p.y=80; if(p.y>320) p.y=320;
+  });
+
+  filtrate.forEach(f=>{
+    f.y+=f.vy*speedMult;
+    if(f.y>370){f.y=320+Math.random()*10;f.x=200+Math.floor(Math.random()*4)*100+40;}
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+
+  // End frames
+  ctx.fillStyle='#2C3E50';
+  ctx.fillRect(80,80,20,240);
+  ctx.fillRect(620,80,20,240);
+
+  // Filter plates
+  PLATES.forEach(px=>{
+    // Plate body
+    ctx.fillStyle='#34495E';ctx.fillRect(px-8,80,16,240);
+    ctx.strokeStyle='#4A90D9';ctx.lineWidth=2;ctx.strokeRect(px-8,80,16,240);
+    // Filter cloth (yellow dashed lines both sides)
+    ctx.strokeStyle='rgba(243,156,18,0.8)';ctx.lineWidth=3;
+    ctx.setLineDash([6,4]);
+    ctx.beginPath();ctx.moveTo(px-12,85);ctx.lineTo(px-12,315);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(px+12,85);ctx.lineTo(px+12,315);ctx.stroke();
+    ctx.setLineDash([]);
+    // Cake buildup (brown)
+    if(cakeThick>2){
+      ctx.fillStyle='rgba(139,90,43,0.7)';
+      ctx.fillRect(px-12-cakeThick,85,cakeThick,230);
+      ctx.fillRect(px+12,85,cakeThick,230);
     }
-  },
-  spraydrying:{
-    points:['Liquid feed (solution or suspension) atomised into fine droplets by nozzle','Droplets contact hot air (150–250°C inlet) — rapid evaporation in milliseconds','Dry powder particles formed; collected in cyclone separator','Product characteristics: spherical, hollow particles; amorphous or crystalline','Used for: infant formula, APIs, amorphous solid dispersions (ASD)','Outlet temperature 60–80°C — product temperature stays low despite high inlet T'],
-    mcqs:[
-      {q:'Spray drying is used to prepare amorphous solid dispersions (ASD) because:',opts:['A) It produces the largest particle size of any drying method','B) Rapid evaporation kinetically traps the drug in the amorphous state within the polymer matrix — insufficient time for crystal nucleation — drug molecularly dispersed in polymer','C) It uses lower temperatures than any other drying method','D) It produces crystalline particles with higher density'],correct:1,exp:'✅ ASD by spray drying: drug + polymer dissolved in organic solvent → atomised → droplets contact hot air → solvent evaporates in <0.1 second (too fast for crystal nucleation) → drug kinetically trapped in amorphous state dispersed in polymer matrix. Key: rate of evaporation >> rate of crystallisation. HPMC-AS, copovidone, Soluplus are common ASD polymers. Commercial examples: Sporanox (itraconazole-HPMC), Kaletra (lopinavir-ritonavir).'},
-      {q:'Why does spray-dried product remain at safe temperature despite inlet air temperature of 150–250°C?',opts:['A) The nozzle cools the droplets before they contact air','B) Evaporative cooling — the rapid evaporation of solvent absorbs heat and keeps droplet temperature near the wet-bulb temperature (60–80°C) throughout drying; product only reaches higher T after all solvent is evaporated','C) The cyclone separator cools the powder','D) The hot air bypasses the product particles'],correct:1,exp:'✅ Spray drying thermal protection: as long as solvent is evaporating from the droplet, the droplet temperature stays near the wet-bulb temperature (for water: ~60–70°C) regardless of 150–250°C inlet air. The latent heat of evaporation absorbs the heat energy. Only after all solvent is gone does the particle temperature rise toward outlet T (60–80°C). This is why spray drying is suitable for many heat-sensitive APIs despite the high inlet temperature.'},
-    ],
-    anim:(ctx,W,H,isRunning,getSpeed)=>{
-      const droplets=[];
-      function addDroplet(){
-        const angle=-Math.PI/2+(Math.random()-0.5)*0.8;
-        droplets.push({x:360,y:80,vx:Math.cos(angle)*3,vy:Math.sin(angle)*3,r:8+Math.random()*4,wet:1,col:'#3498DB'});
-      }
-      let frameCount=0;
-      function step(){
-        if(!isRunning())return;
-        frameCount++;
-        if(frameCount%8===0) addDroplet();
-        if(droplets.length>60) droplets.shift();
-        droplets.forEach(d=>{
-          d.x+=d.vx*getSpeed();d.y+=d.vy*getSpeed();
-          d.vy+=0.08*getSpeed();
-          d.wet-=0.025*getSpeed();
-          if(d.wet<0) d.wet=0;
-          d.r=Math.max(3,(d.wet>0.3?8:5)*1);
-          d.col=d.wet>0.6?'#3498DB':d.wet>0.3?'#F39C12':'#E67E22';
-          // Cyclone collection (bottom right)
-          if(d.x>580||d.x<100||d.y>330) {d.r=0;}
-        });
-      }
-      function draw(){
-        ctx.clearRect(0,0,W,H);
-        ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-        // Drying chamber
-        ctx.strokeStyle='#4A90D9';ctx.lineWidth=5;
-        ctx.beginPath();ctx.moveTo(100,60);ctx.lineTo(580,60);ctx.lineTo(580,300);ctx.lineTo(380,340);ctx.lineTo(180,300);ctx.lineTo(100,60);ctx.stroke();
-        ctx.fillStyle='rgba(231,76,60,0.06)';ctx.fill();
-        // Atomiser nozzle at top centre
-        ctx.fillStyle='#E74C3C';
-        ctx.beginPath();ctx.arc(360,80,12,0,Math.PI*2);ctx.fill();
-        ctx.fillStyle='white';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('NOZZLE',360,78);
-        // Hot air inlet arrows
-        ctx.strokeStyle='rgba(231,76,60,0.5)';ctx.lineWidth=2;
-        for(let i=0;i<3;i++){ctx.beginPath();ctx.moveTo(100+i*30,60);ctx.lineTo(130+i*30,90);ctx.stroke();}
-        // Product outlet
-        ctx.strokeStyle='rgba(149,165,166,0.8)';ctx.lineWidth=4;
-        ctx.beginPath();ctx.moveTo(280,340);ctx.lineTo(280,360);ctx.stroke();
-        ctx.fillStyle='#888';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('Product',280,375);
-        // Droplets
-        droplets.forEach(d=>{
-          if(d.r<1)return;
-          ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
-          ctx.fillStyle=d.col;ctx.globalAlpha=0.8;ctx.fill();ctx.globalAlpha=1;
-        });
-        // Labels
-        ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,220,80);
-        ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('💨 Spray Dryer',18,30);
-        ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
-        ctx.fillText('Inlet: 150–250°C',18,48);ctx.fillText('Outlet: 60–80°C',18,64);
-        ctx.fillStyle='#3498DB';ctx.fillText('● Droplet → ',18,80);ctx.fillStyle='#E67E22';ctx.fillText('Dry powder',80,80);
-        requestAnimationFrame(()=>{step();draw();});
-      }
-      draw();
-    }
-  },
-  filterpress:{
-    points:['Series of filter plates with filter media between them pressed together in a frame','Slurry pumped in under pressure; liquid passes through filter cloth; solids retained as filter cake','Filter cake builds up between plates until resistance too high — then press opened; cake discharged','Filtration pressure: 2–8 bar; produces very dry cake (low residual moisture)','Used for: API isolation after crystallisation; removal of charcoal after decolourisation; large-scale pharmaceutical filtration','Disadvantage: batch process; manual opening to discharge cake; not suitable for sterile filtration'],
-    mcqs:[
-      {q:'The Filter Press is a pressure filtration device. The driving force for filtration is:',opts:['A) Gravity — liquid falls through filter by gravity','B) Applied pressure (2–8 bar) from a pump pushing slurry through the filter cloth — pressure overcomes resistance of filter cake and cloth','C) Vacuum — suction from below the filter','D) Centrifugal force — rotating the plates'],correct:1,exp:'✅ Filter press operates by positive pressure: slurry pump delivers 2–8 bar → liquid forced through filter cloth → cake builds up. Compare with vacuum filtration (Buchner funnel, leaf filter — suction from below, max 1 bar driving force) and gravity filtration (no added pressure, only gravity). Higher pressure = faster filtration and drier cake. Filter press gives driest cake of common batch filters.'},
-      {q:'Why must the filter cake be washed in a Filter Press before discharge?',opts:['A) To dissolve the cake for easier removal','B) To displace mother liquor (filtrate containing impurities, by-products) trapped in the cake pores — washing with fresh solvent improves API purity','C) To cool the cake before drying','D) To increase cake moisture content for easier discharge'],correct:1,exp:'✅ Cake washing in filter press: after slurry filtered → cake contains mother liquor in pores (impurities, by-products, excess reagents). Washing: close the press, pump fresh solvent through the cake (same direction as filtration or counter-current). Solvent displaces impure mother liquor → purer API cake. Wash liquor collected separately (or recycled). Number of wash volumes = wash ratio. Higher wash ratio = purer cake = better API quality. Essential for pharmaceutical API isolation.'},
-    ],
-    anim:(ctx,W,H,isRunning,getSpeed)=>{
-      let pressure=0,cakeThick=0,frameN=0;
-      function step(){if(!isRunning())return;frameN++;pressure=0.7+0.3*Math.sin(frameN*0.05*getSpeed());cakeThick=Math.min(15,cakeThick+0.02*getSpeed());}
-      function draw(){
-        ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-        // Frame plates
-        const plates=[160,240,320,400,480,560];
-        plates.forEach((px,i)=>{
-          ctx.fillStyle=i===0||i===5?'#2C3E50':'#34495E';
-          ctx.fillRect(px-10,80,20,220);
-          ctx.strokeStyle='#4A90D9';ctx.lineWidth=2;ctx.strokeRect(px-10,80,20,220);
-          if(i>0&&i<5){
-            // Filter cloth
-            ctx.strokeStyle='rgba(241,196,15,0.5)';ctx.lineWidth=3;ctx.setLineDash([4,3]);
-            ctx.beginPath();ctx.moveTo(px-2,85);ctx.lineTo(px-2,295);ctx.stroke();ctx.setLineDash([]);
-            // Filter cake
-            if(cakeThick>0){
-              ctx.fillStyle='rgba(210,180,140,0.7)';
-              ctx.fillRect(px+2,85,cakeThick,210);
-            }
-          }
-        });
-        // Slurry inlet arrow
-        ctx.fillStyle='rgba(52,152,219,0.7)';
-        ctx.beginPath();ctx.moveTo(120,185);ctx.lineTo(150,185);ctx.lineTo(145,178);ctx.moveTo(150,185);ctx.lineTo(145,192);ctx.stroke();
-        ctx.strokeStyle='rgba(52,152,219,0.7)';ctx.lineWidth=4;
-        ctx.beginPath();ctx.moveTo(80,185);ctx.lineTo(150,185);ctx.stroke();
-        ctx.fillStyle='#3498DB';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('SLURRY IN',100,175);ctx.fillText(pressure.toFixed(1)+' bar',100,165);
-        // Filtrate outlets
-        ctx.strokeStyle='rgba(52,200,52,0.7)';ctx.lineWidth=3;
-        [195,275,355,435,515].forEach(px=>{
-          ctx.beginPath();ctx.moveTo(px,320);ctx.lineTo(px,350);ctx.stroke();
-        });
-        ctx.fillStyle='#2ECC71';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('FILTRATE',360,365);
-        // Labels
-        ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,200,70);
-        ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🗜️ Filter Press',18,30);
-        ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Pressure: '+pressure.toFixed(1)+' bar',18,48);ctx.fillText('Mechanism: Pressure filtration',18,64);
-        requestAnimationFrame(()=>{step();draw();});
-      }
-      draw();
-    }
-  },
-  sieveshaker:{
-    points:['Stack of sieves arranged with largest aperture at top, smallest at bottom','Sample placed on top sieve; machine vibrates or shakes the stack for 5–20 minutes','Each sieve retains particles larger than its aperture; smallest particles pass through all into receiver pan','Sieve aperture sizes (BS/ASTM mesh): 2000, 1000, 710, 500, 355, 250, 180, 125, 90, 63 µm','Used for: particle size analysis; quality control of granules; classification of powders','Result: particle size distribution (PSD) expressed as % retained on each sieve'],
-    mcqs:[
-      {q:'In a sieve analysis, sieves are stacked with the largest aperture at the top and smallest at the bottom. This is because:',opts:['A) Larger particles are heavier and fall faster to the bottom','B) Largest particles are retained on the top sieve first; progressively smaller particles pass through successive sieves — allowing systematic size classification from coarsest to finest in one operation','C) The sieve shaker motor is at the top','D) Small aperture sieves are stronger and should support the weight of powder'],correct:1,exp:'✅ Sieve stack arrangement: 2000 µm (top) → 1000 → 710 → 500 → 355 → 250 → 180 → 125 → 90 → 63 µm → pan (bottom). Particles > 2000 µm retained on top sieve. Particles 1000–2000 µm retained on second sieve. Finest particles (<63 µm) pass all sieves into receiver pan. After shaking: each sieve weighed → mass retained calculated → % retained plotted as cumulative particle size distribution (PSD).'},
-      {q:'The "equivalent spherical diameter" used in sieve analysis refers to:',opts:['A) The actual diameter of the particle measured by microscopy','B) The size of a sphere that would just pass through the same square sieve aperture as the actual particle — sieve measures one dimension of an irregular particle','C) The diameter calculated from the particle volume','D) The diameter measured by laser diffraction'],correct:1,exp:'✅ Sieve aperture = square hole of side length = mesh size. An elongated needle particle (2 mm long, 0.3 mm wide) passes through a 0.4 mm aperture if oriented correctly → classified as 0.4 mm even though it is 2 mm long in one dimension. Therefore: sieve analysis measures the SECOND smallest dimension of irregular particles. For true size analysis, laser diffraction (measures equivalent volume sphere) or image analysis (measures actual shape) are more precise. But sieve analysis is the pharmacopoeial standard (USP <786>, IP) for granule size QC.'},
-    ],
-    anim:(ctx,W,H,isRunning,getSpeed)=>{
-      const sieves=[{y:80,ap:500},{y:150,ap:250},{y:220,ap:125},{y:290,ap:63}];
-      const particles=[];
-      for(let i=0;i<50;i++) particles.push({x:150+Math.random()*420,y:50,vy:0.5+Math.random(),r:3+Math.random()*12,passed:0,col:'hsl('+(Math.random()*360)+',70%,60%)'});
-      let shakeT=0;
-      function step(){if(!isRunning())return;shakeT+=getSpeed();
-        const shake=Math.sin(shakeT*0.3)*4*getSpeed();
-        particles.forEach(p=>{
-          p.x+=shake+(Math.random()-0.5)*getSpeed();
-          p.y+=p.vy*getSpeed();
-          // Check each sieve
-          sieves.forEach((s,si)=>{
-            if(si>=p.passed&&p.y>s.y-p.r){
-              if(p.r*2>s.ap/20){p.vy=-Math.abs(p.vy)*0.5;p.y=s.y-p.r;}// blocked
-              else{p.passed=si+1;}// passes through
-            }
-          });
-          if(p.y>350){p.y=350;p.vy=0;}
-          p.x=Math.max(120,Math.min(580,p.x));
-        });
-      }
-      function draw(){
-        ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-        // Sieves
-        sieves.forEach(s=>{
-          ctx.strokeStyle='#F39C12';ctx.lineWidth=3;
-          ctx.setLineDash([6,4]);
-          ctx.beginPath();ctx.moveTo(120,s.y);ctx.lineTo(580,s.y);ctx.stroke();
-          ctx.setLineDash([]);
-          ctx.fillStyle='rgba(243,156,18,0.3)';ctx.fillRect(120,s.y-4,460,8);
-          ctx.fillStyle='#F9E79F';ctx.font='10px Arial';ctx.textAlign='right';
-          ctx.fillText(s.ap+'µm',115,s.y+4);
-        });
-        // Pan
-        ctx.fillStyle='#2C3E50';ctx.fillRect(100,340,500,20);
-        ctx.fillStyle='#888';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('RECEIVER PAN (< 63µm)',360,356);
-        // Particles
-        particles.forEach(p=>{
-          ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-          ctx.fillStyle=p.col;ctx.globalAlpha=0.85;ctx.fill();ctx.globalAlpha=1;
-        });
-        // Labels
-        ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,200,65);
-        ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🔲 Sieve Shaker',18,30);
-        ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Sieves: largest → smallest',18,48);ctx.fillText('Result: Particle Size Distribution',18,64);
-        requestAnimationFrame(()=>{step();draw();});
-      }
-      draw();
-    }
-  },
-  rotarytabletpress:{
-    points:['Multiple punch-and-die sets arranged on a rotating turret','Upper and lower punches compress granules in the die cavity to form tablets','Continuous production: 100,000–1,000,000 tablets per hour','Three stages: Filling (granules enter die), Compression (upper punch descends), Ejection (lower punch rises)','Compression force controlled by compression rollers; affects tablet hardness, friability, disintegration','Critical quality attributes (CQAs): tablet weight, hardness, thickness, friability, disintegration time'],
-    mcqs:[
-      {q:'In a Rotary Tablet Press, tablet weight is primarily controlled by:',opts:['A) Compression force applied by the upper punch','B) The die fill depth — how deep the lower punch sits when granules fill the die; deeper = more granules = heavier tablet','C) Turret rotation speed','D) The diameter of the punch face'],correct:1,exp:'✅ Die fill depth adjustment: the lower punch position during filling determines the volume of die filled with granules. More depth = larger volume = more granules = heavier tablet. The weight adjustment mechanism (WAM) controls lower punch depth during filling. Tablet weight monitored by in-process checks (every 5–10 min weighing of 10 tablets) and automated weight control systems (tablet weight feedback to adjust fill depth in real time).'},
-      {q:'Double compression (pre-compression followed by main compression) in a rotary tablet press is used to:',opts:['A) Produce bilayer tablets','B) Remove air trapped in granule pores before main compression — prevents capping and lamination defects; improves tablet mechanical strength','C) Apply two different APIs in sequence','D) Increase tablet production speed'],correct:1,exp:'✅ Pre-compression (first compression at low force, 5–10% of main force): drives out entrapped air from granule pores and voids → creates denser granule bed → main compression then applies full force to air-free material → uniform, strong tablet without capping/lamination. Capping = top or bottom cap detaches from tablet body due to air elastic recovery after compression. Lamination = tablet splits into layers. Both caused by trapped air during compression — prevented by pre-compression.'},
-    ],
-    anim:(ctx,W,H,isRunning,getSpeed)=>{
-      let rotAngle=0;
-      const NUM_STATIONS=8;
-      function step(){if(!isRunning())return;rotAngle+=0.015*getSpeed();}
-      function draw(){
-        ctx.clearRect(0,0,W,H);
-        const bg=ctx.createRadialGradient(W/2,H/2,10,W/2,H/2,300);
-        bg.addColorStop(0,'#1a1a2e');bg.addColorStop(1,'#0d0d1a');
-        ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-        const cx=W/2,cy=H/2+10;
-        // Turret
-        ctx.strokeStyle='#4A90D9';ctx.lineWidth=8;
-        ctx.beginPath();ctx.arc(cx,cy,140,0,Math.PI*2);ctx.stroke();
-        ctx.fillStyle='rgba(44,62,80,0.5)';ctx.beginPath();ctx.arc(cx,cy,140,0,Math.PI*2);ctx.fill();
-        // Central hub
-        ctx.fillStyle='#2C3E50';ctx.beginPath();ctx.arc(cx,cy,30,0,Math.PI*2);ctx.fill();
-        ctx.strokeStyle='#4A90D9';ctx.lineWidth=3;ctx.stroke();
-        // Punch stations
-        for(let i=0;i<NUM_STATIONS;i++){
-          const a=rotAngle+i*(Math.PI*2/NUM_STATIONS);
-          const px=cx+Math.cos(a)*110,py=cy+Math.sin(a)*110;
-          const phase=(a%(Math.PI*2))/(Math.PI*2);
-          // Upper punch
-          const upOffset=phase<0.4?-20+phase*60:phase<0.6?4:phase<0.8?4-(phase-0.6)*60:-20;
-          ctx.fillStyle='#85929E';
-          ctx.fillRect(px-4,py-30+upOffset,8,25);
-          // Die
-          ctx.fillStyle='#34495E';ctx.fillRect(px-8,py-5,16,20);
-          ctx.strokeStyle='#4A90D9';ctx.lineWidth=1;ctx.strokeRect(px-8,py-5,16,20);
-          // Tablet/granules in die
-          if(phase>0.1&&phase<0.8){
-            ctx.fillStyle=phase<0.4?'#F39C12':'#E74C3C';
-            ctx.beginPath();ctx.ellipse(px,py+5,6,4,0,0,Math.PI*2);ctx.fill();
-          }
-          // Lower punch
-          const downOffset=phase<0.4?8:phase<0.6?8-phase*20:phase<0.8?-4:8;
-          ctx.fillStyle='#85929E';
-          ctx.fillRect(px-4,py+15+downOffset,8,20);
-        }
-        // Labels
-        ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,220,80);
-        ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('💊 Rotary Tablet Press',18,30);
-        ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
-        ctx.fillText('Stations: 8–64 punches',18,48);ctx.fillText('Output: up to 1M tablets/hr',18,64);
-        ctx.fillStyle='#F39C12';ctx.fillText('● Filling  ',18,80);ctx.fillStyle='#E74C3C';ctx.fillText('● Compressing',60,80);
-        requestAnimationFrame(()=>{step();draw();});
-      }
-      draw();
-    }
-  }
-};
+  });
+
+  // Slurry particles (blue)
+  slurryParts.forEach(p=>{
+    if(p.blocked) return;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='#3498DB';ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;
+  });
+
+  // Filtrate drops (green, below plates)
+  filtrate.forEach(f=>{
+    ctx.beginPath();ctx.arc(f.x,f.y,3,0,Math.PI*2);
+    ctx.fillStyle=`rgba(46,204,113,${f.alpha})`;ctx.fill();
+  });
+
+  // Slurry inlet arrow
+  ctx.strokeStyle='#3498DB';ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(20,200);ctx.lineTo(75,200);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(70,193);ctx.lineTo(78,200);ctx.lineTo(70,207);ctx.stroke();
+  ctx.fillStyle='#3498DB';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('SLURRY',40,190);ctx.fillText('IN',40,203);
+
+  // Filtrate outlet label
+  ctx.fillStyle='#2ECC71';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('FILTRATE OUT',400,385);
+
+  // Cake label
+  ctx.fillStyle='rgba(139,90,43,0.9)';ctx.font='10px Arial';ctx.textAlign='right';
+  ctx.fillText('Filter cake →',180,165);
+
+  // Info box
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,215,80);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🗜️ Filter Press',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Pressure: 2–8 bar',18,48);
+  ctx.fillText('Mechanism: Pressure filtration',18,64);
+  ctx.fillStyle='#F9E79F';ctx.fillText('Cake thickness: '+cakeThick.toFixed(0)+'% full',18,80);
+}
+
+function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+loop();
 </script>
 </body>
 </html>

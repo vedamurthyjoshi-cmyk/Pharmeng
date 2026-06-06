@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>metafilter — Pharmaceutical Engineering</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;}.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}</style>
+</head>
+<body>
+<header><h1 id="hTitle">Filter</h1><p>Pharmaceutical Engineering BP304T · Chapter 3 — Filtration</p></header>
+<nav><a href="index.html">🏠 Home</a></nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="720" height="380"></canvas>
+  <div style="margin-top:14px;">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  </div>
+</div>
+</div>
+<div id="theory" class="panel"><div class="theory-box"><h3 id="theoryTitle">Theory</h3><div id="theoryContent"></div></div></div>
+<div id="mcq" class="panel"><div id="mcqContent"></div>
+<div class="score-box" id="score" style="display:none"><h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2><button class="btn" onclick="resetMCQ()">🔄 Try Again</button></div></div>
+<footer>© 2025 Pharmaceutical Engineering BP304T</footer>
+<script>
+const SLUG='metafilter';
+const DATA={
+  leaffilter:{title:'🍃 Leaf Filter',theory:'<p>The Leaf Filter consists of filter leaves (flat frames covered with filter cloth) immersed in a vessel containing the slurry. Vacuum or pressure is applied — liquid passes through the filter cloth; solids build up as a cake on the leaf surface. After filtration the cake can be washed (by spraying wash liquid) and then discharged by vibration, back-flushing, or scraping.</p><ul><li>Filter leaves: metal frames with wire mesh base + filter cloth; rectangular or circular</li><li>Pressure vessel: closed; slurry pumped in under pressure 2–5 bar</li><li>Filtrate outlet: central manifold connected to all leaves</li><li>Cake discharge: rotate leaves and vibrate, or back-flush with air</li></ul><div class="key-fact">🔑 Leaf Filter advantage over Filter Press: filter leaves can be removed and cleaned individually; handles larger volumes; suited for pharmaceutical API clarification after crystallisation.</div>',
+    mcqs:[{q:'In a Leaf Filter, filtration occurs through:',opts:['A) The flat surfaces (faces) of filter cloth-covered leaves — liquid passes through both faces of each leaf simultaneously, doubling the effective filtration area per leaf','B) The edges of the filter leaves only','C) The central manifold pipe','D) Gravity settling before entering the filter'],correct:0,exp:'✅ Leaf filter filtration area: liquid contacts BOTH flat faces of each leaf → filtration through both faces → double area per leaf vs single-sided filtration. With 10 leaves each 0.5 m², total filtration area = 10 m² (both faces) = 10 × 2 × 0.5 = 10 m². This high filtration area makes leaf filters very efficient for large-scale pharmaceutical clarification.'},
+    {q:'The Leaf Filter is particularly useful for pharmaceutical API isolation because:',opts:['A) It requires no filter cloth — only metal screens','B) The cake can be washed in situ (without disturbing the cake structure) by spraying wash solvent through the same leaves — achieving high API purity with minimum solvent loss','C) It operates at very high pressure (above 20 bar)','D) It can filter without any filter aid'],correct:1,exp:'✅ In-situ washing advantage: after API crystallisation slurry is filtered, the mother liquor trapped in the cake contains impurities. Leaf filter: close the vessel, spray wash solvent onto cake surfaces → solvent percolates through cake → displaces mother liquor → purer API. The cake remains intact on the leaves during washing — efficient solvent use. Compare with filter press: cake also washable but requires opening press; leaf filter washing is simpler and more uniform.'}]
+  },
+  metafilter:{title:'🔩 Meta Filter (Edge Filter)',theory:'<p>The Meta Filter (Meta Filter or Edge Filter) uses a stack of precision-stamped metal discs (meta discs) as the filter medium instead of cloth. The discs are threaded on a rod and held under compression. Liquid passes through the narrow gaps between disc edges (typically 0.05–0.2 mm); particles larger than the gap are retained. The gap width is precisely controlled by the disc thickness and spacers.</p><ul><li>Meta discs: stainless steel stamped discs; edges have precise ridges creating uniform gaps</li><li>Gap control: controlled by disc thickness; different disc sets for different gap sizes</li><li>Cleaning: discs loosened, gaps open wider, back-flush removes cake</li><li>No filter cloth: metal filter medium — permanent, sterilisable</li></ul><div class="key-fact">🔑 Meta Filter unique advantage: no filter cloth needed — no cloth change, no cloth contamination risk. All-metal construction → autoclavable → sterile filtration applications (though not absolute sterile filtration — 0.2 µm membranes used for that).</div>',
+    mcqs:[{q:'The Meta Filter uses which type of filter medium?',opts:['A) Woven filter cloth (cotton or nylon)','B) Precision-stamped metal discs (meta discs) with calibrated gaps between disc edges — no cloth required','C) Sand and gravel bed (deep bed filtration)','D) Cellulose filter paper'],correct:1,exp:'✅ Meta disc construction: stainless steel discs stamped with precise edge ridges → when stacked under compression → uniform gap between adjacent disc faces (0.05–0.2 mm). Liquid enters from outside → passes through disc edge gaps → exits through central bore. Particles > gap width retained as cake on outside surface. All-metal → no cloth contamination → suitable for pharmaceutical processes where cloth fibres would contaminate product.'},
+    {q:'Compared to a Filter Press with filter cloth, the Meta Filter requires less maintenance because:',opts:['A) Meta Filter has no moving parts at all','B) The metal disc filter medium does not need replacement — it can be cleaned by back-flushing and reused indefinitely; no cloth change between batches','C) Meta Filter operates at lower pressure','D) Meta Filter handles larger particle sizes'],correct:1,exp:'✅ Maintenance comparison: Filter Press: cloth replaced when blinded (pores clogged) — frequency every 5–50 batches depending on slurry. Each cloth change: open press, remove plates, strip cloth, fit new cloth, reassemble, re-tighten — 2–4 hours downtime per press. Meta Filter: discs loosen → gaps open → back-flush with solvent or compressed air → cake discharged → retighten → ready in 15–30 min. No consumable filter medium → lower operating cost → higher productivity for continuous manufacturing.'}]
+  },
+  rotarydrumfilter:{title:'🔃 Rotary Drum Filter',theory:'<p>The Rotary Drum Filter is a continuous vacuum filtration device. A horizontal drum covered with filter cloth rotates slowly (0.1–3 rpm) while partially submerged in a slurry trough. As the drum rotates, different zones perform: submersion (cake formation under vacuum), washing, drying, and cake discharge by scraper blade — all simultaneously as the drum completes each revolution.</p><ul><li>Drum: perforated steel cylinder; 0.5–4 m diameter; covered with filter cloth</li><li>Internal vacuum: applied through internal pipes to different drum sections</li><li>Submersion: lower portion of drum submerged in slurry (typically 30–40%)</li><li>Scraper blade: fixed blade removes cake as it emerges from slurry</li><li>Continuous operation: filtration, washing, and cake discharge happen simultaneously</li></ul><div class="key-fact">🔑 The Rotary Drum Filter is the only truly CONTINUOUS filtration device — all stages happen simultaneously as drum rotates. Compare with Filter Press and Leaf Filter (batch processes). Used for large-volume pharmaceutical manufacturing where continuous operation is needed.</div>',
+    mcqs:[{q:'The Rotary Drum Filter is classified as a continuous filter because:',opts:['A) It rotates continuously at high speed','B) All filtration stages (cake formation, washing, drying, discharge) occur simultaneously on different sections of the rotating drum — no stopping between batches; slurry continuously fed, filtrate and cake continuously discharged','C) It uses a continuous belt instead of drum','D) Continuous vacuum is applied throughout'],correct:1,exp:'✅ Continuous operation: as drum rotates 360° — Zone 1 (submerged in slurry: vacuum draws filtrate; cake builds). Zone 2 (above slurry: vacuum continues; air begins drying cake). Zone 3 (wash zone: wash liquid sprayed; fresh filtrate collected separately). Zone 4 (drying zone: air drawn through cake). Zone 5 (scraper: blade removes cake into conveyor). One full rotation = one complete filtration cycle. Large drums process thousands of litres per hour continuously.'},
+    {q:'The cake formed on a Rotary Drum Filter is discharged by:',opts:['A) Gravity — cake falls off when drum rotates upside down','B) A fixed scraper (doctor blade) that peels the cake from the drum surface as it rotates out of the submersion zone','C) Back-pressure air injected from inside the drum pushing cake off','D) High-pressure water wash that blasts cake from cloth'],correct:1,exp:'✅ Scraper (doctor blade) discharge: fixed blade positioned tangent to drum surface → as cake-coated drum surface rotates to the discharge point → blade peels cake off → cake falls onto conveyor belt or collection trough → transported for further processing (drying, milling). Knife gap (blade-to-drum clearance): precisely set 0.5–2 mm; too close damages cloth; too far leaves cake on drum. Some designs use wire for cake lifting (wire discharge) or air blow-back for thin cakes.'}]
+  }
+};
+const d=DATA[SLUG];
+document.getElementById('hTitle').textContent=d.title;
+document.getElementById('theoryTitle').textContent=d.title+' — Theory';
+document.getElementById('theoryContent').innerHTML=d.theory;
+const mc=document.getElementById('mcqContent');
+d.mcqs.forEach((q,qi)=>{
+  const div=document.createElement('div');div.className='mcq-card';
+  let html='<div class="mcq-q">Q'+(qi+1)+'. '+q.q+'</div>';
+  q.opts.forEach((o,oi)=>{html+='<button class="opt" onclick="choose(this,'+(oi===q.correct)+')"'+(oi===q.correct?' data-correct':'')+'>'+o+'</button>';});
+  html+='<div class="explanation">'+q.exp+'</div>';div.innerHTML=html;mc.appendChild(div);
+});
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+let _s=0,_a=0;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+_s+' / '+t;}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+let running=true,speedMult=1,animAngle=0,frameN=0;
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';if(running)loop();}
+function setSpeed(s){speedMult=s;}
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+const particles=[];
+for(let i=0;i<50;i++) particles.push({x:100+Math.random()*520,y:80+Math.random()*240,vy:0.3+Math.random(),r:3+Math.random()*5,col:'#C8B560',passed:false});
+function step(){animAngle+=0.012*speedMult;frameN++;
+particles.forEach(p=>{p.y+=p.vy*speedMult;if(p.y>H-60){p.y=80+Math.random()*50;p.x=100+Math.random()*520;p.passed=Math.random()<0.7;}});}
+function draw(){
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+  if(SLUG==='leaffilter'){
+    // Leaf filter vessel
+    ctx.strokeStyle='#4A90D9';ctx.lineWidth=6;ctx.strokeRect(100,50,520,300);
+    // Filter leaves
+    for(let i=0;i<5;i++){
+      const lx=160+i*90;
+      ctx.fillStyle='rgba(243,156,18,0.3)';ctx.fillRect(lx-15,80,30,220);
+      ctx.strokeStyle='#F39C12';ctx.lineWidth=3;ctx.strokeRect(lx-15,80,30,220);
+      ctx.strokeStyle='rgba(243,156,18,0.5)';ctx.lineWidth=1;
+      for(let j=0;j<10;j++){ctx.beginPath();ctx.moveTo(lx-15,90+j*20);ctx.lineTo(lx+15,90+j*20);ctx.stroke();}
+    }
+    // Slurry particles
+    particles.forEach(p=>{if(!p.passed){ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='#C8B560';ctx.globalAlpha=0.7;ctx.fill();ctx.globalAlpha=1;}});
+    // Filtrate arrows down
+    ctx.strokeStyle='rgba(52,152,219,0.6)';ctx.lineWidth=2;
+    for(let i=0;i<5;i++){ctx.beginPath();ctx.moveTo(160+i*90,320);ctx.lineTo(160+i*90,360);ctx.stroke();}
+    ctx.fillStyle='#3498DB';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('FILTRATE OUT',360,378);
+    ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,180,55);ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🍃 Leaf Filter',18,30);ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Pressure: 2–5 bar',18,48);ctx.fillText('Vacuum or pressure filtration',18,64);
+  } else if(SLUG==='metafilter'){
+    // Meta filter — stacked discs cross section
+    const mx=W/2,my=H/2;
+    for(let i=0;i<12;i++){
+      const dy=my-110+i*20;
+      ctx.fillStyle=i%2===0?'#5D6D7E':'#85929E';
+      ctx.fillRect(mx-80,dy,160,14);
+      ctx.strokeStyle='#4A90D9';ctx.lineWidth=1;ctx.strokeRect(mx-80,dy,160,14);
+      // Gap
+      ctx.fillStyle='rgba(52,152,219,0.1)';ctx.fillRect(mx-80,dy+14,160,6);
+    }
+    // Centre rod
+    ctx.fillStyle='#2C3E50';ctx.fillRect(mx-8,my-120,16,240);
+    ctx.strokeStyle='#4A90D9';ctx.lineWidth=2;ctx.strokeRect(mx-8,my-120,16,240);
+    // Slurry outside
+    ctx.fillStyle='rgba(201,176,55,0.15)';ctx.fillRect(50,my-130,mx-90,260);
+    // Filtrate arrows
+    ctx.strokeStyle='rgba(52,152,219,0.6)';ctx.lineWidth=2;
+    for(let i=0;i<5;i++){ctx.beginPath();ctx.moveTo(mx+80+i*10,my-40+i*20);ctx.lineTo(mx+130,my+20);ctx.stroke();}
+    ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,180,55);ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🔩 Meta Filter',18,30);ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Medium: metal discs (no cloth)',18,48);ctx.fillText('Gap: 0.05–0.2 mm',18,64);
+  } else {
+    // Rotary drum filter
+    const dcy=H/2,dcx=W/2,dr=130;
+    // Slurry trough
+    ctx.fillStyle='rgba(201,176,55,0.3)';ctx.fillRect(dcx-dr-20,dcy,dr*2+40,140);
+    ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;
+    ctx.beginPath();ctx.moveTo(dcx-dr-20,dcy);ctx.lineTo(dcx-dr-20,dcy+140);ctx.lineTo(dcx+dr+20,dcy+140);ctx.lineTo(dcx+dr+20,dcy);ctx.stroke();
+    // Drum
+    ctx.save();ctx.translate(dcx,dcy);ctx.rotate(animAngle);
+    // Sections coloured
+    const zones=[{start:0,end:Math.PI*0.9,col:'rgba(52,152,219,0.3)',label:'Filtration'},{start:Math.PI*0.9,end:Math.PI*1.4,col:'rgba(46,204,113,0.3)',label:'Wash'},{start:Math.PI*1.4,end:Math.PI*1.8,col:'rgba(241,196,15,0.3)',label:'Dry'},{start:Math.PI*1.8,end:Math.PI*2,col:'rgba(231,76,60,0.3)',label:'Discharge'}];
+    zones.forEach(z=>{ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,dr,z.start,z.end);ctx.closePath();ctx.fillStyle=z.col;ctx.fill();});
+    ctx.strokeStyle='#4A90D9';ctx.lineWidth=6;ctx.beginPath();ctx.arc(0,0,dr,0,Math.PI*2);ctx.stroke();
+    // Radial lines
+    ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=2;
+    for(let i=0;i<8;i++){const a=i*Math.PI/4;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(a)*dr,Math.sin(a)*dr);ctx.stroke();}
+    ctx.restore();
+    // Scraper blade
+    ctx.strokeStyle='#E74C3C';ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(dcx+dr+5,dcy-30);ctx.lineTo(dcx+dr+5,dcy+30);ctx.stroke();
+    ctx.fillStyle='#E74C3C';ctx.font='10px Arial';ctx.textAlign='left';ctx.fillText('SCRAPER',dcx+dr+10,dcy+5);
+    ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,200,65);ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🔃 Rotary Drum Filter',18,30);ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Continuous operation',18,48);ctx.fillText('Speed: 0.1–3 RPM',18,64);
+  }
+}
+function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+loop();
+</script>
+</body>
+</html>

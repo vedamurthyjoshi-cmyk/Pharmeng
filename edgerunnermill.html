@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edge Runner Mill — Pharmaceutical Engineering</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial,sans-serif;background:#f0f4f8;color:#222;}
+header{background:#1B4F72;color:white;padding:16px 20px;}
+header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
+nav{background:#2E86C1;padding:10px 20px;}
+nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}
+.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}
+.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
+.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}
+.panel.active{display:block;}
+.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
+canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
+.controls{margin-top:14px;}
+.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}
+.btn:hover{background:#2E86C1;}
+.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}
+.theory-box ul{padding-left:22px;margin-top:8px;}
+.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
+.opt:hover{background:#EBF5FB;border-color:#1B4F72;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}
+.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+</style>
+</head>
+<body>
+<header><h1>🎡 Edge Runner Mill — Compression &amp; Attrition</h1><p>Pharmaceutical Engineering BP304T · Chapter 1 — Size Reduction</p></header>
+<nav><a href="index.html">🏠 Home</a></nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="720" height="380"></canvas>
+  <div class="controls">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  </div>
+</div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>Two heavy granite or steel wheels (runners) roll around a circular pan. The material sits in the pan and is crushed under the enormous weight of the wheels as they pass over it. The wheel also slides slightly sideways — providing <strong>attrition (shear)</strong> in addition to compression. A scraper blade continuously moves material back under the wheels.</p>
+  <div class="key-fact">🔑 The Edge Runner Mill works by <strong>compression + attrition</strong>. The wheel weight provides compression; the slight sideways sliding of the wheel provides shear/attrition. Produces 50–1000 µm particle size. Ideal for soft to moderately hard materials.</div>
+</div>
+</div>
+
+<div id="theory" class="panel">
+  <div class="theory-box"><h3>Principle</h3>
+    <p>The Edge Runner Mill (also called Chilean Mill or Roller Mill) consists of two heavy cylindrical wheels (runners) mounted on a horizontal shaft that rotates about a vertical central axis. The wheels roll around the inside of a circular pan, crushing and grinding material by <strong>compression</strong> (weight of wheel) and <strong>attrition</strong> (slight lateral sliding). A scraper continuously pushes material back under the wheels.</p>
+  </div>
+  <div class="theory-box"><h3>Construction</h3>
+    <ul>
+      <li><strong>Pan:</strong> Circular flat-bottomed pan, 0.5–2 m diameter; granite, steel, or cast iron</li>
+      <li><strong>Runners (wheels):</strong> Two heavy cylindrical wheels; granite or steel; rotate freely on axle; also rotate about central vertical shaft</li>
+      <li><strong>Central drive shaft:</strong> Vertical shaft rotates at 15–30 rpm; carries the wheel axle around the pan</li>
+      <li><strong>Scraper blades:</strong> Fixed blades push material from pan walls and floor back under wheel path</li>
+      <li><strong>Screen (optional):</strong> Perforated plate at bottom for continuous discharge when product is fine enough</li>
+    </ul>
+  </div>
+  <div class="theory-box"><h3>Applications</h3>
+    <ul>
+      <li>Grinding of soft to moderately hard materials — beeswax, resins, crude drugs</li>
+      <li>Preparation of ointments — grinding and mixing simultaneously</li>
+      <li>Grinding of damp or moist materials (not suitable for dry fine powders)</li>
+      <li>Milling of clays, pigments, and colour bases for pharmaceutical preparations</li>
+    </ul>
+    <div class="key-fact">🔑 Edge Runner Mill is unique in that it can handle both dry and moist/pasty materials — and it mixes while it grinds. This makes it suitable for ointment manufacturing where drug must be intimately mixed with the base.</div>
+  </div>
+  <div class="theory-box"><h3>Advantages vs Disadvantages</h3>
+    <ul>
+      <li>✅ Handles moist, pasty, waxy materials — other mills cannot</li>
+      <li>✅ Simultaneous grinding and mixing</li>
+      <li>✅ Low speed — less heat generated than hammer mill</li>
+      <li>✅ Simple, robust construction</li>
+      <li>❌ Slow throughput; batch operation</li>
+      <li>❌ Not suitable for very hard materials</li>
+      <li>❌ Difficult to clean — open pan design</li>
+      <li>❌ Cannot produce very fine powder (&lt;50 µm)</li>
+    </ul>
+  </div>
+</div>
+
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. The size reduction mechanism in an Edge Runner Mill is:</div>
+    <button class="opt" onclick="choose(this,false)">A) Impact — runners strike particles at high speed</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Compression (weight of heavy wheel crushing particles) + Attrition (lateral sliding of wheel causing shear)</button>
+    <button class="opt" onclick="choose(this,false)">C) Cutting — sharp edges of runner slice through material</button>
+    <button class="opt" onclick="choose(this,false)">D) Inter-particle collision at high velocity</button>
+    <div class="explanation">✅ Edge Runner = Compression + Attrition. Compression: each runner weighs 1–5 tonnes → enormous pressure on particles beneath → crushing. Attrition: the runner does not roll perfectly — it slides slightly sideways as it goes around the pan → shear force → attrition. Compare: Ball Mill (impact + attrition), Hammer Mill (impact), Colloid Mill (shear only). The dual mechanism makes Edge Runner versatile for different material types.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. The Edge Runner Mill is particularly suitable for ointment manufacturing because:</div>
+    <button class="opt" onclick="choose(this,false)">A) It produces the finest particle size of all mills</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) It can handle waxy, pasty, moist materials and simultaneously grinds and mixes the drug into the ointment base — one operation achieves both size reduction and uniform dispersion</button>
+    <button class="opt" onclick="choose(this,false)">C) It operates at very high temperature, melting the ointment base for easier mixing</button>
+    <button class="opt" onclick="choose(this,false)">D) It sterilises the ointment during grinding</button>
+    <div class="explanation">✅ Ointment manufacturing application: drug particles + ointment base loaded into pan → runners roll → drug crushed to fine particles AND simultaneously mixed/dispersed into the semisolid base. No other single mill achieves this for semisolid formulations. Alternative: triple roller mill (three rollers in sequence) — also used for ointments, provides more controlled shear. Both work on compression + attrition principle.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q3. The purpose of the scraper blades in an Edge Runner Mill is:</div>
+    <button class="opt" onclick="choose(this,false)">A) To cut the material into pieces before the runner crushes it</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) To continuously push material that has been displaced to the pan edges back under the runner wheel path — ensuring all material is processed equally</button>
+    <button class="opt" onclick="choose(this,false)">C) To discharge the finished product from the pan</button>
+    <button class="opt" onclick="choose(this,false)">D) To cool the material during grinding</button>
+    <div class="explanation">✅ Scraper function: as the heavy runner rolls over material, it pushes some material sideways toward the pan edges and walls. Without scrapers, this material would pile up at the periphery and never be ground. Scrapers (fixed blades attached to the central shaft) redirect material back under the wheel path → every portion of material gets processed → uniform grinding. Some designs also have a central scraper to prevent dead zones near the shaft.</div>
+  </div>
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
+  </div>
+</div>
+<footer>© 2025 Pharmaceutical Engineering BP304T · Edge Runner Mill</footer>
+
+<script>
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+let _s=0,_a=0;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+_s+' / '+t+(_s===t?' — Perfect! 🌟':' — Review and try again.');}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+const W=canvas.width,H=canvas.height;
+const cx=W/2,cy=H/2+20;
+let running=true,speedMult=1,angle=0,frameN=0;
+
+// Material particles in pan
+const particles=[];
+for(let i=0;i<80;i++){
+  const a=Math.random()*Math.PI*2;
+  const r=20+Math.random()*130;
+  particles.push({x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r,r:3+Math.random()*4,col:'#C8B560',size:1});
+}
+
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';if(running)loop();}
+function setSpeed(s){speedMult=s;}
+
+function step(){
+  angle+=0.012*speedMult;
+  frameN++;
+  // Runner wheel positions
+  const r1x=cx+Math.cos(angle)*90,r1y=cy+Math.sin(angle)*90;
+  const r2x=cx+Math.cos(angle+Math.PI)*90,r2y=cy+Math.sin(angle+Math.PI)*90;
+  // Crush particles under runners
+  particles.forEach(p=>{
+    const d1=Math.sqrt((p.x-r1x)**2+(p.y-r1y)**2);
+    const d2=Math.sqrt((p.x-r2x)**2+(p.y-r2y)**2);
+    if(d1<30||d2<30){
+      if(p.r>1.5) p.r-=0.04*speedMult;
+      // Scatter slightly
+      p.x+=(Math.random()-0.5)*2*speedMult;
+      p.y+=(Math.random()-0.5)*2*speedMult;
+    }
+    // Scraper pushes back to centre area
+    const dp=Math.sqrt((p.x-cx)**2+(p.y-cy)**2);
+    if(dp>148){
+      p.x=cx+(p.x-cx)*0.97;
+      p.y=cy+(p.y-cy)*0.97;
+    }
+    if(p.r<1.5) p.r=3+Math.random()*4; // reset
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+
+  // Pan (circular)
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=14;
+  ctx.beginPath();ctx.arc(cx,cy,155,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='rgba(44,62,80,0.5)';ctx.beginPath();ctx.arc(cx,cy,148,0,Math.PI*2);ctx.fill();
+
+  // Material particles
+  particles.forEach(p=>{
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='#C8B560';ctx.globalAlpha=0.8;ctx.fill();ctx.globalAlpha=1;
+  });
+
+  // Central shaft
+  ctx.fillStyle='#2C3E50';ctx.beginPath();ctx.arc(cx,cy,12,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=2;ctx.stroke();
+
+  // Axle rod
+  ctx.save();ctx.translate(cx,cy);ctx.rotate(angle);
+  ctx.strokeStyle='#85929E';ctx.lineWidth=6;
+  ctx.beginPath();ctx.moveTo(-120,0);ctx.lineTo(120,0);ctx.stroke();
+
+  // Two runner wheels
+  [-1,1].forEach(side=>{
+    const wx=side*90;
+    // Wheel body
+    ctx.save();ctx.translate(wx,0);
+    const wGrad=ctx.createRadialGradient(-8,-8,2,0,0,30);
+    wGrad.addColorStop(0,'#95A5A6');wGrad.addColorStop(1,'#5D6D7E');
+    ctx.fillStyle=wGrad;
+    ctx.beginPath();ctx.ellipse(0,0,30,18,0,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle='#2C3E50';ctx.lineWidth=2;ctx.stroke();
+    // Wheel rotation lines
+    ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=1;
+    for(let i=0;i<4;i++){
+      const wa=frameN*0.08*speedMult+i*Math.PI/2;
+      ctx.beginPath();ctx.moveTo(Math.cos(wa)*28,Math.sin(wa)*16);ctx.lineTo(Math.cos(wa+Math.PI)*28,Math.sin(wa+Math.PI)*16);ctx.stroke();
+    }
+    ctx.restore();
+  });
+
+  // Scraper blades (rotate with shaft)
+  ctx.strokeStyle='#E74C3C';ctx.lineWidth=3;
+  for(let i=0;i<2;i++){
+    const sa=angle+i*Math.PI+Math.PI/2;
+    ctx.beginPath();
+    ctx.moveTo(15*Math.cos(sa),15*Math.sin(sa));
+    ctx.lineTo(145*Math.cos(sa),145*Math.sin(sa));
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // Info box
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,210,75);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';
+  ctx.fillText('🎡 Edge Runner Mill',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Speed: 15–30 RPM',18,48);
+  ctx.fillText('Mechanism: Compression + Attrition',18,64);
+  ctx.fillStyle='#F9E79F';ctx.fillText('Particle size: 50–1000 µm',18,80);
+}
+
+function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+loop();
+</script>
+</body>
+</html>

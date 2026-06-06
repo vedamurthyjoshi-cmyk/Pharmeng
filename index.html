@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pharmaceutical Engineering — Digital Learning Resources</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:Arial,sans-serif;background:#f0f4f8;color:#1B4F72;}
 header{background:#1B4F72;color:white;padding:30px 20px;text-align:center;}
-header h1{font-size:1.8em;margin-bottom:8px;}
-header p{font-size:1em;opacity:0.85;}
+header h1{font-size:1.8em;margin-bottom:8px;}header p{font-size:1em;opacity:0.85;}
 .subtitle{background:#2E86C1;color:white;text-align:center;padding:10px;font-size:0.95em;}
 .container{max-width:920px;margin:30px auto;padding:0 20px;}
 .chapter{background:white;border-radius:10px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.1);overflow:hidden;}
 .chapter-header{background:#1B4F72;color:white;padding:14px 20px;font-size:1.05em;font-weight:bold;}
-.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;padding:16px;}
-.topic-btn{display:block;background:#EBF5FB;border:1px solid #AED6F1;border-radius:8px;padding:14px 14px;text-decoration:none;color:#1B4F72;font-size:0.9em;transition:all 0.2s;text-align:center;}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;padding:16px;}
+.topic-btn{display:block;background:#EBF5FB;border:1px solid #AED6F1;border-radius:8px;padding:14px;text-decoration:none;color:#1B4F72;font-size:0.9em;transition:all 0.2s;text-align:center;}
 .topic-btn:hover{background:#1B4F72;color:white;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
 .topic-btn .icon{font-size:1.6em;margin-bottom:6px;display:block;}
 .topic-btn .label{font-weight:bold;display:block;margin-bottom:3px;}
 .topic-btn .sublabel{font-size:0.8em;opacity:0.7;}
-.coming{opacity:0.45;cursor:default;}
-.coming:hover{background:#EBF5FB!important;color:#1B4F72!important;transform:none!important;box-shadow:none!important;}
 footer{text-align:center;padding:30px;color:#555;font-size:0.85em;background:white;margin-top:20px;border-top:1px solid #eee;}
 </style>
 </head>
@@ -30,19 +26,18 @@ footer{text-align:center;padding:30px;color:#555;font-size:0.85em;background:whi
   <h1>📚 Principles of Pharmaceutical Engineering</h1>
   <p>BP304T — B.Pharm Semester III | PCI NEP 2020 Syllabus</p>
 </header>
-<div class="subtitle">🎬 Interactive Animations &nbsp;·&nbsp; 📖 5-Minute Concept Lessons &nbsp;·&nbsp; ✅ Practice MCQs</div>
-
+<div class="subtitle">🎬 Interactive Animations &nbsp;·&nbsp; 📖 5-Minute Theory &nbsp;·&nbsp; ✅ Practice MCQs</div>
 <div class="container">
 
   <div class="chapter">
     <div class="chapter-header">📌 Chapter 1 — Size Reduction</div>
     <div class="topic-grid">
       <a class="topic-btn" href="ballmill.html"><span class="icon">⚙️</span><span class="label">Ball Mill</span><span class="sublabel">Impact + Attrition</span></a>
-      <a class="topic-btn" href="hammermill.html"><span class="icon">🔨</span><span class="label">Hammer Mill</span><span class="sublabel">Impact + Attrition</span></a>
+      <a class="topic-btn" href="hammermill.html"><span class="icon">🔨</span><span class="label">Hammer Mill</span><span class="sublabel">Impact</span></a>
       <a class="topic-btn" href="fluidenergymill.html"><span class="icon">🌀</span><span class="label">Fluid Energy Mill</span><span class="sublabel">Inter-particle Impact</span></a>
       <a class="topic-btn" href="colloidmill.html"><span class="icon">💧</span><span class="label">Colloid Mill</span><span class="sublabel">Shear</span></a>
-      <a class="topic-btn coming" href="#"><span class="icon">🎡</span><span class="label">Edge Runner Mill</span><span class="sublabel">Coming soon</span></a>
-      <a class="topic-btn coming" href="#"><span class="icon">🎯</span><span class="label">End Runner Mill</span><span class="sublabel">Coming soon</span></a>
+      <a class="topic-btn" href="edgerunnermill.html"><span class="icon">🎡</span><span class="label">Edge Runner Mill</span><span class="sublabel">Compression + Attrition</span></a>
+      <a class="topic-btn" href="endrunnermill.html"><span class="icon">🎯</span><span class="label">End Runner Mill</span><span class="sublabel">Compression + Attrition</span></a>
     </div>
   </div>
 
@@ -50,7 +45,7 @@ footer{text-align:center;padding:30px;color:#555;font-size:0.85em;background:whi
     <div class="chapter-header">📌 Chapter 1 — Size Separation</div>
     <div class="topic-grid">
       <a class="topic-btn" href="sieveshaker.html"><span class="icon">🔲</span><span class="label">Sieve Shaker</span><span class="sublabel">Particle Size Analysis</span></a>
-      <a class="topic-btn coming" href="#"><span class="icon">🌊</span><span class="label">Cyclone Separator</span><span class="sublabel">Coming soon</span></a>
+      <a class="topic-btn" href="cycloneseparator.html"><span class="icon">🌪️</span><span class="label">Cyclone Separator</span><span class="sublabel">Centrifugal Force</span></a>
     </div>
   </div>
 
@@ -59,9 +54,9 @@ footer{text-align:center;padding:30px;color:#555;font-size:0.85em;background:whi
     <div class="topic-grid">
       <a class="topic-btn" href="vblender.html"><span class="icon">🔄</span><span class="label">V-Blender</span><span class="sublabel">Convective Tumbling</span></a>
       <a class="topic-btn" href="doubleconblender.html"><span class="icon">🔁</span><span class="label">Double Cone Blender</span><span class="sublabel">Convective Tumbling</span></a>
-      <a class="topic-btn coming" href="#"><span class="icon">〰️</span><span class="label">Ribbon Blender</span><span class="sublabel">Coming soon</span></a>
-      <a class="topic-btn coming" href="#"><span class="icon">🌍</span><span class="label">Planetary Mixer</span><span class="sublabel">Coming soon</span></a>
-      <a class="topic-btn coming" href="#"><span class="icon">Σ</span><span class="label">Sigma Blade Mixer</span><span class="sublabel">Coming soon</span></a>
+      <a class="topic-btn" href="ribbonblender.html"><span class="icon">〰️</span><span class="label">Ribbon Blender</span><span class="sublabel">Convection + Shear</span></a>
+      <a class="topic-btn" href="planetarymixer.html"><span class="icon">🌍</span><span class="label">Planetary Mixer</span><span class="sublabel">Planetary Motion</span></a>
+      <a class="topic-btn" href="sigmablender.html"><span class="icon">Σ</span><span class="label">Sigma Blade Mixer</span><span class="sublabel">High-Shear Kneading</span></a>
     </div>
   </div>
 
@@ -69,9 +64,9 @@ footer{text-align:center;padding:30px;color:#555;font-size:0.85em;background:whi
     <div class="chapter-header">📌 Chapter 3 — Filtration</div>
     <div class="topic-grid">
       <a class="topic-btn" href="filterpress.html"><span class="icon">🗜️</span><span class="label">Filter Press</span><span class="sublabel">Pressure Filtration</span></a>
-      <a class="topic-btn coming" href="#"><span class="icon">🍃</span><span class="label">Leaf Filter</span><span class="sublabel">Coming soon</span></a>
-      <a class="topic-btn coming" href="#"><span class="icon">🔃</span><span class="label">Rotary Drum Filter</span><span class="sublabel">Coming soon</span></a>
-      <a class="topic-btn coming" href="#"><span class="icon">🔩</span><span class="label">Meta Filter</span><span class="sublabel">Coming soon</span></a>
+      <a class="topic-btn" href="leaffilter.html"><span class="icon">🍃</span><span class="label">Leaf Filter</span><span class="sublabel">Pressure/Vacuum</span></a>
+      <a class="topic-btn" href="metafilter.html"><span class="icon">🔩</span><span class="label">Meta Filter</span><span class="sublabel">Metal Disc Medium</span></a>
+      <a class="topic-btn" href="rotarydrumfilter.html"><span class="icon">🔃</span><span class="label">Rotary Drum Filter</span><span class="sublabel">Continuous Vacuum</span></a>
     </div>
   </div>
 
@@ -79,17 +74,16 @@ footer{text-align:center;padding:30px;color:#555;font-size:0.85em;background:whi
     <div class="chapter-header">📌 Chapter 7 — Drying</div>
     <div class="topic-grid">
       <a class="topic-btn" href="traydryer.html"><span class="icon">🌡️</span><span class="label">Tray Dryer</span><span class="sublabel">Convection Drying</span></a>
-      <a class="topic-btn" href="fluidbeddryer.html"><span class="icon">🌬️</span><span class="label">Fluid Bed Dryer</span><span class="sublabel">Fluidised Bed</span></a>
-      <a class="topic-btn" href="spraydrying.html"><span class="icon">💨</span><span class="label">Spray Dryer</span><span class="sublabel">Atomisation Drying</span></a>
-      <a class="topic-btn coming" href="#"><span class="icon">❄️</span><span class="label">Freeze Dryer</span><span class="sublabel">Coming soon</span></a>
+      <a class="topic-btn" href="fluidbeddryer.html"><span class="icon">🌬️</span><span class="label">Fluid Bed Dryer</span><span class="sublabel">Fluidisation</span></a>
+      <a class="topic-btn" href="spraydrying.html"><span class="icon">💨</span><span class="label">Spray Dryer</span><span class="sublabel">Atomisation</span></a>
+      <a class="topic-btn" href="freezedryer.html"><span class="icon">❄️</span><span class="label">Freeze Dryer</span><span class="sublabel">Sublimation</span></a>
     </div>
   </div>
 
   <div class="chapter">
     <div class="chapter-header">📌 Chapter 10 — Compression</div>
     <div class="topic-grid">
-      <a class="topic-btn" href="rotarytabletpress.html"><span class="icon">💊</span><span class="label">Rotary Tablet Press</span><span class="sublabel">Punch and Die</span></a>
-      <a class="topic-btn coming" href="#"><span class="icon">🔧</span><span class="label">Single Punch Press</span><span class="sublabel">Coming soon</span></a>
+      <a class="topic-btn" href="rotarytabletpress.html"><span class="icon">💊</span><span class="label">Rotary Tablet Press</span><span class="sublabel">Continuous Compression</span></a>
     </div>
   </div>
 
@@ -97,7 +91,7 @@ footer{text-align:center;padding:30px;color:#555;font-size:0.85em;background:whi
 <footer>
   <p><strong>Principles of Pharmaceutical Engineering — BP304T</strong></p>
   <p style="margin-top:8px;">Scan QR codes in your textbook to access these interactive resources</p>
-  <p style="margin-top:8px;color:#888;">© 2025 · More topics being added regularly</p>
+  <p style="margin-top:8px;color:#888;">© 2025 · All animations are standalone — no internet needed after loading</p>
 </footer>
 </body>
 </html>

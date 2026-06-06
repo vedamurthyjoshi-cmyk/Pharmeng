@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>End Runner Mill — Pharmaceutical Engineering</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
+header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
+.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
+.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
+canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
+.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
+.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
+.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
+.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+</style>
+</head>
+<body>
+<header><h1>🎯 End Runner Mill — Mortar and Pestle Principle</h1><p>Pharmaceutical Engineering BP304T · Chapter 1 — Size Reduction</p></header>
+<nav><a href="index.html">🏠 Home</a></nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="720" height="380"></canvas>
+  <div style="margin-top:14px;">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  </div>
+</div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>The pestle (heavy runner) rotates on a fixed vertical axis while also orbiting around the mortar bowl. Material is crushed between the flat face of the pestle and the flat bottom of the mortar by <strong>compression and attrition</strong>. This is essentially a mechanised mortar-and-pestle — the traditional pharmaceutical preparation tool.</p>
+  <div class="key-fact">🔑 The End Runner Mill is the mechanical equivalent of the pharmacist's mortar and pestle. It works by the flat end (face) of the pestle pressing and sliding on the flat mortar floor — hence "End Runner" (runs on its end/face).</div>
+</div>
+</div>
+
+<div id="theory" class="panel">
+  <div class="theory-box"><h3>Principle and Comparison with Edge Runner</h3>
+    <p>The End Runner Mill works on the same principle as the Edge Runner Mill — compression and attrition — but with a different geometry:</p>
+    <ul>
+      <li><strong>Edge Runner Mill:</strong> Cylindrical wheels roll on their curved edge/circumference on a flat pan → contact line is along the cylinder length</li>
+      <li><strong>End Runner Mill:</strong> Cylindrical pestle runs on its flat circular end/face on the mortar floor → contact area is the entire pestle face → higher contact area per unit → more compression per unit area → finer grinding</li>
+    </ul>
+    <div class="key-fact">🔑 Key difference: End Runner produces finer particles than Edge Runner because the flat-face contact gives higher grinding pressure per unit area. End Runner is closer in design to a mortar and pestle — same principle scaled up mechanically.</div>
+  </div>
+  <div class="theory-box"><h3>Construction</h3>
+    <ul>
+      <li><strong>Mortar:</strong> Heavy cast iron or granite flat-bottomed bowl; fixed in position</li>
+      <li><strong>Pestle (runner):</strong> Cylindrical; runs on its flat end face on mortar floor; rotates about its own vertical axis AND orbits around the mortar centre</li>
+      <li><strong>Drive:</strong> Motor drives the orbital motion via eccentric cam or crank mechanism; 20–60 rpm</li>
+      <li><strong>Scraper:</strong> Pushes material back under the pestle face</li>
+    </ul>
+  </div>
+  <div class="theory-box"><h3>Applications and Comparison</h3>
+    <ul>
+      <li>Grinding of soft materials — sugar, lactose, chemical compounds</li>
+      <li>Preparation of pill masses — traditional pharmaceutical use</li>
+      <li>Grinding paints, pigments, and pastes for pharmaceutical preparations</li>
+      <li>Handles moist and pasty materials better than hammer or ball mill</li>
+    </ul>
+  </div>
+</div>
+
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. The End Runner Mill is described as a mechanised version of which traditional pharmaceutical instrument?</div>
+    <button class="opt" onclick="choose(this,false)">A) Spatula and tile — for mixing ointments</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Mortar and pestle — the pestle face runs on the mortar floor by compression and attrition</button>
+    <button class="opt" onclick="choose(this,false)">C) Weighing balance — for measuring ingredients</button>
+    <button class="opt" onclick="choose(this,false)">D) Sieve — for size classification</button>
+    <div class="explanation">✅ Mortar and pestle principle: pharmacist places material in mortar → applies pestle with downward pressure while rotating → compression + attrition grinds particles. End Runner Mill mechanises this: the pestle (runner) is driven by a motor to orbit around the mortar while rotating on its own axis → same compression + attrition action → continuous and much more powerful than manual mortar and pestle. Historical importance: End Runner was the first mechanised pharmaceutical size reduction equipment in 19th century pharmacy.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. The key geometric difference between an End Runner Mill and an Edge Runner Mill is:</div>
+    <button class="opt" onclick="choose(this,false)">A) End Runner uses balls; Edge Runner uses cylinders</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) End Runner: pestle runs on its flat circular END FACE (mortar floor contact) — higher area contact. Edge Runner: wheel runs on its curved EDGE/CIRCUMFERENCE (pan contact) — line contact</button>
+    <button class="opt" onclick="choose(this,false)">C) End Runner is larger than Edge Runner in all dimensions</button>
+    <button class="opt" onclick="choose(this,false)">D) End Runner operates at higher speed than Edge Runner</button>
+    <div class="explanation">✅ Contact geometry: End Runner (flat face on flat floor) = area contact → high pressure over large area → fine grinding. Edge Runner (curved wheel on flat pan) = line contact → very high pressure concentrated on a line → also fine grinding but with more lateral shear. Both use compression + attrition. End Runner is suited for finer, more controlled grinding. Edge Runner gives more lateral shear — better for mixing while grinding (ointments).</div>
+  </div>
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
+  </div>
+</div>
+<footer>© 2025 Pharmaceutical Engineering BP304T · End Runner Mill</footer>
+
+<script>
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+let _s=0,_a=0;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+_s+' / '+t;}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');
+const W=canvas.width,H=canvas.height;const cx=W/2,cy=H/2+20;
+let running=true,speedMult=1,angle=0,selfRot=0,frameN=0;
+const particles=[];
+for(let i=0;i<70;i++){const a=Math.random()*Math.PI*2,r=10+Math.random()*110;particles.push({x:cx+Math.cos(a)*r,y:cy+Math.sin(a)*r,r:3+Math.random()*4});}
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';if(running)loop();}
+function setSpeed(s){speedMult=s;}
+function step(){
+  angle+=0.018*speedMult;selfRot+=0.06*speedMult;frameN++;
+  const px=cx+Math.cos(angle)*70,py=cy+Math.sin(angle)*70;
+  particles.forEach(p=>{
+    const d=Math.sqrt((p.x-px)**2+(p.y-py)**2);
+    if(d<28){if(p.r>1.5)p.r-=0.05*speedMult;p.x+=(Math.random()-0.5)*1.5*speedMult;p.y+=(Math.random()-0.5)*1.5*speedMult;}
+    const dp=Math.sqrt((p.x-cx)**2+(p.y-cy)**2);
+    if(dp>125){p.x=cx+(p.x-cx)*0.96;p.y=cy+(p.y-cy)*0.96;}
+    if(p.r<1.5)p.r=3+Math.random()*4;
+  });
+}
+function draw(){
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+  // Mortar bowl
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=12;ctx.beginPath();ctx.arc(cx,cy,135,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='rgba(44,62,80,0.6)';ctx.beginPath();ctx.arc(cx,cy,129,0,Math.PI*2);ctx.fill();
+  // Particles
+  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='#C8B560';ctx.globalAlpha=0.8;ctx.fill();ctx.globalAlpha=1;});
+  // Orbit line
+  ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.lineWidth=1;ctx.setLineDash([4,4]);ctx.beginPath();ctx.arc(cx,cy,70,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+  // Central shaft
+  ctx.fillStyle='#2C3E50';ctx.beginPath();ctx.arc(cx,cy,10,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=2;ctx.stroke();
+  // Pestle
+  const px=cx+Math.cos(angle)*70,py=cy+Math.sin(angle)*70;
+  ctx.save();ctx.translate(px,py);ctx.rotate(selfRot);
+  // Pestle body
+  ctx.fillStyle='#5D6D7E';ctx.fillRect(-18,-30,36,60);
+  // Pestle face (flat bottom)
+  ctx.fillStyle='#AAB7B8';ctx.fillRect(-20,25,40,10);
+  ctx.strokeStyle='#2C3E50';ctx.lineWidth=1;ctx.strokeRect(-20,25,40,10);
+  ctx.restore();
+  // Connect shaft to pestle
+  ctx.strokeStyle='#85929E';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(px,py-20);ctx.stroke();
+  // Info
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,210,80);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🎯 End Runner Mill',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Speed: 20–60 RPM',18,48);ctx.fillText('Mechanism: Compression + Attrition',18,64);ctx.fillStyle='#F9E79F';ctx.fillText('Like mortar & pestle — mechanised',18,80);
+}
+function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+loop();
+</script>
+</body>
+</html>

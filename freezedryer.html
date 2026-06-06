@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Freeze Dryer — Pharmaceutical Engineering</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}canvas{border-radius:8px;background:#0d1117;max-width:100%;}.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;}.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}</style>
+</head>
+<body>
+<header><h1>❄️ Freeze Dryer (Lyophiliser) — Sublimation Drying</h1><p>Pharmaceutical Engineering BP304T · Chapter 7 — Drying</p></header>
+<nav><a href="index.html">🏠 Home</a></nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="720" height="380"></canvas>
+  <div style="margin-top:14px;">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  </div>
+</div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>The product (vials on shelves) is frozen to −40°C to −80°C. A vacuum is applied. The shelf temperature is slowly raised — but because pressure is far below the triple point of water, the ice <strong>sublimates directly to vapour</strong> (skips the liquid phase). Water vapour travels to the condenser (−60°C) where it freezes onto the condenser coils. The product stays frozen and dry.</p>
+  <div class="key-fact">🔑 Freeze drying = sublimation of ice under vacuum. Ice → vapour (no liquid water ever formed). This is the only drying method that removes water WITHOUT heating the product above 0°C — making it ideal for proteins, vaccines, and heat-labile biologics.</div>
+</div>
+</div>
+<div id="theory" class="panel">
+  <div class="theory-box"><h3>Principle — Sublimation Under Vacuum</h3><p>Water exists as solid, liquid, or gas depending on temperature and pressure. At the triple point (0.01°C, 6.11 mbar), all three phases coexist. Below the triple point pressure, ice <strong>sublimates</strong> directly to vapour without forming liquid water. Freeze drying exploits this: reduce pressure below 0.1–1 mbar → ice sublimates → water removed without thawing the product → product structure preserved.</p></div>
+  <div class="theory-box"><h3>Three Stages of Freeze Drying</h3><ul>
+    <li><strong>Stage 1 — Freezing:</strong> Product cooled to −40 to −80°C; water crystallises as ice; product solidifies; nucleation controlled to produce optimal ice crystal size</li>
+    <li><strong>Stage 2 — Primary drying (sublimation):</strong> Vacuum applied (0.1–1 mbar); shelf temperature raised to −20 to +20°C; free ice sublimates; longest stage (12–48 hours)</li>
+    <li><strong>Stage 3 — Secondary drying (desorption):</strong> Shelf temperature raised to +20–40°C; bound water (adsorbed water) removed; final moisture content &lt; 1–3%</li>
+  </ul><div class="key-fact">🔑 Product temperature must remain below the collapse temperature (Tc) throughout primary drying. Above Tc, the dried cake loses structure (collapses). Excipients (sucrose, mannitol, glycine) raise Tc — allowing higher shelf temperature → faster primary drying.</div></div>
+  <div class="theory-box"><h3>Pharmaceutical Applications</h3><ul>
+    <li>Protein biologics — monoclonal antibodies, enzymes, growth factors</li>
+    <li>Vaccines — viral and bacterial vaccines requiring long shelf life</li>
+    <li>Peptides and small molecule heat-sensitive APIs</li>
+    <li>Blood products — plasma proteins, coagulation factors</li>
+    <li>Diagnostic reagents — immunoassay kits, PCR reagents</li>
+  </ul></div>
+</div>
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. In freeze drying, ice is removed by the process of:</div>
+    <button class="opt" onclick="choose(this,false)">A) Melting — ice melts to water then evaporates</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Sublimation — ice converts directly to vapour at below-triple-point pressure without passing through the liquid phase</button>
+    <button class="opt" onclick="choose(this,false)">C) Dissolution — ice dissolves in residual solvent</button>
+    <button class="opt" onclick="choose(this,false)">D) Evaporation — water evaporates from the liquid surface at reduced pressure</button>
+    <div class="explanation">✅ Sublimation below triple point: triple point of water = 0.01°C, 6.11 mbar. In freeze dryer: pressure reduced to 0.1–1 mbar (below triple point) → thermodynamic phase diagram dictates: at this pressure, solid ice converts directly to vapour (no liquid phase possible). The vacuum drives the partial pressure of water vapour to near zero → strong thermodynamic driving force for ice sublimation. Condenser at −60°C traps vapour as ice → maintaining low vapour pressure throughout the chamber.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. Lyophilisation (freeze drying) is chosen over spray drying for protein biologic formulations because:</div>
+    <button class="opt" onclick="choose(this,false)">A) Freeze drying is faster than spray drying</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Product temperature during freeze drying remains below 0°C (primary drying) — proteins never exposed to high temperature; spray drying uses inlet air 150–250°C — many proteins denature at these temperatures</button>
+    <button class="opt" onclick="choose(this,false)">C) Freeze drying produces larger particle size than spray drying</button>
+    <button class="opt" onclick="choose(this,false)">D) Freeze drying uses less energy than spray drying</button>
+    <div class="explanation">✅ Protein stability comparison: Spray drying — inlet 150–250°C; outlet 60–80°C — most proteins denature at 60–80°C → aggregation, loss of activity → unacceptable for biologic drugs. Freeze drying — primary drying typically −20 to 0°C; secondary drying 20–40°C — well within protein stability range → structure preserved → activity maintained. Exception: some robust proteins (e.g., BSA, immunoglobulins) CAN be spray-dried with protective excipients. For most therapeutic proteins (mAbs, enzymes, vaccines): freeze drying is mandatory.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q3. The purpose of adding sucrose or trehalose to a protein formulation before freeze drying is:</div>
+    <button class="opt" onclick="choose(this,false)">A) To improve the taste of the reconstituted product</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Lyoprotection — sugars form a glassy amorphous matrix that: (1) raises the collapse temperature Tc allowing faster primary drying; (2) forms H-bonds with protein surface groups replacing water — preserving protein structure during ice crystal formation and drying</button>
+    <button class="opt" onclick="choose(this,false)">C) To accelerate sublimation rate</button>
+    <button class="opt" onclick="choose(this,false)">D) To prevent microbial contamination during drying</button>
+    <div class="explanation">✅ Lyoprotection mechanism: (1) Water replacement hypothesis — during drying, water molecules hydrogen-bonded to protein surface are removed → without replacement, protein unfolds (denatures). Sucrose/trehalose form H-bonds with same surface groups → replace water → protein structure maintained. (2) Vitrification — sugars form amorphous glass matrix (high Tg) encapsulating protein → immobilises protein molecules → prevents aggregation during storage. Sucrose preferred for most proteins; trehalose for membranes and some enzymes.</div>
+  </div>
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
+  </div>
+</div>
+<footer>© 2025 Pharmaceutical Engineering BP304T · Freeze Dryer</footer>
+<script>
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+let _s=0,_a=0;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+_s+' / '+t+(_s===t?' — Perfect! 🌟':' — Review and try again.');}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+let running=true,speedMult=1,frameN=0;
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';if(running)loop();}
+function setSpeed(s){speedMult=s;}
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+// Vapour molecules
+const vapour=[];
+for(let i=0;i<60;i++) vapour.push({x:150+Math.random()*300,y:120+Math.random()*180,vx:(Math.random()-0.5)*1.5,vy:-0.5-Math.random()*1.5,alpha:0.4+Math.random()*0.5,r:2+Math.random()*2});
+// Ice crystals on product vials
+const vials=[];
+for(let i=0;i<5;i++) vials.push({x:165+i*65,ice:1.0});
+
+function step(){
+  frameN++;
+  vapour.forEach(v=>{v.x+=v.vx*speedMult;v.y+=v.vy*speedMult;
+    if(v.x<130||v.x>460){v.vx*=-1;}
+    if(v.y<60){v.y=60;v.vy=Math.abs(v.vy)*0.5;
+      // Condenser captures vapour
+      v.x=530+Math.random()*120;v.y=100+Math.random()*200;v.vy=-0.3;
+    }
+    if(v.y>310){v.y=200+Math.random()*50;v.x=165+Math.random()*280;}
+  });
+  vials.forEach(v=>{if(v.ice>0.05)v.ice-=0.001*speedMult;});
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#0d1117';ctx.fillRect(0,0,W,H);
+  // Chamber
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=6;ctx.strokeRect(120,50,370,300);
+  ctx.fillStyle='rgba(173,216,230,0.04)';ctx.fillRect(120,50,370,300);
+  ctx.fillStyle='#AED6F1';ctx.font='11px Arial';ctx.textAlign='center';ctx.fillText('FREEZE DRYER CHAMBER',305,45);
+  // Shelves with vials
+  [180,260,330].forEach((sy,si)=>{
+    ctx.fillStyle='#2C3E50';ctx.fillRect(130,sy,350,8);
+    // Vials on shelf
+    for(let i=0;i<5;i++){
+      const vx=165+i*65;
+      // Vial body
+      ctx.strokeStyle='rgba(174,214,241,0.5)';ctx.lineWidth=2;ctx.strokeRect(vx-12,sy-50,24,50);
+      // Ice inside vial
+      const iceH=vials[i].ice*40;
+      ctx.fillStyle=`rgba(173,216,230,${0.3+vials[i].ice*0.5})`;
+      ctx.fillRect(vx-10,sy-iceH-4,20,iceH);
+      // Ice crystals sparkle
+      if(vials[i].ice>0.1){
+        ctx.fillStyle='white';ctx.font='8px Arial';ctx.fillText('*',vx-4,sy-20);
+      }
+    }
+  });
+  // Vapour molecules (sublimation)
+  vapour.forEach(v=>{
+    ctx.beginPath();ctx.arc(v.x,v.y,v.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(174,214,241,${v.alpha})`;ctx.fill();
+  });
+  // Arrow upward (sublimation direction)
+  ctx.strokeStyle='rgba(174,214,241,0.3)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+  ctx.beginPath();ctx.moveTo(305,310);ctx.lineTo(305,80);ctx.stroke();ctx.setLineDash([]);
+  // Condenser
+  ctx.fillStyle='rgba(0,0,255,0.15)';ctx.fillRect(510,60,140,290);
+  ctx.strokeStyle='#3498DB';ctx.lineWidth=3;ctx.strokeRect(510,60,140,290);
+  // Condenser coils
+  ctx.strokeStyle='#3498DB';ctx.lineWidth=4;
+  for(let i=0;i<6;i++){ctx.beginPath();ctx.arc(580,100+i*35,25,0,Math.PI*2);ctx.stroke();}
+  ctx.fillStyle='white';ctx.font='bold 10px Arial';ctx.textAlign='center';ctx.fillText('CONDENSER',580,368);ctx.fillText('−60°C',580,382);
+  // Arrow from chamber to condenser
+  ctx.strokeStyle='rgba(174,214,241,0.5)';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(490,180);ctx.lineTo(510,180);ctx.stroke();
+  // Vacuum pump
+  ctx.fillStyle='#2C3E50';ctx.fillRect(120,360,100,25);
+  ctx.strokeStyle='#E74C3C';ctx.lineWidth=2;ctx.strokeRect(120,360,100,25);
+  ctx.fillStyle='#E74C3C';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('VACUUM PUMP',170,377);
+  // Labels
+  ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(10,10,210,90);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('❄️ Freeze Dryer',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Process: Sublimation (ice → vapour)',18,48);ctx.fillText('Chamber: −40 to +40°C',18,64);ctx.fillText('Pressure: 0.1–1 mbar (vacuum)',18,80);ctx.fillStyle='#AED6F1';ctx.fillText('Condenser: −60°C (traps vapour)',18,96);
+}
+function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+loop();
+</script>
+</body>
+</html>

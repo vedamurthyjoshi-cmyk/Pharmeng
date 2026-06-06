@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ribbon Blender — Pharmaceutical Engineering</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
+header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
+.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
+.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
+canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
+.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
+.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
+.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
+.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+</style>
+</head>
+<body>
+<header><h1>〰️ Ribbon Blender — Convective + Shear Mixing</h1><p>Pharmaceutical Engineering BP304T · Chapter 2 — Mixing</p></header>
+<nav><a href="index.html">🏠 Home</a></nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="720" height="360"></canvas>
+  <div style="margin-top:14px;">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  </div>
+</div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>Two helical ribbon blades rotate about a central horizontal shaft inside a U-shaped trough. The <strong>outer ribbon</strong> moves material from ends toward the centre. The <strong>inner ribbon</strong> moves material from centre toward the ends. This counter-directional flow creates efficient convective mixing with moderate shear. Red and blue particles represent components blending together.</p>
+  <div class="key-fact">🔑 The Ribbon Blender uses two counter-directional helical ribbons — outer ribbon moves material one way, inner ribbon moves it the opposite way. This constant circulation achieves thorough mixing typically in 10–20 minutes.</div>
+</div>
+</div>
+<div id="theory" class="panel">
+  <div class="theory-box"><h3>Principle</h3><p>The Ribbon Blender has two helical ribbons (inner and outer) of opposite pitch mounted on a central shaft rotating at 30–100 rpm inside a U-shaped trough. The outer ribbon moves material in one direction (e.g., inward from ends to centre); the inner ribbon moves material in the opposite direction (outward from centre to ends). This counter-directional convective flow achieves rapid, thorough mixing.</p></div>
+  <div class="theory-box"><h3>Construction</h3>
+    <ul>
+      <li><strong>Trough:</strong> U-shaped (semi-cylindrical bottom) horizontal stainless steel trough</li>
+      <li><strong>Shaft:</strong> Central horizontal shaft; driven by motor and gearbox at 30–100 rpm</li>
+      <li><strong>Outer ribbon:</strong> Larger diameter helix; pushes material from ends toward centre</li>
+      <li><strong>Inner ribbon:</strong> Smaller diameter helix; pushes material from centre toward ends</li>
+      <li><strong>Discharge:</strong> Outlet valve at the bottom centre of trough for gravity discharge</li>
+    </ul>
+    <div class="key-fact">🔑 Ribbon Blender can handle much larger batches than V-Blender or Double Cone — typical production capacity 500–5000 litres. Common in bulk solid manufacturing, nutraceuticals, and large-scale pharmaceutical operations.</div>
+  </div>
+  <div class="theory-box"><h3>Applications and Comparison</h3>
+    <ul>
+      <li>Large-scale blending of dry pharmaceutical powders and granules</li>
+      <li>Blending of API with excipients in nutraceutical and vitamin manufacturing</li>
+      <li>Mixing of dry milk powder, protein supplements, and dietary supplements</li>
+      <li>Can handle slightly cohesive materials (some shear — breaks agglomerates)</li>
+    </ul>
+    <ul>
+      <li>✅ Large capacity; continuous mixing action; efficient</li>
+      <li>❌ Higher shear than V-Blender — may damage fragile granules</li>
+      <li>❌ Dead spots possible at ends if ribbon pitch not optimised</li>
+      <li>❌ Cleaning more complex than Double Cone</li>
+    </ul>
+  </div>
+</div>
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. The two ribbon blades in a Ribbon Blender have opposite pitch because:</div>
+    <button class="opt" onclick="choose(this,false)">A) To prevent the shaft from bending under load</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Counter-directional flow — outer ribbon moves material inward, inner ribbon moves it outward — creates continuous circulation throughout the entire trough length — efficient convective mixing with no stagnant zones</button>
+    <button class="opt" onclick="choose(this,false)">C) One ribbon heats material while the other cools it</button>
+    <button class="opt" onclick="choose(this,false)">D) Opposite pitch ribbons cancel vibration of the blender</button>
+    <div class="explanation">✅ Counter-directional circulation: if both ribbons moved material the same way, all material would pile up at one end. Opposite pitch creates closed-loop circulation: outer ribbon (larger, slower) moves mass inward → inner ribbon (smaller, faster) moves it outward → continuous exchange throughout trough length → no dead zones → uniform blend. The different diameters also create a radial circulation component for 3D mixing.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. A pharmaceutical manufacturer needs to blend 2000 kg of granules per batch. The MOST appropriate blender is:</div>
+    <button class="opt" onclick="choose(this,false)">A) V-Blender — most common pharmaceutical blender</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Ribbon Blender — available in 2000–10,000 L capacities; handles large batch sizes that would require impractically large V-Blenders or Double Cone Blenders</button>
+    <button class="opt" onclick="choose(this,false)">C) Planetary Mixer — best for large batches</button>
+    <button class="opt" onclick="choose(this,false)">D) Sigma Blade Mixer — highest capacity</button>
+    <div class="explanation">✅ Capacity comparison: V-Blender typically up to 1000 L practical limit. Double Cone up to 2000 L but large footprint and expensive for very large sizes. Ribbon Blender: production models 500–10,000 L; compact horizontal design; good floor space utilisation; ideal for bulk pharmaceutical manufacturing. For 2000 kg granules (bulk density ~0.5 kg/L): need ~4000 L blender — clearly a ribbon blender application.</div>
+  </div>
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
+  </div>
+</div>
+<footer>© 2025 Pharmaceutical Engineering BP304T · Ribbon Blender</footer>
+<script>
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+let _s=0,_a=0;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+_s+' / '+t;}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');
+const W=canvas.width,H=canvas.height;
+const cx=W/2,cy=H/2+20;
+let running=true,speedMult=1,ribbonAngle=0,frameN=0;
+
+// Particles in trough
+const particles=[];
+for(let i=0;i<120;i++){
+  particles.push({
+    x:100+Math.random()*520,
+    y:cy-40+Math.random()*80,
+    vx:(Math.random()>0.5?1:-1)*(0.3+Math.random()*0.5),
+    col:i<60?'#E74C3C':'#3498DB',
+    r:4
+  });
+}
+
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';if(running)loop();}
+function setSpeed(s){speedMult=s;}
+
+function step(){
+  ribbonAngle+=0.04*speedMult;frameN++;
+  particles.forEach(p=>{
+    p.x+=p.vx*speedMult;
+    // Bounce at trough ends
+    if(p.x<100){p.x=100;p.vx=Math.abs(p.vx);}
+    if(p.x>620){p.x=620;p.vx=-Math.abs(p.vx);}
+    // Slight vertical oscillation
+    p.y+=Math.sin(frameN*0.05+p.x*0.02)*0.3*speedMult;
+    p.y=Math.max(cy-55,Math.min(cy+45,p.y));
+    // Gradually mix (colour change)
+    if(Math.random()<0.002*speedMult) p.col=Math.random()<0.5?'#E74C3C':'#3498DB';
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+  // Trough (U-shape)
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=8;
+  ctx.beginPath();ctx.moveTo(80,cy-80);ctx.lineTo(80,cy+60);
+  ctx.arc(cx,cy+60,cx-80,Math.PI,0);
+  ctx.lineTo(W-80,cy-80);ctx.stroke();
+  ctx.fillStyle='rgba(44,62,80,0.4)';
+  ctx.beginPath();ctx.moveTo(82,cy-80);ctx.lineTo(82,cy+60);
+  ctx.arc(cx,cy+60,cx-82,Math.PI,0);ctx.lineTo(W-82,cy-80);ctx.fill();
+
+  // Particles
+  particles.forEach(p=>{
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=p.col;ctx.globalAlpha=0.8;ctx.fill();ctx.globalAlpha=1;
+  });
+
+  // Ribbon blades (simplified 2D view)
+  ctx.save();ctx.translate(cx,cy);
+  // Outer ribbon (larger)
+  ctx.strokeStyle='rgba(149,165,166,0.7)';ctx.lineWidth=4;
+  for(let i=0;i<8;i++){
+    const a=ribbonAngle+i*Math.PI/4;
+    const x1=Math.cos(a)*220,y1=Math.sin(a)*35;
+    const x2=Math.cos(a+Math.PI/4)*220,y2=Math.sin(a+Math.PI/4)*35;
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+  }
+  // Inner ribbon (smaller, opposite direction)
+  ctx.strokeStyle='rgba(174,214,241,0.7)';ctx.lineWidth=3;
+  for(let i=0;i<8;i++){
+    const a=-ribbonAngle*1.3+i*Math.PI/4;
+    const x1=Math.cos(a)*140,y1=Math.sin(a)*22;
+    const x2=Math.cos(a+Math.PI/4)*140,y2=Math.sin(a+Math.PI/4)*22;
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+  }
+  // Central shaft
+  ctx.strokeStyle='#85929E';ctx.lineWidth=8;
+  ctx.beginPath();ctx.moveTo(-240,0);ctx.lineTo(240,0);ctx.stroke();
+  ctx.restore();
+
+  // Info
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,215,80);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('〰️ Ribbon Blender',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Speed: 30–100 RPM',18,48);ctx.fillText('Ribbons: outer ↔ inner (opposite)',18,64);
+  ctx.fillStyle='#85929E';ctx.fillText('— Outer ribbon',18,80);ctx.fillStyle='#AED6F1';ctx.fillText('— Inner ribbon',85,80);
+}
+function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+loop();
+</script>
+</body>
+</html>
