@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Falling Film Evaporator — Pharmaceutical Engineering</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
+header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
+.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
+.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
+canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
+.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
+.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
+.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
+.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+</style>
+</head>
+<body>
+<header><h1>💧 Falling Film Evaporator — Thin Film Concentration</h1><p>Pharmaceutical Engineering BP304T · Chapter 8 — Evaporation</p></header>
+<nav><a href="index.html">🏠 Home</a></nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
+</div>
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="720" height="380"></canvas>
+  <div style="margin-top:14px;">
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  </div>
+</div>
+<div class="theory-box">
+  <h3>💡 What you are seeing</h3>
+  <p>Feed liquid enters at the TOP and flows DOWN the inside of vertical tubes as a thin film (gravity-driven). Steam condenses on the outside of the tubes, heating the thin film. The short contact time and thin film mean very efficient evaporation with minimal heat damage. Vapour rises up through the tube centre while concentrated liquid falls. Both exit at the bottom.</p>
+  <div class="key-fact">🔑 The Falling Film Evaporator is the preferred evaporator for heat-sensitive pharmaceutical products (fruit juices, vitamins, proteins) because residence time is only 5–30 seconds and liquid temperature stays close to boiling point under vacuum — minimising thermal degradation.</div>
+</div>
+</div>
+<div id="theory" class="panel">
+  <div class="theory-box"><h3>Principle</h3>
+    <p>Feed enters the top tube sheet and is distributed evenly into vertical tubes (typically 25–75 mm diameter, 3–8 m long). The liquid wets the tube wall and flows downward as a thin falling film under gravity. Steam (or hot water) condenses on the outside of the tubes — supplying latent heat to the falling film — causing rapid evaporation. Vapour generated rises up through the tube centre counter-current to liquid flow.</p>
+  </div>
+  <div class="theory-box"><h3>Advantages</h3>
+    <ul>
+      <li>✅ Very short residence time (seconds) — minimal thermal degradation</li>
+      <li>✅ Low temperature difference needed (as little as 3°C ΔT between steam and boiling liquid)</li>
+      <li>✅ Low pressure drop — suitable for vacuum operation → lower boiling point → less heat damage</li>
+      <li>✅ Continuous operation — high throughput</li>
+      <li>✅ Can be used as multi-effect evaporator — vapour from first effect heats second effect</li>
+      <li>❌ Requires even liquid distribution — poor distribution → dry spots → fouling</li>
+      <li>❌ Not suitable for high-viscosity liquids or crystallising solutions</li>
+      <li>❌ Minimum wetting rate required — cannot operate at very low feed rates</li>
+    </ul>
+  </div>
+  <div class="theory-box"><h3>Pharmaceutical Applications</h3>
+    <ul>
+      <li>Concentration of antibiotic fermentation broths (penicillin, erythromycin)</li>
+      <li>Concentration of vitamin solutions (ascorbic acid, B-vitamins)</li>
+      <li>Concentration of fruit extracts and herbal extracts for syrup manufacture</li>
+      <li>Evaporation of solvent from API solutions in chemical synthesis</li>
+      <li>Production of WFI (Water for Injection) — falling film multi-effect still</li>
+    </ul>
+    <div class="key-fact">🔑 WFI production: multi-effect falling film evaporator (3–7 effects) evaporates and re-condenses water. Each successive effect operates at lower pressure (lower boiling point). The vapour from the last effect is condensed as WFI. Energy efficiency: 7-effect still uses 1 kg steam to produce 7 kg WFI.</div>
+  </div>
+</div>
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. The Falling Film Evaporator is preferred for heat-sensitive pharmaceuticals because:</div>
+    <button class="opt" onclick="choose(this,false)">A) It operates at higher temperatures than other evaporators</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Residence time is only 5–30 seconds and vacuum operation reduces boiling temperature — liquid is exposed to heat for the minimum possible time at the lowest possible temperature</button>
+    <button class="opt" onclick="choose(this,false)">C) The falling film is cooled by the steam rather than heated</button>
+    <button class="opt" onclick="choose(this,false)">D) It uses UV light instead of heat for evaporation</button>
+    <div class="explanation">✅ Thermal protection in falling film evaporator: (1) Short residence time — liquid passes through tubes in 5–30 seconds; (2) Vacuum operation — reduced pressure lowers boiling point (e.g., at 50 mbar, water boils at ~33°C instead of 100°C); (3) Thin film — very rapid heat transfer, minimal temperature gradient through liquid. Compare with short-tube (calandria) evaporator: liquid recirculates for minutes. Falling film avoids recirculation = minimal thermal exposure = suitable for vitamins, enzymes, antibiotics.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. In a multi-effect falling film evaporator for WFI production, the vapour from the first effect is used to:</div>
+    <button class="opt" onclick="choose(this,false)">A) Cool the condensed water</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Heat the second effect — vapour from effect 1 (at higher pressure/temperature) condenses on the tubes of effect 2 (at lower pressure/boiling point) — supplying latent heat to evaporate more water, saving steam</button>
+    <button class="opt" onclick="choose(this,false)">C) Drive the feed pump</button>
+    <button class="opt" onclick="choose(this,false)">D) Purge the non-condensable gases</button>
+    <div class="explanation">✅ Multiple effect evaporation energy saving: each kg of steam evaporates approximately 1 kg water in single effect. In 7-effect still: same 1 kg steam evaporates ~6.5 kg water (some loss to heat losses). Mechanism: Steam → Effect 1 (at P1, T1) → evaporates water → water vapour at T1 → condenses in Effect 2 (at P2 < P1, T2 < T1) → heats Effect 2 → more evaporation → continues. Each successive effect at lower pressure → lower boiling point. Final condensate = WFI. IP/USP specification: WFI conductivity ≤ 1.3 µS/cm at 25°C.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q3. Which type of pharmaceutical product is NOT suitable for concentration in a Falling Film Evaporator?</div>
+    <button class="opt" onclick="choose(this,false)">A) Antibiotic fermentation broth (dilute aqueous solution)</button>
+    <button class="opt" onclick="choose(this,false)">B) Vitamin C solution for syrup concentration</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>C) Sodium chloride brine approaching saturation — salt crystallises on tube walls (fouling), blocks film flow, causes dry spots and equipment damage</button>
+    <button class="opt" onclick="choose(this,false)">D) Herbal extract for oral liquid concentrate</button>
+    <div class="explanation">✅ Falling film limitations for crystallising solutions: as NaCl concentration approaches saturation during evaporation, crystals nucleate and deposit on the hot tube walls → fouling → tube blockage → uneven film distribution → more fouling → eventually tubes block completely. Alternative: forced circulation evaporator (solution pumped at high velocity — crystals kept in suspension) or crystallising evaporator (Oslo type). Falling film best for: clear solutions, non-viscous liquids (η < 200 mPa·s), non-scaling products, where short residence time is critical.</div>
+  </div>
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
+  </div>
+</div>
+<footer>© 2025 Pharmaceutical Engineering BP304T · Falling Film Evaporator</footer>
+<script>
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+let _s=0,_a=0;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+_s+' / '+t+(_s===t?' — Perfect! 🌟':' — Review and try again.');}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+let running=true,speedMult=1,frameN=0;
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';if(running)loop();}
+function setSpeed(s){speedMult=s;}
+
+// Three vertical tubes
+const TUBES=[{x:220},{x:360},{x:500}];
+// Film drops falling down
+const drops=[];
+for(let t=0;t<TUBES.length;t++)
+  for(let i=0;i<15;i++) drops.push({tube:t,y:90+Math.random()*220,vy:1.5+Math.random()*1,conc:Math.random()});
+// Steam particles outside tubes
+const steam=[];
+for(let i=0;i<20;i++) steam.push({x:160+Math.random()*420,y:80+Math.random()*250,vx:(Math.random()-0.5)*0.5,vy:-0.3-Math.random()*0.3,alpha:0.5});
+// Vapour rising inside tubes
+const vapour=[];
+for(let t=0;t<TUBES.length;t++)
+  for(let i=0;i<6;i++) vapour.push({tube:t,y:280-Math.random()*200,vy:-(0.8+Math.random()),alpha:0.6});
+
+function step(){
+  frameN++;
+  drops.forEach(d=>{
+    d.y+=d.vy*speedMult;
+    d.conc=Math.min(1,d.conc+0.002*speedMult); // concentrate as falling
+    if(d.y>320){d.y=88+Math.random()*10;d.conc=0.1+Math.random()*0.2;}
+  });
+  steam.forEach(s=>{s.y+=s.vy*speedMult;s.x+=(Math.random()-0.5)*0.5;s.alpha-=0.005*speedMult;if(s.alpha<0){s.y=80+Math.random()*250;s.alpha=0.5;}});
+  vapour.forEach(v=>{v.y+=v.vy*speedMult;v.alpha-=0.008*speedMult;if(v.y<60||v.alpha<0){v.y=300+Math.random()*20;v.alpha=0.6;}});
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+  
+  // Steam chest (outer shell)
+  ctx.fillStyle='rgba(44,62,80,0.6)';ctx.fillRect(150,60,430,280);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=5;ctx.strokeRect(150,60,430,280);
+  
+  // Steam particles (outside tubes)
+  steam.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,3,0,Math.PI*2);ctx.fillStyle=`rgba(231,76,60,${s.alpha})`;ctx.fill();});
+  
+  // Tubes
+  TUBES.forEach(tb=>{
+    ctx.strokeStyle='#85929E';ctx.lineWidth=3;
+    ctx.strokeRect(tb.x-18,75,36,245);
+    ctx.fillStyle='rgba(20,20,40,0.8)';ctx.fillRect(tb.x-16,77,32,241);
+  });
+  
+  // Film drops falling (blue=dilute → orange=concentrated)
+  drops.forEach(d=>{
+    const tb=TUBES[d.tube];
+    const r=Math.round(52+(200-52)*d.conc);
+    const g=Math.round(152+(100-152)*d.conc);
+    const b=Math.round(219+(30-219)*d.conc);
+    ctx.beginPath();ctx.arc(tb.x+(Math.random()-0.5)*10,d.y,3,0,Math.PI*2);
+    ctx.fillStyle=`rgb(${r},${g},${b})`;ctx.globalAlpha=0.85;ctx.fill();ctx.globalAlpha=1;
+  });
+  
+  // Vapour rising inside tubes
+  vapour.forEach(v=>{
+    const tb=TUBES[v.tube];
+    ctx.beginPath();ctx.arc(tb.x+(Math.random()-0.5)*6,v.y,2,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${v.alpha})`;ctx.fill();
+  });
+  
+  // Feed distribution header (top)
+  ctx.fillStyle='#2C3E50';ctx.fillRect(150,55,430,20);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=2;ctx.strokeRect(150,55,430,20);
+  ctx.fillStyle='#3498DB';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('FEED DISTRIBUTION HEADER',365,69);
+  
+  // Feed inlet arrow (top)
+  ctx.strokeStyle='#3498DB';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(365,20);ctx.lineTo(365,54);ctx.stroke();
+  ctx.fillStyle='#3498DB';ctx.fillText('FEED IN',365,15);
+  
+  // Steam inlet
+  ctx.strokeStyle='rgba(231,76,60,0.8)';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(100,180);ctx.lineTo(150,180);ctx.stroke();
+  ctx.fillStyle='#E74C3C';ctx.font='10px Arial';ctx.textAlign='right';ctx.fillText('STEAM IN',145,175);
+  
+  // Condensate outlet
+  ctx.strokeStyle='rgba(149,165,166,0.7)';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(150,260);ctx.lineTo(100,260);ctx.stroke();
+  ctx.fillStyle='#888';ctx.textAlign='right';ctx.fillText('CONDENSATE',145,275);
+  
+  // Product + vapour outlet (bottom)
+  ctx.fillStyle='#2C3E50';ctx.fillRect(150,340,430,20);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=2;ctx.strokeRect(150,340,430,20);
+  ctx.strokeStyle='#27AE60';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(280,360);ctx.lineTo(280,385);ctx.stroke();
+  ctx.fillStyle='#27AE60';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('CONCENTRATE',280,395);
+  ctx.strokeStyle='rgba(255,255,255,0.5)';ctx.beginPath();ctx.moveTo(450,360);ctx.lineTo(450,385);ctx.stroke();
+  ctx.fillStyle='#888';ctx.fillText('VAPOUR OUT',450,395);
+  
+  // Labels
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,220,75);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('💧 Falling Film Evaporator',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Residence time: 5–30 seconds',18,48);ctx.fillText('Operation: Vacuum (reduce boiling T)',18,64);
+  ctx.fillStyle='#3498DB';ctx.fillText('● Dilute',18,80);ctx.fillStyle='#E67E22';ctx.fillText('● Concentrated',55,80);
+}
+function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+loop();
+</script>
+</body>
+</html>

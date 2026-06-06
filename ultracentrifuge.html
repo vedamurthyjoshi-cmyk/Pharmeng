@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ultracentrifuge — Pharmaceutical Engineering</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
+header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
+.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
+.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
+canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
+.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
+.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
+.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
+.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+</style>
+</head>
+<body>
+<header><h1>⚡ Ultracentrifuge</h1><p>Pharmaceutical Engineering BP304T · Chapter 7 — Centrifugation</p></header>
+<nav><a href="index.html">&#127968; Home</a></nav>
+<div class="tabs">
+  <button class="tab active" onclick="showTab('anim',this)">&#127916; Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">&#128214; Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">&#9989; MCQs</button>
+</div>
+<div id="anim" class="panel active">
+<div class="anim-box">
+  <canvas id="c" width="720" height="360"></canvas>
+  <div style="margin-top:14px;">
+    <button class="btn" id="playBtn" onclick="togglePlay()">&#9208; Pause</button>
+    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
+    <button class="btn" onclick="setSpeed(1)">Normal</button>
+    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  </div>
+</div>
+<div class="theory-box">
+  <h3>What you are seeing</h3>
+  <p>The rotor spins at 40,000–100,000 rpm inside a vacuum chamber. Centrifugal forces of 100,000–600,000×g sediment macromolecules like proteins, DNA, and viruses at rates determined by their sedimentation coefficient (Svedberg unit). Used for molecular weight determination and separation of biologics.</p>
+  <div class="key-fact">The ultracentrifuge operates in high vacuum to eliminate air friction on the fast-spinning rotor. Without vacuum, air resistance would generate enormous heat and the rotor would fail. The vacuum also prevents sample evaporation.</div>
+</div>
+</div>
+<div id="theory" class="panel">
+  <div class="theory-box"><h3>Ultracentrifuge — Full Theory</h3>
+    <p>Refer to your textbook Chapter 7 — Centrifugation for complete theory, construction details, and pharmaceutical applications. This page focuses on the interactive animation and MCQ practice.</p>
+    <p style="margin-top:12px;">Key principle: The rotor spins at 40,000–100,000 rpm inside a vacuum chamber. Centrifugal forces of 100,000–600,000×g sediment macromolecules like proteins, DNA, and viruses at rates determined by their sedimentation coefficient (Svedberg unit). Used for molecular weight determination and separation of biologics.</p>
+    <div class="key-fact">The ultracentrifuge operates in high vacuum to eliminate air friction on the fast-spinning rotor. Without vacuum, air resistance would generate enormous heat and the rotor would fail. The vacuum also prevents sample evaporation.</div>
+  </div>
+</div>
+<div id="mcq" class="panel">
+  <div class="mcq-card">
+    <div class="mcq-q">Q1. The sedimentation coefficient (S, Svedberg unit) measured in an ultracentrifuge is defined as:</div>
+    <button class="opt" onclick="choose(this,false)">A) It uses higher temperature than Swenson-Walker</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) S = velocity / centrifugal acceleration = v / ω²r — measured in Svedbergs (1 S = 10⁻¹³ seconds). It characterises how fast a particle sediments per unit centrifugal force. Larger, denser particles have higher S values. Ribosomes: 70S (prokaryote), 80S (eukaryote); albumin: ~4.5S; IgG: ~7S</button>
+    <button class="opt" onclick="choose(this,false)">C) It adds seed crystals automatically</button>
+    <button class="opt" onclick="choose(this,false)">D) It operates under vacuum conditions</button>
+    <div class="explanation">&#9989; S = v/(ω²r) is a physical property of the macromolecule (at a given temperature and solvent). From S, molecular weight can be calculated: M = (S × R × T) / (D × (1 − v̄ρ)) [Svedberg equation] where D = diffusion coefficient, v̄ = partial specific volume, ρ = solvent density. Pharmaceutical use: QC of viral vaccines (verify particle sedimentation matches expected S value = correct assembly); mAb aggregation detection (monomer ~7S vs aggregate ~14S); PEGylated protein characterisation.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q2. Ultracentrifugation is used in pharmaceutical manufacture primarily for:</div>
+    <button class="opt" onclick="choose(this,false)">A) It operates continuously without any operator intervention</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Concentration and purification of viral vaccines and virus-like particles (VLPs) — the high g-forces sediment virus particles from large volumes of cell culture medium rapidly; density gradient ultracentrifugation separates intact virus from cell debris and protein contaminants by buoyant density</button>
+    <button class="opt" onclick="choose(this,false)">C) It requires higher temperatures than alternatives</button>
+    <button class="opt" onclick="choose(this,false)">D) It produces smaller particle size than other methods</button>
+    <div class="explanation">&#9989; Viral vaccine purification by density gradient ultracentrifugation: (1) Crude harvest layered on sucrose or CsCl gradient; (2) Centrifuge at 100,000×g for 2–4 hours; (3) Virus band forms at characteristic buoyant density (e.g., influenza: 1.20 g/mL in sucrose); (4) Band collected by tube puncture or fractionation; (5) Product: highly purified virus at defined density — proven free from cellular DNA and protein contaminants. Used for: polio vaccine (Salk); influenza; rabies; hepatitis B VLP; COVID-19 VLP vaccine candidates.</div>
+  </div>
+  <div class="score-box" id="score" style="display:none">
+    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
+    <button class="btn" onclick="resetMCQ()">&#128260; Try Again</button>
+  </div>
+</div>
+<footer>© 2025 Pharmaceutical Engineering BP304T · Ultracentrifuge</footer>
+<script>
+function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+let _s=0,_a=0;
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' — Perfect!':' — Review and try again.');}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+let running=true,speedMult=1,t=0;
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'&#9208; Pause':'&#9654; Play';if(running)loop();}
+function setSpeed(s){speedMult=s;}
+// Generic rotating/flowing animation
+const particles=[];
+for(let i=0;i<50;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*2,vy:(Math.random()-0.5)*2,r:2+Math.random()*4,col:'hsl('+(180+Math.random()*60)+',70%,60%)'});
+function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function draw(){
+  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+  // Draw equipment outline
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;
+  ctx.strokeRect(100,80,520,220);
+  ctx.fillStyle='rgba(74,144,217,0.08)';ctx.fillRect(100,80,520,220);
+  // Particles
+  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.7;ctx.fill();ctx.globalAlpha=1;});
+  // Rotation effect
+  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.02);
+  ctx.strokeStyle='rgba(174,214,241,0.3)';ctx.lineWidth=2;
+  for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(i*Math.PI/2)*100,Math.sin(i*Math.PI/2)*100);ctx.stroke();}
+  ctx.restore();
+  // Labels
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,200,55);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('⚡ Ultracentrifuge',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 7 — Centrifugation',18,48);
+  ctx.textAlign='center';ctx.fillStyle='rgba(255,255,255,0.6)';ctx.font='11px Arial';ctx.fillText('The rotor spins at 40,000–100,000 rpm inside a vacuum chambe...',W/2,H-15);
+}
+function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+loop();
+</script>
+</body>
+</html>
