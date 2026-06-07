@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Molecular Distillation - Pharmaceutical Engineering</title>
+<title>Molecular Distillation (Short-Path Evaporator) — Pharmaceutical Engineering</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
@@ -14,7 +14,7 @@ canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
 .theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
 .theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
 .key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
 .mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
 .mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
@@ -26,7 +26,7 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 </style>
 </head>
 <body>
-<header><h1>Molecular Distillation</h1><p>Pharmaceutical Engineering BP304T - Chapter 10 - Distillation</p></header>
+<header><h1>Molecular Distillation (Short-Path Evaporator)</h1><p>Pharmaceutical Engineering BP304T - Chapter 10 — Distillation</p></header>
 <nav><a href="index.html">Home</a></nav>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">Animation</button>
@@ -35,7 +35,7 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 </div>
 <div id="anim" class="panel active">
 <div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
+  <canvas id="c" width="720" height="400"></canvas>
   <div style="margin-top:14px;">
     <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
     <button class="btn" onclick="setSpeed(0.5)">Slow</button>
@@ -45,66 +45,128 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 </div>
 <div class="theory-box">
   <h3>What you are seeing</h3>
-  <p>Under very high vacuum (0.001-0.01 mbar), the mean free path of vapour molecules exceeds the evaporator-condenser distance. Molecules evaporate from a heated surface and travel directly to the cold condenser without collisions - no equilibrium, no reflux.</p>
-  <div class="key-fact">Key Point: Molecular distillation operates 50-100 degrees C below normal boiling points due to high vacuum - suitable for vitamins A, D, E and other thermolabile molecules that cannot withstand conventional distillation temperatures. Residence time: less than 1 minute.</div>
+  <p>Heated rotor (left, orange) evaporates liquid film in very high vacuum. Molecules travel directly across the short gap (2-3 cm) to the cold condenser (right, blue) without collisions — no equilibrium, no reflux. Heavier molecules (larger) travel slower and hit the condenser at different positions. Both distillate (lighter) and residue (heavier) collected separately.</p>
+  <div class="key-fact">Key Point: In molecular distillation, the mean free path of molecules (distance between collisions) exceeds the evaporator-condenser distance. Molecules travel ballistically — no vapour-liquid equilibrium. Operates at 0.001-0.01 mbar. Product temperature stays below 100 degrees C despite boiling points of 200-300 degrees C.</div>
 </div>
 </div>
-<div id="theory" class="panel">
-  <div class="theory-box"><h3>Molecular Distillation - Principle</h3>
-    <p>Under very high vacuum (0.001-0.01 mbar), the mean free path of vapour molecules exceeds the evaporator-condenser distance. Molecules evaporate from a heated surface and travel directly to the cold condenser without collisions - no equilibrium, no reflux.</p>
-    <div class="key-fact">Key Fact: Molecular distillation operates 50-100 degrees C below normal boiling points due to high vacuum - suitable for vitamins A, D, E and other thermolabile molecules that cannot withstand conventional distillation temperatures. Residence time: less than 1 minute.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 10 - Distillation for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
-</div>
+<div id="theory" class="panel"><div class="theory-box"><h3>Molecular Distillation (Short-Path Evaporator) — Principle</h3>
+    <p>Heated rotor (left, orange) evaporates liquid film in very high vacuum. Molecules travel directly across the short gap (2-3 cm) to the cold condenser (right, blue) without collisions — no equilibrium, no reflux. Heavier molecules (larger) travel slower and hit the condenser at different positions. Both distillate (lighter) and residue (heavier) collected separately.</p>
+    <div class="key-fact">Key Point: In molecular distillation, the mean free path of molecules (distance between collisions) exceeds the evaporator-condenser distance. Molecules travel ballistically — no vapour-liquid equilibrium. Operates at 0.001-0.01 mbar. Product temperature stays below 100 degrees C despite boiling points of 200-300 degrees C.</div>
+    <p style="margin-top:12px;color:#666;font-style:italic;">See your textbook Chapter 10 — Distillation for complete construction details and pharmaceutical applications.</p>
+    </div></div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Molecular Distillation?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Under very high vacuum (0.001-0.01 mbar), the mean free path of vapour molecules exceeds the evapora...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Molecular distillation operates 50-100 degrees C below normal boiling points due to high vacuum - suitable for vitamins A, D, E and other thermolabile molecules that cannot withstand conventional distillation temperatures. Residence time: less than 1 minute.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Molecular Distillation is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Molecular distillation operates 50-100 degrees C below normal boiling points due to high vacuum - su...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. Under very high vacuum (0.001-0.01 mbar), the mean free path of vapour molecules exceeds the evaporator-condenser distance. Molecules evaporate from a heated surface and travel directly to the cold condenser without collisions - no equilibrium, no reflux.</div>
-  </div>
+<div class="mcq-card"><div class="mcq-q">Q1. Molecular distillation differs from conventional distillation because:</div><button class="opt" onclick="choose(this,false)">A) It uses higher pressure to force molecules through the condenser</button>
+<button class="opt" onclick="choose(this,true)" data-correct>B) The evaporator-condenser distance is shorter than the mean free path of vapour molecules — molecules travel directly to the condenser without inter-molecular collisions — no vapour-liquid equilibrium, no reflux</button>
+<button class="opt" onclick="choose(this,false)">C) Molecular distillation uses centrifugal force to separate molecules</button>
+<button class="opt" onclick="choose(this,false)">D) It requires a fractionating column for separation</button>
+<div class="explanation">Correct. Mean free path (lambda) at 0.001 mbar = approximately 50-100 mm. Evaporator-condenser gap = 20-50 mm. Since lambda > gap: molecules evaporate and travel to condenser without hitting other molecules. No equilibrium means no reflux, no theoretical plates — separation is by molecular weight and evaporation rate difference. Heavier molecules (higher MW, lower vapour pressure) are less likely to reach the condenser = separation by molecular weight. Enables gentle distillation of vitamins A, D, E, fatty acids, monoglycerides.</div></div>
+<div class="mcq-card"><div class="mcq-q">Q2. Molecular distillation is the method of choice for purifying Vitamin E (tocopherol, bp 200-220 degrees C under vacuum):</div><button class="opt" onclick="choose(this,false)">A) Because Vitamin E is water-soluble and compatible with steam distillation</button>
+<button class="opt" onclick="choose(this,true)" data-correct>B) Because Vitamin E would thermally degrade at temperatures needed for conventional distillation (200+ degrees C) — molecular distillation achieves evaporation at 120-150 degrees C (50-80 degrees C below normal bp) due to the ultra-high vacuum effect on thermodynamic activity</button>
+<button class="opt" onclick="choose(this,false)">C) Because Vitamin E has a very low molecular weight</button>
+<button class="opt" onclick="choose(this,false)">D) Because Vitamin E is poorly soluble in any organic solvent</button>
+<div class="explanation">Correct. Vitamin E distillation: conventional vacuum distillation at 1 mbar: bp approximately 180 degrees C. At 0.001 mbar (molecular distillation): bp effectively 120-140 degrees C. At 120 degrees C for less than 1 minute residence time: Vitamin E stable. At 180 degrees C for extended time: oxidative degradation, colour formation, loss of bioactivity. Molecular distillation preserves bioactivity of heat-sensitive vitamins, omega-3 fatty acids, high-value natural extracts. Also used for: fish oil concentration, monoglyceride purification, lanolin fractionation.</div></div>
+
   <div class="score-box" id="score" style="display:none">
     <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
     <button class="btn" onclick="resetMCQ()">Try Again</button>
   </div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Molecular Distillation</footer>
+<footer>2025 Pharmaceutical Engineering BP304T - Molecular Distillation (Short-Path Evaporator)</footer>
 <script>
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' Perfect!':' Review and try again.');}}
 function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
+let running=true,speedMult=1;
 function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
 function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+
+let t=0;
+// Molecules leaving heated surface
+const molecules=[];
+for(let i=0;i<40;i++) molecules.push({
+  y:100+Math.random()*220,
+  x:160+Math.random()*20,
+  vx:1.2+Math.random()*0.8,
+  vy:(Math.random()-0.5)*0.3,
+  r:2+Math.random()*3,
+  heavy:Math.random()<0.4,
+  reached:false
+});
+
+function step(){
+  t+=speedMult;
+  molecules.forEach(m=>{
+    if(m.reached)return;
+    m.x+=m.vx*speedMult*(m.heavy?0.7:1.0);
+    m.y+=m.vy*speedMult;
+    m.y=Math.max(95,Math.min(325,m.y));
+    if(m.x>520){m.reached=true;}
+  });
+  // Respawn
+  molecules.forEach((m,i)=>{
+    if(m.x>580){molecules[i]={y:100+Math.random()*220,x:160+Math.random()*20,vx:1.2+Math.random()*0.8,vy:(Math.random()-0.5)*0.3,r:2+Math.random()*3,heavy:Math.random()<0.4,reached:false};}
+  });
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Molecular Distillation_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 10 - Distillation',18,48);
+  
+  // Vacuum chamber
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(10,10,30,0.8)';
+  ctx.fillRect(100,60,540,320);ctx.strokeRect(100,60,540,320);
+  ctx.fillStyle='rgba(0,50,100,0.3)';ctx.fillText('',0,0);
+  
+  // Heated evaporator surface (left)
+  const heatGrad=ctx.createLinearGradient(100,0,180,0);
+  heatGrad.addColorStop(0,'rgba(231,76,60,0.8)');heatGrad.addColorStop(1,'rgba(231,76,60,0.1)');
+  ctx.fillStyle=heatGrad;ctx.fillRect(100,60,80,320);
+  ctx.fillStyle='#E74C3C';ctx.font='10px Arial';ctx.textAlign='center';
+  ctx.save();ctx.translate(140,220);ctx.rotate(-Math.PI/2);ctx.fillText('HEATED EVAPORATOR (150-250 C)',0,0);ctx.restore();
+  
+  // Cold condenser (right)
+  const coldGrad=ctx.createLinearGradient(540,0,640,0);
+  coldGrad.addColorStop(0,'rgba(52,152,219,0.1)');coldGrad.addColorStop(1,'rgba(52,152,219,0.8)');
+  ctx.fillStyle=coldGrad;ctx.fillRect(520,60,120,320);
+  ctx.fillStyle='#3498DB';ctx.font='10px Arial';
+  ctx.save();ctx.translate(580,220);ctx.rotate(Math.PI/2);ctx.fillText('COLD CONDENSER (20-50 C)',0,0);ctx.restore();
+  
+  // Short path indicator
+  ctx.strokeStyle='rgba(255,255,100,0.4)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(180,55);ctx.lineTo(520,55);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='rgba(255,255,100,0.7)';ctx.font='9px Arial';ctx.textAlign='center';
+  ctx.fillText('Short path: 2-5 cm (molecules travel direct - no collisions)',350,52);
+  
+  // Molecules in flight
+  molecules.forEach(m=>{
+    if(m.reached)return;
+    ctx.beginPath();ctx.arc(m.x,m.y,m.r,0,Math.PI*2);
+    ctx.fillStyle=m.heavy?'rgba(231,76,60,0.8)':'rgba(174,214,241,0.8)';
+    ctx.fill();
+  });
+  
+  // Distillate collected at condenser bottom
+  ctx.fillStyle='rgba(174,214,241,0.4)';ctx.fillRect(520,280,120,100);
+  ctx.fillStyle='#AED6F1';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('Distillate (light)',580,340);
+  
+  // Residue at bottom of evaporator
+  ctx.fillStyle='rgba(231,76,60,0.3)';ctx.fillRect(100,330,80,50);
+  ctx.fillStyle='#E74C3C';ctx.font='9px Arial';ctx.fillText('Residue',140,360);
+  
+  // Vacuum label
+  ctx.fillStyle='rgba(255,255,255,0.3)';ctx.font='12px Arial';ctx.textAlign='center';
+  ctx.fillText('HIGH VACUUM: 0.001 - 0.01 mbar',350,220);
+  ctx.fillText('(Mean free path > evaporator-condenser distance)',350,238);
+  
+  // Labels
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,215,65);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Molecular Distillation',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('No collisions - ballistic molecule travel',18,48);
+  ctx.fillStyle='#3498DB';ctx.fillText('Blue = light molecules',18,64);
+  ctx.fillStyle='#E74C3C';ctx.fillText('Red = heavy molecules',115,64);
 }
 function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
 loop();

@@ -1,113 +1,271 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Pharmaceutical Solvent Recovery - Pharmaceutical Engineering</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<title>Solvent Recovery – Pharmaceutical Engineering</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
-header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
-.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
-.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
-.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
-canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
-.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Pharmaceutical Solvent Recovery</h1><p>Pharmaceutical Engineering BP304T - Chapter 15 - Environmental Engineering</p></header>
-<nav><a href="index.html">Home</a></nav>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0d1a;color:#fff;font-family:Arial,sans-serif;display:flex;flex-direction:column;align-items:center}
+h1{font-size:1.1rem;padding:8px;color:#AED6F1;text-align:center}
+.tabs{display:flex;gap:4px;margin-bottom:6px}
+.tab{padding:6px 18px;border-radius:6px 6px 0 0;cursor:pointer;background:#1a1a2e;border:1px solid #4A90D9;color:#AED6F1;font-size:0.85rem}
+.tab.active{background:#4A90D9;color:#fff}
+.panel{display:none;width:720px}
+.panel.active{display:block}
+canvas{display:block;background:#1a1a2e;border-radius:0 8px 8px 8px;border:1px solid #4A90D9}
+.controls{display:flex;gap:8px;margin:6px 0;justify-content:center}
+button{padding:5px 16px;border-radius:5px;border:none;background:#4A90D9;color:#fff;cursor:pointer;font-size:0.82rem}
+button:hover{background:#1F618D}
+.theory{background:#1a1a2e;border-radius:8px;padding:16px;font-size:0.88rem;line-height:1.6;border:1px solid #4A90D9;width:720px}
+.theory h2{color:#4A90D9;margin-bottom:8px;font-size:1rem}
+.theory h3{color:#AED6F1;margin-top:10px;margin-bottom:4px;font-size:0.92rem}
+.mcq{background:#1a1a2e;border-radius:8px;padding:16px;width:720px;border:1px solid #4A90D9}
+.mcq h2{color:#4A90D9;margin-bottom:10px;font-size:1rem}
+.question{margin-bottom:14px}
+.question p{margin-bottom:6px;font-size:0.88rem}
+.opts label{display:block;margin:3px 0;cursor:pointer;font-size:0.85rem;padding:3px 6px;border-radius:4px}
+.opts label:hover{background:#1F618D}
+.opts label.correct{background:#1e7e34;color:#fff}
+.opts label.wrong{background:#721c24;color:#fff}
+footer{font-size:0.75rem;color:#555;margin:8px 0 4px}
+</style></head><body>
+<h1>Solvent Recovery System — Pharmaceutical Manufacturing</h1>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
+  <div class="tab active" onclick="showTab('anim')">Animation</div>
+  <div class="tab" onclick="showTab('theory')">Theory</div>
+  <div class="tab" onclick="showTab('mcq')">MCQs</div>
 </div>
-<div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
-  </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>Organic solvents (ethanol, isopropanol, acetone, ethyl acetate, methanol) used in pharmaceutical synthesis are recovered by distillation. Solvent-laden air is captured by activated carbon adsorption, then recovered solvent is purified by distillation and reused - reducing raw material cost and environmental impact.</p>
-  <div class="key-fact">Key Point: ICH Q3C classifies pharmaceutical solvents by toxicity: Class 1 (avoid - benzene, CCl4); Class 2 (limit - methanol less than 3000 ppm, DCM less than 600 ppm in API); Class 3 (low risk - ethanol, IPA, ethyl acetate). Solvent recovery meets Green Chemistry Principles for sustainable pharmaceutical manufacturing.</div>
+
+<div class="panel active" id="anim">
+<canvas id="cv" width="720" height="380"></canvas>
+<div class="controls">
+  <button onclick="running=!running;this.textContent=running?'Pause':'Play'">Pause</button>
+  <button onclick="t=0">Reset</button>
 </div>
 </div>
-<div id="theory" class="panel">
-  <div class="theory-box"><h3>Pharmaceutical Solvent Recovery - Principle</h3>
-    <p>Organic solvents (ethanol, isopropanol, acetone, ethyl acetate, methanol) used in pharmaceutical synthesis are recovered by distillation. Solvent-laden air is captured by activated carbon adsorption, then recovered solvent is purified by distillation and reused - reducing raw material cost and environmental impact.</p>
-    <div class="key-fact">Key Fact: ICH Q3C classifies pharmaceutical solvents by toxicity: Class 1 (avoid - benzene, CCl4); Class 2 (limit - methanol less than 3000 ppm, DCM less than 600 ppm in API); Class 3 (low risk - ethanol, IPA, ethyl acetate). Solvent recovery meets Green Chemistry Principles for sustainable pharmaceutical manufacturing.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 15 - Environmental Engineering for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+
+<div class="panel" id="theory">
+<div class="theory">
+<h2>Solvent Recovery in Pharmaceutical Industry</h2>
+<p>Solvents are the largest waste stream in pharmaceutical manufacturing. Recovery reduces costs, environmental impact, and complies with solvent emission regulations.</p>
+<h3>Process Overview</h3>
+<p>Spent solvent mixture enters the recovery system. Distillation separates solvents based on boiling points. Recovered pure solvent is reused in manufacturing. Residue (bottoms) is disposed as hazardous waste.</p>
+<h3>Distillation Column</h3>
+<p>The heart of solvent recovery. The column has trays or packing. Vapour rises, liquid descends. Lighter (lower BP) solvent enriches at top; heavier solvent at bottom. A rectification section above the feed and stripping section below.</p>
+<h3>Condenser</h3>
+<p>Overhead vapours are condensed using cooling water. Distillate is collected as recovered pure solvent. Some is returned as reflux to improve separation (reflux ratio 1:3–1:5).</p>
+<h3>Reboiler</h3>
+<p>Steam-heated reboiler at the column base provides vapour for separation. Controls residue removal rate.</p>
+<h3>Common Solvents Recovered</h3>
+<p>Ethanol, IPA, acetone, methanol, ethyl acetate, dichloromethane, toluene. Purity typically 99–99.9% after recovery.</p>
 </div>
-<div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Pharmaceutical Solvent Recovery?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Organic solvents (ethanol, isopropanol, acetone, ethyl acetate, methanol) used in pharmaceutical syn...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. ICH Q3C classifies pharmaceutical solvents by toxicity: Class 1 (avoid - benzene, CCl4); Class 2 (limit - methanol less than 3000 ppm, DCM less than 600 ppm in API); Class 3 (low risk - ethanol, IPA, ethyl acetate). Solvent recovery meets Green Chemistry Principles for sustainable pharmaceutical manufacturing.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Pharmaceutical Solvent Recovery is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) ICH Q3C classifies pharmaceutical solvents by toxicity: Class 1 (avoid - benzene, CCl4); Class 2 (li...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. Organic solvents (ethanol, isopropanol, acetone, ethyl acetate, methanol) used in pharmaceutical synthesis are recovered by distillation. Solvent-laden air is captured by activated carbon adsorption, then recovered solvent is purified by distillation and reused - reducing raw material cost and environmental impact.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Pharmaceutical Solvent Recovery</footer>
+
+<div class="panel" id="mcq">
+<div class="mcq">
+<h2>MCQs — Solvent Recovery</h2>
+<div class="question"><p>1. The principle used in solvent recovery distillation is:</p>
+<div class="opts">
+  <label onclick="cho(this,true)" data-c>A. Difference in boiling points of solvents</label>
+  <label onclick="cho(this,false)">B. Difference in molecular weights</label>
+  <label onclick="cho(this,false)">C. Difference in solubility in water</label>
+  <label onclick="cho(this,false)">D. Difference in density only</label>
+</div></div>
+<div class="question"><p>2. Reflux in a distillation column:</p>
+<div class="opts">
+  <label onclick="cho(this,false)">A. Removes the distillate product</label>
+  <label onclick="cho(this,true)" data-c>B. Returns condensed liquid to the column top to improve separation</label>
+  <label onclick="cho(this,false)">C. Heats the reboiler</label>
+  <label onclick="cho(this,false)">D. Removes bottoms product</label>
+</div></div>
+<div class="question"><p>3. Which component is found at the top of a distillation column during ethanol/water separation?</p>
+<div class="opts">
+  <label onclick="cho(this,true)" data-c>A. Ethanol (lower boiling point, 78°C)</label>
+  <label onclick="cho(this,false)">B. Water (higher boiling point, 100°C)</label>
+  <label onclick="cho(this,false)">C. Equal mixture always</label>
+  <label onclick="cho(this,false)">D. Both at top, both at bottom</label>
+</div></div>
+<div class="question"><p>4. The typical purity of recovered solvent from a pharmaceutical recovery system is:</p>
+<div class="opts">
+  <label onclick="cho(this,false)">A. 50–60%</label>
+  <label onclick="cho(this,false)">B. 70–80%</label>
+  <label onclick="cho(this,false)">C. 90–95%</label>
+  <label onclick="cho(this,true)" data-c>D. 99–99.9%</label>
+</div></div>
+</div>
+</div>
+
+<footer>© 2025 Pharmaceutical Engineering BP304T</footer>
+
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
-function draw(){
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Pharmaceutical Solvent Recovery_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 15 - Environmental Engineering',18,48);
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+const W=720,H=380;
+let t=0,running=true;
+
+// Solvent recovery: Feed tank → Column → Condenser → Product tank
+// + Reboiler at bottom → Residue tank
+
+// Vapour bubbles rising in column
+let vapour=[];
+for(let i=0;i<20;i++) vapour.push({x:290+Math.random()*60,y:280-Math.random()*180,speed:0.5+Math.random()*0.5});
+
+// Liquid drops falling (reflux)
+let reflux=[];
+for(let i=0;i<8;i++) reflux.push({x:295+Math.random()*50,y:80+Math.random()*100,speed:0.3+Math.random()*0.3});
+
+function drawArrow(x1,y1,x2,y2,col){
+  ctx.strokeStyle=col;ctx.lineWidth=2;ctx.setLineDash([5,4]);
+  ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+  ctx.setLineDash([]);
+  const a=Math.atan2(y2-y1,x2-x1);
+  ctx.fillStyle=col;
+  ctx.beginPath();
+  ctx.moveTo(x2,y2);
+  ctx.lineTo(x2-10*Math.cos(a-0.4),y2-10*Math.sin(a-0.4));
+  ctx.lineTo(x2-10*Math.cos(a+0.4),y2-10*Math.sin(a+0.4));
+  ctx.closePath();ctx.fill();
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+
+function label(x,y,text,col){
+  ctx.fillStyle=col||'white';ctx.font='10px Arial';ctx.textAlign='center';
+  ctx.fillText(text,x,y);
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+
+  // Info box
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,240,48);
+  ctx.fillStyle='white';ctx.font='bold 13px Arial';ctx.textAlign='left';
+  ctx.fillText('Solvent Recovery System',18,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Distillation-based pharmaceutical recovery',18,46);
+
+  // === FEED TANK (left) ===
+  ctx.fillStyle='#4E342E';ctx.fillRect(30,180,70,100);
+  ctx.strokeStyle='#8D6E63';ctx.lineWidth=2;ctx.strokeRect(30,180,70,100);
+  // liquid level
+  const feedLevel=180+10+(Math.sin(t*0.03)*5);
+  ctx.fillStyle='rgba(139,90,43,0.7)';ctx.fillRect(32,feedLevel,66,270);
+  label(65,175,'Feed Tank','#8D6E63');
+  label(65,290,'Spent','#ccc');label(65,302,'Solvent','#ccc');
+
+  // Feed pipe → column
+  drawArrow(100,230,270,230,'#8D6E63');
+  label(185,222,'Feed','#8D6E63');
+
+  // === DISTILLATION COLUMN (centre) ===
+  const cx=270,cy=60,cw=100,ch=240;
+  // Column shell
+  ctx.fillStyle='rgba(30,60,90,0.9)';ctx.fillRect(cx,cy,cw,ch);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=3;ctx.strokeRect(cx,cy,cw,ch);
+
+  // Trays (6 trays)
+  for(let i=0;i<6;i++){
+    const ty2=cy+30+i*(ch-40)/6;
+    ctx.strokeStyle='rgba(100,160,220,0.5)';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(cx+5,ty2);ctx.lineTo(cx+cw-5,ty2);ctx.stroke();
+    // Liquid on tray
+    ctx.fillStyle=`rgba(${30+i*10},${100+i*15},${200-i*10},0.5)`;
+    ctx.fillRect(cx+5,ty2-6,cw-10,6);
+  }
+
+  // Vapour bubbles rising
+  vapour.forEach(v=>{
+    ctx.beginPath();ctx.arc(v.x,v.y,3,0,Math.PI*2);
+    ctx.fillStyle='rgba(150,210,255,0.55)';ctx.fill();
+    v.y-=v.speed;
+    if(v.y<cy+10){v.y=cy+ch-10;v.x=cx+10+Math.random()*(cw-20);}
+  });
+
+  // Reflux drops falling
+  reflux.forEach(r=>{
+    ctx.beginPath();ctx.arc(r.x,r.y,2.5,0,Math.PI*2);
+    ctx.fillStyle='rgba(100,200,255,0.7)';ctx.fill();
+    r.y+=r.speed;
+    if(r.y>cy+ch-10){r.y=cy+20;r.x=cx+10+Math.random()*(cw-20);}
+  });
+
+  label(320,55,'Distillation Column','#4A90D9');
+  label(320,315,'Stripping Section','#AED6F1');
+  label(320,100,'Rectifying Section','#AED6F1');
+
+  // Feed point arrow
+  ctx.fillStyle='#F39C12';ctx.font='9px Arial';ctx.textAlign='left';
+  ctx.fillText('← Feed',cx+cw+5,232);
+
+  // === CONDENSER (top right) ===
+  const condX=430,condY=40;
+  ctx.fillStyle='rgba(0,80,120,0.8)';ctx.fillRect(condX,condY,120,50);
+  ctx.strokeStyle='#00ACC1';ctx.lineWidth=2;ctx.strokeRect(condX,condY,120,50);
+  // Cooling water in/out
+  ctx.strokeStyle='#2196F3';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);
+  ctx.beginPath();ctx.moveTo(condX+20,condY);ctx.lineTo(condX+20,condY-15);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(condX+100,condY);ctx.lineTo(condX+100,condY-15);ctx.stroke();
+  ctx.setLineDash([]);
+  label(condX+60,condY+20,'Condenser','#00ACC1');
+  label(condX+60,condY+35,'(Cooling Water)','#AED6F1');
+  label(condX+20,condY-20,'CW in','#2196F3');
+  label(condX+100,condY-20,'CW out','#2196F3');
+
+  // Vapour line: column top → condenser
+  drawArrow(cx+cw/2,cy,condX,condY+25,'#AED6F1');
+  label(390,50,'Vapour','#AED6F1');
+
+  // Reflux line: condenser back to column
+  ctx.strokeStyle='#00ACC1';ctx.lineWidth=2;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(condX,condY+40);ctx.lineTo(cx+cw,condY+40);ctx.lineTo(cx+cw,cy+20);ctx.stroke();
+  ctx.setLineDash([]);
+  label(cx+cw+30,condY+55,'Reflux','#00ACC1');
+
+  // === RECOVERED SOLVENT TANK ===
+  ctx.fillStyle='#1A5276';ctx.fillRect(condX,condY+70,120,80);
+  ctx.strokeStyle='#2980B9';ctx.lineWidth=2;ctx.strokeRect(condX,condY+70,120,80);
+  // clear liquid level
+  const prod=(t%100)/100;
+  ctx.fillStyle='rgba(41,128,185,0.6)';ctx.fillRect(condX+3,condY+70+(80*(1-prod*0.6)),114,80*prod*0.6);
+  label(condX+60,condY+115,'Recovered','white');
+  label(condX+60,condY+127,'Pure Solvent','#AED6F1');
+  label(condX+60,condY+65,'Product Tank','#2980B9');
+
+  // Distillate arrow
+  drawArrow(condX+60,condY+50,condX+60,condY+70,'#2ECC71');
+  label(condX+90,condY+62,'Distillate','#2ECC71');
+
+  // === REBOILER (bottom of column) ===
+  ctx.fillStyle='rgba(100,30,10,0.8)';ctx.fillRect(cx+10,cy+ch,cw-20,30);
+  ctx.strokeStyle='#E74C3C';ctx.lineWidth=2;ctx.strokeRect(cx+10,cy+ch,cw-20,30);
+  label(cx+cw/2,cy+ch+20,'Reboiler (Steam)','#E74C3C');
+
+  // Steam arrows into reboiler
+  ctx.strokeStyle='#E74C3C';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);
+  ctx.beginPath();ctx.moveTo(cx-20,cy+ch+15);ctx.lineTo(cx+10,cy+ch+15);ctx.stroke();
+  ctx.setLineDash([]);
+  label(cx-30,cy+ch+10,'Steam','#E74C3C');
+
+  // Residue out
+  drawArrow(cx+cw/2,cy+ch+30,cx+cw/2,360,'#795548');
+  ctx.fillStyle='rgba(100,60,20,0.7)';ctx.fillRect(cx+20,355,cw-40,20);
+  label(cx+cw/2,368,'Residue / Waste','#8D6E63');
+
+  // Purity label
+  ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(430,200,140,30);
+  ctx.fillStyle='#2ECC71';ctx.font='bold 11px Arial';ctx.textAlign='center';
+  ctx.fillText('Purity: 99–99.9%',500,220);
+}
+
+function step(){t++;}
+function loop(){if(running)step();draw();requestAnimationFrame(loop);}
 loop();
-</script>
-</body>
-</html>
+
+function showTab(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(tb=>tb.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab')[['anim','theory','mcq'].indexOf(id)].classList.add('active');
+}
+function cho(el,ok){
+  const opts=el.parentElement.querySelectorAll('label');
+  opts.forEach(o=>o.classList.remove('correct','wrong'));
+  el.classList.add(ok?'correct':'wrong');
+  if(!ok)el.parentElement.querySelector('[data-c]').classList.add('correct');
+}
+</script></body></html>

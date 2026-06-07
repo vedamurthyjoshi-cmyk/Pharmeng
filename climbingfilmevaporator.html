@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Climbing Film Evaporator - Pharmaceutical Engineering</title>
-<style>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Climbing Film Evaporator</title><style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;}
 .tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
 .panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
 .anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
@@ -14,19 +11,16 @@ canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
 .theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
 .theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
 .key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Climbing Film Evaporator</h1><p>Pharmaceutical Engineering BP304T - Chapter 8 - Evaporation</p></header>
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:10px;padding:10px;background:#FEF9E7;border-radius:6px;font-size:0.9em;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:20px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:16px;color:#888;font-size:0.8em;background:white;margin-top:16px;}
+</style></head><body>
+<header><h1>Climbing Film Evaporator</h1><p>Pharmaceutical Engineering BP304T -- Chapter 8 -- Evaporation</p></header>
 <nav><a href="index.html">Home</a></nav>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">Animation</button>
@@ -34,80 +28,87 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
   <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
-  </div>
+<div class="anim-box"><canvas id="c" width="720" height="380"></canvas>
+<div style="margin-top:12px;">
+<button class="btn" id="pb" onclick="togglePlay()">Pause</button>
+<button class="btn" onclick="setSpeed(0.5)">Slow</button>
+<button class="btn" onclick="setSpeed(1)">Normal</button>
+<button class="btn" onclick="setSpeed(2)">Fast</button>
+</div></div>
+<div class="theory-box"><h3>What you are seeing</h3><p>Feed liquid enters at the BOTTOM of long vertical tubes. Steam condenses on the OUTSIDE of the tubes, heating the liquid. As the liquid begins to boil, vapour bubbles form inside the tubes. The rising vapour bubbles drag the liquid upward as a thin climbing film. Concentrated liquid and vapour exit together at the TOP. Residence time: 1-5 minutes.</p><div class="key-fact">Key Point: Climbing Film Evaporator is the OPPOSITE of the Falling Film -- liquid is pushed UP by vapour momentum rather than falling by gravity. This makes it suitable for slightly more viscous feeds but gives longer residence time than Falling Film.</div></div>
 </div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>Feed enters at the bottom of long vertical tubes. Steam outside heats the liquid which begins to boil. Vapour bubbles carry the liquid upward as a climbing film. Concentrated liquid and vapour exit at the top together.</p>
-  <div class="key-fact">Key Point: In the Climbing Film Evaporator, upward momentum of vapour bubbles drags the liquid film up the tube. Opposite to Falling Film (gravity). Longer residence time but suitable for more viscous feeds.</div>
-</div>
-</div>
-<div id="theory" class="panel">
-  <div class="theory-box"><h3>Climbing Film Evaporator - Principle</h3>
-    <p>Feed enters at the bottom of long vertical tubes. Steam outside heats the liquid which begins to boil. Vapour bubbles carry the liquid upward as a climbing film. Concentrated liquid and vapour exit at the top together.</p>
-    <div class="key-fact">Key Fact: In the Climbing Film Evaporator, upward momentum of vapour bubbles drags the liquid film up the tube. Opposite to Falling Film (gravity). Longer residence time but suitable for more viscous feeds.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 8 - Evaporation for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
-</div>
-<div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Climbing Film Evaporator?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Feed enters at the bottom of long vertical tubes. Steam outside heats the liquid which begins to boi...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. In the Climbing Film Evaporator, upward momentum of vapour bubbles drags the liquid film up the tube. Opposite to Falling Film (gravity). Longer residence time but suitable for more viscous feeds.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Climbing Film Evaporator is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) In the Climbing Film Evaporator, upward momentum of vapour bubbles drags the liquid film up the tube...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. Feed enters at the bottom of long vertical tubes. Steam outside heats the liquid which begins to boil. Vapour bubbles carry the liquid upward as a climbing film. Concentrated liquid and vapour exit at the top together.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
-</div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Climbing Film Evaporator</footer>
+<div id="theory" class="panel"><div class="theory-box"><h3>What you are seeing</h3><p>Feed liquid enters at the BOTTOM of long vertical tubes. Steam condenses on the OUTSIDE of the tubes, heating the liquid. As the liquid begins to boil, vapour bubbles form inside the tubes. The rising vapour bubbles drag the liquid upward as a thin climbing film. Concentrated liquid and vapour exit together at the TOP. Residence time: 1-5 minutes.</p><div class="key-fact">Key Point: Climbing Film Evaporator is the OPPOSITE of the Falling Film -- liquid is pushed UP by vapour momentum rather than falling by gravity. This makes it suitable for slightly more viscous feeds but gives longer residence time than Falling Film.</div></div></div>
+<div id="mcq" class="panel"><div class="mcq-card"><div class="mcq-q">Q1. In the Climbing Film Evaporator, liquid rises upward because:</div>
+<button class="opt" onclick="cho(this,false)">A) A pump pushes liquid up against gravity</button>
+<button class="opt" onclick="cho(this,true)" data-c>B) Vapour bubbles forming inside the tubes have upward momentum that drags the surrounding liquid film upward -- the two-phase mixture of vapour and liquid rises together to the top outlet</button>
+<button class="opt" onclick="cho(this,false)">C) The tube wall is tilted at an angle to assist flow</button>
+<button class="opt" onclick="cho(this,false)">D) Hot steam injected at the bottom pushes liquid up directly</button>
+<div class="explanation">Correct. Two-phase flow dynamics: as liquid boils near the tube wall, vapour bubbles nucleate and rise rapidly. The buoyancy and momentum of rising vapour bubbles entrains surrounding liquid -- lifting the liquid film upward against gravity. This mechanism gives the climbing film its characteristic upward co-current vapour-liquid flow.</div></div><div class="mcq-card"><div class="mcq-q">Q2. The Climbing Film Evaporator is LESS suitable than Falling Film for heat-sensitive products because:</div>
+<button class="opt" onclick="cho(this,false)">A) It operates at higher temperatures</button>
+<button class="opt" onclick="cho(this,true)" data-c>B) Liquid residence time in the tubes is longer (1-5 minutes vs 5-30 seconds for Falling Film) because liquid must travel up the full tube length before exiting -- greater thermal exposure</button>
+<button class="opt" onclick="cho(this,false)">C) The climbing motion causes more chemical degradation</button>
+<button class="opt" onclick="cho(this,false)">D) Steam pressure must be higher to push liquid upward</button>
+<div class="explanation">Correct. Residence time comparison: Falling Film -- liquid falls quickly by gravity, exits in 5-30 seconds -- minimal thermal exposure. Climbing Film -- liquid rises slowly driven by vapour momentum, takes 1-5 minutes to traverse the tube. For vitamins, enzymes, antibiotics -- the shorter the heat exposure the better -- Falling Film is preferred.</div></div>
+<div class="score-box" id="sc" style="display:none"><h2 id="st" style="color:#1B4F72;"></h2><button class="btn" onclick="resetMCQ()">Try Again</button></div></div>
+<footer>2025 Pharmaceutical Engineering BP304T -- Climbing Film Evaporator</footer>
 <script>
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function cho(el,ok){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(ok){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-c]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('sc').style.display='block';document.getElementById('st').textContent='Score: '+_s+'/'+t+(_s===t?' Perfect!':'');}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('sc').style.display='none';}
+const C=document.getElementById('c'),ctx=C.getContext('2d'),W=720,H=380;
+let run=true,sp=1,fr=0;
+function togglePlay(){run=!run;document.getElementById('pb').textContent=run?'Pause':'Play';if(run)loop();}
+function setSpeed(s){sp=s;}
+
+// Climbing film -- liquid enters bottom, vapour bubbles rise, liquid dragged up
+const tubes=[{x:230},{x:360},{x:490}];
+const bubbles=[];
+for(let t=0;t<tubes.length;t++) for(let i=0;i<12;i++) bubbles.push({tube:t,y:310-Math.random()*220,vy:-(0.6+Math.random()*0.8),r:2+Math.random()*3,conc:Math.random()*0.3});
+const steamPuffs=[];
+for(let i=0;i<15;i++) steamPuffs.push({x:150+Math.random()*420,y:90+Math.random()*230,alpha:0.3+Math.random()*0.3,vy:-0.2-Math.random()*0.2});
+
+function step(){
+  fr++;
+  bubbles.forEach(b=>{
+    b.y+=b.vy*sp;b.conc=Math.min(1,b.conc+0.003*sp);
+    if(b.y<70){b.y=310+Math.random()*20;b.conc=0.05;}
+    b.r=Math.min(5,b.r+0.005*sp);
+  });
+  steamPuffs.forEach(s=>{s.y+=s.vy*sp;s.alpha-=0.004*sp;if(s.alpha<0){s.y=90+Math.random()*230;s.alpha=0.3+Math.random()*0.2;}});
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Climbing Film Evaporator_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 8 - Evaporation',18,48);
+  // Steam chest
+  ctx.fillStyle='rgba(44,62,80,0.5)';ctx.fillRect(140,60,440,280);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.strokeRect(140,60,440,280);
+  // Steam puffs
+  steamPuffs.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,4,0,Math.PI*2);ctx.fillStyle=`rgba(231,76,60,${s.alpha})`;ctx.fill();});
+  // Tubes
+  tubes.forEach(tb=>{ctx.strokeStyle='#7F8C8D';ctx.lineWidth=3;ctx.strokeRect(tb.x-16,75,32,235);ctx.fillStyle='rgba(20,30,50,0.7)';ctx.fillRect(tb.x-14,77,28,231);});
+  // Bubbles rising with liquid
+  bubbles.forEach(b=>{
+    const tb=tubes[b.tube];
+    const r=Math.round(52+(200-52)*b.conc);const g=Math.round(152+(80-152)*b.conc);const bl=Math.round(219+(30-219)*b.conc);
+    ctx.beginPath();ctx.arc(tb.x+(Math.random()-0.5)*8,b.y,b.r,0,Math.PI*2);
+    ctx.strokeStyle=`rgb(${r},${g},${bl})`;ctx.lineWidth=1.5;ctx.stroke();
+  });
+  // Feed bottom
+  ctx.strokeStyle='#3498DB';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(360,340);ctx.lineTo(360,360);ctx.stroke();
+  ctx.fillStyle='#3498DB';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('FEED IN (bottom)',360,375);
+  // Product + vapour top
+  ctx.strokeStyle='rgba(46,204,113,0.8)';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(280,60);ctx.lineTo(280,35);ctx.stroke();
+  ctx.strokeStyle='rgba(255,255,255,0.4)';ctx.beginPath();ctx.moveTo(440,60);ctx.lineTo(440,35);ctx.stroke();
+  ctx.fillStyle='#27AE60';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('CONCENTRATE',280,28);
+  ctx.fillStyle='#888';ctx.fillText('VAPOUR',440,28);
+  // Steam inlet
+  ctx.fillStyle='#E74C3C';ctx.textAlign='right';ctx.fillText('STEAM IN',135,200);
+  // Info
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(8,8,215,68);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Climbing Film Evaporator',16,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Liquid rises by vapour bubble momentum',16,46);ctx.fillText('Residence time: 1-5 minutes',16,62);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function loop(){if(run)step();draw();if(run)requestAnimationFrame(loop);}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>

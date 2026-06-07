@@ -1,113 +1,243 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Bernoulli Flow Calculator - Pharmaceutical Engineering</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bernoulli Flow | Pharmaceutical Engineering</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
-header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
-.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
-.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
-.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
-canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
-.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Bernoulli Flow Calculator</h1><p>Pharmaceutical Engineering BP304T - Chapter 16 - Fluid Mechanics</p></header>
-<nav><a href="index.html">Home</a></nav>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0d1a;color:#eee;font-family:Arial,sans-serif;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+h1{font-size:1.2rem;padding:10px;color:#AED6F1;text-align:center}
+.tabs{display:flex;gap:6px;margin-bottom:8px}
+.tab{padding:7px 18px;border:none;border-radius:6px 6px 0 0;cursor:pointer;font-size:0.9rem;background:#1a1a2e;color:#aaa}
+.tab.active{background:#1F4E79;color:#fff}
+canvas{border-radius:8px;display:block}
+.panel{display:none;max-width:720px;width:100%;background:#111827;border-radius:0 8px 8px 8px;padding:16px;line-height:1.7}
+.panel.active{display:block}
+.panel h2{color:#AED6F1;margin-bottom:8px;font-size:1rem}
+.panel p,.panel li{font-size:0.88rem;color:#ccc;margin-bottom:6px}
+.panel ul{padding-left:18px}
+.mcq{margin-bottom:14px}
+.mcq p{font-size:0.88rem;color:#ddd;margin-bottom:6px}
+.mcq button{display:block;width:100%;text-align:left;margin:3px 0;padding:6px 10px;background:#1a1a2e;border:1px solid #333;border-radius:5px;color:#ccc;cursor:pointer;font-size:0.83rem}
+.mcq button:hover{background:#1F4E79}
+.right{background:#145a32!important;color:#fff!important}
+.wrong{background:#7b241c!important;color:#fff!important}
+.controls{display:flex;gap:8px;margin:8px 0}
+.controls button{padding:6px 14px;border:none;border-radius:5px;background:#1F4E79;color:#fff;cursor:pointer;font-size:0.85rem}
+footer{font-size:0.75rem;color:#555;padding:10px;text-align:center}
+</style></head><body>
+<h1>Bernoulli's Theorem — Fluid Flow Visualiser</h1>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">Animation</button>
   <button class="tab" onclick="showTab('theory',this)">Theory</button>
   <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  <div class="controls">
+    <button onclick="toggleRun()">⏯ Pause/Play</button>
+    <button onclick="resetAnim()">↺ Reset</button>
   </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>Bernoulli principle: in steady incompressible flow, total mechanical energy per unit volume is constant: P plus half-rho-v-squared plus rho-g-h equals constant. As velocity increases (narrow pipe), pressure decreases. As height increases, pressure decreases. Governs flow through pipes, orifices, venturimeters, and pumps.</p>
-  <div class="key-fact">Key Point: Continuity equation Q = A1v1 = A2v2. At a constriction: velocity increases, pressure decreases. Reynolds number Re = rho-v-D/eta determines laminar (Re less than 2100) vs turbulent (Re greater than 4000) flow. Critical for pharmaceutical pipe sizing and pump selection.</div>
-</div>
+  <canvas id="c" width="720" height="380"></canvas>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Bernoulli Flow Calculator - Principle</h3>
-    <p>Bernoulli principle: in steady incompressible flow, total mechanical energy per unit volume is constant: P plus half-rho-v-squared plus rho-g-h equals constant. As velocity increases (narrow pipe), pressure decreases. As height increases, pressure decreases. Governs flow through pipes, orifices, venturimeters, and pumps.</p>
-    <div class="key-fact">Key Fact: Continuity equation Q = A1v1 = A2v2. At a constriction: velocity increases, pressure decreases. Reynolds number Re = rho-v-D/eta determines laminar (Re less than 2100) vs turbulent (Re greater than 4000) flow. Critical for pharmaceutical pipe sizing and pump selection.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 16 - Fluid Mechanics for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+  <h2>Bernoulli's Theorem</h2>
+  <p>For steady, incompressible flow along a streamline: <strong>P + ½ρv² + ρgh = constant</strong></p>
+  <p>Where P = static pressure, ρ = fluid density, v = velocity, g = gravity, h = height.</p>
+  <h2>Key Principles</h2>
+  <ul>
+    <li>At a constriction (narrow section), velocity increases and pressure drops</li>
+    <li>Total energy per unit volume remains constant along a streamline</li>
+    <li>Continuity equation: A₁v₁ = A₂v₂ (wider pipe → slower flow)</li>
+    <li>Applications: Venturi meter, orifice meter, rotameter, spray atomisers</li>
+    <li>Assumptions: inviscid, incompressible, steady, along a streamline</li>
+  </ul>
+  <h2>Pharmaceutical Applications</h2>
+  <ul>
+    <li>Venturi mixer: low-pressure zone draws in second fluid</li>
+    <li>Spray drying: high-velocity air atomises liquid feed</li>
+    <li>Fluid bed dryer: fluidisation velocity calculated from Bernoulli principles</li>
+    <li>IV flow regulation: pressure–velocity balance in infusion sets</li>
+  </ul>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Bernoulli Flow Calculator?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Bernoulli principle: in steady incompressible flow, total mechanical energy per unit volume is const...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Continuity equation Q = A1v1 = A2v2. At a constriction: velocity increases, pressure decreases. Reynolds number Re = rho-v-D/eta determines laminar (Re less than 2100) vs turbulent (Re greater than 4000) flow. Critical for pharmaceutical pipe sizing and pump selection.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Bernoulli Flow Calculator is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Continuity equation Q = A1v1 = A2v2. At a constriction: velocity increases, pressure decreases. Reyn...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. Bernoulli principle: in steady incompressible flow, total mechanical energy per unit volume is constant: P plus half-rho-v-squared plus rho-g-h equals constant. As velocity increases (narrow pipe), pressure decreases. As height increases, pressure decreases. Governs flow through pipes, orifices, venturimeters, and pumps.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
+  <div class="mcq"><p>1. In a constricted pipe section, what happens to fluid velocity?</p>
+    <button data-c="1" onclick="cho(this,1)">a) Decreases</button>
+    <button onclick="cho(this,0)">b) Remains same</button>
+    <button onclick="cho(this,0)">c) Increases</button>
+    <button onclick="cho(this,0)">d) Becomes zero</button></div>
+  <div class="mcq"><p>2. Bernoulli's theorem assumes the fluid is:</p>
+    <button onclick="cho(this,0)">a) Viscous and compressible</button>
+    <button data-c="1" onclick="cho(this,1)">b) Inviscid and incompressible</button>
+    <button onclick="cho(this,0)">c) Viscous and incompressible</button>
+    <button onclick="cho(this,0)">d) Turbulent</button></div>
+  <div class="mcq"><p>3. Continuity equation A₁v₁ = A₂v₂ expresses conservation of:</p>
+    <button onclick="cho(this,0)">a) Energy</button>
+    <button onclick="cho(this,0)">b) Momentum</button>
+    <button data-c="1" onclick="cho(this,1)">c) Mass (flow rate)</button>
+    <button onclick="cho(this,0)">d) Pressure</button></div>
+  <div class="mcq"><p>4. Which instrument directly applies Bernoulli's theorem to measure flow?</p>
+    <button onclick="cho(this,0)">a) Manometer</button>
+    <button onclick="cho(this,0)">b) Hydrometer</button>
+    <button data-c="1" onclick="cho(this,1)">c) Venturi meter</button>
+    <button onclick="cho(this,0)">d) Viscometer</button></div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Bernoulli Flow Calculator</footer>
+
+<footer>© 2025 Pharmaceutical Engineering BP304T</footer>
+
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
-function draw(){
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Bernoulli Flow Calculator_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 16 - Fluid Mechanics',18,48);
+function showTab(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function cho(el,ok){
+  const btns=el.parentElement.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);
+  el.classList.add(ok?'right':'wrong');
+  if(!ok) btns.forEach(b=>{if(b.dataset.c)b.classList.add('right');});
+}
+
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+const W=720,H=380;
+let t=0,running=true;
+
+// Pipe geometry: wide → narrow → wide
+const pipeTop=[
+  {x:0,y:110},{x:200,y:110},{x:320,y:170},{x:400,y:170},{x:520,y:110},{x:720,y:110}
+];
+const pipeBot=[
+  {x:0,y:230},{x:200,y:230},{x:320,y:210},{x:400,y:210},{x:520,y:230},{x:720,y:230}
+];
+
+// Particles moving through pipe
+let particles=[];
+for(let i=0;i<18;i++){
+  particles.push({frac:i/18,speed:0});
+}
+
+function pipeY(frac,top){
+  // interpolate pipe top/bottom at normalised x position
+  const pts=top?pipeTop:pipeBot;
+  const px=frac*720;
+  for(let i=0;i<pts.length-1;i++){
+    if(px>=pts[i].x&&px<=pts[i+1].x){
+      const r=(px-pts[i].x)/(pts[i+1].x-pts[i].x);
+      return pts[i].y+r*(pts[i+1].y-pts[i].y);
+    }
+  }
+  return top?110:230;
+}
+
+function pipeSpeed(frac){
+  // narrow section → faster
+  const px=frac*720;
+  if(px>220&&px<500){
+    const gap=pipeBot[2].y-pipeTop[2].y; // 40
+    const normalGap=120;
+    return 2.2*(normalGap/gap);
+  }
+  return 2.2;
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+
+  // Draw pipe walls
+  ctx.beginPath();
+  pipeTop.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=3;ctx.stroke();
+
+  ctx.beginPath();
+  pipeBot.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+  ctx.stroke();
+
+  // Fill pipe interior
+  ctx.beginPath();
+  pipeTop.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+  [...pipeBot].reverse().forEach(p=>ctx.lineTo(p.x,p.y));
+  ctx.closePath();
+  ctx.fillStyle='rgba(30,60,100,0.35)';ctx.fill();
+
+  // Pressure columns
+  const pressurePoints=[
+    {frac:0.18,label:'P₁ HIGH'},
+    {frac:0.49,label:'P₂ LOW'},
+    {frac:0.78,label:'P₃ HIGH'},
+  ];
+  pressurePoints.forEach((pp,i)=>{
+    const px=pp.frac*720;
+    const ty=pipeY(pp.frac,true)-10;
+    const barH=i===1?22:60; // narrow = low pressure = short bar
+    const col=i===1?'#E74C3C':'#2ECC71';
+    ctx.fillStyle=col;
+    ctx.fillRect(px-8,ty-barH,16,barH);
+    ctx.fillStyle='#fff';ctx.font='bold 10px Arial';ctx.textAlign='center';
+    ctx.fillText(pp.label,px,ty-barH-5);
+    // pressure value
+    const val=i===1?'38 kPa':'101 kPa';
+    ctx.fillStyle='#ddd';ctx.font='9px Arial';
+    ctx.fillText(val,px,ty-barH-16);
+  });
+
+  // Velocity arrows in pipe
+  const velPoints=[0.12,0.3,0.46,0.65,0.85];
+  velPoints.forEach(frac=>{
+    const px=frac*720;
+    const midY=(pipeY(frac,true)+pipeY(frac,false))/2;
+    const spd=pipeSpeed(frac);
+    const len=spd*14;
+    ctx.beginPath();ctx.moveTo(px,midY);ctx.lineTo(px+len,midY);
+    ctx.strokeStyle=frac>0.25&&frac<0.55?'#E74C3C':'#2ECC71';
+    ctx.lineWidth=2.5;ctx.stroke();
+    // arrowhead
+    ctx.beginPath();ctx.moveTo(px+len,midY);
+    ctx.lineTo(px+len-7,midY-4);ctx.lineTo(px+len-7,midY+4);ctx.closePath();
+    ctx.fillStyle=frac>0.25&&frac<0.55?'#E74C3C':'#2ECC71';ctx.fill();
+  });
+
+  // Moving particles
+  particles.forEach(p=>{
+    const px=p.frac*720;
+    const ty=pipeY(p.frac,true),by=pipeY(p.frac,false);
+    const midY=(ty+by)/2;
+    const radius=4;
+    ctx.beginPath();ctx.arc(px,midY,radius,0,Math.PI*2);
+    ctx.fillStyle=p.frac>0.28&&p.frac<0.56?'#E74C3C':'#AED6F1';
+    ctx.fill();
+  });
+
+  // Labels
+  ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(10,10,240,70);
+  ctx.fillStyle='#fff';ctx.font='bold 12px Arial';ctx.textAlign='left';
+  ctx.fillText('Bernoulli\'s Theorem — Pipe Flow',18,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Wide pipe: low v, high P  |  Narrow: high v, low P',18,46);
+  ctx.fillText('Chapter 16 — Fluid Mechanics',18,62);
+
+  // Equation box
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(430,10,280,50);
+  ctx.fillStyle='#F9E79F';ctx.font='bold 13px Arial';ctx.textAlign='left';
+  ctx.fillText('P + ½ρv² + ρgh = constant',438,32);
+  ctx.fillStyle='#aaa';ctx.font='10px Arial';
+  ctx.fillText('Total energy conserved along streamline',438,50);
+
+  // Pipe labels
+  ctx.fillStyle='#ccc';ctx.font='11px Arial';ctx.textAlign='center';
+  ctx.fillText('WIDE SECTION',100,300);ctx.fillText('v₁ slow, P₁ high',100,315);
+  ctx.fillText('NARROW SECTION',360,300);ctx.fillText('v₂ fast, P₂ low',360,315);
+  ctx.fillText('WIDE SECTION',620,300);ctx.fillText('v₃ slow, P₃ high',620,315);
+}
+
+function step(){
+  t++;
+  particles.forEach(p=>{
+    const spd=pipeSpeed(p.frac);
+    p.frac+=spd*0.00055;
+    if(p.frac>1)p.frac-=1;
+  });
+}
+
+function loop(){if(running)step();draw();requestAnimationFrame(loop);}
+function toggleRun(){running=!running;}
+function resetAnim(){t=0;particles.forEach((p,i)=>p.frac=i/18);}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>

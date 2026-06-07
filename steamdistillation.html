@@ -1,113 +1,202 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Steam Distillation - Pharmaceutical Engineering</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Steam Distillation — PE BP304T</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
-header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
-.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
-.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
-.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
-canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
-.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Steam Distillation</h1><p>Pharmaceutical Engineering BP304T - Chapter 10 - Distillation</p></header>
-<nav><a href="index.html">Home</a></nav>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#0f0f1a;color:#eee;min-height:100vh}
+header{background:linear-gradient(135deg,#1F4E79,#2e86de);padding:14px 20px;text-align:center}
+header h1{font-size:1.3rem;font-weight:700;color:#fff}
+header p{font-size:0.8rem;color:#cde;margin-top:3px}
+.tabs{display:flex;background:#16213e}
+.tab{flex:1;padding:10px;text-align:center;cursor:pointer;font-size:0.85rem;border-bottom:3px solid transparent;transition:all 0.2s}
+.tab.active{border-bottom-color:#2e86de;color:#2e86de;background:#0f0f1a}
+.panel{display:none;padding:16px}
+.panel.active{display:block}
+canvas{display:block;margin:0 auto;border-radius:8px;background:#1a1a2e;max-width:100%}
+.info-box{background:rgba(0,0,0,0.65);color:#fff;padding:8px 12px;border-radius:6px;font-size:0.75rem;line-height:1.6;margin-top:10px;max-width:720px;margin-left:auto;margin-right:auto}
+h2{color:#2e86de;margin-bottom:8px;font-size:1rem}
+p,li{font-size:0.88rem;line-height:1.7;margin-bottom:6px}
+ul{padding-left:18px}
+.mcq{background:#16213e;border-radius:8px;padding:12px;margin-bottom:12px}
+.mcq p{font-weight:600;margin-bottom:8px}
+.opt{display:block;padding:7px 10px;margin:4px 0;background:#1a1a2e;border-radius:5px;cursor:pointer;font-size:0.84rem;border:1px solid #2a2a4a;transition:background 0.2s}
+.opt:hover{background:#22305a}
+.opt.correct{background:#1a5c1a!important;border-color:#2ecc71}
+.opt.wrong{background:#5c1a1a!important;border-color:#e74c3c}
+footer{text-align:center;font-size:0.75rem;color:#666;padding:14px;border-top:1px solid #222}
+</style></head><body>
+<header><h1>Steam Distillation</h1><p>Pharmaceutical Engineering BP304T — Separation Techniques</p></header>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
+  <div class="tab active" onclick="showTab('anim')">▶ Animation</div>
+  <div class="tab" onclick="showTab('theory')">📖 Theory</div>
+  <div class="tab" onclick="showTab('mcq')">✏ MCQs</div>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
-  </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>Steam passed through a water-immiscible compound. The compound distils at temperature below its normal boiling point because total vapour pressure (P_compound + P_water) reaches atmospheric at lower temperature. Both steam and compound condense and are collected.</p>
-  <div class="key-fact">Key Point: Steam distillation allows high-boiling heat-sensitive compounds to distil at approximately 100 degrees C instead of 200-300 degrees C. Classic pharmaceutical use: isolation of essential oils (eucalyptus, peppermint, clove) from plant material without thermal degradation.</div>
+<canvas id="c" width="720" height="380"></canvas>
+<div class="info-box">
+  <b>Steam Distillation</b> — Steam bubbled through immiscible liquid → mixture distils below 100 °C → two-layer distillate in receiver (oil layer + water layer).
 </div>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Steam Distillation - Principle</h3>
-    <p>Steam passed through a water-immiscible compound. The compound distils at temperature below its normal boiling point because total vapour pressure (P_compound + P_water) reaches atmospheric at lower temperature. Both steam and compound condense and are collected.</p>
-    <div class="key-fact">Key Fact: Steam distillation allows high-boiling heat-sensitive compounds to distil at approximately 100 degrees C instead of 200-300 degrees C. Classic pharmaceutical use: isolation of essential oils (eucalyptus, peppermint, clove) from plant material without thermal degradation.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 10 - Distillation for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+<h2>Steam Distillation</h2>
+<p>Steam distillation is used to separate heat-sensitive, water-immiscible substances (like essential oils) at temperatures below their normal boiling point.</p>
+<ul>
+<li><b>Principle:</b> Total vapour pressure = P(steam) + P(organic). Mixture boils when total P = atmospheric</li>
+<li><b>Advantage:</b> Distillation occurs well below 100 °C — prevents decomposition</li>
+<li><b>Pharmaceutical use:</b> Isolation of volatile oils (peppermint, clove, eucalyptus)</li>
+<li><b>Distillate layers:</b> Organic layer (oil) floats on water layer — separated by separating funnel</li>
+<li><b>Steam generator:</b> External boiler supplies steam directly into the distillation flask</li>
+</ul>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Steam Distillation?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Steam passed through a water-immiscible compound. The compound distils at temperature below its norm...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Steam distillation allows high-boiling heat-sensitive compounds to distil at approximately 100 degrees C instead of 200-300 degrees C. Classic pharmaceutical use: isolation of essential oils (eucalyptus, peppermint, clove) from plant material without thermal degradation.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Steam Distillation is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Steam distillation allows high-boiling heat-sensitive compounds to distil at approximately 100 degre...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. Steam passed through a water-immiscible compound. The compound distils at temperature below its normal boiling point because total vapour pressure (P_compound + P_water) reaches atmospheric at lower temperature. Both steam and compound condense and are collected.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
+<div class="mcq"><p>1. Steam distillation is used for substances that are:</p>
+<span class="opt" data-c="1" onclick="cho(this,1)">A. Heat-sensitive and water-immiscible</span>
+<span class="opt" onclick="cho(this,0)">B. Water-soluble and stable</span>
+<span class="opt" onclick="cho(this,0)">C. Miscible with water</span>
+<span class="opt" onclick="cho(this,0)">D. Having very low boiling points</span></div>
+<div class="mcq"><p>2. In steam distillation, the mixture boils when:</p>
+<span class="opt" onclick="cho(this,0)">A. Water reaches 100 °C only</span>
+<span class="opt" data-c="1" onclick="cho(this,1)">B. Total vapour pressure equals atmospheric pressure</span>
+<span class="opt" onclick="cho(this,0)">C. Organic compound reaches its boiling point</span>
+<span class="opt" onclick="cho(this,0)">D. Steam pressure exceeds 2 atm</span></div>
+<div class="mcq"><p>3. The distillate in steam distillation consists of:</p>
+<span class="opt" onclick="cho(this,0)">A. Only water</span>
+<span class="opt" onclick="cho(this,0)">B. Only organic oil</span>
+<span class="opt" data-c="1" onclick="cho(this,1)">C. Two immiscible layers — oil and water</span>
+<span class="opt" onclick="cho(this,0)">D. A clear homogeneous solution</span></div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Steam Distillation</footer>
+<footer>© 2025 Pharmaceutical Engineering BP304T</footer>
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function showTab(id){document.querySelectorAll('.panel,.tab').forEach(e=>e.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.tab').forEach((t,i)=>{ if(['anim','theory','mcq'][i]===id)t.classList.add('active')});}
+function cho(el,ok){const p=el.parentElement;if(p.dataset.answered)return;p.dataset.answered=1;el.classList.add(ok?'correct':'wrong');if(!ok){p.querySelector('[data-c="1"]').classList.add('correct');}}
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+const W=720,H=380;let t=0;
+
+// Steam generator (left)
+const genX=80,genY=260,genW=80,genH=100;
+// Distillation flask (middle)
+const flaskX=280,flaskY=260,flaskR=70;
+const neckX=280,neckY=195,neckW=26,neckH=50;
+// Condenser
+const condX1=360,condY1=130,condX2=560,condY2=200;
+// Receiver
+const recX=580,recY=210,recW=70,recH=90;
+
+// Steam bubbles rising in flask
+const steamBubbles=[];
+for(let i=0;i<10;i++) steamBubbles.push({x:flaskX-50+Math.random()*100,y:flaskY+40,vy:-(0.6+Math.random()*0.5),life:Math.random()*80,maxLife:60+Math.random()*40,r:3+Math.random()*3});
+
+// Drops in condenser
+const cdrops=[];
+for(let i=0;i<10;i++) cdrops.push({t:Math.random(),speed:0.004+Math.random()*0.002});
+
+// Receiver oil/water levels
+let waterLevel=0,oilLevel=0;
+
+function drawGenerator(){
+  ctx.fillStyle='#2a3a5a';ctx.fillRect(genX,genY-genH,genW,genH);
+  ctx.strokeStyle='#888';ctx.lineWidth=2;ctx.strokeRect(genX,genY-genH,genW,genH);
+  // Water inside
+  ctx.fillStyle='rgba(40,100,200,0.5)';ctx.fillRect(genX+2,genY-40,genW-4,36);
+  // Steam pipe going right
+  ctx.strokeStyle='#bbb';ctx.lineWidth=8;
+  ctx.beginPath();ctx.moveTo(genX+genW,genY-genH+30);ctx.lineTo(flaskX-flaskR,genY-genH+30);ctx.lineTo(flaskX-flaskR,flaskY+10);ctx.stroke();
+  // Heat flames
+  for(let i=0;i<4;i++){
+    const hx=genX+10+i*20;
+    ctx.strokeStyle=`rgba(255,${80+i*20},0,${0.6+0.2*Math.sin(t*0.1+i)})`;
+    ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(hx,genY+5);ctx.lineTo(hx,genY+18);ctx.stroke();
+  }
+  ctx.fillStyle='#aaa';ctx.font='10px sans-serif';ctx.fillText('Steam',genX+10,genY-genH-5);
+  ctx.fillText('Generator',genX+2,genY-genH+12);
+  // Steam puffs from generator
+  const sp=(t*0.025)%1;
+  const sx=genX+genW+(flaskX-flaskR-genX-genW)*sp;
+  const sy=genY-genH+30;
+  ctx.beginPath();ctx.arc(sx,sy,5,0,Math.PI*2);
+  ctx.fillStyle=`rgba(200,220,255,${0.7-sp*0.5})`;ctx.fill();
+}
+
+function drawFlask(){
+  // Liquid in flask (two layers visible)
+  ctx.save();ctx.beginPath();ctx.arc(flaskX,flaskY,flaskR,0,Math.PI*2);ctx.clip();
+  // Water layer
+  ctx.fillStyle='rgba(40,120,200,0.5)';ctx.fillRect(flaskX-flaskR,flaskY-20,flaskR*2,25);
+  // Oil layer (lighter, floats on top)
+  ctx.fillStyle='rgba(180,160,40,0.5)';ctx.fillRect(flaskX-flaskR,flaskY-40,flaskR*2,22);
+  ctx.restore();
+  ctx.beginPath();ctx.arc(flaskX,flaskY,flaskR,0,Math.PI*2);ctx.strokeStyle='#aaa';ctx.lineWidth=2;ctx.stroke();
+  // Neck
+  ctx.fillStyle='rgba(100,180,220,0.1)';ctx.fillRect(neckX-neckW/2,neckY-neckH,neckW,neckH);
+  ctx.strokeStyle='#aaa';ctx.strokeRect(neckX-neckW/2,neckY-neckH,neckW,neckH);
+  ctx.fillStyle='#aaa';ctx.font='10px sans-serif';ctx.fillText('Distillation',flaskX+75,flaskY-20);ctx.fillText('Flask',flaskX+80,flaskY-8);
+}
+
+function drawSteamBubbles(){
+  steamBubbles.forEach(b=>{
+    b.life++;
+    if(b.life>b.maxLife){b.life=0;b.x=flaskX-50+Math.random()*100;b.y=flaskY+40;b.vy=-(0.6+Math.random()*0.5);}
+    b.y+=b.vy;
+    const alpha=(1-b.life/b.maxLife)*0.7;
+    ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+    ctx.strokeStyle=`rgba(180,220,255,${alpha})`;ctx.lineWidth=1.2;ctx.stroke();
+  });
+}
+
+function drawCondenser(){
+  ctx.strokeStyle='#888';ctx.lineWidth=14;
+  ctx.beginPath();ctx.moveTo(condX1,condY1);ctx.lineTo(condX2,condY2);ctx.stroke();
+  ctx.strokeStyle='rgba(50,100,200,0.35)';ctx.lineWidth=12;
+  ctx.beginPath();ctx.moveTo(condX1,condY1);ctx.lineTo(condX2,condY2);ctx.stroke();
+  ctx.strokeStyle='rgba(180,220,255,0.5)';ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(condX1,condY1);ctx.lineTo(condX2,condY2);ctx.stroke();
+}
+
+function drawDropsAndReceiver(){
+  cdrops.forEach(d=>{
+    d.t+=d.speed;if(d.t>=1){d.t=0;waterLevel=Math.min(waterLevel+0.8,recH-oilLevel-15);oilLevel=Math.min(oilLevel+0.3,recH-20);}
+    const px=condX1+(condX2-condX1)*d.t;
+    const py=condY1+(condY2-condY1)*d.t;
+    ctx.beginPath();ctx.arc(px,py,3,0,Math.PI*2);
+    const isOil=d.speed<0.005;
+    ctx.fillStyle=isOil?`rgba(180,160,40,0.9)`:`rgba(80,160,230,0.9)`;ctx.fill();
+  });
+  // Receiver
+  ctx.strokeStyle='#aaa';ctx.lineWidth=2;ctx.strokeRect(recX,recY,recW,recH);
+  // Water layer bottom
+  if(waterLevel>0){ctx.fillStyle='rgba(40,120,200,0.6)';ctx.fillRect(recX+2,recY+recH-waterLevel,recW-4,waterLevel);}
+  // Oil layer on top of water
+  if(oilLevel>0){ctx.fillStyle='rgba(180,160,40,0.6)';ctx.fillRect(recX+2,recY+recH-waterLevel-oilLevel,recW-4,oilLevel);}
+  // Labels
+  if(oilLevel>10){ctx.fillStyle='#ffe';ctx.font='9px sans-serif';ctx.fillText('Oil',recX+recW/2-8,recY+recH-waterLevel-oilLevel+12);}
+  if(waterLevel>10){ctx.fillStyle='#cef';ctx.font='9px sans-serif';ctx.fillText('Water',recX+recW/2-14,recY+recH-waterLevel/2+4);}
+  ctx.fillStyle='#aaa';ctx.font='10px sans-serif';ctx.fillText('Receiver',recX,recY+recH+16);
+}
+
+function drawVapourPath(){
+  const phase=(t*0.02)%1;
+  for(let i=0;i<5;i++){
+    const p=(phase+i*0.2)%1;
+    const px=neckX+(condX1-neckX)*p;
+    const py=(neckY-neckH)+(condY1-(neckY-neckH))*p;
+    ctx.beginPath();ctx.arc(px,py,4,0,Math.PI*2);
+    ctx.fillStyle=`rgba(180,220,255,${0.7-p*0.4})`;ctx.fill();
+  }
+}
+
+function drawLabels(){
+  ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(8,8,210,80);
+  ctx.fillStyle='#fff';ctx.font='bold 12px sans-serif';ctx.fillText('Steam Distillation',16,26);
+  ctx.font='11px sans-serif';ctx.fillStyle='#cde';
+  ctx.fillText('① Steam enters flask, heats mixture',16,42);
+  ctx.fillText('② Oil+steam vapours enter condenser',16,56);
+  ctx.fillText('③ Two layers form in receiver',16,70);
+  ctx.fillText('   (oil floats on water)',16,84);
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Steam Distillation_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 10 - Distillation',18,48);
+  drawGenerator();drawFlask();drawSteamBubbles();drawCondenser();drawDropsAndReceiver();drawVapourPath();drawLabels();
+  t++;requestAnimationFrame(draw);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
-loop();
-</script>
-</body>
-</html>
+draw();
+</script></body></html>

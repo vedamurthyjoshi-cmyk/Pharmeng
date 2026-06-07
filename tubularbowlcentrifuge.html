@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Tubular Bowl Centrifuge — Pharmaceutical Engineering</title>
+<title>Tubular Bowl Centrifuge -- Pharmaceutical Engineering</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;}
 .tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
 .panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
 .anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
@@ -17,100 +17,148 @@ canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
 .key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
 .mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:10px;padding:10px;background:#FEF9E7;border-radius:6px;font-size:0.9em;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:20px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:16px;color:#888;font-size:0.8em;background:white;margin-top:16px;}
 </style>
 </head>
 <body>
-<header><h1>🌀 Tubular Bowl Centrifuge</h1><p>Pharmaceutical Engineering BP304T · Chapter 7 — Centrifugation</p></header>
-<nav><a href="index.html">&#127968; Home</a></nav>
+<header><h1>Tubular Bowl Centrifuge</h1><p>Pharmaceutical Engineering BP304T -- Chapter 7 -- Centrifugation</p></header>
+<nav><a href="index.html">Home</a></nav>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">&#127916; Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">&#128214; Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">&#9989; MCQs</button>
+  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
 <div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">&#9208; Pause</button>
+  <canvas id="c" width="720" height="380"></canvas>
+  <div style="margin-top:12px;">
+    <button class="btn" id="pb" onclick="togglePlay()">Pause</button>
     <button class="btn" onclick="setSpeed(0.5)">Slow</button>
     <button class="btn" onclick="setSpeed(1)">Normal</button>
     <button class="btn" onclick="setSpeed(2)">Fast</button>
   </div>
 </div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>The cylindrical bowl rotates at high speed (15,000–50,000 rpm). Feed enters from the bottom. Centrifugal force (up to 62,000×g) throws dense particles or heavy liquid phase to the bowl wall. Light phase overflows at top. Solids collected manually when bowl is stopped.</p>
-  <div class="key-fact">The Tubular Bowl Centrifuge generates centrifugal force of 13,000–62,000×g — far greater than any other pharmaceutical centrifuge. This extremely high force separates very fine particles (< 1 µm) and clarifies solutions that cannot be filtered.</div>
-</div>
+<div class="theory-box"><h3>What you are seeing</h3><p>The long narrow bowl (bowl diameter ~100mm, length ~750mm) rotates at 15,000-50,000 rpm. Feed enters at the BOTTOM through a stationary nozzle. Centrifugal force (up to 62,000xg) throws dense particles and heavy liquid phase to the bowl WALL. Light phase (clarified liquid) rises and overflows at the TOP. Solids accumulate on the wall and must be removed manually by stopping the bowl.</p><div class="key-fact">Key Point: The Tubular Bowl generates the highest centrifugal force of any pharmaceutical centrifuge -- up to 62,000xg. This separates particles smaller than 1 micrometre that cannot be filtered by any conventional filter.</div></div>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Tubular Bowl Centrifuge — Full Theory</h3>
-    <p>Refer to your textbook Chapter 7 — Centrifugation for complete theory, construction details, and pharmaceutical applications. This page focuses on the interactive animation and MCQ practice.</p>
-    <p style="margin-top:12px;">Key principle: The cylindrical bowl rotates at high speed (15,000–50,000 rpm). Feed enters from the bottom. Centrifugal force (up to 62,000×g) throws dense particles or heavy liquid phase to the bowl wall. Light phase overflows at top. Solids collected manually when bowl is stopped.</p>
-    <div class="key-fact">The Tubular Bowl Centrifuge generates centrifugal force of 13,000–62,000×g — far greater than any other pharmaceutical centrifuge. This extremely high force separates very fine particles (< 1 µm) and clarifies solutions that cannot be filtered.</div>
-  </div>
+<div class="theory-box"><h3>Tubular Bowl Centrifuge -- Construction and Working</h3><ul><li><strong>Bowl:</strong> Narrow cylindrical tube (D=100mm, L=750mm), high-tensile steel or SS 316L</li><li><strong>Speed:</strong> 15,000-50,000 rpm generating 13,000-62,000xg</li><li><strong>Feed:</strong> Enters at bottom via stationary nozzle; liquid rises through bowl</li><li><strong>Separation:</strong> Dense phase (heavy liquid or solids) accumulates at wall; light phase overflows at top</li><li><strong>Solids discharge:</strong> Manual -- bowl must be stopped, disassembled, scraped -- batch operation</li><li><strong>Pharmaceutical use:</strong> Clarification of blood plasma, enzyme solutions, viral vaccines, colloidal preparations</li></ul><div class="key-fact">Key Fact: The Tubular Bowl has NO continuous solids discharge -- it must be stopped and manually cleaned when solid capacity is reached. This limits throughput for heavily-loaded feeds. Use Disc Centrifuge for continuous operation.</div></div>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. The Tubular Bowl Centrifuge is used for pharmaceutical clarification rather than batch filtration because:</div>
-    <button class="opt" onclick="choose(this,false)">A) It uses higher temperature than Swenson-Walker</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) It generates 13,000–62,000×g centrifugal force — separating particles < 1 µm that pass through most filters; used for clarifying blood plasma, enzyme solutions, viral vaccines, and colloidal products where filtration is inadequate</button>
-    <button class="opt" onclick="choose(this,false)">C) It adds seed crystals automatically</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates under vacuum conditions</button>
-    <div class="explanation">&#9989; Separation by centrifugal force: F_centrifugal = mω²r where ω = angular velocity, r = radius. At 50,000 rpm with 50 mm radius: g-force = (2π×50000/60)²×0.025/9.81 = 34,600×g. This force is 34,600 times stronger than gravity — can sediment particles that would take years to settle by gravity. Applications: virus concentration for vaccines; plasma protein fractionation; bacteria harvesting from fermentation broth.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. Solids recovery from a Tubular Bowl Centrifuge requires:</div>
-    <button class="opt" onclick="choose(this,false)">A) It operates continuously without any operator intervention</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Stopping the bowl completely and manually scraping the solids from the wall — the Tubular Bowl has no continuous solids discharge mechanism; this is its main limitation for pharmaceutical solids processing</button>
-    <button class="opt" onclick="choose(this,false)">C) It requires higher temperatures than alternatives</button>
-    <button class="opt" onclick="choose(this,false)">D) It produces smaller particle size than other methods</button>
-    <div class="explanation">&#9989; Manual discharge limitation: solids accumulate on bowl wall during operation → bowl must be decelerated → stopped → opened → scraped manually → reassembled → re-accelerated. This batch cycle means: low throughput for heavily-loaded feeds; labour intensive; contamination risk during bowl opening. Alternative for continuous solids discharge: Disc Centrifuge (self-cleaning nozzle type) or Basket Centrifuge.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">&#128260; Try Again</button>
-  </div>
+<div class="mcq-card"><div class="mcq-q">Q1. The Tubular Bowl Centrifuge is used for pharmaceutical clarification because:</div>
+<button class="opt" onclick="cho(this,false)">A) It has the largest bowl volume of all centrifuges</button>
+<button class="opt" onclick="cho(this,true)" data-c>B) It generates 13,000-62,000xg centrifugal force -- separating particles less than 1 micrometre that pass through most filters -- essential for clarifying blood plasma, enzyme solutions, and viral vaccines</button>
+<button class="opt" onclick="cho(this,false)">C) It operates at the slowest speed for gentle product handling</button>
+<button class="opt" onclick="cho(this,false)">D) It has continuous automatic solids discharge</button>
+<div class="explanation">Correct. At 50,000rpm with 50mm radius: g-force = 34,600xg. This force sediments virus particles (50-200nm), colloidal particles, and fine precipitates that no filter can retain. Applications: plasma protein fractionation; virus concentration for vaccines; bacteria removal from fermentation broth.</div></div><div class="mcq-card"><div class="mcq-q">Q2. Solids discharge from the Tubular Bowl Centrifuge requires:</div>
+<button class="opt" onclick="cho(this,false)">A) Opening a valve at the bottom of the bowl during operation</button>
+<button class="opt" onclick="cho(this,true)" data-c>B) Stopping the bowl completely, disassembling it, and manually scraping accumulated solids from the bowl wall -- the major limitation of this centrifuge type</button>
+<button class="opt" onclick="cho(this,false)">C) Automatically ejecting solids through peripheral nozzles</button>
+<button class="opt" onclick="cho(this,false)">D) Reversing the bowl rotation direction to dislodge solids</button>
+<div class="explanation">Correct. Manual discharge makes the Tubular Bowl a batch centrifuge despite continuous liquid flow. When bowl fills with solids (typically every 30-120 minutes), the entire machine must stop, be opened in a clean area, scraped, cleaned, reassembled, and restarted -- labour intensive and a contamination risk.</div></div>
+<div class="score-box" id="sc" style="display:none"><h2 id="st" style="color:#1B4F72;"></h2><button class="btn" onclick="resetMCQ()">Try Again</button></div>
 </div>
-<footer>© 2025 Pharmaceutical Engineering BP304T · Tubular Bowl Centrifuge</footer>
+<footer>2025 Pharmaceutical Engineering BP304T -- Tubular Bowl Centrifuge</footer>
 <script>
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' — Perfect!':' — Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'&#9208; Pause':'&#9654; Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-// Generic rotating/flowing animation
-const particles=[];
-for(let i=0;i<50;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*2,vy:(Math.random()-0.5)*2,r:2+Math.random()*4,col:'hsl('+(180+Math.random()*60)+',70%,60%)'});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function cho(el,ok){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(ok){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-c]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('sc').style.display='block';document.getElementById('st').textContent='Score: '+_s+'/'+t+(_s===t?' -- Perfect!':'');}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('sc').style.display='none';}
+const C=document.getElementById('c'),ctx=C.getContext('2d'),W=720,H=380;
+let run=true,sp=1,fr=0;
+function togglePlay(){run=!run;document.getElementById('pb').textContent=run?'Pause':'Play';if(run)loop();}
+function setSpeed(s){sp=s;}
+
+// Tubular bowl centrifuge animation
+// Tall narrow bowl rotating, feed entering bottom, clarified liquid exiting top
+// Particles accumulating on wall
+
+let bowlAngle=0;
+const feedDrops=[];
+for(let i=0;i<20;i++) feedDrops.push({y:310+Math.random()*40,phase:Math.random()*Math.PI*2,r:i%3===0?4:2.5,isHeavy:Math.random()<0.3});
+const wallSolids=[];
+for(let i=0;i<30;i++) wallSolids.push({y:120+Math.random()*200,thickness:2+Math.random()*3,side:Math.random()<0.5?-1:1});
+
+function step(){
+  fr++;bowlAngle+=0.12*sp;
+  feedDrops.forEach(d=>{
+    d.y-=0.8*sp;
+    d.phase+=0.05*sp;
+    if(d.isHeavy && d.y<300) d.phase=Math.min(d.phase,1.8); // move to wall
+    if(d.y<80){d.y=320+Math.random()*30;d.phase=Math.random()*0.5;}
+  });
+  // Build wall solids over time
+  if(fr%40===0&&wallSolids.length<60) wallSolids.push({y:120+Math.random()*200,thickness:1+Math.random()*2,side:Math.random()<0.5?-1:1});
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  // Draw equipment outline
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;
-  ctx.strokeRect(100,80,520,220);
-  ctx.fillStyle='rgba(74,144,217,0.08)';ctx.fillRect(100,80,520,220);
-  // Particles
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.7;ctx.fill();ctx.globalAlpha=1;});
-  // Rotation effect
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.02);
-  ctx.strokeStyle='rgba(174,214,241,0.3)';ctx.lineWidth=2;
-  for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(i*Math.PI/2)*100,Math.sin(i*Math.PI/2)*100);ctx.stroke();}
+
+  // Bowl outline (tall narrow rectangle)
+  const BX=310,BY=70,BW=100,BH=290;
+  ctx.fillStyle='rgba(44,62,80,0.6)';ctx.fillRect(BX,BY,BW,BH);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=5;ctx.strokeRect(BX,BY,BW,BH);
+
+  // Rotation indicator marks on bowl wall
+  ctx.save();ctx.translate(BX+BW/2,BY+BH/2);ctx.rotate(bowlAngle);
+  ctx.strokeStyle='rgba(127,140,141,0.4)';ctx.lineWidth=1;
+  for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(0,-BH/2+10);ctx.lineTo(0,-BH/2+25);ctx.rotate(Math.PI/2);ctx.stroke();}
   ctx.restore();
-  // Labels
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,200,55);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🌀 Tubular Bowl Centrifuge',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 7 — Centrifugation',18,48);
-  ctx.textAlign='center';ctx.fillStyle='rgba(255,255,255,0.6)';ctx.font='11px Arial';ctx.fillText('The cylindrical bowl rotates at high speed (15,000–50,000 rp...',W/2,H-15);
+
+  // Solids accumulation on wall (brown/orange layer)
+  wallSolids.forEach(s=>{
+    const wx=s.side>0 ? BX+BW-s.thickness : BX;
+    ctx.fillStyle='rgba(180,120,40,0.55)';
+    ctx.fillRect(wx,s.y,s.thickness,4);
+  });
+
+  // Feed particles rising and separating
+  feedDrops.forEach(d=>{
+    const maxR=46; // max radius from centre
+    const r=d.isHeavy ? Math.min(d.phase*25,maxR) : Math.min(d.phase*8,15);
+    const side=d.phase>0.8?1:-1;
+    const x=BX+BW/2+(d.isHeavy?side*r:Math.sin(d.phase*3)*r*0.4);
+    ctx.beginPath();ctx.arc(x,d.y,d.r,0,Math.PI*2);
+    ctx.fillStyle=d.isHeavy?'rgba(180,100,30,0.8)':'rgba(52,152,219,0.65)';
+    ctx.fill();
+  });
+
+  // Feed nozzle at bottom
+  ctx.fillStyle='#7F8C8D';ctx.fillRect(BX+35,BY+BH,30,25);
+  ctx.strokeStyle='#5D6D7E';ctx.lineWidth=2;ctx.strokeRect(BX+35,BY+BH,30,25);
+  ctx.fillStyle='#E74C3C';ctx.font='9px Arial';ctx.textAlign='center';
+  ctx.fillText('FEED IN',BX+BW/2,BY+BH+38);
+  ctx.strokeStyle='rgba(231,76,60,0.7)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(BX+BW/2,BY+BH+22);ctx.lineTo(BX+BW/2,BY+BH+5);ctx.stroke();
+
+  // Light phase overflow at top
+  ctx.strokeStyle='rgba(52,152,219,0.8)';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(BX-5,BY+20);ctx.lineTo(BX-35,BY+20);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(BX+BW+5,BY+20);ctx.lineTo(BX+BW+35,BY+20);ctx.stroke();
+  ctx.fillStyle='#3498DB';ctx.font='9px Arial';ctx.textAlign='left';
+  ctx.fillText('CLARIFIED LIQUID',BX+BW+10,BY+15);
+
+  // Speed label
+  ctx.fillStyle='rgba(231,76,60,0.9)';ctx.font='10px Arial';ctx.textAlign='center';
+  ctx.fillText('15,000-50,000 RPM',BX+BW/2,BY-10);
+  ctx.fillText('Up to 62,000 x g',BX+BW/2,BY-22);
+
+  // Wall solids label
+  ctx.fillStyle='rgba(180,120,40,0.9)';ctx.font='9px Arial';
+  ctx.fillText('Solids on wall',BX+BW+40,BY+BH/2);
+  ctx.fillText('(manual removal)',BX+BW+40,BY+BH/2+12);
+
+  // Info box
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(8,8,215,68);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Tubular Bowl Centrifuge',16,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Force: 13,000-62,000 x g',16,46);
+  ctx.fillText('Orange = solids | Blue = clarified liquid',16,62);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function loop(){if(run)step();draw();if(run)requestAnimationFrame(loop);}
 loop();
 </script>
 </body>

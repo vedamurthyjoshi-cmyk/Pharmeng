@@ -1,113 +1,147 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Pitot Tube - Pharmaceutical Engineering</title>
-<style>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pitot Tube</title><style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;}
 .tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
 .panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
 .anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
 canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Pitot Tube</h1><p>Pharmaceutical Engineering BP304T - Chapter 17 - Flow Measurement</p></header>
+.tb{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.tb h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.tb p,.tb li{line-height:1.8;font-size:0.95em;color:#333;}.tb ul{padding-left:22px;margin-top:8px;}
+.kf{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px;margin:12px 0;font-size:0.93em;}
+.mc{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mq{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.exp{display:none;margin-top:10px;padding:10px;background:#FEF9E7;border-radius:6px;font-size:0.9em;border-left:3px solid #F39C12;}
+.sb{text-align:center;padding:20px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:16px;color:#888;font-size:0.8em;background:white;margin-top:16px;}
+</style></head><body>
+<header><h1>Pitot Tube</h1><p>Pharmaceutical Engineering BP304T -- Chapter 17 -- Flow Measurement</p></header>
 <nav><a href="index.html">Home</a></nav>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
+  <button class="tab active" onclick="sT('anim',this)">Animation</button>
+  <button class="tab" onclick="sT('theory',this)">Theory</button>
+  <button class="tab" onclick="sT('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
-  </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>A thin tube with one opening facing the flow direction (stagnation point - measures total pressure) and another opening perpendicular to flow (measures static pressure only). The difference equals the dynamic pressure, giving local fluid velocity. Used for point velocity measurement and velocity profiles.</p>
-  <div class="key-fact">Key Point: Pitot tube equation: v = square root of (2 times deltaP divided by rho) where deltaP = total pressure minus static pressure = dynamic pressure = half-rho-v-squared. Pharmaceutical applications: measuring airflow velocity in HVAC ducts and cleanrooms (ensures adequate air changes per hour); mapping velocity profiles in pipes during validation.</div>
-</div>
+<div class="anim-box"><canvas id="c" width="720" height="380"></canvas>
+<div style="margin-top:12px;">
+<button class="btn" id="pb" onclick="tP()">Pause</button>
+<button class="btn" onclick="sS(0.5)">Slow</button>
+<button class="btn" onclick="sS(1)">Normal</button>
+<button class="btn" onclick="sS(2)">Fast</button>
+</div></div>
+<div class="tb"><h3>What you are seeing</h3><p>A bent tube points UPSTREAM into the flow (stagnation point). The flow is brought to rest at the tube tip -- all kinetic energy converts to pressure (total pressure P_total = P_static + 0.5*rho*v^2). A second port at the side (perpendicular to flow) measures only static pressure P_static. The difference = dynamic pressure = 0.5*rho*v^2. From this, local velocity v = sqrt(2*deltaP/rho).</p><div class="kf">Key Point: The Pitot tube measures LOCAL VELOCITY at one point in the pipe -- not average flow. For average flow, must traverse (move tube across the pipe cross-section) and average multiple readings. Used extensively in pharmaceutical HVAC for measuring airflow velocity in ducts and cleanrooms.</div></div>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Pitot Tube - Principle</h3>
-    <p>A thin tube with one opening facing the flow direction (stagnation point - measures total pressure) and another opening perpendicular to flow (measures static pressure only). The difference equals the dynamic pressure, giving local fluid velocity. Used for point velocity measurement and velocity profiles.</p>
-    <div class="key-fact">Key Fact: Pitot tube equation: v = square root of (2 times deltaP divided by rho) where deltaP = total pressure minus static pressure = dynamic pressure = half-rho-v-squared. Pharmaceutical applications: measuring airflow velocity in HVAC ducts and cleanrooms (ensures adequate air changes per hour); mapping velocity profiles in pipes during validation.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 17 - Flow Measurement for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+<div class="tb"><h3>Pitot Tube -- Theory</h3><ul><li><strong>Stagnation point:</strong> Tip of forward-facing tube; all kinetic energy converts to pressure; P_total measured</li><li><strong>Static port:</strong> Perpendicular holes in the outer tube; measures undisturbed static pressure P_static</li><li><strong>Differential pressure:</strong> deltaP = P_total - P_static = 0.5*rho*v^2; gives local velocity</li><li><strong>Traversing:</strong> Move Pitot across pipe at multiple radial positions; average gives mean velocity; mean velocity x area = volumetric flow Q</li><li><strong>Pharmaceutical use:</strong> Measuring unidirectional airflow velocity in Grade A laminar flow hoods (must be 0.45 +/- 0.02 m/s); HVAC duct velocity measurement; air change rate verification in cleanrooms</li></ul><div class="kf">Key Point: The Pitot tube measures LOCAL VELOCITY at one point in the pipe -- not average flow. For average flow, must traverse (move tube across the pipe cross-section) and average multiple readings. Used extensively in pharmaceutical HVAC for measuring airflow velocity in ducts and cleanrooms.</div></div>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Pitot Tube?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) A thin tube with one opening facing the flow direction (stagnation point - measures total pressure) ...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Pitot tube equation: v = square root of (2 times deltaP divided by rho) where deltaP = total pressure minus static pressure = dynamic pressure = half-rho-v-squared. Pharmaceutical applications: measuring airflow velocity in HVAC ducts and cleanrooms (ensures adequate air changes per hour); mapping velocity profiles in pipes during validation.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Pitot Tube is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Pitot tube equation: v = square root of (2 times deltaP divided by rho) where deltaP = total pressur...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. A thin tube with one opening facing the flow direction (stagnation point - measures total pressure) and another opening perpendicular to flow (measures static pressure only). The difference equals the dynamic pressure, giving local fluid velocity. Used for point velocity measurement and velocity profiles.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
-</div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Pitot Tube</footer>
+<div class="mc"><div class="mq">Q1. The Pitot tube measures velocity by bringing the flow to a complete stop at the tube tip because:</div>
+<button class="opt" onclick="ch(this,false)">A) Incorrect option</button>
+<button class="opt" onclick="ch(this,true)" data-c>B) At the stagnation point, all fluid kinetic energy (0.5*rho*v^2) converts to pressure energy (Bernoulli) -- the pressure at the stagnation point (total pressure) is higher than the undisturbed static pressure by exactly 0.5*rho*v^2 -- measuring this pressure difference gives velocity directly</button>
+<button class="opt" onclick="ch(this,false)">C) Another incorrect option</button>
+<button class="opt" onclick="ch(this,false)">D) Yet another incorrect option</button>
+<div class="exp">Correct. Bernoulli at stagnation point: P_static + 0.5*rho*v^2 = P_total + 0 (v=0 at stagnation). Therefore P_total - P_static = 0.5*rho*v^2. Rearranging: v = sqrt(2*deltaP/rho). For air at 20C (rho=1.2 kg/m^3): v = sqrt(2*deltaP/1.2). If deltaP = 12 Pa: v = sqrt(20) = 4.47 m/s -- typical clean room supply air velocity.</div></div>
+<div class="mc"><div class="mq">Q2. In pharmaceutical Grade A cleanroom validation, the Pitot tube is used to verify:</div>
+<button class="opt" onclick="ch(this,false)">A) Incorrect option</button>
+<button class="opt" onclick="ch(this,true)" data-c>B) Unidirectional airflow velocity of 0.45 +/- 0.02 m/s (at the work surface) -- this velocity ensures adequate aerosol particle removal -- too low means particles may not be swept away; too high causes turbulence and eddies that can deposit particles on open product -- precise Pitot measurement at multiple points is the IP/USP required verification method</button>
+<button class="opt" onclick="ch(this,false)">C) Another incorrect option</button>
+<button class="opt" onclick="ch(this,false)">D) Yet another incorrect option</button>
+<div class="exp">Correct. ISO 14644-3 cleanroom testing: Pitot tube traversal at the HEPA filter face and at the critical zone (open product level). Acceptance criteria: 0.45 m/s mean velocity; coefficient of variation less than 20% (ensures uniform flow, no dead spots). Non-uniform Pitot readings indicate HEPA filter damage, blockage, or plenum design issue. Pitot traversal at 4-9 points across the filter face gives the spatial velocity profile.</div></div>
+<div class="sb" id="sc" style="display:none"><h2 id="st" style="color:#1B4F72;"></h2><button class="btn" onclick="rM()">Try Again</button></div></div>
+<footer>2025 Pharmaceutical Engineering BP304T -- Pitot Tube</footer>
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+function sT(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function ch(el,ok){const card=el.closest('.mc');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(ok){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-c]').classList.add('correct');}card.querySelector('.exp').style.display='block';_a++;const t=document.querySelectorAll('.mc').length;if(_a===t){document.getElementById('sc').style.display='block';document.getElementById('st').textContent='Score: '+_s+'/'+t+(_s===t?' Perfect!':'');}}
+function rM(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.exp').forEach(e=>e.style.display='none');document.getElementById('sc').style.display='none';}
+const C=document.getElementById('c'),ctx=C.getContext('2d'),W=720,H=380;
+let run=true,sp=1,fr=0;
+function tP(){run=!run;document.getElementById('pb').textContent=run?'Pause':'Play';if(run)loop();}
+function sS(s){sp=s;}
+
+// Pitot tube -- tube in pipe pointing upstream, stagnation point, differential pressure
+const flowParts=[];
+for(let i=0;i<40;i++) flowParts.forEach?flowParts.push({y:120+Math.random()*160,x:80+Math.random()*200,vx:1.2+Math.random()*0.8}):null;
+for(let i=0;i<40;i++) flowParts.push({y:120+Math.random()*160,x:80+Math.random()*200,vx:1.2+Math.random()*0.8,slow:false});
+let tick=0;
+
+function step(){
+  tick+=sp;fr++;
+  flowParts.forEach(p=>{
+    // Slow down near stagnation point (Pitot tip at x=380, y=200)
+    const dist=Math.sqrt((p.x-385)**2+(p.y-200)**2);
+    const slowFactor=dist<30?Math.max(0.05,dist/30):1;
+    p.x+=p.vx*slowFactor*sp;
+    // Streamlines diverge around stagnation point
+    if(dist<60&&dist>5){
+      const dy=(p.y-200)/dist;
+      p.y+=dy*0.3*sp*(1-dist/60);
+    }
+    if(p.x>640){p.x=85;p.y=120+Math.random()*160;}
+  });
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Pitot Tube_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 17 - Flow Measurement',18,48);
+
+  // Pipe
+  ctx.fillStyle='rgba(26,50,90,0.6)';ctx.fillRect(70,115,560,170);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=3;ctx.strokeRect(70,115,560,170);
+
+  // Flow arrows (upstream)
+  ctx.strokeStyle='rgba(52,152,219,0.25)';ctx.lineWidth=1;
+  for(let y=130;y<=270;y+=20){ctx.beginPath();ctx.moveTo(75,y);ctx.lineTo(620,y);ctx.stroke();}
+
+  // Flow particles
+  flowParts.forEach(p=>{
+    const speed=p.vx;
+    ctx.beginPath();ctx.arc(p.x,p.y,2.5,0,Math.PI*2);
+    ctx.fillStyle='rgba(52,152,219,0.65)';ctx.fill();
+  });
+
+  // Pitot tube body (horizontal, pointing upstream from right wall)
+  ctx.strokeStyle='#95A5A6';ctx.lineWidth=6;ctx.lineCap='round';
+  // Outer tube (static pressure ports)
+  ctx.beginPath();ctx.moveTo(385,200);ctx.lineTo(560,200);ctx.stroke();
+  // Exit through pipe wall
+  ctx.beginPath();ctx.moveTo(560,200);ctx.lineTo(560,115);ctx.stroke();
+  // Inner tube (total pressure)
+  ctx.strokeStyle='#E74C3C';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(385,200);ctx.lineTo(545,200);ctx.lineTo(545,115);ctx.stroke();
+
+  // Stagnation point (tip)
+  ctx.beginPath();ctx.arc(385,200,8,0,Math.PI*2);ctx.fillStyle='rgba(231,76,60,0.9)';ctx.fill();
+  ctx.strokeStyle='#C0392B';ctx.lineWidth=2;ctx.stroke();
+
+  // Static ports (perpendicular holes)
+  ctx.fillStyle='#95A5A6';
+  [430,460,490].forEach(x=>{ctx.beginPath();ctx.arc(x,200,3,0,Math.PI*2);ctx.fill();});
+
+  // DP gauge above pipe
+  ctx.strokeStyle='#E74C3C';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(545,115);ctx.lineTo(545,75);ctx.lineTo(250,75);ctx.lineTo(250,115);ctx.stroke();
+  ctx.beginPath();ctx.arc(398,60,22,0,Math.PI*2);ctx.fillStyle='rgba(44,62,80,0.9)';ctx.fill();ctx.strokeStyle='#E74C3C';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='white';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('deltaP',398,58);ctx.fillText('meter',398,70);
+
+  // Labels
+  ctx.fillStyle='#E74C3C';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('STAGNATION POINT (P_total)',385,235);
+  ctx.fillStyle='#888';ctx.fillText('Static ports (P_static)',480,230);
+  ctx.fillStyle='white';ctx.font='9px Arial';ctx.textAlign='right';ctx.fillText('FLOW ---->',375,200);
+
+  // Formula
+  ctx.fillStyle='rgba(255,255,255,0.6)';ctx.font='10px Arial';ctx.textAlign='center';
+  ctx.fillText('v = sqrt(2 x deltaP / rho)',200,200);
+
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(8,8,210,68);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Pitot Tube',16,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Measures point velocity',16,46);ctx.fillText('HVAC: verify 0.45 m/s in Grade A zone',16,62);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function loop(){if(run)step();draw();if(run)requestAnimationFrame(loop);}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>

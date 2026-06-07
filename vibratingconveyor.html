@@ -1,113 +1,229 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Vibrating Conveyor - Pharmaceutical Engineering</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vibrating Conveyor | Pharmaceutical Engineering</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
-header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
-.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
-.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
-.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
-canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
-.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Vibrating Conveyor</h1><p>Pharmaceutical Engineering BP304T - Chapter 13 - Material Handling</p></header>
-<nav><a href="index.html">Home</a></nav>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0d1a;color:#eee;font-family:Arial,sans-serif;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+h1{font-size:1.2rem;padding:10px;color:#AED6F1;text-align:center}
+.tabs{display:flex;gap:6px;margin-bottom:8px}
+.tab{padding:7px 18px;border:none;border-radius:6px 6px 0 0;cursor:pointer;font-size:0.9rem;background:#1a1a2e;color:#aaa}
+.tab.active{background:#1F4E79;color:#fff}
+canvas{border-radius:8px;display:block}
+.panel{display:none;max-width:720px;width:100%;background:#111827;border-radius:0 8px 8px 8px;padding:16px;line-height:1.7}
+.panel.active{display:block}
+.panel h2{color:#AED6F1;margin-bottom:8px;font-size:1rem}
+.panel p,.panel li{font-size:0.88rem;color:#ccc;margin-bottom:6px}
+.panel ul{padding-left:18px}
+.mcq{margin-bottom:14px}
+.mcq p{font-size:0.88rem;color:#ddd;margin-bottom:6px}
+.mcq button{display:block;width:100%;text-align:left;margin:3px 0;padding:6px 10px;background:#1a1a2e;border:1px solid #333;border-radius:5px;color:#ccc;cursor:pointer;font-size:0.83rem}
+.mcq button:hover{background:#1F4E79}
+.right{background:#145a32!important;color:#fff!important}
+.wrong{background:#7b241c!important;color:#fff!important}
+.controls{display:flex;gap:8px;margin:8px 0}
+.controls button{padding:6px 14px;border:none;border-radius:5px;background:#1F4E79;color:#fff;cursor:pointer;font-size:0.85rem}
+footer{font-size:0.75rem;color:#555;padding:10px;text-align:center}
+</style></head><body>
+<h1>Vibrating Conveyor — Oscillating Trough Transport</h1>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">Animation</button>
   <button class="tab" onclick="showTab('theory',this)">Theory</button>
   <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  <div class="controls">
+    <button onclick="toggleRun()">⏯ Pause/Play</button>
+    <button onclick="resetAnim()">↺ Reset</button>
   </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>An electromagnetic vibrator imparts rapid oscillating motion (50-100 Hz) to a trough at a precise angle. Powder particles are repeatedly thrown forward in short hops. Very gentle - no product degradation. Used for fragile tablets, coated beads, and sensitive granules.</p>
-  <div class="key-fact">Key Point: Vibrating conveyors selected when product fragility is critical: coated tablets (prevent coating damage), effervescent tablets (prevent premature reaction from friction), lyophilised products (preserve cake structure). Zero-contamination risk - no moving parts contact the product.</div>
-</div>
+  <canvas id="c" width="720" height="380"></canvas>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Vibrating Conveyor - Principle</h3>
-    <p>An electromagnetic vibrator imparts rapid oscillating motion (50-100 Hz) to a trough at a precise angle. Powder particles are repeatedly thrown forward in short hops. Very gentle - no product degradation. Used for fragile tablets, coated beads, and sensitive granules.</p>
-    <div class="key-fact">Key Fact: Vibrating conveyors selected when product fragility is critical: coated tablets (prevent coating damage), effervescent tablets (prevent premature reaction from friction), lyophilised products (preserve cake structure). Zero-contamination risk - no moving parts contact the product.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 13 - Material Handling for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+  <h2>Vibrating Conveyor</h2>
+  <p>A trough mounted on leaf springs or rubber isolators is vibrated at an angle by an eccentric drive or electromagnetic vibrator. Material moves forward by micro-hops due to asymmetric acceleration.</p>
+  <h2>Operating Principle</h2>
+  <ul>
+    <li>Forward stroke: slow, inclined — material moves forward with trough</li>
+    <li>Return stroke: fast — material separates from trough surface briefly (hops forward)</li>
+    <li>Net displacement per cycle: forward; frequency typically 15–60 Hz</li>
+  </ul>
+  <h2>Advantages in Pharmacy</h2>
+  <ul>
+    <li>No moving parts contacting material — easy cleaning</li>
+    <li>Can convey hot, sticky, or abrasive materials</li>
+    <li>Gentle on fragile tablets and coated pellets</li>
+    <li>Can be totally enclosed for dust control</li>
+    <li>Used as tablet de-duster and metal detector conveyor</li>
+  </ul>
+  <h2>Key Parameters</h2>
+  <ul>
+    <li>Amplitude: 2–10 mm; Frequency: 15–60 Hz</li>
+    <li>Throw angle: 15–30° from horizontal</li>
+    <li>Speed depends on amplitude × frequency</li>
+  </ul>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Vibrating Conveyor?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) An electromagnetic vibrator imparts rapid oscillating motion (50-100 Hz) to a trough at a precise an...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Vibrating conveyors selected when product fragility is critical: coated tablets (prevent coating damage), effervescent tablets (prevent premature reaction from friction), lyophilised products (preserve cake structure). Zero-contamination risk - no moving parts contact the product.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Vibrating Conveyor is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Vibrating conveyors selected when product fragility is critical: coated tablets (prevent coating dam...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. An electromagnetic vibrator imparts rapid oscillating motion (50-100 Hz) to a trough at a precise angle. Powder particles are repeatedly thrown forward in short hops. Very gentle - no product degradation. Used for fragile tablets, coated beads, and sensitive granules.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
+  <div class="mcq"><p>1. Material moves forward in a vibrating conveyor because of:</p>
+    <button onclick="cho(this,0)">a) Gravity alone</button>
+    <button data-c="1" onclick="cho(this,1)">b) Asymmetric forward/return stroke causing micro-hops</button>
+    <button onclick="cho(this,0)">c) Air pressure</button>
+    <button onclick="cho(this,0)">d) Belt friction</button></div>
+  <div class="mcq"><p>2. Vibrating conveyors are preferred for coated tablets because:</p>
+    <button onclick="cho(this,0)">a) They are faster than belt conveyors</button>
+    <button data-c="1" onclick="cho(this,1)">b) They are gentle and do not damage coatings</button>
+    <button onclick="cho(this,0)">c) They use less electricity</button>
+    <button onclick="cho(this,0)">d) They can work vertically</button></div>
+  <div class="mcq"><p>3. Typical operating frequency of a vibrating conveyor is:</p>
+    <button onclick="cho(this,0)">a) 1–5 Hz</button>
+    <button onclick="cho(this,0)">b) 5–10 Hz</button>
+    <button data-c="1" onclick="cho(this,1)">c) 15–60 Hz</button>
+    <button onclick="cho(this,0)">d) 100–200 Hz</button></div>
+  <div class="mcq"><p>4. The supporting elements that isolate vibration from the floor are:</p>
+    <button onclick="cho(this,0)">a) Ball bearings</button>
+    <button data-c="1" onclick="cho(this,1)">b) Leaf springs or rubber isolators</button>
+    <button onclick="cho(this,0)">c) Air cushions</button>
+    <button onclick="cho(this,0)">d) Magnetic levitation</button></div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Vibrating Conveyor</footer>
+<footer>© 2025 Pharmaceutical Engineering BP304T</footer>
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
-function draw(){
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Vibrating Conveyor_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 13 - Material Handling',18,48);
+function showTab(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');el.classList.add('active');
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function cho(el,ok){
+  const btns=el.parentElement.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);el.classList.add(ok?'right':'wrong');
+  if(!ok)btns.forEach(b=>{if(b.dataset.c)b.classList.add('right');});
+}
+
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+const W=720,H=380;
+let t=0,running=true;
+const freq=0.18; // vibration frequency (animation units)
+const amp=6;     // vibration amplitude px
+
+// Trough base position
+const troughX=90,troughY=210,troughW=520,troughH=25;
+
+// Particles on trough
+let particles=[];
+for(let i=0;i<22;i++){
+  particles.push({
+    x:troughX+20+i*22,
+    baseX:troughX+20+i*22,
+    y:troughY-8,
+    vy:0,
+    onGround:true,
+    r:5+Math.random()*3
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+
+  // Vibration offset
+  const vib=Math.sin(t*freq)*amp;
+  const trY=troughY+vib*0.4;
+
+  // Spring supports (4 leaf springs)
+  const springXs=[130,260,390,530];
+  springXs.forEach(sx=>{
+    // Leaf spring (zigzag)
+    ctx.beginPath();ctx.moveTo(sx,trY+troughH);
+    for(let sy=trY+troughH;sy<trY+troughH+55;sy+=10){
+      ctx.lineTo(sx+(sy%20<10?6:-6),sy);
+    }
+    ctx.lineTo(sx,trY+troughH+60);
+    ctx.strokeStyle='#f39c12';ctx.lineWidth=2.5;ctx.stroke();
+    // Base
+    ctx.fillStyle='#7f8c8d';ctx.fillRect(sx-15,trY+troughH+58,30,8);
+  });
+
+  // Trough body
+  ctx.fillStyle='#2c3e50';
+  ctx.fillRect(troughX,trY,troughW,troughH);
+  // Trough side walls
+  ctx.fillStyle='#34495e';
+  ctx.fillRect(troughX,trY-30,8,30);
+  ctx.fillRect(troughX+troughW-8,trY-30,8,30);
+  ctx.strokeStyle='#7f8c8d';ctx.lineWidth=2;ctx.strokeRect(troughX,trY,troughW,troughH);
+
+  // Eccentric drive motor
+  ctx.fillStyle='#8e44ad';ctx.fillRect(troughX+troughW+10,trY-10,55,troughH+20);
+  ctx.strokeStyle='#9b59b6';ctx.lineWidth=2;ctx.strokeRect(troughX+troughW+10,trY-10,55,troughH+20);
+  ctx.fillStyle='#fff';ctx.font='bold 9px Arial';ctx.textAlign='center';
+  ctx.fillText('ECCENTRIC',troughX+troughW+37,trY+10);ctx.fillText('DRIVE',troughX+troughW+37,trY+22);
+  // Crank arm
+  const crankAngle=t*0.2;
+  const crankCx=troughX+troughW+37,crankCy=trY+troughH/2;
+  ctx.beginPath();ctx.moveTo(crankCx,crankCy);
+  ctx.lineTo(crankCx+Math.cos(crankAngle)*14,crankCy+Math.sin(crankAngle)*14);
+  ctx.strokeStyle='#e74c3c';ctx.lineWidth=3;ctx.stroke();
+  ctx.beginPath();ctx.arc(crankCx+Math.cos(crankAngle)*14,crankCy+Math.sin(crankAngle)*14,4,0,Math.PI*2);
+  ctx.fillStyle='#e74c3c';ctx.fill();
+
+  // Particles (tablets/granules)
+  particles.forEach(p=>{
+    // Draw particle
+    ctx.beginPath();ctx.arc(p.x,p.y+vib*0.7,p.r,0,Math.PI*2);
+    ctx.fillStyle='#F0B27A';ctx.globalAlpha=0.9;ctx.fill();ctx.globalAlpha=1;
+
+    if(running){
+      // Simulate hop: on forward stroke particle moves with trough,
+      // on return stroke it briefly lifts
+      const accel=Math.sin(t*freq)*2.5;
+      if(accel<-1.5){
+        // fast return — particle separates and hops
+        p.vy-=1.2;
+        p.x+=1.0; // net forward drift
+      } else {
+        // forward stroke — stay on trough
+        if(p.y>=trY-p.r-1){p.vy=0;p.y=trY-p.r;}
+      }
+      p.y+=p.vy;
+      p.vy+=0.3; // gravity
+      if(p.y>trY-p.r){p.y=trY-p.r;p.vy=0;}
+      if(p.x>troughX+troughW-5){p.x=troughX+10;}
+    }
+  });
+
+  // Feed hopper
+  ctx.fillStyle='#2980b9';
+  ctx.beginPath();ctx.moveTo(troughX-5,130);ctx.lineTo(troughX+55,130);
+  ctx.lineTo(troughX+45,trY);ctx.lineTo(troughX+5,trY);ctx.closePath();
+  ctx.fill();ctx.strokeStyle='#3498db';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#fff';ctx.font='10px Arial';ctx.textAlign='center';
+  ctx.fillText('FEED',troughX+25,158);
+
+  // Discharge chute
+  ctx.fillStyle='#27ae60';
+  ctx.beginPath();ctx.moveTo(troughX+troughW-10,trY);ctx.lineTo(troughX+troughW+5,trY);
+  ctx.lineTo(troughX+troughW+25,trY+80);ctx.lineTo(troughX+troughW-20,trY+80);ctx.closePath();
+  ctx.fill();ctx.strokeStyle='#2ecc71';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#fff';ctx.font='10px Arial';ctx.textAlign='center';
+  ctx.fillText('DISCHARGE',troughX+troughW+5,trY+52);
+
+  // Vibration indicator arrows
+  ctx.fillStyle='#E74C3C';ctx.font='bold 14px Arial';ctx.textAlign='center';
+  ctx.fillText('↕ vibrating',360,165);
+
+  // Info box
+  ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(10,10,260,65);
+  ctx.fillStyle='#fff';ctx.font='bold 12px Arial';ctx.textAlign='left';
+  ctx.fillText('Vibrating Conveyor',18,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Oscillating trough — particles hop forward',18,46);
+  ctx.fillText('Chapter 13 — Material Handling',18,62);
+
+  // Labels
+  ctx.fillStyle='#f39c12';ctx.font='11px Arial';ctx.textAlign='center';
+  ctx.fillText('Leaf Springs',310,310);
+  ctx.fillText('← Net particle movement →',360,360);
+}
+
+function step(){t++;}
+function loop(){if(running)step();draw();requestAnimationFrame(loop);}
+function toggleRun(){running=!running;}
+function resetAnim(){t=0;particles.forEach((p,i)=>{p.x=troughX+20+i*22;p.y=troughY-8;p.vy=0;});}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>

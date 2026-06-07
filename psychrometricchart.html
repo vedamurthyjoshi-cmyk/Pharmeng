@@ -1,113 +1,233 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Psychrometric Chart - Pharmaceutical Engineering</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Psychrometric Chart | Pharmaceutical Engineering</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
-header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
-.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
-.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
-.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
-canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
-.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Psychrometric Chart</h1><p>Pharmaceutical Engineering BP304T - Chapter 12 - HVAC</p></header>
-<nav><a href="index.html">Home</a></nav>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0d1a;color:#eee;font-family:Arial,sans-serif;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+h1{font-size:1.2rem;padding:10px;color:#AED6F1;text-align:center}
+.tabs{display:flex;gap:6px;margin-bottom:8px}
+.tab{padding:7px 18px;border:none;border-radius:6px 6px 0 0;cursor:pointer;font-size:0.9rem;background:#1a1a2e;color:#aaa}
+.tab.active{background:#1F4E79;color:#fff}
+canvas{border-radius:8px;display:block}
+.panel{display:none;max-width:720px;width:100%;background:#111827;border-radius:0 8px 8px 8px;padding:16px;line-height:1.7}
+.panel.active{display:block}
+.panel h2{color:#AED6F1;margin-bottom:8px;font-size:1rem}
+.panel p,.panel li{font-size:0.88rem;color:#ccc;margin-bottom:6px}
+.panel ul{padding-left:18px}
+.mcq{margin-bottom:14px}
+.mcq p{font-size:0.88rem;color:#ddd;margin-bottom:6px}
+.mcq button{display:block;width:100%;text-align:left;margin:3px 0;padding:6px 10px;background:#1a1a2e;border:1px solid #333;border-radius:5px;color:#ccc;cursor:pointer;font-size:0.83rem}
+.mcq button:hover{background:#1F4E79}
+.right{background:#145a32!important;color:#fff!important}
+.wrong{background:#7b241c!important;color:#fff!important}
+.controls{display:flex;gap:8px;margin:8px 0}
+.controls button{padding:6px 14px;border:none;border-radius:5px;background:#1F4E79;color:#fff;cursor:pointer;font-size:0.85rem}
+footer{font-size:0.75rem;color:#555;padding:10px;text-align:center}
+</style></head><body>
+<h1>Psychrometric Chart — Air Conditioning Processes</h1>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">Animation</button>
   <button class="tab" onclick="showTab('theory',this)">Theory</button>
   <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  <div class="controls">
+    <button onclick="toggleRun()">⏯ Pause/Play</button>
+    <button onclick="resetAnim()">↺ Reset</button>
   </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>The psychrometric chart graphically represents thermodynamic properties of moist air: dry-bulb temperature, wet-bulb temperature, dew point, relative humidity, humidity ratio, enthalpy, and specific volume. Used to design pharmaceutical HVAC systems and drying operations.</p>
-  <div class="key-fact">Key Point: Key psychrometric processes for pharmaceutical HVAC: Sensible heating (temperature increases, humidity ratio constant); Cooling and dehumidification (both temperature and humidity ratio decrease); Humidification (humidity ratio increases at constant temperature).</div>
-</div>
+  <canvas id="c" width="720" height="380"></canvas>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Psychrometric Chart - Principle</h3>
-    <p>The psychrometric chart graphically represents thermodynamic properties of moist air: dry-bulb temperature, wet-bulb temperature, dew point, relative humidity, humidity ratio, enthalpy, and specific volume. Used to design pharmaceutical HVAC systems and drying operations.</p>
-    <div class="key-fact">Key Fact: Key psychrometric processes for pharmaceutical HVAC: Sensible heating (temperature increases, humidity ratio constant); Cooling and dehumidification (both temperature and humidity ratio decrease); Humidification (humidity ratio increases at constant temperature).</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 12 - HVAC for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+  <h2>Psychrometric Chart</h2>
+  <p>A graphical representation of thermodynamic properties of moist air — relating dry-bulb temperature, humidity ratio, relative humidity, enthalpy, wet-bulb temperature, and dew point.</p>
+  <h2>Key Properties</h2>
+  <ul>
+    <li><strong>Dry-bulb temperature (DBT):</strong> actual air temperature on x-axis</li>
+    <li><strong>Humidity ratio (W):</strong> kg water vapour per kg dry air (y-axis)</li>
+    <li><strong>Relative humidity (RH):</strong> curved lines from 10% to 100% (saturation curve)</li>
+    <li><strong>Wet-bulb temperature:</strong> diagonal lines (adiabatic saturation lines)</li>
+    <li><strong>Dew point:</strong> temperature at which air becomes saturated</li>
+    <li><strong>Enthalpy (h):</strong> total energy content of moist air</li>
+  </ul>
+  <h2>Air Conditioning Processes on Chart</h2>
+  <ul>
+    <li><strong>Sensible heating/cooling:</strong> horizontal line (W constant, DBT changes)</li>
+    <li><strong>Humidification:</strong> vertical line (DBT constant, W increases)</li>
+    <li><strong>Cooling + dehumidification:</strong> follows to saturation curve, then along it</li>
+    <li><strong>Adiabatic humidification:</strong> along wet-bulb temperature line</li>
+  </ul>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Psychrometric Chart?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) The psychrometric chart graphically represents thermodynamic properties of moist air: dry-bulb tempe...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Key psychrometric processes for pharmaceutical HVAC: Sensible heating (temperature increases, humidity ratio constant); Cooling and dehumidification (both temperature and humidity ratio decrease); Humidification (humidity ratio increases at constant temperature).</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Psychrometric Chart is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Key psychrometric processes for pharmaceutical HVAC: Sensible heating (temperature increases, humidi...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. The psychrometric chart graphically represents thermodynamic properties of moist air: dry-bulb temperature, wet-bulb temperature, dew point, relative humidity, humidity ratio, enthalpy, and specific volume. Used to design pharmaceutical HVAC systems and drying operations.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
+  <div class="mcq"><p>1. The x-axis of a psychrometric chart represents:</p>
+    <button data-c="1" onclick="cho(this,1)">a) Dry-bulb temperature</button>
+    <button onclick="cho(this,0)">b) Humidity ratio</button>
+    <button onclick="cho(this,0)">c) Relative humidity</button>
+    <button onclick="cho(this,0)">d) Enthalpy</button></div>
+  <div class="mcq"><p>2. The saturation curve (100% RH) on the psychrometric chart is:</p>
+    <button onclick="cho(this,0)">a) A straight horizontal line</button>
+    <button onclick="cho(this,0)">b) A straight vertical line</button>
+    <button data-c="1" onclick="cho(this,1)">c) A curved line rising to the left</button>
+    <button onclick="cho(this,0)">d) A series of parallel diagonal lines</button></div>
+  <div class="mcq"><p>3. Sensible heating of air at constant humidity ratio appears as:</p>
+    <button data-c="1" onclick="cho(this,1)">a) A horizontal line moving right</button>
+    <button onclick="cho(this,0)">b) A vertical line moving up</button>
+    <button onclick="cho(this,0)">c) A curved line</button>
+    <button onclick="cho(this,0)">d) A diagonal line</button></div>
+  <div class="mcq"><p>4. The dew point of air is found by:</p>
+    <button onclick="cho(this,0)">a) Moving horizontally to the right on the chart</button>
+    <button data-c="1" onclick="cho(this,1)">b) Moving horizontally to the left until reaching the 100% RH line</button>
+    <button onclick="cho(this,0)">c) Moving vertically upward to the saturation curve</button>
+    <button onclick="cho(this,0)">d) Reading the wet-bulb temperature directly</button></div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Psychrometric Chart</footer>
+<footer>© 2025 Pharmaceutical Engineering BP304T</footer>
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
-function draw(){
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Psychrometric Chart_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 12 - HVAC',18,48);
+function showTab(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');el.classList.add('active');
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function cho(el,ok){
+  const btns=el.parentElement.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);el.classList.add(ok?'right':'wrong');
+  if(!ok)btns.forEach(b=>{if(b.dataset.c)b.classList.add('right');});
+}
+
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+const W=720,H=380;
+let t=0,running=true;
+// Chart area
+const cX=90,cY=30,cW=580,cH=300;
+// T range 10–50°C, W range 0–0.030 kg/kg
+const Tmin=10,Tmax=50,Wmin=0,Wmax=0.030;
+
+function toCanvasX(T){return cX+(T-Tmin)/(Tmax-Tmin)*cW;}
+function toCanvasY(W){return cY+cH-(W-Wmin)/(Wmax-Wmin)*cH;}
+
+// Saturation curve points (simplified) W_sat(T)
+function Wsat(T){
+  // approximate: from 10°C ~0.0076 to 50°C ~0.0863 (simplified)
+  return 0.0076*Math.exp(0.062*(T-10));
+}
+
+// Animate a moving state point through different processes
+let processes=[
+  {name:'State A\n(Outdoor air)',T:35,W:0.018,col:'#e74c3c'},
+  {name:'After cooling',T:12,W:0.018,col:'#3498db'},
+  {name:'After dehumid.',T:12,W:0.0088,col:'#27ae60'},
+  {name:'After reheat',T:22,W:0.0088,col:'#f39c12'},
+];
+let procIdx=0,interp=0;
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+
+  // Chart background
+  ctx.fillStyle='#0d1520';ctx.fillRect(cX,cY,cW,cH);
+  ctx.strokeStyle='#2c3e50';ctx.lineWidth=1;ctx.strokeRect(cX,cY,cW,cH);
+
+  // Grid lines and T-axis labels
+  ctx.strokeStyle='rgba(52,73,94,0.7)';ctx.lineWidth=0.8;
+  for(let T=10;T<=50;T+=5){
+    const x=toCanvasX(T);
+    ctx.beginPath();ctx.moveTo(x,cY);ctx.lineTo(x,cY+cH);ctx.stroke();
+    ctx.fillStyle='#aaa';ctx.font='10px Arial';ctx.textAlign='center';
+    ctx.fillText(T+'°C',x,cY+cH+14);
+  }
+  // W-axis labels
+  for(let W2=0;W2<=0.030;W2+=0.005){
+    const y=toCanvasY(W2);
+    ctx.beginPath();ctx.moveTo(cX,y);ctx.lineTo(cX+cW,y);ctx.stroke();
+    ctx.fillStyle='#aaa';ctx.font='9px Arial';ctx.textAlign='right';
+    ctx.fillText(W2.toFixed(3),cX-4,y+3);
+  }
+
+  // RH curves
+  const rhLevels=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0];
+  rhLevels.forEach(rh=>{
+    ctx.beginPath();let first=true;
+    for(let T=Tmin;T<=Tmax;T+=0.5){
+      const ws=Wsat(T);const W2=rh*ws;
+      if(W2>Wmax)break;
+      const x=toCanvasX(T),y=toCanvasY(W2);
+      if(first){ctx.moveTo(x,y);first=false;}else ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle=rh===1?'#2980b9':`rgba(41,128,185,${0.2+rh*0.3})`;
+    ctx.lineWidth=rh===1?2:1;ctx.stroke();
+    // RH label
+    const labelT=Tmin+5;const ws=Wsat(labelT);const W2=rh*ws;
+    if(W2<Wmax){
+      ctx.fillStyle='rgba(41,128,185,0.8)';ctx.font='8px Arial';ctx.textAlign='left';
+      ctx.fillText(Math.round(rh*100)+'%',toCanvasX(labelT),toCanvasY(W2)-3);
+    }
+  });
+
+  // Axis labels
+  ctx.fillStyle='#AED6F1';ctx.font='bold 11px Arial';ctx.textAlign='center';
+  ctx.fillText('Dry-Bulb Temperature (°C)',cX+cW/2,cY+cH+30);
+  ctx.save();ctx.translate(cX-40,cY+cH/2);ctx.rotate(-Math.PI/2);
+  ctx.fillText('Humidity Ratio W (kg/kg dry air)',0,0);ctx.restore();
+  ctx.fillText('PSYCHROMETRIC CHART (at 101.325 kPa)',cX+cW/2,cY-12);
+
+  // Process path
+  const pathColors=['#e74c3c','#3498db','#27ae60','#f39c12'];
+  for(let i=0;i<processes.length-1;i++){
+    const p1=processes[i],p2=processes[i+1];
+    ctx.beginPath();
+    ctx.moveTo(toCanvasX(p1.T),toCanvasY(p1.W));
+    ctx.lineTo(toCanvasX(p2.T),toCanvasY(p2.W));
+    ctx.strokeStyle=pathColors[i];ctx.lineWidth=2.5;ctx.setLineDash([6,4]);ctx.stroke();ctx.setLineDash([]);
+    // Arrow midpoint
+    const mx=(toCanvasX(p1.T)+toCanvasX(p2.T))/2;
+    const my=(toCanvasY(p1.W)+toCanvasY(p2.W))/2;
+    const dx=toCanvasX(p2.T)-toCanvasX(p1.T);
+    const dy=toCanvasY(p2.W)-toCanvasY(p1.W);
+    const ang=Math.atan2(dy,dx);
+    ctx.save();ctx.translate(mx,my);ctx.rotate(ang);
+    ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(-10,-5);ctx.lineTo(-10,5);ctx.closePath();
+    ctx.fillStyle=pathColors[i];ctx.fill();ctx.restore();
+  }
+
+  // State point labels
+  processes.forEach((p,i)=>{
+    const px=toCanvasX(p.T),py=toCanvasY(p.W);
+    ctx.beginPath();ctx.arc(px,py,6,0,Math.PI*2);
+    ctx.fillStyle=p.col;ctx.fill();
+    ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle='#fff';ctx.font='bold 9px Arial';ctx.textAlign='left';
+    const lx=px+(i%2===0?8:-60),ly=py+(i<2?-10:14);
+    p.name.split('\n').forEach((line,li)=>ctx.fillText(line,lx,ly+li*12));
+  });
+
+  // Moving animated point
+  const pA=processes[procIdx],pB=processes[(procIdx+1)%processes.length];
+  const animT=pA.T+(pB.T-pA.T)*interp;
+  const animW=pA.W+(pB.W-pA.W)*interp;
+  ctx.beginPath();ctx.arc(toCanvasX(animT),toCanvasY(animW),9,0,Math.PI*2);
+  ctx.fillStyle='rgba(255,255,255,0.9)';ctx.fill();
+  ctx.strokeStyle='#e74c3c';ctx.lineWidth=3;ctx.stroke();
+
+  // Process labels in panel
+  const pLabels=['Sensible Cooling','Cooling + Dehumidification','Sensible Reheat'];
+  if(running){
+    interp+=0.008;
+    if(interp>=1){interp=0;procIdx=(procIdx+1)%(processes.length-1);}
+  }
+
+  // Legend
+  ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(10,10,260,75);
+  ctx.fillStyle='#fff';ctx.font='bold 11px Arial';ctx.textAlign='left';
+  ctx.fillText('Air Conditioning Process:',18,28);
+  const stepNames=['→ Sensible Cooling','→ Cooling+Dehumid.','→ Sensible Reheat'];
+  stepNames.forEach((s,i)=>{
+    ctx.fillStyle=i===procIdx?pathColors[i]:'#666';
+    ctx.font=i===procIdx?'bold 10px Arial':'10px Arial';
+    ctx.fillText(s,22,46+i*14);
+  });
+}
+
+function step(){t++;}
+function loop(){if(running)step();draw();requestAnimationFrame(loop);}
+function toggleRun(){running=!running;}
+function resetAnim(){t=0;procIdx=0;interp=0;}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>

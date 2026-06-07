@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Forced Circulation Evaporator - Pharmaceutical Engineering</title>
-<style>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Forced Circulation Evaporator</title><style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;}
 .tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
 .panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
 .anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
@@ -14,19 +11,16 @@ canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
 .theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
 .theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
 .key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Forced Circulation Evaporator</h1><p>Pharmaceutical Engineering BP304T - Chapter 8 - Evaporation</p></header>
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:10px;padding:10px;background:#FEF9E7;border-radius:6px;font-size:0.9em;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:20px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:16px;color:#888;font-size:0.8em;background:white;margin-top:16px;}
+</style></head><body>
+<header><h1>Forced Circulation Evaporator</h1><p>Pharmaceutical Engineering BP304T -- Chapter 8 -- Evaporation</p></header>
 <nav><a href="index.html">Home</a></nav>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">Animation</button>
@@ -34,80 +28,97 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
   <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
-  </div>
+<div class="anim-box"><canvas id="c" width="720" height="380"></canvas>
+<div style="margin-top:12px;">
+<button class="btn" id="pb" onclick="togglePlay()">Pause</button>
+<button class="btn" onclick="setSpeed(0.5)">Slow</button>
+<button class="btn" onclick="setSpeed(1)">Normal</button>
+<button class="btn" onclick="setSpeed(2)">Fast</button>
+</div></div>
+<div class="theory-box"><h3>What you are seeing</h3><p>A centrifugal pump (bottom right) forces liquid through the heat exchanger tubes at HIGH velocity (2-6 m/s). The liquid is heated but does NOT boil inside the tubes -- system pressure is maintained above boiling point. When liquid enters the vapour body (large vessel, top left) through the flash valve, pressure drops suddenly -- the liquid FLASHES to vapour. Concentrated liquid settles out and recirculates.</p><div class="key-fact">Key Point: The Forced Circulation Evaporator prevents boiling inside the heat exchanger tubes by maintaining elevated pressure. This prevents crystal deposition on tube walls -- making it the ONLY evaporator suitable for crystallising solutions such as sodium chloride, ammonium sulphate, and sugar.</div></div>
 </div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>A pump forces liquid through the heat exchanger at high velocity. Liquid is heated but does not boil inside tubes. Flash evaporation occurs only in the vapour separator at reduced pressure.</p>
-  <div class="key-fact">Key Point: The Forced Circulation Evaporator is the only evaporator suitable for crystallising solutions (NaCl, ammonium sulphate) because high liquid velocity (2-6 m/s) prevents crystal deposition on tube walls.</div>
-</div>
-</div>
-<div id="theory" class="panel">
-  <div class="theory-box"><h3>Forced Circulation Evaporator - Principle</h3>
-    <p>A pump forces liquid through the heat exchanger at high velocity. Liquid is heated but does not boil inside tubes. Flash evaporation occurs only in the vapour separator at reduced pressure.</p>
-    <div class="key-fact">Key Fact: The Forced Circulation Evaporator is the only evaporator suitable for crystallising solutions (NaCl, ammonium sulphate) because high liquid velocity (2-6 m/s) prevents crystal deposition on tube walls.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 8 - Evaporation for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
-</div>
-<div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Forced Circulation Evaporator?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) A pump forces liquid through the heat exchanger at high velocity. Liquid is heated but does not boil...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. The Forced Circulation Evaporator is the only evaporator suitable for crystallising solutions (NaCl, ammonium sulphate) because high liquid velocity (2-6 m/s) prevents crystal deposition on tube walls.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Forced Circulation Evaporator is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) The Forced Circulation Evaporator is the only evaporator suitable for crystallising solutions (NaCl,...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. A pump forces liquid through the heat exchanger at high velocity. Liquid is heated but does not boil inside tubes. Flash evaporation occurs only in the vapour separator at reduced pressure.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
-</div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Forced Circulation Evaporator</footer>
+<div id="theory" class="panel"><div class="theory-box"><h3>What you are seeing</h3><p>A centrifugal pump (bottom right) forces liquid through the heat exchanger tubes at HIGH velocity (2-6 m/s). The liquid is heated but does NOT boil inside the tubes -- system pressure is maintained above boiling point. When liquid enters the vapour body (large vessel, top left) through the flash valve, pressure drops suddenly -- the liquid FLASHES to vapour. Concentrated liquid settles out and recirculates.</p><div class="key-fact">Key Point: The Forced Circulation Evaporator prevents boiling inside the heat exchanger tubes by maintaining elevated pressure. This prevents crystal deposition on tube walls -- making it the ONLY evaporator suitable for crystallising solutions such as sodium chloride, ammonium sulphate, and sugar.</div></div></div>
+<div id="mcq" class="panel"><div class="mcq-card"><div class="mcq-q">Q1. The Forced Circulation Evaporator is used for crystallising solutions because:</div>
+<button class="opt" onclick="cho(this,false)">A) It generates the highest temperature of all evaporators</button>
+<button class="opt" onclick="cho(this,true)" data-c>B) By maintaining high velocity (2-6 m/s) and suppressing boiling inside the tubes, it prevents crystal nucleation and deposition on tube walls -- crystals remain suspended in the fast-flowing liquid and only form in the flash vessel where controlled crystallisation occurs</button>
+<button class="opt" onclick="cho(this,false)">C) It operates under vacuum which prevents crystallisation</button>
+<button class="opt" onclick="cho(this,false)">D) The pump breaks up any crystals that form in the tubes</button>
+<div class="explanation">Correct. In other evaporators (falling film, short-tube), liquid boils on hot tube surfaces -- if the product is near saturation, crystals nucleate on the hot wall (scale) -- tubes block -- catastrophic fouling. Forced circulation: high velocity turbulence prevents stagnant zones; elevated pressure prevents boiling at the wall; crystals only form in the flash zone where controlled supersaturation occurs.</div></div><div class="mcq-card"><div class="mcq-q">Q2. Flash evaporation in the Forced Circulation Evaporator occurs when:</div>
+<button class="opt" onclick="cho(this,false)">A) Steam pressure is suddenly increased in the heat exchanger</button>
+<button class="opt" onclick="cho(this,true)" data-c>B) Superheated liquid from the heat exchanger enters the vapour body at reduced pressure -- the pressure drop causes instantaneous evaporation of a fraction of the liquid proportional to the degree of superheating</button>
+<button class="opt" onclick="cho(this,false)">C) The pump speed is suddenly reduced causing turbulence</button>
+<button class="opt" onclick="cho(this,false)">D) Cold feed is mixed with hot concentrated liquid</button>
+<div class="explanation">Correct. Flash evaporation thermodynamics: if liquid is heated to T at pressure P1 (above boiling point at P1) then enters vapour body at pressure P2 (below boiling point at P2), the liquid is now superheated relative to P2 -- it instantly evaporates until temperature drops to boiling point at P2. The fraction evaporated = Cp*(T1-T2)/lambda where lambda = latent heat. This is efficient, gentle, and controllable.</div></div>
+<div class="score-box" id="sc" style="display:none"><h2 id="st" style="color:#1B4F72;"></h2><button class="btn" onclick="resetMCQ()">Try Again</button></div></div>
+<footer>2025 Pharmaceutical Engineering BP304T -- Forced Circulation Evaporator</footer>
 <script>
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function cho(el,ok){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(ok){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-c]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('sc').style.display='block';document.getElementById('st').textContent='Score: '+_s+'/'+t+(_s===t?' Perfect!':'');}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('sc').style.display='none';}
+const C=document.getElementById('c'),ctx=C.getContext('2d'),W=720,H=380;
+let run=true,sp=1,fr=0;
+function togglePlay(){run=!run;document.getElementById('pb').textContent=run?'Pause':'Play';if(run)loop();}
+function setSpeed(s){sp=s;}
+
+// Forced circulation -- pump, heat exchanger, flash vessel
+let pumpAngle=0;
+const liquidFlow=[];
+for(let i=0;i<25;i++) liquidFlow.push({pos:Math.random(),vpath:0.005+Math.random()*0.003,col:Math.random()<0.3?'rgba(231,76,60,0.7)':'rgba(52,152,219,0.6)'});
+const flashDrops=[];
+for(let i=0;i<20;i++) flashDrops.push({x:200+Math.random()*120,y:80+Math.random()*120,vy:-(0.3+Math.random()*0.5),alpha:0.7});
+
+function step(){
+  fr++;pumpAngle+=0.08*sp;
+  liquidFlow.forEach(p=>{p.pos=(p.pos+p.vpath*sp)%1;});
+  flashDrops.forEach(d=>{d.y+=d.vy*sp;d.alpha-=0.01*sp;if(d.alpha<0){d.y=170+Math.random()*30;d.x=200+Math.random()*120;d.alpha=0.7;}});
+}
+
+// Path points: HX tubes -> vapour body -> pump -> back to HX
+const PATH=[ [490,270],[490,100],[490,60],[260,60],[160,60],[160,200],[260,280],[380,280],[490,280],[490,270] ];
+function pathPoint(t){const n=PATH.length-1;const i=Math.floor(t*n);const f=t*n-i;const a=PATH[Math.min(i,n-1)],b=PATH[Math.min(i+1,n-1)];return[a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f];}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Forced Circulation Evaporator_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 8 - Evaporation',18,48);
+
+  // Draw circuit path
+  ctx.strokeStyle='rgba(74,144,217,0.25)';ctx.lineWidth=14;ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.beginPath();PATH.forEach((p,i)=>i===0?ctx.moveTo(p[0],p[1]):ctx.lineTo(p[0],p[1]));ctx.stroke();
+
+  // Heat exchanger
+  ctx.fillStyle='rgba(44,62,80,0.85)';ctx.fillRect(465,75,50,210);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=3;ctx.strokeRect(465,75,50,210);
+  for(let i=0;i<8;i++){ctx.strokeStyle='rgba(231,76,60,0.4)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(470,90+i*22);ctx.lineTo(510,90+i*22);ctx.stroke();}
+  ctx.fillStyle='#888';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('HX',490,298);
+
+  // Vapour body (flash vessel)
+  ctx.beginPath();ctx.ellipse(225,130,100,80,0,0,Math.PI*2);ctx.fillStyle='rgba(26,50,80,0.7)';ctx.fill();
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=3;ctx.stroke();
+  ctx.fillStyle='#888';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('FLASH VESSEL',225,218);
+
+  // Flash vapour rising inside vessel
+  flashDrops.forEach(d=>{ctx.beginPath();ctx.arc(d.x,d.y,3,0,Math.PI*2);ctx.fillStyle=`rgba(200,200,255,${d.alpha})`;ctx.fill();});
+  ctx.strokeStyle='rgba(200,200,255,0.5)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(225,50);ctx.lineTo(225,25);ctx.stroke();
+  ctx.fillStyle='#888';ctx.fillText('VAPOUR',225,18);
+
+  // Pump
+  ctx.beginPath();ctx.arc(420,280,22,0,Math.PI*2);ctx.fillStyle='rgba(35,50,70,0.9)';ctx.fill();ctx.strokeStyle='#4A90D9';ctx.lineWidth=2;ctx.stroke();
+  ctx.save();ctx.translate(420,280);ctx.rotate(pumpAngle);ctx.strokeStyle='#AED6F1';ctx.lineWidth=2;
+  for(let i=0;i<3;i++){ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(i*2.094)*17,Math.sin(i*2.094)*17);ctx.stroke();}
+  ctx.restore();
+  ctx.fillStyle='#888';ctx.font='8px Arial';ctx.textAlign='center';ctx.fillText('PUMP',420,310);
+
+  // Flowing liquid particles
+  liquidFlow.forEach(p=>{const [x,y]=pathPoint(p.pos);ctx.beginPath();ctx.arc(x,y,3.5,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.8;ctx.fill();ctx.globalAlpha=1;});
+
+  // Labels
+  ctx.fillStyle='#E74C3C';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('STEAM',510,65);
+  ctx.fillStyle='#3498DB';ctx.fillText('FEED IN',565,175);ctx.strokeStyle='rgba(52,152,219,0.6)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(560,170);ctx.lineTo(515,170);ctx.stroke();
+
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(8,8,225,68);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Forced Circulation Evaporator',16,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Pump velocity: 2-6 m/s (no boiling in tubes)',16,46);ctx.fillText('Only evaporator for crystallising solutions',16,62);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function loop(){if(run)step();draw();if(run)requestAnimationFrame(loop);}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>

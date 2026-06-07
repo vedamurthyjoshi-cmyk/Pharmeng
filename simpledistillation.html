@@ -1,113 +1,219 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Simple Distillation - Pharmaceutical Engineering</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Simple Distillation — PE BP304T</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
-header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
-.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
-.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
-.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
-canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
-.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Simple Distillation</h1><p>Pharmaceutical Engineering BP304T - Chapter 10 - Distillation</p></header>
-<nav><a href="index.html">Home</a></nav>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#0f0f1a;color:#eee;min-height:100vh}
+header{background:linear-gradient(135deg,#1F4E79,#2e86de);padding:14px 20px;text-align:center}
+header h1{font-size:1.3rem;font-weight:700;color:#fff}
+header p{font-size:0.8rem;color:#cde;margin-top:3px}
+.tabs{display:flex;background:#16213e}
+.tab{flex:1;padding:10px;text-align:center;cursor:pointer;font-size:0.85rem;border-bottom:3px solid transparent;transition:all 0.2s}
+.tab.active{border-bottom-color:#2e86de;color:#2e86de;background:#0f0f1a}
+.panel{display:none;padding:16px}
+.panel.active{display:block}
+canvas{display:block;margin:0 auto;border-radius:8px;background:#1a1a2e;max-width:100%}
+.info-box{background:rgba(0,0,0,0.65);color:#fff;padding:8px 12px;border-radius:6px;font-size:0.75rem;line-height:1.6;margin-top:10px;max-width:720px;margin-left:auto;margin-right:auto}
+h2{color:#2e86de;margin-bottom:8px;font-size:1rem}
+p,li{font-size:0.88rem;line-height:1.7;margin-bottom:6px}
+ul{padding-left:18px}
+.mcq{background:#16213e;border-radius:8px;padding:12px;margin-bottom:12px}
+.mcq p{font-weight:600;margin-bottom:8px}
+.opt{display:block;padding:7px 10px;margin:4px 0;background:#1a1a2e;border-radius:5px;cursor:pointer;font-size:0.84rem;border:1px solid #2a2a4a;transition:background 0.2s}
+.opt:hover{background:#22305a}
+.opt.correct{background:#1a5c1a!important;border-color:#2ecc71}
+.opt.wrong{background:#5c1a1a!important;border-color:#e74c3c}
+footer{text-align:center;font-size:0.75rem;color:#666;padding:14px;border-top:1px solid #222}
+</style></head><body>
+<header><h1>Simple Distillation</h1><p>Pharmaceutical Engineering BP304T — Separation Techniques</p></header>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
+  <div class="tab active" onclick="showTab('anim')">▶ Animation</div>
+  <div class="tab" onclick="showTab('theory')">📖 Theory</div>
+  <div class="tab" onclick="showTab('mcq')">✏ MCQs</div>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
-  </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>Liquid mixture heated in a flask. More volatile component vaporises preferentially. Vapour passes through a water-cooled condenser. Condensed distillate collected - enriched in the more volatile component.</p>
-  <div class="key-fact">Key Point: Simple distillation separates components with boiling point differences greater than 25 degrees C. For closely-boiling mixtures, fractional distillation with a column is required. Pharmaceutical use: solvent recovery, WFI purification, volatile oil isolation.</div>
+<canvas id="c" width="720" height="380"></canvas>
+<div class="info-box">
+  <b>Simple Distillation</b> — Liquid heated → vapour rises → condenser cools vapour → distillate collected. Works when boiling points differ by &gt;25 °C.
 </div>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Simple Distillation - Principle</h3>
-    <p>Liquid mixture heated in a flask. More volatile component vaporises preferentially. Vapour passes through a water-cooled condenser. Condensed distillate collected - enriched in the more volatile component.</p>
-    <div class="key-fact">Key Fact: Simple distillation separates components with boiling point differences greater than 25 degrees C. For closely-boiling mixtures, fractional distillation with a column is required. Pharmaceutical use: solvent recovery, WFI purification, volatile oil isolation.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 10 - Distillation for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+<h2>Simple Distillation</h2>
+<p>Simple distillation separates liquids based on differences in boiling point. The mixture is heated; the more volatile component vaporises first, travels through the condenser where it is cooled and condensed back to liquid, and is collected as the distillate.</p>
+<ul>
+<li><b>Principle:</b> Differential vapour pressure at a given temperature</li>
+<li><b>Suitable for:</b> Mixtures with boiling point difference &gt;25 °C, or solid-liquid separation</li>
+<li><b>Components:</b> Round-bottom flask, Liebig condenser, thermometer, receiver flask</li>
+<li><b>Pharmaceutical use:</b> Purification of solvents, preparation of distilled water, essential oil isolation</li>
+<li><b>Limitation:</b> Cannot separate close-boiling mixtures efficiently</li>
+</ul>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Simple Distillation?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Liquid mixture heated in a flask. More volatile component vaporises preferentially. Vapour passes th...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Simple distillation separates components with boiling point differences greater than 25 degrees C. For closely-boiling mixtures, fractional distillation with a column is required. Pharmaceutical use: solvent recovery, WFI purification, volatile oil isolation.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Simple Distillation is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Simple distillation separates components with boiling point differences greater than 25 degrees C. F...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. Liquid mixture heated in a flask. More volatile component vaporises preferentially. Vapour passes through a water-cooled condenser. Condensed distillate collected - enriched in the more volatile component.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
+<div class="mcq"><p>1. Simple distillation is preferred when boiling point difference is:</p>
+<span class="opt" data-c="1" onclick="cho(this,1)">A. Less than 5 °C</span>
+<span class="opt" onclick="cho(this,0)">B. 10–15 °C</span>
+<span class="opt" onclick="cho(this,0)">C. Greater than 25 °C</span>
+<span class="opt" onclick="cho(this,0)">D. Exactly 20 °C</span></div>
+<div class="mcq"><p>2. The purpose of the condenser in distillation is to:</p>
+<span class="opt" onclick="cho(this,0)">A. Heat the liquid</span>
+<span class="opt" data-c="1" onclick="cho(this,1)">B. Cool vapour back to liquid</span>
+<span class="opt" onclick="cho(this,0)">C. Remove impurities</span>
+<span class="opt" onclick="cho(this,0)">D. Increase boiling point</span></div>
+<div class="mcq"><p>3. Which flask is used as the distillation vessel?</p>
+<span class="opt" onclick="cho(this,0)">A. Conical flask</span>
+<span class="opt" onclick="cho(this,0)">B. Beaker</span>
+<span class="opt" data-c="1" onclick="cho(this,1)">C. Round-bottom flask</span>
+<span class="opt" onclick="cho(this,0)">D. Separating funnel</span></div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Simple Distillation</footer>
+<footer>© 2025 Pharmaceutical Engineering BP304T</footer>
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function showTab(id){document.querySelectorAll('.panel,.tab').forEach(e=>e.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.tab').forEach((t,i)=>{ if(['anim','theory','mcq'][i]===id)t.classList.add('active')});}
+function cho(el,ok){const p=el.parentElement;if(p.dataset.answered)return;p.dataset.answered=1;el.classList.add(ok?'correct':'wrong');if(!ok){p.querySelector('[data-c="1"]').classList.add('correct');}}
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+const W=720,H=380;
+let t=0;
+
+// Flask geometry
+const flaskX=160,flaskY=260,flaskR=70;
+const neckX=flaskX,neckY=flaskY-flaskR-10,neckW=28,neckH=60;
+// Condenser
+const condX1=240,condY1=100,condX2=500,condY2=180;
+// Receiver
+const recX=560,recY=220,recW=60,recH=80;
+
+// Bubbles in flask
+const bubbles=[];
+for(let i=0;i<8;i++) bubbles.push({x:flaskX-40+Math.random()*80,y:flaskY+30,vy:-(0.4+Math.random()*0.5),life:Math.random()*100,maxLife:80+Math.random()*40,r:3+Math.random()*3});
+
+// Vapour drops along condenser path
+const drops=[];
+for(let i=0;i<12;i++) drops.push({t:Math.random(),speed:0.003+Math.random()*0.002,condensed:false});
+
+// Distillate drops in receiver
+let distillateLevel=0;
+
+function drawFlask(){
+  // Liquid in flask
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(flaskX,flaskY,flaskR,0,Math.PI*2);
+  ctx.clip();
+  ctx.fillStyle='#1a6b8a';
+  ctx.fillRect(flaskX-flaskR,flaskY-10,flaskR*2,flaskR+10);
+  ctx.restore();
+  // Flask outline
+  ctx.beginPath();ctx.arc(flaskX,flaskY,flaskR,0,Math.PI*2);
+  ctx.strokeStyle='#aaa';ctx.lineWidth=2;ctx.stroke();
+  // Neck
+  ctx.fillStyle='rgba(100,180,220,0.15)';
+  ctx.fillRect(neckX-neckW/2,neckY-neckH,neckW,neckH);
+  ctx.strokeStyle='#aaa';ctx.strokeRect(neckX-neckW/2,neckY-neckH,neckW,neckH);
+  // Heat source
+  for(let i=0;i<5;i++){
+    const hx=flaskX-50+i*25;
+    ctx.strokeStyle=`rgba(255,${80+i*20},0,${0.5+0.1*Math.sin(t*0.1+i)})`;
+    ctx.lineWidth=3;
+    ctx.beginPath();ctx.moveTo(hx,flaskY+flaskR+5);ctx.lineTo(hx,flaskY+flaskR+18);ctx.stroke();
+  }
+  ctx.fillStyle='#555';ctx.fillRect(flaskX-60,flaskY+flaskR+18,120,6);
+}
+
+function drawCondenser(){
+  // Outer tube
+  ctx.strokeStyle='#888';ctx.lineWidth=14;
+  ctx.beginPath();ctx.moveTo(condX1,condY1);ctx.lineTo(condX2,condY2);ctx.stroke();
+  // Coolant water blue tint
+  ctx.strokeStyle='rgba(50,100,200,0.35)';ctx.lineWidth=12;
+  ctx.beginPath();ctx.moveTo(condX1,condY1);ctx.lineTo(condX2,condY2);ctx.stroke();
+  // Inner vapour path
+  ctx.strokeStyle='rgba(180,220,255,0.5)';ctx.lineWidth=5;
+  ctx.beginPath();ctx.moveTo(condX1,condY1);ctx.lineTo(condX2,condY2);ctx.stroke();
+  // Labels
+  ctx.fillStyle='#7bb';ctx.font='11px sans-serif';
+  ctx.fillText('Water in',condX1-50,condY1+20);
+  ctx.fillText('Water out',condX2+5,condY2-5);
+  // Coolant flow arrows
+  ctx.fillStyle='rgba(80,160,255,0.7)';
+  ctx.fillText('↑',condX2+2,condY2+10);
+}
+
+function drawReceiver(){
+  // Receiver flask
+  ctx.strokeStyle='#aaa';ctx.lineWidth=2;
+  ctx.strokeRect(recX,recY,recW,recH);
+  // Distillate liquid
+  if(distillateLevel>0){
+    ctx.fillStyle='rgba(100,200,230,0.6)';
+    ctx.fillRect(recX+2,recY+recH-distillateLevel,recW-4,distillateLevel);
+  }
+  ctx.fillStyle='#aaa';ctx.font='11px sans-serif';ctx.fillText('Distillate',recX-5,recY+recH+16);
+}
+
+function drawBubbles(){
+  bubbles.forEach(b=>{
+    b.life++;
+    if(b.life>b.maxLife){b.life=0;b.x=flaskX-40+Math.random()*80;b.y=flaskY+30;b.vy=-(0.4+Math.random()*0.5);}
+    b.y+=b.vy;
+    const alpha=1-b.life/b.maxLife;
+    ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+    ctx.strokeStyle=`rgba(150,230,255,${alpha})`;ctx.lineWidth=1.5;ctx.stroke();
+  });
+}
+
+function drawVapourPath(){
+  // Vapour rising from neck to condenser
+  const vx=neckX,vy=neckY-neckH;
+  const phase=t*0.02%1;
+  for(let i=0;i<4;i++){
+    const p=(phase+i*0.25)%1;
+    const px=vx+(condX1-vx)*p;
+    const py=vy+(condY1-vy)*p;
+    ctx.beginPath();ctx.arc(px,py,4,0,Math.PI*2);
+    ctx.fillStyle=`rgba(180,230,255,${0.8-p*0.5})`;ctx.fill();
+  }
+}
+
+function drawDrops(){
+  drops.forEach(d=>{
+    d.t+=d.speed;
+    if(d.t>=1){d.t=0;distillateLevel=Math.min(distillateLevel+1,recH-10);}
+    const px=condX1+(condX2-condX1)*d.t;
+    const py=condY1+(condY2-condY1)*d.t;
+    const alpha=d.t>0.6?1:d.t/0.6;
+    // gets bluer as it condenses
+    const g=Math.floor(150+100*d.t);
+    ctx.beginPath();ctx.arc(px,py,3,0,Math.PI*2);
+    ctx.fillStyle=`rgba(80,${g},230,${alpha})`;ctx.fill();
+  });
+  // Drop falling from condenser tip to receiver
+  const dropPhase=(t*0.03)%1;
+  if(dropPhase<0.5){
+    const dy=condY2+(recY-condY2)*dropPhase*2;
+    ctx.beginPath();ctx.arc(condX2,dy,3,0,Math.PI*2);
+    ctx.fillStyle='rgba(100,200,230,0.9)';ctx.fill();
+  }
+}
+
+function drawLabels(){
+  ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(8,8,200,72);
+  ctx.fillStyle='#fff';ctx.font='bold 12px sans-serif';ctx.fillText('Simple Distillation',16,26);
+  ctx.font='11px sans-serif';ctx.fillStyle='#cde';
+  ctx.fillText('① Liquid heated in flask',16,42);
+  ctx.fillText('② Vapour rises, enters condenser',16,56);
+  ctx.fillText('③ Condensed liquid collected',16,70);
+  // Thermometer label
+  ctx.fillStyle='#ffd';ctx.font='11px sans-serif';ctx.fillText('Thermometer',neckX+20,neckY-neckH+10);
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Simple Distillation_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 10 - Distillation',18,48);
+  drawFlask();
+  drawCondenser();
+  drawReceiver();
+  drawBubbles();
+  drawVapourPath();
+  drawDrops();
+  drawLabels();
+  t++;requestAnimationFrame(draw);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
-loop();
-</script>
-</body>
-</html>
+draw();
+</script></body></html>

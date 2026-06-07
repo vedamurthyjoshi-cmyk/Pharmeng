@@ -1,113 +1,228 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Desiccant Rotor Dehumidifier - Pharmaceutical Engineering</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Desiccant Dehumidifier | Pharmaceutical Engineering</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
-header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
-.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
-.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
-.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
-canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
-.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Desiccant Rotor Dehumidifier</h1><p>Pharmaceutical Engineering BP304T - Chapter 12 - HVAC</p></header>
-<nav><a href="index.html">Home</a></nav>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0d1a;color:#eee;font-family:Arial,sans-serif;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+h1{font-size:1.2rem;padding:10px;color:#AED6F1;text-align:center}
+.tabs{display:flex;gap:6px;margin-bottom:8px}
+.tab{padding:7px 18px;border:none;border-radius:6px 6px 0 0;cursor:pointer;font-size:0.9rem;background:#1a1a2e;color:#aaa}
+.tab.active{background:#1F4E79;color:#fff}
+canvas{border-radius:8px;display:block}
+.panel{display:none;max-width:720px;width:100%;background:#111827;border-radius:0 8px 8px 8px;padding:16px;line-height:1.7}
+.panel.active{display:block}
+.panel h2{color:#AED6F1;margin-bottom:8px;font-size:1rem}
+.panel p,.panel li{font-size:0.88rem;color:#ccc;margin-bottom:6px}
+.panel ul{padding-left:18px}
+.mcq{margin-bottom:14px}
+.mcq p{font-size:0.88rem;color:#ddd;margin-bottom:6px}
+.mcq button{display:block;width:100%;text-align:left;margin:3px 0;padding:6px 10px;background:#1a1a2e;border:1px solid #333;border-radius:5px;color:#ccc;cursor:pointer;font-size:0.83rem}
+.mcq button:hover{background:#1F4E79}
+.right{background:#145a32!important;color:#fff!important}
+.wrong{background:#7b241c!important;color:#fff!important}
+.controls{display:flex;gap:8px;margin:8px 0}
+.controls button{padding:6px 14px;border:none;border-radius:5px;background:#1F4E79;color:#fff;cursor:pointer;font-size:0.85rem}
+footer{font-size:0.75rem;color:#555;padding:10px;text-align:center}
+</style></head><body>
+<h1>Desiccant Dehumidifier — Rotary Wheel System</h1>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">Animation</button>
   <button class="tab" onclick="showTab('theory',this)">Theory</button>
   <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  <div class="controls">
+    <button onclick="toggleRun()">⏯ Pause/Play</button>
+    <button onclick="resetAnim()">↺ Reset</button>
   </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>A slowly rotating wheel impregnated with desiccant (silica gel or molecular sieve) absorbs moisture from process air as it passes through. The wet section is continuously regenerated by hot air at 120-150 degrees C on the other side. Very low humidity (as low as 1 percent RH) achievable.</p>
-  <div class="key-fact">Key Point: Desiccant dehumidifiers achieve much lower humidity than cooling coils. Pharmaceutical applications: effervescent tablet manufacturing (must have less than 15 percent RH to prevent premature CO2 release); moisture-sensitive API processing; lyophilised product packaging.</div>
-</div>
+  <canvas id="c" width="720" height="380"></canvas>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Desiccant Rotor Dehumidifier - Principle</h3>
-    <p>A slowly rotating wheel impregnated with desiccant (silica gel or molecular sieve) absorbs moisture from process air as it passes through. The wet section is continuously regenerated by hot air at 120-150 degrees C on the other side. Very low humidity (as low as 1 percent RH) achievable.</p>
-    <div class="key-fact">Key Fact: Desiccant dehumidifiers achieve much lower humidity than cooling coils. Pharmaceutical applications: effervescent tablet manufacturing (must have less than 15 percent RH to prevent premature CO2 release); moisture-sensitive API processing; lyophilised product packaging.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 12 - HVAC for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+  <h2>Desiccant Dehumidifier (Rotary Wheel)</h2>
+  <p>A large rotating wheel impregnated with silica gel or molecular sieve adsorbs moisture from process air in the adsorption zone. The saturated wheel continuously rotates into the reactivation zone where hot air drives off moisture, regenerating the desiccant.</p>
+  <h2>Key Zones</h2>
+  <ul>
+    <li><strong>Adsorption zone (process side ~75%):</strong> Moist process air passes through; moisture adsorbed onto desiccant</li>
+    <li><strong>Reactivation zone (regen side ~25%):</strong> Hot air (120–140°C) drives off moisture; exhausted outside</li>
+    <li><strong>Cooling sector:</strong> Wheel pre-cooled before entering adsorption zone</li>
+  </ul>
+  <h2>Advantages over Cooling Coil</h2>
+  <ul>
+    <li>Can achieve very low dew points (&lt; −40°C) — critical for hygroscopic APIs</li>
+    <li>Works independently of ambient temperature</li>
+    <li>Continuous operation — no defrost cycle needed</li>
+  </ul>
+  <h2>Pharmaceutical Use</h2>
+  <ul>
+    <li>Granulation rooms for moisture-sensitive APIs</li>
+    <li>Tablet compression and coating suites</li>
+    <li>Lyophilisation (freeze-drying) ancillary areas</li>
+    <li>Cold store dehumidification</li>
+  </ul>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Desiccant Rotor Dehumidifier?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) A slowly rotating wheel impregnated with desiccant (silica gel or molecular sieve) absorbs moisture ...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Desiccant dehumidifiers achieve much lower humidity than cooling coils. Pharmaceutical applications: effervescent tablet manufacturing (must have less than 15 percent RH to prevent premature CO2 release); moisture-sensitive API processing; lyophilised product packaging.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Desiccant Rotor Dehumidifier is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Desiccant dehumidifiers achieve much lower humidity than cooling coils. Pharmaceutical applications:...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. A slowly rotating wheel impregnated with desiccant (silica gel or molecular sieve) absorbs moisture from process air as it passes through. The wet section is continuously regenerated by hot air at 120-150 degrees C on the other side. Very low humidity (as low as 1 percent RH) achievable.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
+  <div class="mcq"><p>1. The desiccant in a rotary dehumidifier wheel is regenerated by:</p>
+    <button onclick="cho(this,0)">a) Chilled water</button>
+    <button data-c="1" onclick="cho(this,1)">b) Hot regeneration air (120–140°C)</button>
+    <button onclick="cho(this,0)">c) UV radiation</button>
+    <button onclick="cho(this,0)">d) Vacuum</button></div>
+  <div class="mcq"><p>2. A desiccant dehumidifier can achieve dew points as low as:</p>
+    <button onclick="cho(this,0)">a) 0°C</button>
+    <button onclick="cho(this,0)">b) −10°C</button>
+    <button data-c="1" onclick="cho(this,1)">c) −40°C or lower</button>
+    <button onclick="cho(this,0)">d) −100°C</button></div>
+  <div class="mcq"><p>3. Which desiccant material is commonly used in rotary wheel dehumidifiers?</p>
+    <button onclick="cho(this,0)">a) Calcium carbonate</button>
+    <button data-c="1" onclick="cho(this,1)">b) Silica gel or molecular sieve</button>
+    <button onclick="cho(this,0)">c) Activated charcoal</button>
+    <button onclick="cho(this,0)">d) Sodium chloride</button></div>
+  <div class="mcq"><p>4. The typical split of adsorption to regeneration zone in the wheel is:</p>
+    <button onclick="cho(this,0)">a) 50% : 50%</button>
+    <button data-c="1" onclick="cho(this,1)">b) 75% : 25%</button>
+    <button onclick="cho(this,0)">c) 90% : 10%</button>
+    <button onclick="cho(this,0)">d) 30% : 70%</button></div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Desiccant Rotor Dehumidifier</footer>
+<footer>© 2025 Pharmaceutical Engineering BP304T</footer>
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
-function draw(){
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Desiccant Rotor Dehumidifier_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 12 - HVAC',18,48);
+function showTab(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');el.classList.add('active');
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function cho(el,ok){
+  const btns=el.parentElement.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);el.classList.add(ok?'right':'wrong');
+  if(!ok)btns.forEach(b=>{if(b.dataset.c)b.classList.add('right');});
+}
+
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+const W=720,H=380;
+let t=0,running=true;
+const cx=360,cy=200,R=130; // wheel centre and radius
+
+// Air stream particles
+let processAirIn=[];  // moist process air entering left
+let processAirOut=[]; // dry process air leaving right
+let regenAirIn=[];    // hot regen air entering top
+let regenAirOut=[];   // humid exhaust leaving bottom
+
+function initParticles(){
+  processAirIn=[];processAirOut=[];regenAirIn=[];regenAirOut=[];
+  for(let i=0;i<12;i++) processAirIn.push({x:30+i*16,y:cy-R/2+20+Math.random()*(R-40),r:3,col:'rgba(100,180,255,0.8)'});
+  for(let i=0;i<10;i++) processAirOut.push({x:520+i*16,y:cy-R/2+20+Math.random()*(R-40),r:2.5,col:'rgba(200,230,255,0.5)'});
+  for(let i=0;i<8;i++) regenAirIn.push({x:cx-R/2+20+Math.random()*(R-40),y:40+i*10,r:2.5,col:'rgba(255,160,80,0.8)'});
+  for(let i=0;i<8;i++) regenAirOut.push({x:cx-R/2+20+Math.random()*(R-40),y:330+i*8,r:2.5,col:'rgba(150,200,255,0.6)'});
+}
+initParticles();
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+
+  const wheelAngle=t*0.008;
+
+  // Draw rotating wheel (filled sectors)
+  // Adsorption zone: left 75% of wheel (270° span)
+  ctx.save();ctx.translate(cx,cy);ctx.rotate(wheelAngle);
+  // Adsorption sector (blue — dry desiccant)
+  ctx.beginPath();ctx.moveTo(0,0);
+  ctx.arc(0,0,R,-Math.PI*0.5,Math.PI*1.0);
+  ctx.closePath();
+  ctx.fillStyle='rgba(41,128,185,0.4)';ctx.fill();
+  ctx.strokeStyle='#2980b9';ctx.lineWidth=1;ctx.stroke();
+  // Regeneration sector (orange — saturated/hot)
+  ctx.beginPath();ctx.moveTo(0,0);
+  ctx.arc(0,0,R,Math.PI*1.0,Math.PI*1.5);
+  ctx.closePath();
+  ctx.fillStyle='rgba(230,126,34,0.5)';ctx.fill();
+  ctx.strokeStyle='#e67e22';ctx.lineWidth=1;ctx.stroke();
+
+  // Sector dividers
+  for(let s=0;s<4;s++){
+    const ang=s*Math.PI/2;
+    ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(ang)*R,Math.sin(ang)*R);
+    ctx.strokeStyle='rgba(255,255,255,0.3)';ctx.lineWidth=1.5;ctx.stroke();
+  }
+  // Hub
+  ctx.beginPath();ctx.arc(0,0,18,0,Math.PI*2);
+  ctx.fillStyle='#7f8c8d';ctx.fill();
+  ctx.restore();
+
+  // Wheel rim
+  ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);
+  ctx.strokeStyle='#7f8c8d';ctx.lineWidth=4;ctx.stroke();
+
+  // Zone divider lines (fixed, not rotating)
+  // Process air duct dividers (horizontal)
+  ctx.strokeStyle='rgba(255,255,255,0.4)';ctx.lineWidth=2;ctx.setLineDash([5,5]);
+  ctx.beginPath();ctx.moveTo(cx-R,cy-R*0.22);ctx.lineTo(cx+R,cy-R*0.22);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(cx-R,cy+R*0.22);ctx.lineTo(cx+R,cy+R*0.22);ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Zone labels on wheel
+  ctx.save();ctx.translate(cx,cy);
+  ctx.fillStyle='rgba(41,128,185,0.8)';ctx.font='bold 11px Arial';ctx.textAlign='center';
+  ctx.fillText('ADSORPTION',0,-40);ctx.fillStyle='#aed6f1';ctx.font='9px Arial';
+  ctx.fillText('Moist air → Dry air',0,-25);ctx.fillText('~75% of wheel',0,-12);
+  ctx.fillStyle='rgba(230,126,34,0.9)';ctx.font='bold 10px Arial';
+  ctx.fillText('REGEN',0,75);ctx.fillStyle='#f0a060';ctx.font='9px Arial';
+  ctx.fillText('Hot air ~25%',0,88);
+  ctx.restore();
+
+  // Process air in (moist — left)
+  ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(20,cy-R+20,80,R*2-40);
+  ctx.strokeStyle='#2980b9';ctx.lineWidth=2;ctx.strokeRect(20,cy-R+20,80,R*2-40);
+  ctx.fillStyle='rgba(100,150,255,0.15)';ctx.fillRect(21,cy-R+21,78,R*2-42);
+  ctx.fillStyle='#AED6F1';ctx.font='bold 10px Arial';ctx.textAlign='center';
+  ctx.fillText('MOIST AIR IN',60,cy-R+8);ctx.font='9px Arial';ctx.fillText('RH: 70%',60,cy-R+20);
+
+  processAirIn.forEach(p=>{
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(100,180,255,0.8)';ctx.fill();
+    if(running){p.x+=2;if(p.x>cx-R+10){p.x=30+Math.random()*20;p.y=cy-R/2+20+Math.random()*(R-40);}}
+  });
+
+  // Process air out (dry — right)
+  ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(cx+R,cy-R+20,80,R*2-40);
+  ctx.strokeStyle='#27ae60';ctx.lineWidth=2;ctx.strokeRect(cx+R,cy-R+20,80,R*2-40);
+  ctx.fillStyle='rgba(46,204,113,0.1)';ctx.fillRect(cx+R+1,cy-R+21,78,R*2-42);
+  ctx.fillStyle='#2ecc71';ctx.font='bold 10px Arial';ctx.textAlign='center';
+  ctx.fillText('DRY AIR OUT',cx+R+40,cy-R+8);ctx.font='9px Arial';ctx.fillText('RH: <10%',cx+R+40,cy-R+20);
+
+  processAirOut.forEach(p=>{
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(200,230,255,0.5)';ctx.fill();
+    if(running){p.x+=2;if(p.x>cx+R+80){p.x=cx+R+5+Math.random()*15;p.y=cy-R/2+20+Math.random()*(R-40);}}
+  });
+
+  // Regen air in (hot — top)
+  ctx.fillStyle='#e67e22';ctx.font='bold 10px Arial';ctx.textAlign='center';
+  ctx.fillText('HOT REGEN AIR IN (130°C)',cx,35);
+  regenAirIn.forEach(p=>{
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,160,80,0.8)';ctx.fill();
+    if(running){p.y+=2;if(p.y>cy+R-10){p.y=30+Math.random()*20;p.x=cx-R/2+20+Math.random()*(R-40);}}
+  });
+
+  // Regen exhaust (humid hot — bottom)
+  ctx.fillStyle='#aaa';ctx.font='10px Arial';ctx.textAlign='center';
+  ctx.fillText('HUMID EXHAUST OUT',cx,360);
+  regenAirOut.forEach(p=>{
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(150,200,255,0.6)';ctx.fill();
+    if(running){p.y+=1.5;if(p.y>375){p.y=cy+R-5;p.x=cx-R/2+20+Math.random()*(R-40);}}
+  });
+
+  // Info box
+  ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(10,10,240,55);
+  ctx.fillStyle='#fff';ctx.font='bold 12px Arial';ctx.textAlign='left';
+  ctx.fillText('Desiccant Dehumidifier',18,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Rotating silica gel wheel adsorbs moisture',18,46);
+}
+
+function step(){t++;}
+function loop(){if(running)step();draw();requestAnimationFrame(loop);}
+function toggleRun(){running=!running;}
+function resetAnim(){t=0;initParticles();}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>

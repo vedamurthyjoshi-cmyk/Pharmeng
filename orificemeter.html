@@ -1,113 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Orifice Meter - Pharmaceutical Engineering</title>
-<style>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Orifice Meter</title><style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;}
 .tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
 .panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
 .anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
 canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Orifice Meter</h1><p>Pharmaceutical Engineering BP304T - Chapter 17 - Flow Measurement</p></header>
+.tb{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.tb h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.tb p,.tb li{line-height:1.8;font-size:0.95em;color:#333;}.tb ul{padding-left:22px;margin-top:8px;}
+.kf{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px;margin:12px 0;font-size:0.93em;}
+.mc{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mq{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.exp{display:none;margin-top:10px;padding:10px;background:#FEF9E7;border-radius:6px;font-size:0.9em;border-left:3px solid #F39C12;}
+.sb{text-align:center;padding:20px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:16px;color:#888;font-size:0.8em;background:white;margin-top:16px;}
+</style></head><body>
+<header><h1>Orifice Meter</h1><p>Pharmaceutical Engineering BP304T -- Chapter 17 -- Flow Measurement</p></header>
 <nav><a href="index.html">Home</a></nav>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
+  <button class="tab active" onclick="sT('anim',this)">Animation</button>
+  <button class="tab" onclick="sT('theory',this)">Theory</button>
+  <button class="tab" onclick="sT('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
-  </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>A flat plate with a central circular hole (orifice) is inserted perpendicular to flow. As fluid passes through the orifice, velocity increases and pressure drops. The pressure difference across the orifice plate is measured. Simpler and cheaper than venturimeter but higher permanent pressure loss (60 percent of deltaP lost).</p>
-  <div class="key-fact">Key Point: Orifice meter vs Venturimeter: Orifice - lower cost, more compact, higher pressure loss (60 percent permanent), Cd approximately 0.6; Venturimeter - higher cost, longer, lower pressure loss (10 percent), Cd approximately 0.98. Both measure flow by Bernoulli deltaP principle. Used for WFI flow, CIP solution flow, compressed air flow monitoring.</div>
-</div>
+<div class="anim-box"><canvas id="c" width="720" height="380"></canvas>
+<div style="margin-top:12px;">
+<button class="btn" id="pb" onclick="tP()">Pause</button>
+<button class="btn" onclick="sS(0.5)">Slow</button>
+<button class="btn" onclick="sS(1)">Normal</button>
+<button class="btn" onclick="sS(2)">Fast</button>
+</div></div>
+<div class="tb"><h3>What you are seeing</h3><p>A flat plate with a sharp-edged circular hole (orifice) is inserted perpendicular to flow. Fluid accelerates through the orifice. Pressure drops sharply across the plate. The flow stream contracts to a minimum cross-section (VENA CONTRACTA) just downstream. Pressure measured at the upstream tap (P1) and at the vena contracta (P2). DeltaP related to flow rate by Bernoulli.</p><div class="kf">Key Point: The Orifice Meter is simpler and cheaper than the Venturimeter but has much higher permanent pressure loss (60% of deltaP lost) because the sudden expansion downstream creates turbulence. Discharge coefficient Cd approximately 0.6 (vs 0.98 for Venturimeter).</div></div>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Orifice Meter - Principle</h3>
-    <p>A flat plate with a central circular hole (orifice) is inserted perpendicular to flow. As fluid passes through the orifice, velocity increases and pressure drops. The pressure difference across the orifice plate is measured. Simpler and cheaper than venturimeter but higher permanent pressure loss (60 percent of deltaP lost).</p>
-    <div class="key-fact">Key Fact: Orifice meter vs Venturimeter: Orifice - lower cost, more compact, higher pressure loss (60 percent permanent), Cd approximately 0.6; Venturimeter - higher cost, longer, lower pressure loss (10 percent), Cd approximately 0.98. Both measure flow by Bernoulli deltaP principle. Used for WFI flow, CIP solution flow, compressed air flow monitoring.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 17 - Flow Measurement for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+<div class="tb"><h3>Orifice Meter -- Theory</h3><ul><li><strong>Orifice plate:</strong> Flat SS plate; orifice diameter = 0.5-0.8 times pipe diameter; sharp upstream edge; bevelled downstream edge</li><li><strong>Pressure taps:</strong> Corner taps (most common), flange taps, or D-D/2 taps</li><li><strong>Vena contracta:</strong> Point of minimum stream cross-section just downstream of orifice; slightly smaller than orifice area</li><li><strong>Cd approximately 0.6:</strong> Accounts for vena contracta contraction (Cc) and velocity coefficient (Cv)</li><li><strong>Pharmaceutical use:</strong> Steam flow, compressed air, WFI flow measurement in utilities</li></ul><div class="kf">Key Point: The Orifice Meter is simpler and cheaper than the Venturimeter but has much higher permanent pressure loss (60% of deltaP lost) because the sudden expansion downstream creates turbulence. Discharge coefficient Cd approximately 0.6 (vs 0.98 for Venturimeter).</div></div>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Orifice Meter?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) A flat plate with a central circular hole (orifice) is inserted perpendicular to flow. As fluid pass...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Orifice meter vs Venturimeter: Orifice - lower cost, more compact, higher pressure loss (60 percent permanent), Cd approximately 0.6; Venturimeter - higher cost, longer, lower pressure loss (10 percent), Cd approximately 0.98. Both measure flow by Bernoulli deltaP principle. Used for WFI flow, CIP solution flow, compressed air flow monitoring.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Orifice Meter is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Orifice meter vs Venturimeter: Orifice - lower cost, more compact, higher pressure loss (60 percent ...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. A flat plate with a central circular hole (orifice) is inserted perpendicular to flow. As fluid passes through the orifice, velocity increases and pressure drops. The pressure difference across the orifice plate is measured. Simpler and cheaper than venturimeter but higher permanent pressure loss (60 percent of deltaP lost).</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
-</div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Orifice Meter</footer>
+<div class="mc"><div class="mq">Q1. The discharge coefficient of an Orifice Meter (Cd approximately 0.6) is much lower than a Venturimeter (Cd approximately 0.98) because:</div>
+<button class="opt" onclick="ch(this,false)">A) Incorrect option</button>
+<button class="opt" onclick="ch(this,true)" data-c>B) The orifice creates a sudden cross-sectional change -- the flow contracts further beyond the orifice (vena contracta is smaller than the orifice area, Cc approximately 0.64) and there is turbulent energy loss at the sudden expansion -- both effects reduce actual flow below the theoretical value calculated from deltaP alone</button>
+<button class="opt" onclick="ch(this,false)">C) Another incorrect option</button>
+<button class="opt" onclick="ch(this,false)">D) Yet another incorrect option</button>
+<div class="exp">Correct. Cd = Cc x Cv where Cc = contraction coefficient (vena contracta area / orifice area, approximately 0.64) and Cv = velocity coefficient (accounts for friction losses, approximately 0.97). Venturimeter: smooth contraction and gradual expansion -- no vena contracta, no turbulent expansion -- Cc approximately 1.0, Cv approximately 0.98, so Cd approximately 0.98. Orifice: Cd approximately 0.64 x 0.97 approximately 0.62.</div></div>
+<div class="mc"><div class="mq">Q2. In pharmaceutical GMP utilities, the Orifice Meter is used for steam flow measurement rather than Venturimeter because:</div>
+<button class="opt" onclick="ch(this,false)">A) Incorrect option</button>
+<button class="opt" onclick="ch(this,true)" data-c>B) Orifice meters are cheaper, more compact, and easier to install and replace in utility (non-product contact) applications -- steam flow does not require the low pressure loss or sanitary design needed for product-contact WFI systems -- the higher permanent pressure loss is acceptable given the lower cost</button>
+<button class="opt" onclick="ch(this,false)">C) Another incorrect option</button>
+<button class="opt" onclick="ch(this,false)">D) Yet another incorrect option</button>
+<div class="exp">Correct. Cost vs performance trade-off: Venturimeter costs 5-10 times more than an equivalent orifice plate and requires a longer straight pipe run. For steam, compressed air, nitrogen, and cooling water (utility services) -- the pressure loss is acceptable because these lines operate at higher pressure with more available head. Product-contact WFI lines: Venturimeter preferred because lower pressure loss maintains WFI loop pressure and circulation velocity, preventing bacterial growth.</div></div>
+<div class="sb" id="sc" style="display:none"><h2 id="st" style="color:#1B4F72;"></h2><button class="btn" onclick="rM()">Try Again</button></div></div>
+<footer>2025 Pharmaceutical Engineering BP304T -- Orifice Meter</footer>
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+function sT(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function ch(el,ok){const card=el.closest('.mc');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(ok){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-c]').classList.add('correct');}card.querySelector('.exp').style.display='block';_a++;const t=document.querySelectorAll('.mc').length;if(_a===t){document.getElementById('sc').style.display='block';document.getElementById('st').textContent='Score: '+_s+'/'+t+(_s===t?' Perfect!':'');}}
+function rM(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.exp').forEach(e=>e.style.display='none');document.getElementById('sc').style.display='none';}
+const C=document.getElementById('c'),ctx=C.getContext('2d'),W=720,H=380;
+let run=true,sp=1,fr=0;
+function tP(){run=!run;document.getElementById('pb').textContent=run?'Pause':'Play';if(run)loop();}
+function sS(s){sp=s;}
+
+// Orifice meter -- plate in pipe, vena contracta, pressure taps
+const flowParts=[];
+for(let i=0;i<35;i++) flowParts.push({x:80+Math.random()*560,y:200+(Math.random()-0.5)*60,vx:1+Math.random()*0.5,phase:'pipe'});
+let tick=0;
+
+function pipeRO(x){
+  // Orifice at x=360, creates vena contracta
+  if(x<340) return 55; // upstream pipe
+  if(x<360) return 55-(55-18)*(x-340)/20; // convergence into orifice
+  if(x<380) return 18+(30-18)*(x-360)/20; // vena contracta expansion
+  if(x<420) return 30+(55-30)*(x-380)/40; // expansion back
+  return 55; // downstream pipe
+}
+
+function step(){
+  tick+=sp;fr++;
+  flowParts.forEach(p=>{
+    const r=pipeRO(p.x);
+    const vMult=p.x>340&&p.x<420 ? 55*55/(r*r*0.6) : 1;
+    p.x+=p.vx*Math.min(4,vMult)*sp*0.6;
+    const maxY=200+r-4;const minY=200-r+4;
+    if(p.y>maxY)p.y=200+(Math.random()-0.5)*(r*1.5);
+    if(p.y<minY)p.y=200+(Math.random()-0.5)*(r*1.5);
+    if(p.x>660){p.x=85;p.y=200+(Math.random()-0.5)*90;}
+  });
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Orifice Meter_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 17 - Flow Measurement',18,48);
+
+  // Upstream pipe
+  ctx.fillStyle='rgba(26,50,90,0.6)';ctx.fillRect(70,145,270,110);ctx.strokeStyle='#4A90D9';ctx.lineWidth=3;ctx.strokeRect(70,145,270,110);
+
+  // Orifice plate
+  ctx.fillStyle='rgba(80,100,120,0.95)';ctx.fillRect(340,140,20,60);ctx.fillRect(340,200,20,60);
+  ctx.strokeStyle='#7F8C8D';ctx.lineWidth=2;ctx.strokeRect(340,140,20,60);ctx.strokeRect(340,200,20,60);
+  ctx.fillStyle='#888';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('ORIFICE PLATE',350,132);
+
+  // Downstream pipe
+  ctx.fillStyle='rgba(26,50,90,0.55)';ctx.fillRect(360,145,280,110);ctx.strokeStyle='#4A90D9';ctx.lineWidth=3;ctx.strokeRect(360,145,280,110);
+
+  // Vena contracta boundary (dotted)
+  ctx.strokeStyle='rgba(231,76,60,0.4)';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
+  ctx.beginPath();
+  // Narrow zone just after orifice
+  ctx.moveTo(360,182);ctx.lineTo(385,186);ctx.moveTo(360,218);ctx.lineTo(385,214);
+  ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='rgba(231,76,60,0.6)';ctx.font='8px Arial';ctx.textAlign='center';ctx.fillText('VENA',385,196);ctx.fillText('CONTRACTA',385,208);
+
+  // Flow particles
+  flowParts.forEach(p=>{
+    const r=pipeRO(p.x);
+    const speed=Math.min(1,Math.max(0,(55*55/(r*r)-1)/8));
+    const rc=Math.round(52+speed*180);const gc=Math.round(152-speed*80);
+    ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);
+    ctx.fillStyle=`rgb(${rc},${gc},200)`;ctx.globalAlpha=0.7;ctx.fill();ctx.globalAlpha=1;
+  });
+
+  // Pressure taps
+  ctx.strokeStyle='#E74C3C';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(300,145);ctx.lineTo(300,115);ctx.stroke(); // P1
+  ctx.beginPath();ctx.moveTo(390,145);ctx.lineTo(390,115);ctx.stroke(); // P2
+  // Connecting line
+  ctx.beginPath();ctx.moveTo(300,115);ctx.lineTo(390,115);ctx.stroke();
+  // deltaP symbol
+  ctx.fillStyle='white';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('deltaP',345,110);
+
+  // Labels
+  ctx.fillStyle='#3498DB';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('P1 high',255,135);
+  ctx.fillStyle='#E74C3C';ctx.fillText('P2 low',390,135);
+  ctx.fillStyle='#888';ctx.fillText('60% deltaP permanently lost',520,275);
+
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(8,8,205,68);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Orifice Meter',16,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Simple, cheap | Cd ~0.6',16,46);ctx.fillText('60% permanent pressure loss',16,62);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function loop(){if(run)step();draw();if(run)requestAnimationFrame(loop);}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>

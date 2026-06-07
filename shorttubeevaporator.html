@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Short-Tube Calandria Evaporator - Pharmaceutical Engineering</title>
+<title>Short-Tube Calandria Evaporator — Pharmaceutical Engineering</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
@@ -14,7 +14,7 @@ canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
 .theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
 .theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
 .key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
 .mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
 .mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
@@ -26,85 +26,214 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 </style>
 </head>
 <body>
-<header><h1>Short-Tube Calandria Evaporator</h1><p>Pharmaceutical Engineering BP304T - Chapter 8 - Evaporation</p></header>
-<nav><a href="index.html">Home</a></nav>
+<header><h1>🔥 Short-Tube (Calandria) Evaporator</h1><p>Pharmaceutical Engineering BP304T · Chapter 8 — Evaporation</p></header>
+<nav><a href="index.html">🏠 Home</a></nav>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
+  <button class="tab active" onclick="showTab('anim',this)">🎬 Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">📖 Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">✅ MCQs</button>
 </div>
 <div id="anim" class="panel active">
 <div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
+  <canvas id="c" width="720" height="400"></canvas>
   <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
+    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
     <button class="btn" onclick="setSpeed(0.5)">Slow</button>
     <button class="btn" onclick="setSpeed(1)">Normal</button>
     <button class="btn" onclick="setSpeed(2)">Fast</button>
   </div>
 </div>
 <div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>Liquid circulates naturally through short vertical tubes surrounded by steam. Natural convection drives liquid up through the tubes and down through a central downcomer. Simple and robust - the original pharmaceutical evaporator.</p>
-  <div class="key-fact">Key Point: The Short-Tube Evaporator relies on natural circulation driven by density difference between hot liquid rising in tubes and cooler liquid descending through the central downcomer. No pump needed.</div>
+  <h3>💡 What you are seeing</h3>
+  <p>Steam surrounds the short vertical tubes (calandria). Liquid inside the tubes is heated and rises upward (hot liquid is less dense). It enters the vapour space above, where vapour bubbles escape upward (white dots). Cooler, denser liquid descends through the central downcomer (large central pipe) back to the bottom — creating a natural circulation loop. Concentrated liquid exits at the bottom.</p>
+  <div class="key-fact">🔑 Natural circulation — no pump needed. The density difference between hot liquid in tubes and cooler liquid in the downcomer drives the circulation. Simple, robust, widely used for pharmaceutical evaporation where the product is not heat-sensitive.</div>
 </div>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Short-Tube Calandria Evaporator - Principle</h3>
-    <p>Liquid circulates naturally through short vertical tubes surrounded by steam. Natural convection drives liquid up through the tubes and down through a central downcomer. Simple and robust - the original pharmaceutical evaporator.</p>
-    <div class="key-fact">Key Fact: The Short-Tube Evaporator relies on natural circulation driven by density difference between hot liquid rising in tubes and cooler liquid descending through the central downcomer. No pump needed.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 8 - Evaporation for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+  <div class="theory-box"><h3>Principle</h3><p>The Calandria (short-tube) evaporator achieves evaporation by natural circulation. Steam condenses on the outside of short vertical tubes (1–2 m long, 50–100 mm diameter). Liquid inside the tubes heats up, density decreases, liquid rises. In the vapour space above the tubes, vapour separates from liquid. Cooler, denser liquid flows down the central downcomer back to the bottom. This creates a continuous natural circulation without any pump.</p></div>
+  <div class="theory-box"><h3>Construction</h3><ul>
+    <li><strong>Calandria (tube bundle):</strong> Short vertical tubes (1–2 m) fixed between upper and lower tube sheets; steam in the shell side</li>
+    <li><strong>Central downcomer:</strong> Large-diameter central pipe (200–500 mm); liquid descends through this</li>
+    <li><strong>Vapour space:</strong> Large open space above tube bundle for vapour-liquid separation</li>
+    <li><strong>Steam chest:</strong> Shell surrounding the tubes; steam inlet and condensate outlet</li>
+    <li><strong>Feed inlet:</strong> Dilute solution enters at bottom; concentrated product exits at bottom</li>
+  </ul></div>
+  <div class="theory-box"><h3>Pharmaceutical Applications and Limitations</h3><ul>
+    <li>Concentration of inorganic salt solutions (NaCl, KCl, ammonium sulphate) in pharmaceutical synthesis</li>
+    <li>Concentration of sugar syrups and liquid oral formulations</li>
+    <li>NOT suitable for heat-sensitive products — long residence time (minutes to hours) in hot liquid</li>
+    <li>NOT suitable for viscous liquids (poor natural circulation) or scaling/crystallising products</li>
+  </ul><div class="key-fact">🔑 The short-tube evaporator is the OLDEST evaporator design — simple, reliable, and easy to maintain. Its main limitation is long liquid residence time making it unsuitable for heat-sensitive pharmaceutical products like vitamins, antibiotics, or proteins.</div></div>
 </div>
 <div id="mcq" class="panel">
   <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Short-Tube Calandria Evaporator?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Liquid circulates naturally through short vertical tubes surrounded by steam. Natural convection dri...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. The Short-Tube Evaporator relies on natural circulation driven by density difference between hot liquid rising in tubes and cooler liquid descending through the central downcomer. No pump needed.</div>
+    <div class="mcq-q">Q1. In a Short-Tube Calandria Evaporator, liquid circulation is driven by:</div>
+    <button class="opt" onclick="choose(this,false)">A) A centrifugal pump that forces liquid through the tubes</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Natural convection — hot less-dense liquid rises in heated tubes; cooler denser liquid descends through the central downcomer — no pump required</button>
+    <button class="opt" onclick="choose(this,false)">C) Vacuum applied at the top pulling liquid upward</button>
+    <button class="opt" onclick="choose(this,false)">D) Gravity alone — liquid falls downward through the tubes</button>
+    <div class="explanation">✅ Natural circulation principle: density of liquid decreases as temperature increases. Hot liquid in steam-heated tubes (less dense) rises due to buoyancy. At top, vapour separates. Cooler concentrated liquid (denser) descends through central downcomer. This density-driven loop circulates liquid continuously without any external pump — simplifying construction and maintenance. Circulation rate depends on tube length, temperature difference, and liquid viscosity.</div>
   </div>
   <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Short-Tube Calandria Evaporator is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) The Short-Tube Evaporator relies on natural circulation driven by density difference between hot liq...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. Liquid circulates naturally through short vertical tubes surrounded by steam. Natural convection drives liquid up through the tubes and down through a central downcomer. Simple and robust - the original pharmaceutical evaporator.</div>
+    <div class="mcq-q">Q2. The Short-Tube Evaporator is NOT recommended for concentration of antibiotic solutions because:</div>
+    <button class="opt" onclick="choose(this,false)">A) Antibiotics are not soluble in water</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) Long liquid residence time (minutes to hours) at high temperature causes thermal degradation of heat-sensitive antibiotics — Falling Film Evaporator (5–30 second residence time) is preferred</button>
+    <button class="opt" onclick="choose(this,false)">C) The calandria tubes are too narrow for antibiotic solutions</button>
+    <button class="opt" onclick="choose(this,false)">D) Antibiotics react with the steam used for heating</button>
+    <div class="explanation">✅ Residence time comparison: Short-tube/Calandria = liquid recirculates continuously → effective residence time = minutes to hours. Falling Film = liquid passes once through tube in 5–30 seconds. For heat-sensitive APIs (antibiotics like penicillin, erythromycin; vitamins; enzymes): use Falling Film under vacuum (lower boiling temperature + short time = minimal degradation). Short-tube is acceptable for thermally stable molecules: inorganic salts, sugars, non-heat-sensitive APIs.</div>
+  </div>
+  <div class="mcq-card">
+    <div class="mcq-q">Q3. The purpose of the central downcomer in a Calandria Evaporator is:</div>
+    <button class="opt" onclick="choose(this,false)">A) To add steam directly to the liquid for faster heating</button>
+    <button class="opt" onclick="choose(this,true)" data-correct>B) To provide a path for cooler, denser liquid to flow downward from the vapour space back to the bottom of the tube bundle — completing the natural circulation loop</button>
+    <button class="opt" onclick="choose(this,false)">C) To discharge the concentrated product from the evaporator</button>
+    <button class="opt" onclick="choose(this,false)">D) To separate vapour from liquid in the evaporator</button>
+    <div class="explanation">✅ Downcomer function: without the central downcomer, liquid would have no return path → circulation would stop → tubes would run dry → fouling and damage. The downcomer (typically 25–40% of total cross-sectional area) provides low-resistance return flow path. Large diameter = low velocity = low pressure drop = good natural circulation. If downcomer is too small → high velocity → high pressure drop → reduced circulation → poor evaporation efficiency.</div>
   </div>
   <div class="score-box" id="score" style="display:none">
     <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
+    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
   </div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Short-Tube Calandria Evaporator</footer>
+<footer>© 2025 Pharmaceutical Engineering BP304T · Short-Tube Calandria Evaporator</footer>
 <script>
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' — Perfect! 🌟':' — Review and try again.');}}
 function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
+
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');
+const W=canvas.width,H=canvas.height;
+let running=true,speedMult=1,frameN=0;
+function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';if(running)loop();}
 function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+
+// Tube positions (6 tubes around central downcomer)
+const TUBES=[{x:220},{x:280},{x:340},{x:460},{x:520},{x:580}];
+const DOWNCOMER_X=400,DOWNCOMER_W=60;
+
+// Liquid particles rising in tubes
+const rising=[];
+for(let t=0;t<TUBES.length;t++)
+  for(let i=0;i<5;i++) rising.push({tube:t,y:250+Math.random()*80,vy:-(0.8+Math.random()*0.6),conc:0.2+Math.random()*0.3});
+
+// Vapour bubbles escaping at top
+const vapour=[];
+for(let i=0;i<25;i++) vapour.push({x:180+Math.random()*440,y:120+Math.random()*60,vy:-(0.5+Math.random()*0.8),r:2+Math.random()*3,alpha:0.7});
+
+// Descending particles in downcomer
+const descending=[];
+for(let i=0;i<8;i++) descending.push({y:120+Math.random()*150,vy:0.6+Math.random()*0.4,conc:0.7+Math.random()*0.3});
+
+// Steam particles (outside tubes)
+const steam=[];
+for(let i=0;i<20;i++) steam.push({x:170+Math.random()*480,y:200+Math.random()*120,alpha:0.3+Math.random()*0.3,vy:-0.2});
+
+function step(){
+  frameN++;
+  rising.forEach(p=>{
+    p.y+=p.vy*speedMult;
+    p.conc=Math.min(0.9,p.conc+0.001*speedMult);
+    if(p.y<130){p.y=250+Math.random()*60;p.conc=0.2+Math.random()*0.2;}
+  });
+  vapour.forEach(v=>{
+    v.y+=v.vy*speedMult;v.x+=(Math.random()-0.5)*0.8;
+    v.alpha-=0.006*speedMult;
+    if(v.alpha<0||v.y<60){v.y=130+Math.random()*30;v.x=180+Math.random()*440;v.alpha=0.7;}
+  });
+  descending.forEach(p=>{
+    p.y+=p.vy*speedMult;
+    if(p.y>300){p.y=120+Math.random()*20;}
+  });
+  steam.forEach(s=>{s.y+=s.vy*speedMult;s.alpha-=0.003*speedMult;if(s.alpha<0){s.y=200+Math.random()*120;s.alpha=0.3;}});
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Short-Tube Calandria Evaporator_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 8 - Evaporation',18,48);
+
+  // Steam chest (outer shell)
+  ctx.fillStyle='rgba(44,62,80,0.7)';ctx.fillRect(160,180,480,170);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=5;ctx.strokeRect(160,180,480,170);
+
+  // Steam particles
+  steam.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,3,0,Math.PI*2);ctx.fillStyle=`rgba(231,76,60,${s.alpha})`;ctx.fill();});
+
+  // Tubes (filled with liquid)
+  TUBES.forEach(tb=>{
+    ctx.fillStyle='rgba(52,152,219,0.3)';ctx.fillRect(tb.x-12,185,24,160);
+    ctx.strokeStyle='#85929E';ctx.lineWidth=3;ctx.strokeRect(tb.x-12,185,24,160);
+  });
+
+  // Rising liquid in tubes
+  rising.forEach(p=>{
+    const tb=TUBES[p.tube];
+    const r=Math.round(52+(52-52)*p.conc);
+    const g=Math.round(152+(100-152)*p.conc);
+    const b=Math.round(219+(30-219)*p.conc);
+    ctx.beginPath();ctx.arc(tb.x+(Math.random()-0.5)*8,p.y,3,0,Math.PI*2);
+    ctx.fillStyle=`rgb(${r},${g},${b})`;ctx.globalAlpha=0.85;ctx.fill();ctx.globalAlpha=1;
+  });
+
+  // Central downcomer
+  ctx.fillStyle='rgba(52,73,94,0.8)';ctx.fillRect(DOWNCOMER_X-DOWNCOMER_W/2,130,DOWNCOMER_W,230);
+  ctx.strokeStyle='#7F8C8D';ctx.lineWidth=3;ctx.strokeRect(DOWNCOMER_X-DOWNCOMER_W/2,130,DOWNCOMER_W,230);
+
+  // Descending liquid in downcomer
+  descending.forEach(p=>{
+    ctx.beginPath();ctx.arc(DOWNCOMER_X+(Math.random()-0.5)*25,p.y,4,0,Math.PI*2);
+    ctx.fillStyle='rgba(52,152,219,0.6)';ctx.fill();
+  });
+  // Down arrow in downcomer
+  ctx.strokeStyle='rgba(149,165,166,0.5)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(DOWNCOMER_X,150);ctx.lineTo(DOWNCOMER_X,330);
+  ctx.moveTo(DOWNCOMER_X-8,320);ctx.lineTo(DOWNCOMER_X,335);ctx.lineTo(DOWNCOMER_X+8,320);
+  ctx.stroke();
+
+  // Vapour space
+  ctx.fillStyle='rgba(30,30,50,0.4)';ctx.fillRect(160,60,480,120);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=2;ctx.strokeRect(160,60,480,120);
+  ctx.fillStyle='#888';ctx.font='11px Arial';ctx.textAlign='center';ctx.fillText('VAPOUR SPACE',400,80);
+
+  // Vapour bubbles
+  vapour.forEach(v=>{
+    ctx.beginPath();ctx.arc(v.x,v.y,v.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${v.alpha})`;ctx.fill();
+  });
+
+  // Vapour outlet (top)
+  ctx.strokeStyle='rgba(255,255,255,0.6)';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(400,60);ctx.lineTo(400,30);ctx.stroke();
+  ctx.fillStyle='#aaa';ctx.font='10px Arial';ctx.fillText('VAPOUR OUT',400,22);
+
+  // Steam inlet
+  ctx.strokeStyle='rgba(231,76,60,0.8)';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(100,265);ctx.lineTo(160,265);ctx.stroke();
+  ctx.fillStyle='#E74C3C';ctx.textAlign='right';ctx.fillText('STEAM IN',155,260);
+
+  // Condensate out
+  ctx.strokeStyle='rgba(149,165,166,0.7)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(160,300);ctx.lineTo(110,300);ctx.stroke();
+  ctx.fillStyle='#888';ctx.textAlign='right';ctx.fillText('CONDENSATE',155,315);
+
+  // Feed in / Product out (bottom)
+  ctx.strokeStyle='#3498DB';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(200,350);ctx.lineTo(200,390);ctx.stroke();
+  ctx.fillStyle='#3498DB';ctx.textAlign='center';ctx.fillText('FEED IN',200,400);
+  ctx.strokeStyle='#27AE60';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(600,350);ctx.lineTo(600,390);ctx.stroke();
+  ctx.fillStyle='#27AE60';ctx.fillText('CONCENTRATE OUT',600,400);
+
+  // Circulation arrows
+  ctx.strokeStyle='rgba(255,255,255,0.25)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(155,270);ctx.arc(400,270,245,Math.PI,0,true);ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Labels
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,220,75);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🔥 Short-Tube Calandria Evaporator',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Circulation: Natural convection',18,48);ctx.fillText('No pump needed',18,64);
+  ctx.fillStyle='#F9E79F';ctx.fillText('Limitation: Long residence time',18,80);
 }
 function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
 loop();

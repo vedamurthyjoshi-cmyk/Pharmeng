@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Fractional Distillation - Pharmaceutical Engineering</title>
+<title>Fractional Distillation — Pharmaceutical Engineering</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
@@ -14,10 +14,9 @@ canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
 .theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
 .theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
 .key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
 .opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
 .opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
 .explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
@@ -26,7 +25,7 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 </style>
 </head>
 <body>
-<header><h1>Fractional Distillation</h1><p>Pharmaceutical Engineering BP304T - Chapter 10 - Distillation</p></header>
+<header><h1>Column Fractional Distillation</h1><p>Pharmaceutical Engineering BP304T &middot; Chapter 10 — Distillation</p></header>
 <nav><a href="index.html">Home</a></nav>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">Animation</button>
@@ -35,7 +34,7 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 </div>
 <div id="anim" class="panel active">
 <div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
+  <canvas id="c" width="720" height="400"></canvas>
   <div style="margin-top:14px;">
     <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
     <button class="btn" onclick="setSpeed(0.5)">Slow</button>
@@ -45,66 +44,136 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 </div>
 <div class="theory-box">
   <h3>What you are seeing</h3>
-  <p>A fractionating column sits between the flask and condenser. Vapour rising meets descending condensate - repeated vapour-liquid equilibrium on each theoretical plate. Each plate enriches vapour in the more volatile component. Pure component exits from the top.</p>
-  <div class="key-fact">Key Point: Number of theoretical plates (NTP) determines separation efficiency. More plates means better separation of closely-boiling components. McCabe-Thiele diagram plots vapour-liquid equilibrium and determines NTP needed for a given separation.</div>
+  <p>Vapour (yellow) rises up the fractionating column — meeting descending condensate (blue) at each theoretical plate. Each meeting creates a vapour-liquid equilibrium. More volatile component concentrates in rising vapour. Gradient bar shows temperature decreasing from hot (bottom) to cool (top). Pure component exits at top.</p>
+  <div class="key-fact">Key Point: The more theoretical plates in the column, the better the separation of closely-boiling components. Used when boiling point difference is less than 25 degrees C.</div>
 </div>
 </div>
-<div id="theory" class="panel">
-  <div class="theory-box"><h3>Fractional Distillation - Principle</h3>
-    <p>A fractionating column sits between the flask and condenser. Vapour rising meets descending condensate - repeated vapour-liquid equilibrium on each theoretical plate. Each plate enriches vapour in the more volatile component. Pure component exits from the top.</p>
-    <div class="key-fact">Key Fact: Number of theoretical plates (NTP) determines separation efficiency. More plates means better separation of closely-boiling components. McCabe-Thiele diagram plots vapour-liquid equilibrium and determines NTP needed for a given separation.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 10 - Distillation for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
-</div>
+<div id="theory" class="panel"><div class="theory-box"><h3>Principle</h3>
+<p>A fractionating column provides multiple vapour-liquid equilibrium stages between the flask and condenser. Rising vapour meets descending condensate — at each theoretical plate, volatile component transfers from liquid to vapour phase and less-volatile component transfers from vapour to liquid. After many plates, pure volatile component exits at top; pure less-volatile component remains at bottom.</p></div>
+<div class="theory-box"><h3>Pharmaceutical Applications</h3><ul>
+<li>Purification of ethanol for pharmaceutical use (spirits of wine, rectified spirit)</li>
+<li>Recovery of mixed solvents from pharmaceutical synthesis — separating ethanol/water, acetone/water, IPA/water</li>
+<li>Purification of glycerol (by-product of soap manufacture) for pharmaceutical use</li>
+<li>Separation of essential oil components (terpenoids) for fragrance and flavour</li>
+</ul></div></div>
 <div id="mcq" class="panel">
   <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Fractional Distillation?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) A fractionating column sits between the flask and condenser. Vapour rising meets descending condensa...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Number of theoretical plates (NTP) determines separation efficiency. More plates means better separation of closely-boiling components. McCabe-Thiele diagram plots vapour-liquid equilibrium and determines NTP needed for a given separation.</div>
+    <div class="mcq-q">Q1. The number of theoretical plates (NTP) in a fractionating column determines:</div>
+    <button class="opt" onclick="choose(this,false)">A) The boiling point of the liquid mixture</button>
+<button class="opt" onclick="choose(this,true)" data-correct>B) The efficiency of separation — more plates means more vapour-liquid equilibrium stages — better enrichment of the vapour in the more volatile component — closer-boiling mixtures can be separated</button>
+<button class="opt" onclick="choose(this,false)">C) The temperature of the heating bath</button>
+<button class="opt" onclick="choose(this,false)">D) The flow rate of distillate</button>
+
+    <div class="explanation">NTP and separation: each theoretical plate provides one vapour-liquid equilibrium stage. At each stage, the vapour becomes richer in the more volatile component by a factor related to the relative volatility (alpha = P_A/P_B, ratio of vapour pressures). More plates = more enrichment steps = purer distillate for same feed composition. McCabe-Thiele graphical method: step between operating line and equilibrium curve on y-x diagram counts NTP. High-performance columns: >100 NTP possible (packed columns, efficiency plates).</div>
   </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Fractional Distillation is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Number of theoretical plates (NTP) determines separation efficiency. More plates means better separa...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. A fractionating column sits between the flask and condenser. Vapour rising meets descending condensate - repeated vapour-liquid equilibrium on each theoretical plate. Each plate enriches vapour in the more volatile component. Pure component exits from the top.</div>
+<div class="mcq-card">
+    <div class="mcq-q">Q2. In pharmaceutical solvent recovery, fractional distillation is preferred over simple distillation for recovering ethanol from aqueous solutions because:</div>
+    <button class="opt" onclick="choose(this,true)" data-correct>A) Ethanol and water have a boiling point difference of only 22 degrees C — simple distillation gives only about 40-50% ethanol — fractional distillation with multiple plates enriches the distillate to 95.6% (azeotrope)</button>
+<button class="opt" onclick="choose(this,false)">B) Simple distillation cannot handle ethanol at all</button>
+<button class="opt" onclick="choose(this,false)">C) Fractional distillation operates at lower temperature</button>
+<button class="opt" onclick="choose(this,false)">D) Fractional distillation is faster than simple distillation</button>
+
+    <div class="explanation">Ethanol-water azeotrope: at 95.6% ethanol by weight (89.4 mol%), the vapour and liquid compositions are identical — this is the azeotropic composition. Fractional distillation cannot separate beyond the azeotrope regardless of number of plates. The distillate approaches 95.6% ethanol maximum. For absolute ethanol (99.9%+): need to break the azeotrope by (1) adding benzene or cyclohexane (azeotropic distillation — breaks azeotrope but toxic solvent); (2) molecular sieves (adsorb water selectively); (3) pervaporation membranes. IP definition: Rectified Spirit = 95% v/v ethanol (near azeotrope).</div>
   </div>
+
   <div class="score-box" id="score" style="display:none">
     <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
     <button class="btn" onclick="resetMCQ()">Try Again</button>
   </div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Fractional Distillation</footer>
+<footer>2025 Pharmaceutical Engineering BP304T - Fractional Distillation</footer>
 <script>
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' Perfect!':' Review and try again.');}}
 function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
+let running=true,speedMult=1;
 function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
 function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+// Fractional distillation with column
+let t=0;
+// Vapour rising up column
+const rising=[];
+for(let i=0;i<20;i++) rising.push({y:280+Math.random()*80,vy:-(0.4+Math.random()*0.4),x:320+Math.random()*60,alpha:0.6});
+// Condensate dripping down column
+const dripping=[];
+for(let i=0;i<15;i++) dripping.push({y:100+Math.random()*180,vy:0.3+Math.random()*0.3,x:310+Math.random()*80,alpha:0.5});
+// Distillate drops
+const distDrops=[];
+for(let i=0;i<8;i++) distDrops.push({y:80+Math.random()*120,vy:0.6+Math.random()});
+// Temperature labels
+const temps=[{y:280,t:'T1 (boiling point of mixture)'},{y:200,t:'T2 (enriched vapour)'},{y:120,t:'T3 (near pure component)'}];
+
+function step(){
+  t+=speedMult;
+  rising.forEach(v=>{v.y+=v.vy*speedMult;v.x+=(Math.random()-0.5)*0.3;if(v.y<90||v.alpha<0){v.y=280+Math.random()*60;v.alpha=0.6;}});
+  dripping.forEach(d=>{d.y+=d.vy*speedMult;if(d.y>290){d.y=100+Math.random()*30;}});
+  distDrops.forEach(d=>{d.y+=d.vy*speedMult;if(d.y>230){d.y=80+Math.random()*20;}});
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Fractional Distillation_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 10 - Distillation',18,48);
+  
+  // Flask
+  ctx.strokeStyle='#AED6F1';ctx.lineWidth=4;ctx.fillStyle='rgba(52,152,219,0.2)';
+  ctx.beginPath();ctx.arc(280,350,60,0,Math.PI*2);ctx.fill();ctx.stroke();
+  // Heat
+  ctx.fillStyle='rgba(231,76,60,0.25)';ctx.beginPath();ctx.arc(280,410,50,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#E74C3C';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('HEAT',280,415);
+  
+  // Fractionating column (tall vertical)
+  ctx.fillStyle='rgba(52,152,219,0.1)';ctx.fillRect(310,80,80,260);
+  ctx.strokeStyle='#AED6F1';ctx.lineWidth=4;ctx.strokeRect(310,80,80,260);
+  // Column packing (plates represented as horizontal lines)
+  ctx.strokeStyle='rgba(174,214,241,0.4)';ctx.lineWidth=2;
+  for(let py=110;py<340;py+=30){
+    ctx.beginPath();ctx.moveTo(312,py);ctx.lineTo(388,py);ctx.stroke();
+    // Packing zigzag
+    for(let px=315;px<388;px+=12){
+      ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px+6,py-10);ctx.lineTo(px+12,py);ctx.stroke();
+    }
+  }
+  // Column label
+  ctx.fillStyle='rgba(255,255,255,0.5)';ctx.font='9px Arial';ctx.textAlign='center';
+  ctx.fillText('THEORETICAL',350,200);ctx.fillText('PLATES',350,212);
+  
+  // Vapour rising
+  rising.forEach(v=>{ctx.beginPath();ctx.arc(v.x,v.y,2,0,Math.PI*2);ctx.fillStyle=`rgba(255,200,100,${v.alpha})`;ctx.fill();});
+  
+  // Condensate dripping down
+  dripping.forEach(d=>{ctx.beginPath();ctx.arc(d.x,d.y,2,0,Math.PI*2);ctx.fillStyle=`rgba(100,160,255,${d.alpha})`;ctx.fill();});
+  
+  // Condenser at top
+  ctx.fillStyle='rgba(52,152,219,0.15)';ctx.fillRect(388,60,35,100);
+  ctx.strokeStyle='#AED6F1';ctx.lineWidth=3;ctx.strokeRect(388,60,35,100);
+  ctx.fillStyle='#888';ctx.font='9px Arial';ctx.fillText('Condenser',405,55);
+  
+  // Distillate drops
+  distDrops.forEach(d=>{ctx.beginPath();ctx.arc(430,d.y,3,0,Math.PI*2);ctx.fillStyle='rgba(52,152,219,0.8)';ctx.fill();});
+  ctx.strokeStyle='#2ECC71';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(423,160);ctx.lineTo(460,160);ctx.stroke();
+  ctx.fillStyle='#2ECC71';ctx.font='10px Arial';ctx.fillText('Distillate',500,164);
+  
+  // Temperature gradient bar
+  const grad=ctx.createLinearGradient(260,80,260,340);
+  grad.addColorStop(0,'rgba(52,152,219,0.4)');grad.addColorStop(1,'rgba(231,76,60,0.4)');
+  ctx.fillStyle=grad;ctx.fillRect(250,80,12,260);
+  ctx.fillStyle='#E74C3C';ctx.font='9px Arial';ctx.textAlign='right';ctx.fillText('HOT',246,330);
+  ctx.fillStyle='#3498DB';ctx.fillText('COOL',246,95);
+  
+  // Temp labels
+  ctx.fillStyle='rgba(255,255,255,0.5)';ctx.font='9px Arial';ctx.textAlign='left';
+  temps.forEach(tp=>{
+    ctx.beginPath();ctx.moveTo(260,tp.y);ctx.lineTo(300,tp.y);ctx.stroke();
+    ctx.fillText(tp.t,130,tp.y+4);
+  });
+  
+  // Info
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,215,70);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Fractional Distillation',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Column: repeated vapour-liquid equilibrium',18,48);ctx.fillText('Each plate enriches vapour further',18,64);
 }
 function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
 loop();

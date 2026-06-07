@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Basket Centrifuge — Pharmaceutical Engineering</title>
+<title>Basket Centrifuge -- Pharmaceutical Engineering</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;}
 .tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
 .panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
 .anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
@@ -17,100 +17,146 @@ canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
 .key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
 .mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:10px;padding:10px;background:#FEF9E7;border-radius:6px;font-size:0.9em;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:20px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:16px;color:#888;font-size:0.8em;background:white;margin-top:16px;}
 </style>
 </head>
 <body>
-<header><h1>🧺 Basket Centrifuge</h1><p>Pharmaceutical Engineering BP304T · Chapter 7 — Centrifugation</p></header>
-<nav><a href="index.html">&#127968; Home</a></nav>
+<header><h1>Basket Centrifuge</h1><p>Pharmaceutical Engineering BP304T -- Chapter 7 -- Centrifugation</p></header>
+<nav><a href="index.html">Home</a></nav>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">&#127916; Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">&#128214; Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">&#9989; MCQs</button>
+  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
 <div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">&#9208; Pause</button>
+  <canvas id="c" width="720" height="380"></canvas>
+  <div style="margin-top:12px;">
+    <button class="btn" id="pb" onclick="togglePlay()">Pause</button>
     <button class="btn" onclick="setSpeed(0.5)">Slow</button>
     <button class="btn" onclick="setSpeed(1)">Normal</button>
     <button class="btn" onclick="setSpeed(2)">Fast</button>
   </div>
 </div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>A perforated basket (bowl) with filter cloth lining rotates at 600–1800 rpm. Slurry is fed in. Centrifugal force drives liquid through the filter cloth and basket perforations (filtrate). Solids are retained as a cake on the filter cloth. Cake can be washed in situ then discharged by a plough blade.</p>
-  <div class="key-fact">The Basket Centrifuge is essentially a centrifugal filter — it uses centrifugal force instead of vacuum or pressure to drive filtrate through the filter medium. This gives faster filtration than Buchner funnels and drier cake than most pressure filters.</div>
-</div>
+<div class="theory-box"><h3>What you are seeing</h3><p>A perforated basket (bowl) lined with filter cloth rotates at 600-1800 rpm. Slurry (crystal suspension) is fed in from the top. Centrifugal force drives liquid through the filter cloth and basket perforations as filtrate. Solids (crystals) are retained as a cake on the filter cloth. The cake can be washed in-situ with fresh solvent, then discharged by a plough blade.</p><div class="key-fact">Key Point: The Basket Centrifuge is essentially a centrifugal filter. It uses centrifugal force (500-1500xg) instead of vacuum to drive filtrate through the filter medium -- producing drier cake in less time than vacuum filtration.</div></div>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Basket Centrifuge — Full Theory</h3>
-    <p>Refer to your textbook Chapter 7 — Centrifugation for complete theory, construction details, and pharmaceutical applications. This page focuses on the interactive animation and MCQ practice.</p>
-    <p style="margin-top:12px;">Key principle: A perforated basket (bowl) with filter cloth lining rotates at 600–1800 rpm. Slurry is fed in. Centrifugal force drives liquid through the filter cloth and basket perforations (filtrate). Solids are retained as a cake on the filter cloth. Cake can be washed in situ then discharged by a plough blade.</p>
-    <div class="key-fact">The Basket Centrifuge is essentially a centrifugal filter — it uses centrifugal force instead of vacuum or pressure to drive filtrate through the filter medium. This gives faster filtration than Buchner funnels and drier cake than most pressure filters.</div>
-  </div>
+<div class="theory-box"><h3>Basket Centrifuge -- Pharmaceutical Importance</h3><ul><li><strong>Basket:</strong> Perforated SS bowl (600-1200mm dia) lined with filter cloth (woven SS or synthetic)</li><li><strong>Speed:</strong> 600-1800 rpm generating 300-1500xg (much lower than tubular bowl)</li><li><strong>Cycle:</strong> Feed (fill) >> Spin (separate) >> Wash (solvent wash in-situ) >> Dry spin >> Discharge (plough blade)</li><li><strong>GMP advantage:</strong> Fully contained; CIP compatible; in-situ wash avoids transfer; PLC controlled for reproducibility</li><li><strong>Pharmaceutical use:</strong> Isolation of API crystals after crystallisation -- standard operation in API manufacturing</li></ul><div class="key-fact">Key Fact: In-situ washing in the basket centrifuge purifies the API cake without any transfer step. Impurities in mother liquor are washed out by fresh solvent while the cake stays in the basket -- minimising contamination risk and yield loss.</div></div>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. The Basket Centrifuge produces drier cake than a vacuum filter because:</div>
-    <button class="opt" onclick="choose(this,false)">A) It uses higher temperature than Swenson-Walker</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Centrifugal force (500–1500×g) is much greater than the pressure differential achievable with vacuum (maximum ~1 bar = 1×g equivalent) — the higher driving force expresses more residual liquid from the cake pores</button>
-    <button class="opt" onclick="choose(this,false)">C) It adds seed crystals automatically</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates under vacuum conditions</button>
-    <div class="explanation">&#9989; Centrifugal vs vacuum filtration driving force: vacuum filter maximum ΔP = 0.8–0.9 bar (limited by atmospheric pressure). Basket centrifuge: centrifugal pressure at basket wall = ρω²r²/2. At 1200 rpm with 0.5 m radius basket: pressure = 1000 × (2π×1200/60)² × 0.5² / 2 = 197,000 Pa ≈ 2 bar — twice the vacuum filtration driving force → significantly drier cake → less drying needed → energy saving.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. In pharmaceutical API manufacturing, the Basket Centrifuge is preferred for:</div>
-    <button class="opt" onclick="choose(this,false)">A) It operates continuously without any operator intervention</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Isolation of API crystals after crystallisation — in-situ washing removes mother liquor and impurities while cake remains in basket; then discharge by plough blade — all in one contained GMP-compliant operation</button>
-    <button class="opt" onclick="choose(this,false)">C) It requires higher temperatures than alternatives</button>
-    <button class="opt" onclick="choose(this,false)">D) It produces smaller particle size than other methods</button>
-    <div class="explanation">&#9989; GMP advantages of basket centrifuge for API isolation: (1) Contained operation — reduces operator exposure to potent API dust; (2) In-situ wash — purifies cake without transferring it; (3) CIP (clean-in-place) compatible — spray nozzles wash basket and bowl; (4) Gentle discharge by plough — minimal crystal breakage; (5) Automated operation — PLC control of speed profile, wash timing, discharge — minimises operator intervention and ensures reproducibility.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">&#128260; Try Again</button>
-  </div>
+<div class="mcq-card"><div class="mcq-q">Q1. The Basket Centrifuge is preferred for isolating pharmaceutical API crystals because:</div>
+<button class="opt" onclick="cho(this,false)">A) It generates the highest centrifugal force of all centrifuges</button>
+<button class="opt" onclick="cho(this,true)" data-c>B) It provides in-situ cake washing -- API crystals can be washed with fresh solvent inside the basket without any transfer step -- reducing contamination risk and impurity carryover while maintaining GMP compliance</button>
+<button class="opt" onclick="cho(this,false)">C) It operates continuously without any batch cycles</button>
+<button class="opt" onclick="cho(this,false)">D) It uses no filter medium so crystals pass through freely</button>
+<div class="explanation">Correct. The in-situ wash cycle: after spinning off mother liquor, fresh solvent is sprayed onto the cake while it spins -- solvent displaces residual mother liquor (which contains impurities and by-products) -- then spin-dried again. This can be repeated 2-3 times. All in the same contained vessel -- no open transfers.</div></div><div class="mcq-card"><div class="mcq-q">Q2. The cake formed in a Basket Centrifuge is drier than from a vacuum filter because:</div>
+<button class="opt" onclick="cho(this,false)">A) The basket operates at higher temperature to evaporate liquid</button>
+<button class="opt" onclick="cho(this,true)" data-c>B) Centrifugal force (500-1500xg) is greater than the maximum pressure differential achievable with vacuum (approximately 0.9 bar equivalent to 1xg) -- the higher driving force expresses more liquid from cake pores</button>
+<button class="opt" onclick="cho(this,false)">C) The filter cloth in the basket is more porous than Buchner funnel paper</button>
+<button class="opt" onclick="cho(this,false)">D) The basket rotates which mechanically squeezes liquid out of crystals</button>
+<div class="explanation">Correct. Vacuum filter maximum driving force is limited by atmospheric pressure (approximately 0.9 bar). Basket centrifuge at 1200 rpm with 0.5m radius generates approximately 2 bar equivalent pressure at the basket wall -- twice the vacuum filtration force -- significantly drier cake -- less drying energy needed afterwards.</div></div>
+<div class="score-box" id="sc" style="display:none"><h2 id="st" style="color:#1B4F72;"></h2><button class="btn" onclick="resetMCQ()">Try Again</button></div>
 </div>
-<footer>© 2025 Pharmaceutical Engineering BP304T · Basket Centrifuge</footer>
+<footer>2025 Pharmaceutical Engineering BP304T -- Basket Centrifuge</footer>
 <script>
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' — Perfect!':' — Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'&#9208; Pause':'&#9654; Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-// Generic rotating/flowing animation
-const particles=[];
-for(let i=0;i<50;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*2,vy:(Math.random()-0.5)*2,r:2+Math.random()*4,col:'hsl('+(180+Math.random()*60)+',70%,60%)'});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function cho(el,ok){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(ok){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-c]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('sc').style.display='block';document.getElementById('st').textContent='Score: '+_s+'/'+t+(_s===t?' -- Perfect!':'');}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('sc').style.display='none';}
+const C=document.getElementById('c'),ctx=C.getContext('2d'),W=720,H=380;
+let run=true,sp=1,fr=0;
+function togglePlay(){run=!run;document.getElementById('pb').textContent=run?'Pause':'Play';if(run)loop();}
+function setSpeed(s){sp=s;}
+
+// Basket centrifuge -- rotating perforated basket, cake forming on wall
+// Filtrate exiting through holes, plough discharge
+let basketAngle=0;
+const slurry=[];
+for(let i=0;i<25;i++) slurry.push({angle:Math.random()*Math.PI*2,r:30+Math.random()*30,isCrystal:Math.random()<0.5,size:3+Math.random()*4});
+let cakeThickness=0;
+const filtrate=[];
+for(let i=0;i<15;i++) filtrate.push({angle:Math.random()*Math.PI*2,r:130+Math.random()*20,vy:0.5+Math.random(),y:200+Math.random()*60,done:false});
+let plowing=false;
+
+function step(){
+  fr++;basketAngle+=0.06*sp;
+  // Grow cake
+  if(cakeThickness<30) cakeThickness+=0.04*sp;
+  // Move filtrate outward and down
+  filtrate.forEach(f=>{if(!f.done){f.r+=0.3*sp;if(f.r>160){f.done=true;setTimeout(()=>{f.r=130;f.done=false;},3000/sp);}}});
+  // Plough after cake full
+  if(fr>400&&fr%500<100) plowing=true; else plowing=false;
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  // Draw equipment outline
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;
-  ctx.strokeRect(100,80,520,220);
-  ctx.fillStyle='rgba(74,144,217,0.08)';ctx.fillRect(100,80,520,220);
-  // Particles
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.7;ctx.fill();ctx.globalAlpha=1;});
-  // Rotation effect
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.02);
-  ctx.strokeStyle='rgba(174,214,241,0.3)';ctx.lineWidth=2;
-  for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(i*Math.PI/2)*100,Math.sin(i*Math.PI/2)*100);ctx.stroke();}
+  const CX=360,CY=200,R=140;
+
+  // Outer casing
+  ctx.beginPath();ctx.arc(CX,CY,R+25,0,Math.PI*2);ctx.fillStyle='rgba(44,62,80,0.5)';ctx.fill();
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.stroke();
+
+  // Basket wall (perforated) -- draw as dashed ring
+  ctx.beginPath();ctx.arc(CX,CY,R,0,Math.PI*2);ctx.strokeStyle='#85929E';ctx.lineWidth=6;ctx.setLineDash([8,5]);ctx.stroke();ctx.setLineDash([]);
+
+  // Cake layer (orange/brown ring inside basket wall)
+  if(cakeThickness>0){
+    ctx.beginPath();ctx.arc(CX,CY,R-cakeThickness,0,Math.PI*2,true);ctx.arc(CX,CY,R,0,Math.PI*2);
+    ctx.fillStyle='rgba(180,120,40,0.65)';ctx.fill();
+  }
+
+  // Crystal slurry (inside, rotating)
+  ctx.save();ctx.translate(CX,CY);ctx.rotate(basketAngle);
+  slurry.forEach(s=>{
+    const maxR=R-cakeThickness-8;
+    const r=Math.min(s.r,maxR);
+    ctx.save();ctx.translate(r*Math.cos(s.angle),r*Math.sin(s.angle));
+    if(s.isCrystal){ctx.rotate(Math.PI/4);ctx.fillStyle='rgba(174,214,241,0.85)';ctx.fillRect(-s.size/2,-s.size/2,s.size,s.size);}
+    else{ctx.beginPath();ctx.arc(0,0,2.5,0,Math.PI*2);ctx.fillStyle='rgba(52,152,219,0.6)';ctx.fill();}
+    ctx.restore();
+  });
   ctx.restore();
+
+  // Filtrate droplets exiting through basket wall
+  filtrate.forEach(f=>{
+    if(!f.done){
+      const x=CX+f.r*Math.cos(f.angle);const y=CY+f.r*Math.sin(f.angle);
+      ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fillStyle='rgba(52,152,219,0.5)';ctx.fill();
+    }
+  });
+
+  // Plough blade
+  if(plowing){
+    ctx.save();ctx.translate(CX,CY);ctx.rotate(fr*0.04);
+    ctx.fillStyle='rgba(231,76,60,0.7)';
+    ctx.fillRect(0,-4,R-2,8);
+    ctx.restore();
+    ctx.fillStyle='#E74C3C';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('PLOUGH DISCHARGING',CX,CY+R+40);
+  }
+
+  // Feed inlet
+  ctx.strokeStyle='rgba(52,152,219,0.7)';ctx.lineWidth=6;
+  ctx.beginPath();ctx.moveTo(CX,CY-R-25);ctx.lineTo(CX,CY-R-50);ctx.stroke();
+  ctx.fillStyle='#3498DB';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('SLURRY FEED',CX,CY-R-55);
+
+  // Filtrate collection
+  ctx.fillStyle='#888';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('FILTRATE (mother liquor)',CX+R+60,CY);
+
   // Labels
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,200,55);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('🧺 Basket Centrifuge',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 7 — Centrifugation',18,48);
-  ctx.textAlign='center';ctx.fillStyle='rgba(255,255,255,0.6)';ctx.font='11px Arial';ctx.fillText('A perforated basket (bowl) with filter cloth lining rotates ...',W/2,H-15);
+  ctx.fillStyle='rgba(180,120,40,0.9)';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('CAKE (API crystals)',CX,CY+8);
+
+  // Info box
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(8,8,215,68);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Basket Centrifuge',16,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('600-1800 RPM | 300-1500 x g',16,46);
+  ctx.fillText('Orange ring = API crystal cake',16,62);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function loop(){if(run)step();draw();if(run)requestAnimationFrame(loop);}
 loop();
 </script>
 </body>

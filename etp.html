@@ -1,113 +1,238 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Pharmaceutical Effluent Treatment Plant - Pharmaceutical Engineering</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<title>Effluent Treatment Plant – Pharmaceutical Engineering</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
-header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
-.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
-.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
-.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
-canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
-.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Pharmaceutical Effluent Treatment Plant</h1><p>Pharmaceutical Engineering BP304T - Chapter 15 - Environmental Engineering</p></header>
-<nav><a href="index.html">Home</a></nav>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0d1a;color:#fff;font-family:Arial,sans-serif;display:flex;flex-direction:column;align-items:center}
+h1{font-size:1.1rem;padding:8px;color:#AED6F1;text-align:center}
+.tabs{display:flex;gap:4px;margin-bottom:6px}
+.tab{padding:6px 18px;border-radius:6px 6px 0 0;cursor:pointer;background:#1a1a2e;border:1px solid #4A90D9;color:#AED6F1;font-size:0.85rem}
+.tab.active{background:#4A90D9;color:#fff}
+.panel{display:none;width:720px}
+.panel.active{display:block}
+canvas{display:block;background:#1a1a2e;border-radius:0 8px 8px 8px;border:1px solid #4A90D9}
+.controls{display:flex;gap:8px;margin:6px 0;justify-content:center}
+button{padding:5px 16px;border-radius:5px;border:none;background:#4A90D9;color:#fff;cursor:pointer;font-size:0.82rem}
+button:hover{background:#1F618D}
+.theory{background:#1a1a2e;border-radius:8px;padding:16px;font-size:0.88rem;line-height:1.6;border:1px solid #4A90D9;width:720px}
+.theory h2{color:#4A90D9;margin-bottom:8px;font-size:1rem}
+.theory h3{color:#AED6F1;margin-top:10px;margin-bottom:4px;font-size:0.92rem}
+.mcq{background:#1a1a2e;border-radius:8px;padding:16px;width:720px;border:1px solid #4A90D9}
+.mcq h2{color:#4A90D9;margin-bottom:10px;font-size:1rem}
+.question{margin-bottom:14px}
+.question p{margin-bottom:6px;font-size:0.88rem}
+.opts label{display:block;margin:3px 0;cursor:pointer;font-size:0.85rem;padding:3px 6px;border-radius:4px}
+.opts label:hover{background:#1F618D}
+.opts label.correct{background:#1e7e34;color:#fff}
+.opts label.wrong{background:#721c24;color:#fff}
+footer{font-size:0.75rem;color:#555;margin:8px 0 4px}
+</style></head><body>
+<h1>Effluent Treatment Plant (ETP) — Pharmaceutical Industry</h1>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
+  <div class="tab active" onclick="showTab('anim')">Animation</div>
+  <div class="tab" onclick="showTab('theory')">Theory</div>
+  <div class="tab" onclick="showTab('mcq')">MCQs</div>
 </div>
-<div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
-  </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>Pharmaceutical ETP treats contaminated wastewater from manufacturing. Stages: Primary (screening, equalisation, pH adjustment); Secondary biological treatment (activated sludge); Tertiary (activated carbon adsorption of API residues; reverse osmosis; ozone treatment). Treated effluent meets CPCB discharge standards.</p>
-  <div class="key-fact">Key Point: Pharmaceutical manufacturing generates wastewater containing APIs at microgram/L concentrations - risk to aquatic organisms. The ETP must achieve API removal greater than 99.9 percent before discharge. Advanced oxidation (ozone plus UV) degrades recalcitrant API molecules.</div>
+
+<div class="panel active" id="anim">
+<canvas id="cv" width="720" height="380"></canvas>
+<div class="controls">
+  <button onclick="running=!running;this.textContent=running?'Pause':'Play'">Pause</button>
+  <button onclick="t=0">Reset</button>
 </div>
 </div>
-<div id="theory" class="panel">
-  <div class="theory-box"><h3>Pharmaceutical Effluent Treatment Plant - Principle</h3>
-    <p>Pharmaceutical ETP treats contaminated wastewater from manufacturing. Stages: Primary (screening, equalisation, pH adjustment); Secondary biological treatment (activated sludge); Tertiary (activated carbon adsorption of API residues; reverse osmosis; ozone treatment). Treated effluent meets CPCB discharge standards.</p>
-    <div class="key-fact">Key Fact: Pharmaceutical manufacturing generates wastewater containing APIs at microgram/L concentrations - risk to aquatic organisms. The ETP must achieve API removal greater than 99.9 percent before discharge. Advanced oxidation (ozone plus UV) degrades recalcitrant API molecules.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 15 - Environmental Engineering for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+
+<div class="panel" id="theory">
+<div class="theory">
+<h2>Effluent Treatment Plant (ETP)</h2>
+<p>ETPs treat pharmaceutical wastewater before discharge to meet CPCB/pollution control norms. Pharma effluents contain solvents, APIs, detergents, and high BOD/COD loads.</p>
+<h3>Stage 1 — Primary Treatment</h3>
+<p>Screening removes large solids. Equalisation tank homogenises flow and pH. Oil and grease trap removes hydrocarbons. pH adjustment to 6.5–8.5.</p>
+<h3>Stage 2 — Secondary Treatment (Biological)</h3>
+<p>Activated sludge process (ASP) or Moving Bed Biofilm Reactor (MBBR) uses microorganisms to degrade organic matter. Aeration tank with diffusers supplies oxygen. Secondary clarifier settles biomass (sludge). 80–90% BOD removal achieved.</p>
+<h3>Stage 3 — Tertiary Treatment</h3>
+<p>Sand/multimedia filtration, activated carbon adsorption to remove colour and residual APIs. UV/ozone disinfection kills pathogens. Reverse osmosis for zero liquid discharge (ZLD) compliance.</p>
+<h3>Sludge Handling</h3>
+<p>Sludge from clarifiers is thickened, dewatered in filter press, and disposed as hazardous waste per CPCB norms.</p>
+<h3>Regulatory Compliance</h3>
+<p>Output must meet: BOD &lt; 30 mg/L, COD &lt; 250 mg/L, TSS &lt; 100 mg/L, pH 6.5–8.5 before discharge.</p>
 </div>
-<div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Pharmaceutical Effluent Treatment Plant?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Pharmaceutical ETP treats contaminated wastewater from manufacturing. Stages: Primary (screening, eq...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Pharmaceutical manufacturing generates wastewater containing APIs at microgram/L concentrations - risk to aquatic organisms. The ETP must achieve API removal greater than 99.9 percent before discharge. Advanced oxidation (ozone plus UV) degrades recalcitrant API molecules.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Pharmaceutical Effluent Treatment Plant is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Pharmaceutical manufacturing generates wastewater containing APIs at microgram/L concentrations - ri...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. Pharmaceutical ETP treats contaminated wastewater from manufacturing. Stages: Primary (screening, equalisation, pH adjustment); Secondary biological treatment (activated sludge); Tertiary (activated carbon adsorption of API residues; reverse osmosis; ozone treatment). Treated effluent meets CPCB discharge standards.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Pharmaceutical Effluent Treatment Plant</footer>
+
+<div class="panel" id="mcq">
+<div class="mcq">
+<h2>MCQs — Effluent Treatment Plant</h2>
+<div class="question"><p>1. Which stage removes suspended solids and adjusts pH in an ETP?</p>
+<div class="opts">
+  <label onclick="cho(this,true)" data-c>A. Primary treatment</label>
+  <label onclick="cho(this,false)">B. Secondary treatment</label>
+  <label onclick="cho(this,false)">C. Tertiary treatment</label>
+  <label onclick="cho(this,false)">D. Sludge handling</label>
+</div></div>
+<div class="question"><p>2. The biological stage of ETP reduces:</p>
+<div class="opts">
+  <label onclick="cho(this,false)">A. Heavy metals</label>
+  <label onclick="cho(this,true)" data-c>B. BOD and COD through microbial degradation</label>
+  <label onclick="cho(this,false)">C. API solubility</label>
+  <label onclick="cho(this,false)">D. pH only</label>
+</div></div>
+<div class="question"><p>3. ZLD (Zero Liquid Discharge) is achieved by:</p>
+<div class="opts">
+  <label onclick="cho(this,false)">A. Activated sludge alone</label>
+  <label onclick="cho(this,false)">B. Sand filtration</label>
+  <label onclick="cho(this,true)" data-c>C. Reverse osmosis and evaporation in tertiary stage</label>
+  <label onclick="cho(this,false)">D. UV disinfection</label>
+</div></div>
+<div class="question"><p>4. Permissible BOD limit for pharmaceutical effluent discharge is:</p>
+<div class="opts">
+  <label onclick="cho(this,false)">A. 100 mg/L</label>
+  <label onclick="cho(this,true)" data-c>B. 30 mg/L</label>
+  <label onclick="cho(this,false)">C. 500 mg/L</label>
+  <label onclick="cho(this,false)">D. 250 mg/L</label>
+</div></div>
+</div>
+</div>
+
+<footer>© 2025 Pharmaceutical Engineering BP304T</footer>
+
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
-function draw(){
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Pharmaceutical Effluent Treatment Plant_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 15 - Environmental Engineering',18,48);
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+const W=720,H=380;
+let t=0,running=true;
+
+// ETP stages: 5 tanks in series with flow left-to-right
+// Wastewater colour transitions from brown/murky to clear
+
+const stages=[
+  {x:30, label:'Screening\n& Equalisation', col:'#5D4037', lightcol:'#8D6E63'},
+  {x:160,label:'pH Adjust\n& Oil Trap',     col:'#4E342E', lightcol:'#795548'},
+  {x:290,label:'Aeration\n(Bio treatment)', col:'#1B5E20', lightcol:'#2E7D32'},
+  {x:420,label:'Clarifier\n(Settling)',      col:'#1565C0', lightcol:'#1976D2'},
+  {x:550,label:'Tertiary\n(Filter+UV+RO)',   col:'#0D47A1', lightcol:'#1565C0'},
+  {x:670,label:'Treated\nEffluent',          col:'#006064', lightcol:'#00838F'},
+];
+
+// Particles flowing through the system
+let particles=[];
+function initParticles(){
+  particles=[];
+  for(let i=0;i<40;i++){
+    particles.push({
+      x:30+Math.random()*50,
+      y:160+Math.random()*80,
+      stage:0,
+      progress:Math.random(),
+      size:3+Math.random()*3,
+      speed:0.3+Math.random()*0.3
+    });
+  }
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+initParticles();
+
+function getColor(stageIdx){
+  // Interpolate from dirty brown to clear blue
+  const colors=['#8D6E63','#795548','#388E3C','#1976D2','#0288D1','#00ACC1'];
+  return colors[Math.min(stageIdx,5)];
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+
+  // Info box
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,280,48);
+  ctx.fillStyle='white';ctx.font='bold 13px Arial';ctx.textAlign='left';
+  ctx.fillText('Effluent Treatment Plant (ETP)',18,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Pharmaceutical Wastewater → Safe Discharge',18,46);
+
+  // Draw connecting pipes between tanks
+  for(let i=0;i<stages.length-1;i++){
+    const s=stages[i], ns=stages[i+1];
+    const pipeY=200;
+    ctx.fillStyle='#37474F';
+    ctx.fillRect(s.x+90,pipeY-6,ns.x-s.x-90,12);
+    // Flow arrow
+    const ax=(s.x+90+ns.x)/2;
+    ctx.fillStyle='#AED6F1';
+    ctx.beginPath();ctx.moveTo(ax,pipeY-10);ctx.lineTo(ax+10,pipeY);ctx.lineTo(ax,pipeY+10);ctx.fill();
+  }
+
+  // Draw tanks
+  stages.forEach((s,i)=>{
+    const tw=85,th=100,tx=s.x,ty=155;
+    // Tank body
+    ctx.fillStyle=s.col;ctx.fillRect(tx,ty,tw,th);
+    ctx.strokeStyle=s.lightcol;ctx.lineWidth=2;ctx.strokeRect(tx,ty,tw,th);
+    // Liquid level with wave
+    const liq=ty+10;
+    ctx.fillStyle=s.lightcol+'88';ctx.fillRect(tx+2,liq,tw-4,th-12);
+    // Wave top
+    ctx.beginPath();ctx.moveTo(tx+2,liq);
+    for(let wx=0;wx<tw-4;wx+=5){
+      ctx.lineTo(tx+2+wx,liq+Math.sin((wx+t*(0.03+i*0.005))*0.4)*4);
+    }
+    ctx.lineTo(tx+tw-2,liq);ctx.closePath();ctx.fill();
+
+    // Aeration bubbles in stage 3
+    if(i===2){
+      for(let b=0;b<5;b++){
+        const bx=tx+10+b*14;
+        const by=ty+th-10-((t*0.5+b*20)%80);
+        ctx.beginPath();ctx.arc(bx,by,3,0,Math.PI*2);
+        ctx.fillStyle='rgba(100,200,255,0.6)';ctx.fill();
+      }
+    }
+
+    // Stage label
+    const lines=s.label.split('\n');
+    ctx.fillStyle='white';ctx.font='bold 9px Arial';ctx.textAlign='center';
+    ctx.fillText(lines[0],tx+tw/2,ty-18);
+    ctx.fillStyle='#AED6F1';ctx.font='8px Arial';
+    ctx.fillText(lines[1],tx+tw/2,ty-7);
+
+    // Stage number
+    ctx.fillStyle='#4A90D9';ctx.font='bold 11px Arial';
+    ctx.fillText(i<5?`Stage ${i+1}`:'OUT',tx+tw/2,ty+th+14);
+  });
+
+  // Moving particles along the flow
+  particles.forEach(p=>{
+    const si=Math.floor(p.progress*5);
+    const s1=stages[Math.min(si,4)], s2=stages[Math.min(si+1,5)];
+    const frac=(p.progress*5)%1;
+    const px=s1.x+s1.x*0+(frac*(s2.x-s1.x))+Math.sin(t*0.05+p.y)*3;
+    const py=185+Math.sin(p.progress*Math.PI*6+p.y)*15;
+    ctx.beginPath();ctx.arc(px+42,py,p.size,0,Math.PI*2);
+    ctx.fillStyle=getColor(si);ctx.globalAlpha=0.7;ctx.fill();ctx.globalAlpha=1;
+    p.progress+=p.speed*0.001;
+    if(p.progress>1){p.progress=0;p.x=30+Math.random()*50;}
+  });
+
+  // Bottom legend
+  ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(10,355,700,20);
+  ctx.fillStyle='#8D6E63';ctx.fillRect(15,360,10,10);
+  ctx.fillStyle='white';ctx.font='9px Arial';ctx.textAlign='left';
+  ctx.fillText('Raw effluent (brown)',30,369);
+  ctx.fillStyle='#00ACC1';ctx.fillRect(160,360,10,10);
+  ctx.fillStyle='white';ctx.fillText('Treated effluent (clear blue)',175,369);
+  ctx.fillStyle='#AED6F1';ctx.textAlign='center';
+  ctx.fillText('BOD↓  COD↓  TSS↓  pH corrected',500,369);
+}
+
+function step(){t++;}
+function loop(){if(running)step();draw();requestAnimationFrame(loop);}
 loop();
-</script>
-</body>
-</html>
+
+function showTab(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(tb=>tb.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab')[['anim','theory','mcq'].indexOf(id)].classList.add('active');
+}
+function cho(el,ok){
+  const opts=el.parentElement.querySelectorAll('label');
+  opts.forEach(o=>o.classList.remove('correct','wrong'));
+  el.classList.add(ok?'correct':'wrong');
+  if(!ok)el.parentElement.querySelector('[data-c]').classList.add('correct');
+}
+</script></body></html>

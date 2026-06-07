@@ -6,7 +6,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;}
 .tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
 .panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
 .anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
@@ -18,11 +18,11 @@ canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
 .mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
 .mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:10px;padding:10px;background:#FEF9E7;border-radius:6px;font-size:0.9em;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:20px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:16px;color:#888;font-size:0.8em;background:white;margin-top:16px;}
 </style>
 </head>
 <body>
@@ -36,8 +36,8 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 <div id="anim" class="panel active">
 <div class="anim-box">
   <canvas id="c" width="720" height="380"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">⏸ Pause</button>
+  <div style="margin-top:12px;">
+    <button class="btn" id="pb" onclick="togglePlay()">⏸ Pause</button>
     <button class="btn" onclick="setSpeed(0.5)">Slow</button>
     <button class="btn" onclick="setSpeed(1)">Normal</button>
     <button class="btn" onclick="setSpeed(2)">Fast</button>
@@ -45,180 +45,143 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 </div>
 <div class="theory-box">
   <h3>💡 What you are seeing</h3>
-  <p>Hot saturated solution enters from the left. A slowly rotating helical screw conveyor moves the solution along the trough while cooling water flows through the jacket below. As solution cools, supersaturation is reached and crystals nucleate and grow. The screw prevents crystals from settling and agglomerating. Crystals exit at the right end.</p>
-  <div class="key-fact">🔑 The Swenson-Walker Crystalliser cools a saturated solution by indirect heat exchange through a jacketed trough. Cooling creates supersaturation → crystal nucleation and growth. The rotating screw provides gentle agitation and moves crystals toward the discharge end.</div>
+  <p>Hot saturated solution (red) enters from the LEFT and flows along the U-shaped trough. Cooling water flows through the jacket beneath the trough — temperature drops from left to right. As the solution cools, supersaturation is reached and crystals (white squares) nucleate and grow. The slowly rotating helical screw moves the crystal slurry toward the RIGHT discharge end. Temperature gradient shown above trough.</p>
+  <div class="key-fact">🔑 The Swenson-Walker is a <strong>cooling crystalliser</strong>. Solubility of most APIs decreases as temperature falls — hot saturated solution becomes supersaturated on cooling → crystals form. The screw prevents settling and cake formation.</div>
 </div>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Principle</h3>
-    <p>Crystallisation occurs when a solution becomes supersaturated — the concentration of solute exceeds its equilibrium solubility at that temperature. The Swenson-Walker crystalliser achieves supersaturation by <strong>cooling</strong>: hot saturated solution enters → cooling jacket removes heat → solubility decreases → solution becomes supersaturated → crystals nucleate and grow.</p>
-  </div>
-  <div class="theory-box"><h3>Construction</h3>
+  <div class="theory-box"><h3>Construction and Working</h3>
     <ul>
-      <li><strong>Trough:</strong> Open, U-shaped stainless steel trough; 600 mm wide, up to 12 m long; may be arranged in sections</li>
-      <li><strong>Cooling jacket:</strong> Water-cooled jacket below and around trough sides; cooling water flows in counter-current to solution flow</li>
-      <li><strong>Screw conveyor:</strong> Single helical screw (450 mm diameter); rotates slowly (0.5–5 rpm); moves crystals from feed end to discharge end while keeping them suspended</li>
-      <li><strong>Drive:</strong> Motor and gearbox drive the screw; low speed to prevent crystal breakage</li>
-      <li><strong>Discharge:</strong> Crystals + mother liquor exit at the discharge end; separated by centrifuge or filter</li>
+      <li><strong>Trough:</strong> Open U-shaped SS trough, 600 mm wide, up to 12 m long</li>
+      <li><strong>Cooling jacket:</strong> Cold water flows beneath and around trough walls</li>
+      <li><strong>Screw conveyor:</strong> Helical screw (450 mm dia), 0.5–5 rpm — moves crystals and prevents settling</li>
+      <li><strong>Feed:</strong> Hot saturated solution enters one end; crystal slurry exits other end</li>
+      <li><strong>Multiple units:</strong> Can be arranged in series (cascade) at progressively lower temperatures</li>
     </ul>
-    <div class="key-fact">🔑 Multiple units can be connected in series (each at a lower temperature) to achieve progressive crystallisation and recover more product. This is called a cascade or train arrangement.</div>
-  </div>
-  <div class="theory-box"><h3>Pharmaceutical Applications</h3>
-    <ul>
-      <li>Crystallisation of aspirin (acetylsalicylic acid) from ethyl acetate or acetic acid solution</li>
-      <li>Crystallisation of citric acid, tartaric acid, sodium chloride</li>
-      <li>Crystallisation of vitamins (ascorbic acid, riboflavin) from aqueous solution</li>
-      <li>Manufacture of bulk pharmaceutical chemicals (BPCs) requiring large crystal size</li>
-    </ul>
-  </div>
-  <div class="theory-box"><h3>Advantages and Disadvantages</h3>
-    <ul>
-      <li>✅ Continuous operation — high throughput</li>
-      <li>✅ Gentle agitation — large, uniform crystals produced</li>
-      <li>✅ Simple construction — easy to maintain</li>
-      <li>✅ Easy scale-up by adding sections</li>
-      <li>❌ Open trough — contamination risk; not suitable for sterile products</li>
-      <li>❌ Limited to cooling crystallisation — not for salting-out or anti-solvent</li>
-      <li>❌ Crystal breakage possible if screw speed too high</li>
-    </ul>
+    <div class="key-fact">🔑 Pharmaceutical uses: Aspirin (from ethyl acetate), citric acid, tartaric acid, vitamin C, sodium chloride, riboflavin — all crystallised in Swenson-Walker units.</div>
   </div>
 </div>
 <div id="mcq" class="panel">
   <div class="mcq-card">
-    <div class="mcq-q">Q1. In the Swenson-Walker Crystalliser, supersaturation is achieved by:</div>
-    <button class="opt" onclick="choose(this,false)">A) Adding anti-solvent to reduce drug solubility</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Cooling the hot saturated solution — as temperature drops, solubility decreases, solution becomes supersaturated, crystals nucleate and grow</button>
-    <button class="opt" onclick="choose(this,false)">C) Evaporating solvent to concentrate the solution</button>
-    <button class="opt" onclick="choose(this,false)">D) Adding seed crystals to trigger precipitation</button>
-    <div class="explanation">✅ Swenson-Walker = cooling crystalliser. Solubility of most pharmaceutical compounds increases with temperature. Hot saturated solution enters → cooling jacket removes heat → temperature drops → solubility decreases → concentration exceeds new solubility → supersaturation → nucleation and crystal growth. The screw prevents settling and moves crystals to discharge. Compare Oslo crystalliser (circulation crystalliser — allows larger crystals to grow).</div>
+    <div class="mcq-q">Q1. Supersaturation in the Swenson-Walker Crystalliser is achieved by:</div>
+    <button class="opt" onclick="cho(this,false)">A) Evaporating solvent from the solution</button>
+    <button class="opt" onclick="cho(this,true)" data-c>B) Cooling the hot saturated solution — as temperature drops, solubility decreases, solution becomes supersaturated, crystals nucleate and grow</button>
+    <button class="opt" onclick="cho(this,false)">C) Adding anti-solvent to reduce drug solubility</button>
+    <button class="opt" onclick="cho(this,false)">D) Increasing pressure above the solution</button>
+    <div class="explanation">✅ Swenson-Walker = cooling crystalliser. Most pharmaceutical compounds have higher solubility at higher temperatures. Cooling → solubility drops → existing concentration exceeds new solubility → supersaturation → nucleation → crystal growth.</div>
   </div>
   <div class="mcq-card">
-    <div class="mcq-q">Q2. The rotating screw in a Swenson-Walker Crystalliser serves which purpose?</div>
-    <button class="opt" onclick="choose(this,false)">A) It breaks crystals into smaller uniform size</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) It gently agitates the slurry to prevent crystal settling and agglomeration, and conveys crystals from feed end to discharge end continuously</button>
-    <button class="opt" onclick="choose(this,false)">C) It pumps cooling water through the jacket</button>
-    <button class="opt" onclick="choose(this,false)">D) It applies pressure to force crystallisation</button>
-    <div class="explanation">✅ Screw functions: (1) Conveyance — moves crystal slurry from hot feed end toward cooler discharge end (residence time = 30–90 min); (2) Agitation — gentle rotation keeps crystals suspended, prevents settling into a solid cake, prevents crystal-to-crystal agglomeration; (3) Heat transfer improvement — gentle agitation improves contact between solution and cooled trough surface. Speed is kept low (0.5–5 rpm) to prevent crystal breakage — excessive shear creates fines (small crystals) that are harder to filter.</div>
+    <div class="mcq-q">Q2. The purpose of the rotating screw in the Swenson-Walker Crystalliser is:</div>
+    <button class="opt" onclick="cho(this,false)">A) To grind crystals to a smaller size</button>
+    <button class="opt" onclick="cho(this,true)" data-c>B) To gently agitate the crystal slurry preventing settling and caking, and to continuously convey crystals from the feed end to the discharge end</button>
+    <button class="opt" onclick="cho(this,false)">C) To pump cooling water through the jacket</button>
+    <button class="opt" onclick="cho(this,false)">D) To measure the temperature of the solution</button>
+    <div class="explanation">✅ The screw rotates slowly (0.5–5 rpm) — fast enough to keep crystals suspended and moving forward, slow enough to avoid crystal breakage. Without the screw, crystals would settle and form a hard immovable cake at the bottom of the trough.</div>
   </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q3. Aspirin is crystallised from ethyl acetate solution using a Swenson-Walker crystalliser. The yield of crystals depends primarily on:</div>
-    <button class="opt" onclick="choose(this,false)">A) The speed of the screw conveyor</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) The temperature difference between inlet and outlet (ΔT) — greater cooling means greater solubility reduction means more drug crystallises out; yield = (C_in − C_out) × volume, where C_out = solubility at outlet temperature</button>
-    <button class="opt" onclick="choose(this,false)">C) The width of the trough</button>
-    <button class="opt" onclick="choose(this,false)">D) The molecular weight of aspirin</button>
-    <div class="explanation">✅ Yield calculation: theoretical yield = mass of solute that crystallises = feed concentration (g/L) − equilibrium solubility at outlet T (g/L), multiplied by total volume processed. Example: aspirin solubility in EtOAc at 50°C = 300 g/L; at 10°C = 50 g/L. If feed is saturated at 50°C → theoretical yield = 300 − 50 = 250 g per litre of solution processed = 83% yield. Higher ΔT (lower outlet T) = higher yield. But too fast cooling = many small crystals (poor filtration) vs slow cooling = large crystals (easy filtration).</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">🔄 Try Again</button>
-  </div>
+  <div class="score-box" id="sc" style="display:none"><h2 id="st" style="color:#1B4F72;"></h2><button class="btn" onclick="resetMCQ()">🔄 Try Again</button></div>
 </div>
 <footer>© 2025 Pharmaceutical Engineering BP304T · Swenson-Walker Crystalliser</footer>
 <script>
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='🎯 Score: '+_s+' / '+t+(_s===t?' — Perfect! 🌟':' — Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,frameN=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'⏸ Pause':'▶ Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
+function cho(el,ok){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(ok){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-c]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('sc').style.display='block';document.getElementById('st').textContent='Score: '+_s+'/'+t+(_s===t?' — Perfect! 🌟':'');}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('sc').style.display='none';}
+
+const C=document.getElementById('c'),ctx=C.getContext('2d'),W=720,H=380;
+let run=true,sp=1,fr=0;
+document.getElementById('pb').onclick=()=>{run=!run;document.getElementById('pb').textContent=run?'⏸ Pause':'▶ Play';if(run)loop();};
+function setSpeed(s){sp=s;}
+
 // Crystals growing along trough
 const crystals=[];
-for(let i=0;i<40;i++) crystals.push({x:100+Math.random()*520,y:220+Math.random()*80,size:1+Math.random()*3,growing:true,col:'#AED6F1'});
-// Screw segments
-let screwAngle=0;
-// Solution particles
-const particles=[];
-for(let i=0;i<30;i++) particles.push({x:80+Math.random()*50,y:200+Math.random()*100,vx:0.4+Math.random()*0.3,col:'rgba(52,152,219,0.6)',r:3});
+for(let i=0;i<50;i++) crystals.push({x:110+Math.random()*490,y:230+Math.random()*70,sz:1+Math.random()*2,max:4+Math.random()*8});
+// Solution flow particles
+const drops=[];
+for(let i=0;i<25;i++) drops.push({x:80+Math.random()*60,y:215+Math.random()*90,vx:0.6+Math.random()*0.4,heat:1});
+// Screw angle
+let sa=0;
 
 function step(){
-  frameN++;screwAngle+=0.04*speedMult;
-  // Move particles right
-  particles.forEach(p=>{
-    p.x+=p.vx*speedMult;
-    p.y+=Math.sin(frameN*0.02+p.x*0.01)*0.3*speedMult;
-    // Grow crystal where particle is
-    if(Math.random()<0.01*speedMult){
-      const cx=p.x,cy=p.y;
-      const nearest=crystals.reduce((best,c)=>{
-        const d=Math.sqrt((c.x-cx)**2+(c.y-cy)**2);
-        return d<best.d?{d,c}:best;
-      },{d:9999,c:null});
-      if(nearest.c&&nearest.d<40&&nearest.c.size<12) nearest.c.size+=0.1*speedMult;
-    }
-    if(p.x>650){p.x=80+Math.random()*40;p.y=200+Math.random()*100;}
+  fr++;sa+=0.05*sp;
+  drops.forEach(d=>{
+    d.x+=d.vx*sp;
+    d.heat=Math.max(0,d.heat-0.001*sp);
+    if(d.x>650){d.x=80+Math.random()*40;d.y=215+Math.random()*90;d.heat=1;}
   });
+  // Grow crystals gradually
+  crystals.forEach(c=>{if(c.sz<c.max)c.sz+=0.008*sp;});
 }
 
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+
+  // Temperature gradient bar above trough
+  for(let i=0;i<560;i++){
+    const t=i/560;
+    ctx.fillStyle=`hsl(${220+t*100},80%,55%)`;
+    ctx.fillRect(80+i,155,1,12);
+  }
+  ctx.fillStyle='#E74C3C';ctx.font='9px Arial';ctx.textAlign='left';ctx.fillText('HOT 70°C',80,168);
+  ctx.fillStyle='#3498DB';ctx.textAlign='right';ctx.fillText('COLD 15°C',640,168);
+
+  // Cooling jacket (below trough)
+  const jgrad=ctx.createLinearGradient(80,320,640,320);
+  jgrad.addColorStop(0,'rgba(52,152,219,0.15)');jgrad.addColorStop(1,'rgba(52,152,219,0.4)');
+  ctx.fillStyle=jgrad;ctx.fillRect(80,318,560,30);
+  ctx.strokeStyle='#2980B9';ctx.lineWidth=2;ctx.strokeRect(80,318,560,30);
+  ctx.fillStyle='#3498DB';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('COOLING WATER JACKET',360,335);
+
   // Trough body
-  ctx.fillStyle='rgba(44,62,80,0.8)';
-  ctx.fillRect(80,190,560,130);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=5;
-  ctx.strokeRect(80,190,560,130);
-  // Cooling jacket (bottom)
-  ctx.fillStyle='rgba(52,152,219,0.2)';
-  ctx.fillRect(82,295,556,20);
-  ctx.strokeStyle='#3498DB';ctx.lineWidth=2;
-  ctx.beginPath();
-  for(let x=90;x<630;x+=30){
-    ctx.moveTo(x,295);ctx.lineTo(x+15,315);ctx.moveTo(x+15,315);ctx.lineTo(x+30,295);
-  }ctx.stroke();
-  // Screw conveyor
-  ctx.strokeStyle='rgba(149,165,166,0.7)';ctx.lineWidth=4;
-  for(let seg=0;seg<18;seg++){
-    const sx=90+seg*30;
-    const sy=255+Math.sin(screwAngle+seg*0.8)*30;
-    if(seg===0){ctx.beginPath();ctx.moveTo(sx,sy);}
-    else ctx.lineTo(sx,sy);
-  }ctx.stroke();
-  // Shaft
-  ctx.strokeStyle='#7F8C8D';ctx.lineWidth=3;
-  ctx.beginPath();ctx.moveTo(80,255);ctx.lineTo(640,255);ctx.stroke();
-  // Solution particles
-  particles.forEach(p=>{
-    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=p.col;ctx.fill();
+  ctx.fillStyle='rgba(44,62,80,0.85)';ctx.fillRect(80,175,560,145);
+  ctx.strokeStyle='#5D6D7E';ctx.lineWidth=4;ctx.strokeRect(80,175,560,145);
+
+  // Solution particles (hot=red → cool=blue)
+  drops.forEach(d=>{
+    const h=Math.round(220+d.heat*(-180)); // 220=blue, 40=red/orange
+    ctx.beginPath();ctx.arc(d.x,d.y,5,0,Math.PI*2);
+    ctx.fillStyle=`hsl(${40+d.heat*180},85%,58%)`;ctx.globalAlpha=0.8;ctx.fill();ctx.globalAlpha=1;
   });
-  // Crystals
+
+  // Crystals (white/light blue squares)
   crystals.forEach(c=>{
-    const s=c.size;
     ctx.save();ctx.translate(c.x,c.y);ctx.rotate(Math.PI/4);
-    ctx.fillStyle='rgba(174,214,241,0.8)';
-    ctx.strokeStyle='white';ctx.lineWidth=0.5;
-    ctx.fillRect(-s/2,-s/2,s,s);ctx.strokeRect(-s/2,-s/2,s,s);
+    ctx.fillStyle='rgba(200,230,255,0.85)';ctx.strokeStyle='white';ctx.lineWidth=0.5;
+    ctx.fillRect(-c.sz/2,-c.sz/2,c.sz,c.sz);ctx.strokeRect(-c.sz/2,-c.sz/2,c.sz,c.sz);
     ctx.restore();
   });
+
+  // Screw conveyor (helical line)
+  ctx.strokeStyle='rgba(127,140,141,0.8)';ctx.lineWidth=3;
+  ctx.beginPath();
+  for(let i=0;i<=20;i++){
+    const x=90+i*26;
+    const y=255+Math.sin(sa+i*0.9)*28;
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }ctx.stroke();
+  // Shaft
+  ctx.strokeStyle='rgba(100,100,110,0.6)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(80,255);ctx.lineTo(640,255);ctx.stroke();
+
   // Feed arrow
-  ctx.fillStyle='rgba(231,76,60,0.8)';ctx.font='10px Arial';ctx.textAlign='center';
-  ctx.fillText('HOT FEED →',110,180);
-  ctx.strokeStyle='rgba(231,76,60,0.7)';ctx.lineWidth=2;
-  ctx.beginPath();ctx.moveTo(80,188);ctx.lineTo(80,192);ctx.stroke();
+  ctx.strokeStyle='rgba(231,76,60,0.9)';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(50,240);ctx.lineTo(78,240);
+  ctx.moveTo(70,234);ctx.lineTo(78,240);ctx.lineTo(70,246);ctx.stroke();
+  ctx.fillStyle='#E74C3C';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('HOT FEED',50,228);
+
   // Discharge arrow
-  ctx.fillStyle='rgba(46,204,113,0.8)';
-  ctx.fillText('← CRYSTALS',610,180);
-  // Cooling water labels
-  ctx.fillStyle='#3498DB';ctx.font='9px Arial';
-  ctx.fillText('COOLING WATER',360,310);
-  // Temperature gradient
-  for(let i=0;i<8;i++){
-    const tx=100+i*70;
-    const temp=70-i*8;
-    const col=`hsl(${200+i*15},70%,55%)`;
-    ctx.fillStyle=col;
-    ctx.fillRect(tx-2,175,4,10);
-    ctx.fillStyle='white';ctx.font='8px Arial';
-    ctx.fillText(temp+'°',tx,173);
-  }
+  ctx.strokeStyle='rgba(46,204,113,0.9)';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(642,240);ctx.lineTo(670,240);
+  ctx.moveTo(662,234);ctx.lineTo(670,240);ctx.lineTo(662,246);ctx.stroke();
+  ctx.fillStyle='#27AE60';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('CRYSTALS',670,228);
+
   // Info box
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,210,70);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('❄️ Swenson-Walker Crystalliser',18,30);
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(8,8,210,70);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('❄️ Swenson-Walker Crystalliser',16,28);
   ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
-  ctx.fillText('Type: Cooling crystalliser',18,48);ctx.fillText('Screw speed: 0.5–5 RPM',18,64);
+  ctx.fillText('Type: Continuous cooling crystalliser',16,46);
+  ctx.fillText('Screw: 0.5–5 RPM | Crystals grow →',16,62);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function loop(){if(run)step();draw();if(run)requestAnimationFrame(loop);}
 loop();
 </script>
 </body>

@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Disc Centrifuge — Pharmaceutical Engineering</title>
+<title>Disc Centrifuge -- Pharmaceutical Engineering</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;}
 .tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
 .panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
 .anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
@@ -17,100 +17,134 @@ canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
 .key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
 .mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.explanation{display:none;margin-top:10px;padding:10px;background:#FEF9E7;border-radius:6px;font-size:0.9em;border-left:3px solid #F39C12;}
+.score-box{text-align:center;padding:20px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:16px;color:#888;font-size:0.8em;background:white;margin-top:16px;}
 </style>
 </head>
 <body>
-<header><h1>💿 Disc Centrifuge</h1><p>Pharmaceutical Engineering BP304T · Chapter 7 — Centrifugation</p></header>
-<nav><a href="index.html">&#127968; Home</a></nav>
+<header><h1>Disc Centrifuge</h1><p>Pharmaceutical Engineering BP304T -- Chapter 7 -- Centrifugation</p></header>
+<nav><a href="index.html">Home</a></nav>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">&#127916; Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">&#128214; Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">&#9989; MCQs</button>
+  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
+  <button class="tab" onclick="showTab('theory',this)">Theory</button>
+  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
 <div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">&#9208; Pause</button>
+  <canvas id="c" width="720" height="380"></canvas>
+  <div style="margin-top:12px;">
+    <button class="btn" id="pb" onclick="togglePlay()">Pause</button>
     <button class="btn" onclick="setSpeed(0.5)">Slow</button>
     <button class="btn" onclick="setSpeed(1)">Normal</button>
     <button class="btn" onclick="setSpeed(2)">Fast</button>
   </div>
 </div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>The spinning bowl contains a stack of conical discs with narrow gaps between them. Feed enters at the bottom. Centrifugal force separates heavy phase (to outer wall) and light phase (up through disc stack to central outlet). Solids collect at bowl periphery and are discharged through nozzles or intermittently through ports.</p>
-  <div class="key-fact">The Disc Centrifuge is the standard continuous centrifuge for liquid-liquid separation (O/W emulsions, cream from milk) and liquid clarification in pharmaceutical manufacturing. The disc stack dramatically increases the effective settling area.</div>
-</div>
+<div class="theory-box"><h3>What you are seeing</h3><p>The spinning bowl contains a stack of conical discs with narrow gaps (~0.5mm) between them. Feed enters at the bottom centre. Centrifugal force separates heavy phase (to outer wall) from light phase (up through disc stack to central outlet). The corrugated disc stack multiplies the effective settling area by 100x compared to an empty bowl. Solids collect at the bowl periphery and are ejected through nozzles or intermittent ports.</p><div class="key-fact">Key Point: The disc stack dramatically increases separation efficiency -- each thin disc gap acts as an independent shallow settling chamber. The particle only needs to travel the short disc gap distance (0.5mm) to settle, not the full bowl radius.</div></div>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Disc Centrifuge — Full Theory</h3>
-    <p>Refer to your textbook Chapter 7 — Centrifugation for complete theory, construction details, and pharmaceutical applications. This page focuses on the interactive animation and MCQ practice.</p>
-    <p style="margin-top:12px;">Key principle: The spinning bowl contains a stack of conical discs with narrow gaps between them. Feed enters at the bottom. Centrifugal force separates heavy phase (to outer wall) and light phase (up through disc stack to central outlet). Solids collect at bowl periphery and are discharged through nozzles or intermittently through ports.</p>
-    <div class="key-fact">The Disc Centrifuge is the standard continuous centrifuge for liquid-liquid separation (O/W emulsions, cream from milk) and liquid clarification in pharmaceutical manufacturing. The disc stack dramatically increases the effective settling area.</div>
-  </div>
+<div class="theory-box"><h3>Disc Centrifuge -- Design Features</h3><ul><li><strong>Disc stack:</strong> 50-200 conical discs; disc angle 35-50 degrees; gap 0.5-1mm between discs</li><li><strong>Speed:</strong> 4,000-10,000 rpm generating 4,000-15,000xg</li><li><strong>Continuous operation:</strong> Feed in, light phase out, solids either discharged through nozzles (nozzle bowl) or periodic automatic discharge (self-cleaning bowl)</li><li><strong>Clarification rate:</strong> 10,000-50,000 L/hr -- far higher than tubular bowl</li><li><strong>Pharmaceutical use:</strong> Clarification of fermentation broth (biopharmaceuticals); continuous cream separation; liquid-liquid extraction in continuous mode</li></ul><div class="key-fact">Key Fact: Self-cleaning disc centrifuge opens peripheral ports for 0.1-0.3 seconds every few minutes to eject accumulated solids by centrifugal force -- then ports close and operation continues. This allows true continuous operation even with solids-containing feeds.</div></div>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. The disc stack in a Disc Centrifuge improves separation efficiency because:</div>
-    <button class="opt" onclick="choose(this,false)">A) It uses higher temperature than Swenson-Walker</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Each disc gap acts as a thin settling chamber — the thin liquid layer between discs requires particles to travel only a short radial distance before settling onto the disc surface — increasing effective settling area by 100× compared to an empty bowl</button>
-    <button class="opt" onclick="choose(this,false)">C) It adds seed crystals automatically</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates under vacuum conditions</button>
-    <div class="explanation">&#9989; Sigma theory for disc centrifuge: equivalent settling area Σ = (2πn × ω² × (r₃³-r₂³)) / (3g × tan θ) where n = number of disc intervals, r₂,r₃ = inner/outer disc radii, θ = disc half-angle. Increasing n (more discs) or decreasing gap proportionally increases Σ and thus clarification capacity. Pharmaceutical application: clarification of cell culture broth (biopharmaceuticals) — continuous clarification at 10,000–50,000 L/hr with automatic solids discharge.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A self-cleaning (hermetic) disc centrifuge automatically discharges solids by:</div>
-    <button class="opt" onclick="choose(this,false)">A) It operates continuously without any operator intervention</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Hydraulically opening ports at the bowl periphery for a fraction of a second — solids are ejected by centrifugal force through the open ports — then ports close and separation resumes — no stopping required</button>
-    <button class="opt" onclick="choose(this,false)">C) It requires higher temperatures than alternatives</button>
-    <button class="opt" onclick="choose(this,false)">D) It produces smaller particle size than other methods</button>
-    <div class="explanation">&#9989; Self-cleaning mechanism: hydraulic system opens peripheral ports (2–4 per bowl) for 0.1–0.3 seconds every few minutes → centrifugal force ejects accumulated solids through open ports into a collecting trough → ports close → operation continues. This allows true continuous operation even with solids-containing feeds. Critical for pharmaceutical fermentation broth clarification where cells must be continuously removed from the product-containing supernatant.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">&#128260; Try Again</button>
-  </div>
+<div class="mcq-card"><div class="mcq-q">Q1. The disc stack in a Disc Centrifuge improves separation efficiency because:</div>
+<button class="opt" onclick="cho(this,false)">A) It increases the bowl rotation speed</button>
+<button class="opt" onclick="cho(this,true)" data-c>B) Each disc gap acts as a shallow settling chamber -- particles only travel the short disc spacing distance (0.5mm) to sediment onto a disc surface rather than the full bowl radius -- increasing effective settling area by up to 100 times</button>
+<button class="opt" onclick="cho(this,false)">C) The discs heat the liquid to reduce viscosity</button>
+<button class="opt" onclick="cho(this,false)">D) The conical disc angle filters particles by size</button>
+<div class="explanation">Correct. Sigma theory: equivalent settling area = (2*pi*n * omega^2 * (r3^3-r2^3)) / (3*g*tan(theta)) where n = number of disc intervals. More discs = proportionally more settling area = higher clarification capacity at the same centrifugal force.</div></div><div class="mcq-card"><div class="mcq-q">Q2. For continuous clarification of pharmaceutical fermentation broth, the Disc Centrifuge is preferred over the Tubular Bowl because:</div>
+<button class="opt" onclick="cho(this,false)">A) It generates higher g-force</button>
+<button class="opt" onclick="cho(this,true)" data-c>B) It operates continuously with automatic self-cleaning solids discharge -- no bowl stoppage needed -- allowing uninterrupted processing of large volumes (10,000-50,000 L/hr) of broth during fermentation harvest</button>
+<button class="opt" onclick="cho(this,false)">C) It uses less electricity</button>
+<button class="opt" onclick="cho(this,false)">D) It produces drier solids</button>
+<div class="explanation">Correct. Biopharmaceutical manufacturing: monoclonal antibody fermentation produces 1,000-10,000 litres of broth. After fermentation ends, cells must be removed continuously and rapidly (product degrades at room temperature). Self-cleaning disc centrifuge clarifies 10,000-50,000 L/hr continuously -- the only practical option for this scale.</div></div>
+<div class="score-box" id="sc" style="display:none"><h2 id="st" style="color:#1B4F72;"></h2><button class="btn" onclick="resetMCQ()">Try Again</button></div>
 </div>
-<footer>© 2025 Pharmaceutical Engineering BP304T · Disc Centrifuge</footer>
+<footer>2025 Pharmaceutical Engineering BP304T -- Disc Centrifuge</footer>
 <script>
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' — Perfect!':' — Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'&#9208; Pause':'&#9654; Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-// Generic rotating/flowing animation
-const particles=[];
-for(let i=0;i<50;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*2,vy:(Math.random()-0.5)*2,r:2+Math.random()*4,col:'hsl('+(180+Math.random()*60)+',70%,60%)'});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function cho(el,ok){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(ok){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-c]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('sc').style.display='block';document.getElementById('st').textContent='Score: '+_s+'/'+t+(_s===t?' -- Perfect!':'');}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('sc').style.display='none';}
+const C=document.getElementById('c'),ctx=C.getContext('2d'),W=720,H=380;
+let run=true,sp=1,fr=0;
+function togglePlay(){run=!run;document.getElementById('pb').textContent=run?'Pause':'Play';if(run)loop();}
+function setSpeed(s){sp=s;}
+
+// Disc centrifuge -- rotating bowl with disc stack, feed centre, separation
+let bowlAngle=0;
+const discCount=8;
+const feedParts=[];
+for(let i=0;i<30;i++) feedParts.push({r:5+Math.random()*15,angle:Math.random()*Math.PI*2,vy:-0.5-Math.random()*0.5,heavy:Math.random()<0.3,disc:Math.floor(Math.random()*discCount)});
+const nozzleDrops=[];
+for(let i=0;i<8;i++) nozzleDrops.push({angle:i*Math.PI/4,r:135,active:false,timer:Math.random()*100});
+
+function step(){
+  fr++;bowlAngle+=0.05*sp;
+  feedParts.forEach(p=>{
+    if(p.heavy) p.r+=0.2*sp; else p.r+=0.05*sp;
+    if(p.r>140){p.r=5+Math.random()*10;p.angle=Math.random()*Math.PI*2;}
+  });
+  nozzleDrops.forEach(n=>{n.timer-=sp;if(n.timer<0){n.active=true;n.r+=1.5*sp;if(n.r>170){n.active=false;n.r=135;n.timer=60+Math.random()*80;}}});
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  // Draw equipment outline
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;
-  ctx.strokeRect(100,80,520,220);
-  ctx.fillStyle='rgba(74,144,217,0.08)';ctx.fillRect(100,80,520,220);
-  // Particles
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.7;ctx.fill();ctx.globalAlpha=1;});
-  // Rotation effect
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.02);
-  ctx.strokeStyle='rgba(174,214,241,0.3)';ctx.lineWidth=2;
-  for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(i*Math.PI/2)*100,Math.sin(i*Math.PI/2)*100);ctx.stroke();}
+  const CX=360,CY=195;
+
+  // Outer bowl
+  ctx.save();ctx.translate(CX,CY);ctx.rotate(bowlAngle);
+  ctx.beginPath();ctx.ellipse(0,0,145,160,0,0,Math.PI*2);ctx.fillStyle='rgba(44,62,80,0.6)';ctx.fill();ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.stroke();
+
+  // Disc stack (conical discs)
+  for(let d=0;d<discCount;d++){
+    const y=-60+d*15;const r=40+d*10;
+    ctx.beginPath();ctx.moveTo(-r,y+8);ctx.lineTo(r,y+8);ctx.lineTo(r-8,y);ctx.lineTo(-r+8,y);ctx.closePath();
+    ctx.fillStyle=`rgba(74,144,217,${0.2+d*0.03})`;ctx.fill();
+    ctx.strokeStyle='rgba(100,160,220,0.5)';ctx.lineWidth=1;ctx.stroke();
+  }
   ctx.restore();
-  // Labels
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,200,55);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('💿 Disc Centrifuge',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 7 — Centrifugation',18,48);
-  ctx.textAlign='center';ctx.fillStyle='rgba(255,255,255,0.6)';ctx.font='11px Arial';ctx.fillText('The spinning bowl contains a stack of conical discs with nar...',W/2,H-15);
+
+  // Feed inlet (centre, from top)
+  ctx.strokeStyle='rgba(52,152,219,0.8)';ctx.lineWidth=5;
+  ctx.beginPath();ctx.moveTo(CX,CY-160);ctx.lineTo(CX,CY-20);ctx.stroke();
+  ctx.fillStyle='#3498DB';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('FEED IN',CX,CY-165);
+
+  // Light phase outlet (top, centre)
+  ctx.strokeStyle='rgba(52,152,219,0.6)';ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(CX+5,CY-160);ctx.lineTo(CX+50,CY-160);ctx.stroke();
+  ctx.fillStyle='#3498DB';ctx.font='9px Arial';ctx.textAlign='left';ctx.fillText('CLARIFIED OUT',CX+55,CY-157);
+
+  // Separated particles (heavy moving outward, light upward)
+  feedParts.forEach(p=>{
+    const angle=p.angle+bowlAngle;
+    const x=CX+p.r*Math.cos(angle);const y=CY+p.r*Math.sin(angle)*0.9;
+    ctx.beginPath();ctx.arc(x,y,p.heavy?3.5:2,0,Math.PI*2);
+    ctx.fillStyle=p.heavy?'rgba(180,100,30,0.8)':'rgba(52,152,219,0.6)';ctx.fill();
+  });
+
+  // Nozzle solids ejection
+  nozzleDrops.forEach(n=>{
+    if(n.active){
+      const x=CX+n.r*Math.cos(n.angle);const y=CY+n.r*Math.sin(n.angle);
+      ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle='rgba(180,100,30,0.85)';ctx.fill();
+    }
+  });
+
+  // Peripheral solids zone label
+  ctx.strokeStyle='rgba(180,100,30,0.4)';ctx.lineWidth=2;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.arc(CX,CY,130,0,Math.PI*2);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='rgba(180,100,30,0.8)';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('Solids zone',CX+155,CY+5);
+
+  // Info box
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(8,8,215,68);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Disc Centrifuge',16,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('4,000-15,000 x g | Continuous',16,46);
+  ctx.fillText('Disc stack = 100x settling area',16,62);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function loop(){if(run)step();draw();if(run)requestAnimationFrame(loop);}
 loop();
 </script>
 </body>

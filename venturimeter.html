@@ -1,113 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Venturimeter - Pharmaceutical Engineering</title>
-<style>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Venturimeter</title><style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;}
 .tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
 .panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
 .anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
 canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Venturimeter</h1><p>Pharmaceutical Engineering BP304T - Chapter 17 - Flow Measurement</p></header>
+.tb{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.tb h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.tb p,.tb li{line-height:1.8;font-size:0.95em;color:#333;}.tb ul{padding-left:22px;margin-top:8px;}
+.kf{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px;margin:12px 0;font-size:0.93em;}
+.mc{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mq{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.exp{display:none;margin-top:10px;padding:10px;background:#FEF9E7;border-radius:6px;font-size:0.9em;border-left:3px solid #F39C12;}
+.sb{text-align:center;padding:20px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:16px;color:#888;font-size:0.8em;background:white;margin-top:16px;}
+</style></head><body>
+<header><h1>Venturimeter</h1><p>Pharmaceutical Engineering BP304T -- Chapter 17 -- Flow Measurement</p></header>
 <nav><a href="index.html">Home</a></nav>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
+  <button class="tab active" onclick="sT('anim',this)">Animation</button>
+  <button class="tab" onclick="sT('theory',this)">Theory</button>
+  <button class="tab" onclick="sT('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
-  </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>A converging-diverging section inserted in a pipe. As liquid flows through the narrow throat, velocity increases and pressure decreases (Bernoulli). The pressure difference between upstream pipe and throat is measured by a differential pressure transmitter. Flow rate calculated from the pressure difference.</p>
-  <div class="key-fact">Key Point: Venturimeter flow equation: Q = Cd times A2 times square root of (2 times deltaP divided by rho times (1 minus (A2/A1) squared)). Discharge coefficient Cd approximately 0.98. Advantages: permanent pressure loss only 10-20 percent of deltaP; no moving parts; suitable for pharmaceutical liquids including slurries.</div>
-</div>
+<div class="anim-box"><canvas id="c" width="720" height="380"></canvas>
+<div style="margin-top:12px;">
+<button class="btn" id="pb" onclick="tP()">Pause</button>
+<button class="btn" onclick="sS(0.5)">Slow</button>
+<button class="btn" onclick="sS(1)">Normal</button>
+<button class="btn" onclick="sS(2)">Fast</button>
+</div></div>
+<div class="tb"><h3>What you are seeing</h3><p>Liquid flows from the wide pipe into the converging (tapering) section, then through the narrow THROAT, then diverges back to the original pipe diameter. As liquid enters the throat, velocity INCREASES (continuity: Av = constant). By Bernoulli, increased velocity means decreased pressure. The pressure difference (P1 - P2) measured between the inlet and throat is directly related to flow rate.</p><div class="kf">Key Point: Flow equation -- Q = Cd x A_throat x sqrt(2 x deltaP / (rho x (1 - (A_throat/A_pipe)^2))). Discharge coefficient Cd approximately 0.98. Low permanent pressure loss (only 10-20% of deltaP lost permanently) -- most pressure recovered in the diverging section.</div></div>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Venturimeter - Principle</h3>
-    <p>A converging-diverging section inserted in a pipe. As liquid flows through the narrow throat, velocity increases and pressure decreases (Bernoulli). The pressure difference between upstream pipe and throat is measured by a differential pressure transmitter. Flow rate calculated from the pressure difference.</p>
-    <div class="key-fact">Key Fact: Venturimeter flow equation: Q = Cd times A2 times square root of (2 times deltaP divided by rho times (1 minus (A2/A1) squared)). Discharge coefficient Cd approximately 0.98. Advantages: permanent pressure loss only 10-20 percent of deltaP; no moving parts; suitable for pharmaceutical liquids including slurries.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 17 - Flow Measurement for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+<div class="tb"><h3>Venturimeter -- Theory</h3><ul><li><strong>Converging section:</strong> 20-30 degree angle; smooth contraction to throat</li><li><strong>Throat:</strong> Minimum diameter (50-75% of pipe diameter); pressure tap here (P2)</li><li><strong>Diverging section:</strong> 5-7 degree angle; slow expansion recovers pressure (avoids separation)</li><li><strong>Pressure measurement:</strong> Differential pressure transmitter between upstream tap (P1) and throat tap (P2)</li><li><strong>Pharmaceutical use:</strong> WFI flow in distribution loops; CIP solution flow; process fluid flow monitoring</li></ul><div class="kf">Key Point: Flow equation -- Q = Cd x A_throat x sqrt(2 x deltaP / (rho x (1 - (A_throat/A_pipe)^2))). Discharge coefficient Cd approximately 0.98. Low permanent pressure loss (only 10-20% of deltaP lost permanently) -- most pressure recovered in the diverging section.</div></div>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Venturimeter?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) A converging-diverging section inserted in a pipe. As liquid flows through the narrow throat, veloci...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Venturimeter flow equation: Q = Cd times A2 times square root of (2 times deltaP divided by rho times (1 minus (A2/A1) squared)). Discharge coefficient Cd approximately 0.98. Advantages: permanent pressure loss only 10-20 percent of deltaP; no moving parts; suitable for pharmaceutical liquids including slurries.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Venturimeter is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Venturimeter flow equation: Q = Cd times A2 times square root of (2 times deltaP divided by rho time...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. A converging-diverging section inserted in a pipe. As liquid flows through the narrow throat, velocity increases and pressure decreases (Bernoulli). The pressure difference between upstream pipe and throat is measured by a differential pressure transmitter. Flow rate calculated from the pressure difference.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
-</div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Venturimeter</footer>
+<div class="mc"><div class="mq">Q1. The pressure at the Venturimeter throat is lower than at the inlet because:</div>
+<button class="opt" onclick="ch(this,false)">A) Incorrect option</button>
+<button class="opt" onclick="ch(this,true)" data-c>B) By continuity (A1v1 = A2v2), liquid velocity must increase as the cross-sectional area decreases at the throat. By Bernoulli (P + 0.5*rho*v^2 = constant), higher velocity means lower pressure -- the kinetic energy increase comes at the expense of pressure energy</button>
+<button class="opt" onclick="ch(this,false)">C) Another incorrect option</button>
+<button class="opt" onclick="ch(this,false)">D) Yet another incorrect option</button>
+<div class="exp">Correct. Bernoulli application: P1 + 0.5*rho*v1^2 = P2 + 0.5*rho*v2^2. Rearranging: P1 - P2 = 0.5*rho*(v2^2 - v1^2). Since v2 > v1 (throat velocity greater than inlet velocity), P2 < P1. The pressure drop deltaP = P1 - P2 is proportional to v2^2, and therefore to Q^2. So Q proportional to sqrt(deltaP) -- that is why the venturimeter equation contains a square root.</div></div>
+<div class="mc"><div class="mq">Q2. The Venturimeter has lower permanent pressure loss than the Orifice Meter because:</div>
+<button class="opt" onclick="ch(this,false)">A) Incorrect option</button>
+<button class="opt" onclick="ch(this,true)" data-c>B) The gradual diverging section (5-7 degree angle) allows orderly pressure recovery -- flow decelerates smoothly from throat velocity back to pipe velocity with minimal turbulence -- approximately 80-90% of the created deltaP is recovered. The Orifice plate has a sudden expansion after the vena contracta -- turbulent energy dissipation -- only 40% of deltaP recovered</button>
+<button class="opt" onclick="ch(this,false)">C) Another incorrect option</button>
+<button class="opt" onclick="ch(this,false)">D) Yet another incorrect option</button>
+<div class="exp">Correct. Pressure recovery: Venturimeter -- smooth diffuser converts velocity back to pressure efficiently -- permanent loss only 10-20% of measured deltaP. Orifice meter -- sudden expansion downstream of orifice -- turbulent eddies dissipate kinetic energy as heat -- permanent loss 60% of deltaP. For WFI systems where pressure is limited (to avoid pump cavitation and maintain flow to all use points), Venturimeter is preferred despite higher cost.</div></div>
+<div class="sb" id="sc" style="display:none"><h2 id="st" style="color:#1B4F72;"></h2><button class="btn" onclick="rM()">Try Again</button></div></div>
+<footer>2025 Pharmaceutical Engineering BP304T -- Venturimeter</footer>
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+function sT(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function ch(el,ok){const card=el.closest('.mc');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(ok){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-c]').classList.add('correct');}card.querySelector('.exp').style.display='block';_a++;const t=document.querySelectorAll('.mc').length;if(_a===t){document.getElementById('sc').style.display='block';document.getElementById('st').textContent='Score: '+_s+'/'+t+(_s===t?' Perfect!':'');}}
+function rM(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.exp').forEach(e=>e.style.display='none');document.getElementById('sc').style.display='none';}
+const C=document.getElementById('c'),ctx=C.getContext('2d'),W=720,H=380;
+let run=true,sp=1,fr=0;
+function tP(){run=!run;document.getElementById('pb').textContent=run?'Pause':'Play';if(run)loop();}
+function sS(s){sp=s;}
+
+// Venturimeter -- pipe profile with throat, pressure taps, flowing particles
+const THROAT_X=360,INLET_R=55,THROAT_R=22;
+const flowParts=[];
+for(let i=0;i<30;i++) flowParts.push({x:80+Math.random()*560,y:200+(Math.random()-0.5)*80,vx:1+Math.random()*0.5});
+// Pressure taps
+const tap1_x=160,tap2_x=THROAT_X;
+let tick=0;
+
+// Pipe profile function -- gives y radius at position x
+function pipeR(x){
+  const convergeStart=220,convergeEnd=340,divergeEnd=500;
+  if(x<convergeStart) return INLET_R;
+  if(x<convergeEnd) return INLET_R+(THROAT_R-INLET_R)*(x-convergeStart)/(convergeEnd-convergeStart);
+  if(x<THROAT_X) return THROAT_R;
+  if(x<divergeEnd) return THROAT_R+(INLET_R-THROAT_R)*(x-THROAT_X)/(divergeEnd-THROAT_X);
+  return INLET_R;
+}
+
+function step(){
+  tick+=sp;fr++;
+  flowParts.forEach(p=>{
+    const r=pipeR(p.x);
+    // Velocity inversely proportional to cross-section area (continuity)
+    const vMult=INLET_R*INLET_R/(r*r);
+    p.x+=p.vx*vMult*sp*0.6;
+    // Keep within pipe
+    const maxY=200+r-5;const minY=200-r+5;
+    if(p.y>maxY)p.y=maxY;if(p.y<minY)p.y=minY;
+    if(p.x>660){p.x=85+Math.random()*20;p.y=200+(Math.random()-0.5)*(INLET_R*2-15);}
+  });
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Venturimeter_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 17 - Flow Measurement',18,48);
+
+  // Draw pipe profile (venturi shape)
+  ctx.beginPath();
+  // Top profile
+  const steps=200;
+  for(let i=0;i<=steps;i++){
+    const x=70+i*(580/steps);
+    const r=pipeR(x);
+    i===0?ctx.moveTo(x,200-r):ctx.lineTo(x,200-r);
+  }
+  // Bottom profile (reverse)
+  for(let i=steps;i>=0;i--){
+    const x=70+i*(580/steps);
+    const r=pipeR(x);
+    ctx.lineTo(x,200+r);
+  }
+  ctx.closePath();
+  ctx.fillStyle='rgba(26,50,90,0.65)';ctx.fill();
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=3;ctx.stroke();
+
+  // Flow particles (colour = speed -- blue slow, red fast at throat)
+  flowParts.forEach(p=>{
+    const r=pipeR(p.x);const maxR=pipeR(p.x)*2;
+    const speed=Math.min(1,(INLET_R*INLET_R)/(r*r)-1)/8;
+    const rc=Math.round(52+speed*180);const gc=Math.round(152-speed*80);const bc=Math.round(219-speed*100);
+    ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);
+    ctx.fillStyle=`rgb(${rc},${gc},${bc})`;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;
+  });
+
+  // Pressure taps
+  ctx.strokeStyle='#E74C3C';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(tap1_x,200-INLET_R);ctx.lineTo(tap1_x,200-INLET_R-30);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(tap2_x,200-THROAT_R);ctx.lineTo(tap2_x,200-THROAT_R-30);ctx.stroke();
+  // Delta P gauge
+  ctx.beginPath();ctx.moveTo(tap1_x,200-INLET_R-30);ctx.lineTo(tap1_x,140);ctx.lineTo(THROAT_X,140);ctx.lineTo(THROAT_X,200-THROAT_R-30);ctx.stroke();
+  ctx.beginPath();ctx.arc((tap1_x+THROAT_X)/2,125,18,0,Math.PI*2);ctx.fillStyle='rgba(44,62,80,0.9)';ctx.fill();ctx.strokeStyle='#E74C3C';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='white';ctx.font='8px Arial';ctx.textAlign='center';ctx.fillText('deltaP',260,123);ctx.fillText('meter',260,133);
+
+  // Labels
+  ctx.fillStyle='#3498DB';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('P1 (high)',tap1_x,200-INLET_R-55);
+  ctx.fillStyle='#E74C3C';ctx.fillText('P2 (LOW)',THROAT_X,200-THROAT_R-55);
+  ctx.fillStyle='#27AE60';ctx.fillText('HIGH VELOCITY',THROAT_X,200+THROAT_R+18);
+  ctx.fillStyle='#888';ctx.fillText('Normal velocity',140,200+INLET_R+18);ctx.fillText('Pressure recovered',520,200+INLET_R+18);
+
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(8,8,210,68);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Venturimeter',16,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Throat: high velocity, low pressure',16,46);ctx.fillText('Cd ~0.98 | Low permanent pressure loss',16,62);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function loop(){if(run)step();draw();if(run)requestAnimationFrame(loop);}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>

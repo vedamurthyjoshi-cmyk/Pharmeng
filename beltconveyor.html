@@ -1,113 +1,228 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Belt Conveyor - Pharmaceutical Engineering</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Belt Conveyor | Pharmaceutical Engineering</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
-header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
-.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
-.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
-.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
-canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
-.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Belt Conveyor</h1><p>Pharmaceutical Engineering BP304T - Chapter 13 - Material Handling</p></header>
-<nav><a href="index.html">Home</a></nav>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0d1a;color:#eee;font-family:Arial,sans-serif;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+h1{font-size:1.2rem;padding:10px;color:#AED6F1;text-align:center}
+.tabs{display:flex;gap:6px;margin-bottom:8px}
+.tab{padding:7px 18px;border:none;border-radius:6px 6px 0 0;cursor:pointer;font-size:0.9rem;background:#1a1a2e;color:#aaa}
+.tab.active{background:#1F4E79;color:#fff}
+canvas{border-radius:8px;display:block}
+.panel{display:none;max-width:720px;width:100%;background:#111827;border-radius:0 8px 8px 8px;padding:16px;line-height:1.7}
+.panel.active{display:block}
+.panel h2{color:#AED6F1;margin-bottom:8px;font-size:1rem}
+.panel p,.panel li{font-size:0.88rem;color:#ccc;margin-bottom:6px}
+.panel ul{padding-left:18px}
+.mcq{margin-bottom:14px}
+.mcq p{font-size:0.88rem;color:#ddd;margin-bottom:6px}
+.mcq button{display:block;width:100%;text-align:left;margin:3px 0;padding:6px 10px;background:#1a1a2e;border:1px solid #333;border-radius:5px;color:#ccc;cursor:pointer;font-size:0.83rem}
+.mcq button:hover{background:#1F4E79}
+.right{background:#145a32!important;color:#fff!important}
+.wrong{background:#7b241c!important;color:#fff!important}
+.controls{display:flex;gap:8px;margin:8px 0}
+.controls button{padding:6px 14px;border:none;border-radius:5px;background:#1F4E79;color:#fff;cursor:pointer;font-size:0.85rem}
+footer{font-size:0.75rem;color:#555;padding:10px;text-align:center}
+</style></head><body>
+<h1>Belt Conveyor — Continuous Material Transfer</h1>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">Animation</button>
   <button class="tab" onclick="showTab('theory',this)">Theory</button>
   <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  <div class="controls">
+    <button onclick="toggleRun()">⏯ Pause/Play</button>
+    <button onclick="resetAnim()">↺ Reset</button>
   </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>A continuous flat belt runs over rollers driven by an electric motor. Pharmaceutical materials (tablets, bottles, packages, bulk solids) are placed on the belt and conveyed horizontally or at a slight incline. Speed adjustable by variable frequency drive.</p>
-  <div class="key-fact">Key Point: Belt conveyors are the most common material handling equipment in pharmaceutical packaging lines. Stainless steel belts used for direct product contact. Used for tablets from press to coating pan, coated tablets to inspection, bottles from filling to labelling.</div>
-</div>
+  <canvas id="c" width="720" height="380"></canvas>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Belt Conveyor - Principle</h3>
-    <p>A continuous flat belt runs over rollers driven by an electric motor. Pharmaceutical materials (tablets, bottles, packages, bulk solids) are placed on the belt and conveyed horizontally or at a slight incline. Speed adjustable by variable frequency drive.</p>
-    <div class="key-fact">Key Fact: Belt conveyors are the most common material handling equipment in pharmaceutical packaging lines. Stainless steel belts used for direct product contact. Used for tablets from press to coating pan, coated tablets to inspection, bottles from filling to labelling.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 13 - Material Handling for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+  <h2>Belt Conveyor</h2>
+  <p>A continuous flexible belt stretched between two pulleys conveys solid materials horizontally or at a slight incline. The belt is supported by idler rollers underneath.</p>
+  <h2>Key Components</h2>
+  <ul>
+    <li><strong>Drive pulley:</strong> powered; at discharge end; moves belt</li>
+    <li><strong>Tail pulley:</strong> at feed end; maintains belt tension</li>
+    <li><strong>Idler rollers:</strong> support belt between pulleys; reduce sag</li>
+    <li><strong>Belt:</strong> rubber, PVC, or stainless steel mesh; continuous loop</li>
+    <li><strong>Take-up device:</strong> adjusts belt tension automatically</li>
+  </ul>
+  <h2>Capacity</h2>
+  <p>Throughput = Belt width × Material depth × Belt speed × Bulk density</p>
+  <h2>Pharmaceutical Applications</h2>
+  <ul>
+    <li>Moving tablet bottles on packaging lines</li>
+    <li>Transporting filled ampoules through inspection tunnel</li>
+    <li>Conveying blister packs to cartoning machine</li>
+    <li>Feeding granules from dryer to mill</li>
+  </ul>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Belt Conveyor?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) A continuous flat belt runs over rollers driven by an electric motor. Pharmaceutical materials (tabl...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Belt conveyors are the most common material handling equipment in pharmaceutical packaging lines. Stainless steel belts used for direct product contact. Used for tablets from press to coating pan, coated tablets to inspection, bottles from filling to labelling.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Belt Conveyor is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Belt conveyors are the most common material handling equipment in pharmaceutical packaging lines. St...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. A continuous flat belt runs over rollers driven by an electric motor. Pharmaceutical materials (tablets, bottles, packages, bulk solids) are placed on the belt and conveyed horizontally or at a slight incline. Speed adjustable by variable frequency drive.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
+  <div class="mcq"><p>1. The powered pulley in a belt conveyor is called:</p>
+    <button data-c="1" onclick="cho(this,1)">a) Drive pulley</button>
+    <button onclick="cho(this,0)">b) Tail pulley</button>
+    <button onclick="cho(this,0)">c) Idler roller</button>
+    <button onclick="cho(this,0)">d) Take-up pulley</button></div>
+  <div class="mcq"><p>2. Idler rollers in a belt conveyor serve to:</p>
+    <button onclick="cho(this,0)">a) Drive the belt</button>
+    <button onclick="cho(this,0)">b) Tension the belt</button>
+    <button data-c="1" onclick="cho(this,1)">c) Support the belt between pulleys</button>
+    <button onclick="cho(this,0)">d) Clean the belt surface</button></div>
+  <div class="mcq"><p>3. In pharmaceutical belt conveyors, stainless steel mesh belts are preferred because:</p>
+    <button onclick="cho(this,0)">a) They are lighter</button>
+    <button data-c="1" onclick="cho(this,1)">b) They are easy to clean and corrosion resistant</button>
+    <button onclick="cho(this,0)">c) They are cheaper</button>
+    <button onclick="cho(this,0)">d) They move faster</button></div>
+  <div class="mcq"><p>4. Increasing belt speed will:</p>
+    <button data-c="1" onclick="cho(this,1)">a) Increase throughput</button>
+    <button onclick="cho(this,0)">b) Decrease throughput</button>
+    <button onclick="cho(this,0)">c) Change direction of travel</button>
+    <button onclick="cho(this,0)">d) Reduce noise</button></div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Belt Conveyor</footer>
+<footer>© 2025 Pharmaceutical Engineering BP304T</footer>
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
-function draw(){
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Belt Conveyor_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 13 - Material Handling',18,48);
+function showTab(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');el.classList.add('active');
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function cho(el,ok){
+  const btns=el.parentElement.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);el.classList.add(ok?'right':'wrong');
+  if(!ok)btns.forEach(b=>{if(b.dataset.c)b.classList.add('right');});
+}
+
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+const W=720,H=380;
+let t=0,running=true;
+const beltY=220,beltH=18;
+const pL=80,pR=640; // pulley x positions
+
+// Bottles on belt
+let bottles=[];
+for(let i=0;i<5;i++) bottles.push({x:pL+30+i*120,type:i%3});
+
+// Belt stripe offset
+let beltOffset=0;
+
+function drawPulley(cx,cy,r,isMotor){
+  // Pulley body
+  const grad=ctx.createRadialGradient(cx-r*0.3,cy-r*0.3,r*0.1,cx,cy,r);
+  grad.addColorStop(0,'#7f8c8d');grad.addColorStop(1,'#2c3e50');
+  ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+  ctx.fillStyle=grad;ctx.fill();
+  ctx.strokeStyle='#95a5a6';ctx.lineWidth=3;ctx.stroke();
+  // Hub
+  ctx.beginPath();ctx.arc(cx,cy,r*0.25,0,Math.PI*2);
+  ctx.fillStyle=isMotor?'#e74c3c':'#bdc3c7';ctx.fill();
+  if(isMotor){
+    ctx.fillStyle='#fff';ctx.font='bold 9px Arial';ctx.textAlign='center';
+    ctx.fillText('M',cx,cy+3);
+  }
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+
+  // Support frame
+  ctx.fillStyle='#2c3e50';
+  ctx.fillRect(pL,240,pR-pL,12); // bottom frame
+  // Support legs
+  [pL+30,pL+160,pL+290,pL+420,pL+530].forEach(lx=>{
+    ctx.fillRect(lx,252,8,80);
+  });
+
+  // Idler rollers
+  [pL+90,pL+210,pL+330,pL+450,pL+560].forEach(rx=>{
+    ctx.beginPath();ctx.arc(rx,beltY+beltH+5,9,0,Math.PI*2);
+    ctx.fillStyle='#7f8c8d';ctx.fill();
+    ctx.strokeStyle='#95a5a6';ctx.lineWidth=1.5;ctx.stroke();
+  });
+
+  // Belt — top surface
+  ctx.fillStyle='#1a1a2e';
+  ctx.fillRect(pL,beltY,pR-pL,beltH);
+  // Belt stripes (moving)
+  const stripeW=40;
+  for(let sx=pL-stripeW;sx<pR+stripeW;sx+=stripeW){
+    const bx=((sx+beltOffset)%(pR-pL))+pL;
+    if(bx<pL||bx>pR)continue;
+    ctx.fillStyle='rgba(52,73,94,0.8)';
+    ctx.fillRect(bx,beltY,stripeW/2,beltH);
+  }
+  ctx.strokeStyle='#3d5a6e';ctx.lineWidth=2;
+  ctx.strokeRect(pL,beltY,pR-pL,beltH);
+
+  // Belt return (bottom loop)
+  ctx.beginPath();ctx.moveTo(pL,beltY+beltH);ctx.lineTo(pR,beltY+beltH);
+  ctx.lineTo(pR,beltY+beltH+20);ctx.lineTo(pL,beltY+beltH+20);
+  ctx.strokeStyle='#2c3e50';ctx.lineWidth=10;ctx.stroke();
+
+  // Pulleys
+  drawPulley(pR,beltY+beltH/2,28,true);   // drive (right)
+  drawPulley(pL,beltY+beltH/2,28,false);   // tail (left)
+
+  // Bottles/packages on belt
+  bottles.forEach(b=>{
+    const x=b.x,y=beltY-32;
+    if(b.type===0){
+      // Tablet bottle
+      ctx.fillStyle='#e74c3c';ctx.fillRect(x-12,y,24,30);
+      ctx.fillStyle='#c0392b';ctx.fillRect(x-10,y-8,20,10);
+      ctx.fillStyle='#fff';ctx.font='8px Arial';ctx.textAlign='center';
+      ctx.fillText('TAB',x,y+18);
+    } else if(b.type===1){
+      // Blister pack
+      ctx.fillStyle='#f39c12';ctx.fillRect(x-18,y+8,36,18);
+      for(let bi=0;bi<4;bi++){
+        ctx.beginPath();ctx.ellipse(x-12+bi*8,y+17,4,5,0,0,Math.PI*2);
+        ctx.fillStyle='#fff';ctx.fill();
+      }
+    } else {
+      // Ampoule box
+      ctx.fillStyle='#3498db';ctx.fillRect(x-15,y+4,30,24);
+      ctx.fillStyle='#2980b9';ctx.fillRect(x-13,y+6,26,4);
+      ctx.fillStyle='#fff';ctx.font='7px Arial';ctx.textAlign='center';
+      ctx.fillText('AMP',x,y+22);
+    }
+    if(running){
+      b.x+=1.8;
+      if(b.x>pR+30){b.x=pL-20;b.type=(b.type+1)%3;}
+    }
+  });
+
+  // Feed hopper
+  ctx.fillStyle='#8e44ad';
+  ctx.beginPath();ctx.moveTo(pL+10,140);ctx.lineTo(pL+70,140);ctx.lineTo(pL+60,beltY);ctx.lineTo(pL+20,beltY);ctx.closePath();ctx.fill();
+  ctx.strokeStyle='#9b59b6';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#fff';ctx.font='10px Arial';ctx.textAlign='center';
+  ctx.fillText('FEED',pL+40,170);
+
+  // Motor box
+  ctx.fillStyle='#c0392b';ctx.fillRect(pR+32,beltY-18,50,42);
+  ctx.strokeStyle='#e74c3c';ctx.lineWidth=2;ctx.strokeRect(pR+32,beltY-18,50,42);
+  ctx.fillStyle='#fff';ctx.font='bold 10px Arial';ctx.textAlign='center';
+  ctx.fillText('MOTOR',pR+57,beltY+8);
+
+  // Info box
+  ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(10,10,250,65);
+  ctx.fillStyle='#fff';ctx.font='bold 12px Arial';ctx.textAlign='left';
+  ctx.fillText('Belt Conveyor',18,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Continuous belt moves packages left → right',18,46);
+  ctx.fillText('Chapter 13 — Material Handling',18,62);
+
+  // Labels
+  ctx.fillStyle='#ccc';ctx.font='11px Arial';ctx.textAlign='center';
+  ctx.fillText('Tail Pulley',pL,310);ctx.fillText('(tension)',pL,325);
+  ctx.fillText('Drive Pulley',pR,310);ctx.fillText('(powered)',pR,325);
+  ctx.fillText('← Belt travel direction →',360,355);
+}
+
+function step(){t++;beltOffset+=1.8;if(beltOffset>80)beltOffset-=80;}
+function loop(){if(running)step();draw();requestAnimationFrame(loop);}
+function toggleRun(){running=!running;}
+function resetAnim(){t=0;beltOffset=0;bottles.forEach((b,i)=>{b.x=pL+30+i*120;b.type=i%3;});}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>

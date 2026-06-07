@@ -1,32 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Jacketed Vessel - Pharmaceutical Engineering</title>
-<style>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Jacketed Vessel</title><style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;}
 .tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
 .panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
 .anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
 canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Jacketed Vessel</h1><p>Pharmaceutical Engineering BP304T - Chapter 11 - Heat Transfer</p></header>
+.tb{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.tb h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.tb p,.tb li{line-height:1.8;font-size:0.95em;color:#333;}.tb ul{padding-left:22px;margin-top:8px;}
+.kf{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
+.mc{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mq{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.exp{display:none;margin-top:10px;padding:10px;background:#FEF9E7;border-radius:6px;font-size:0.9em;border-left:3px solid #F39C12;}
+.sb{text-align:center;padding:20px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:16px;color:#888;font-size:0.8em;background:white;margin-top:16px;}
+</style></head><body>
+<header><h1>Jacketed Vessel</h1><p>Pharmaceutical Engineering BP304T -- Chapter 11 -- Heat Transfer</p></header>
 <nav><a href="index.html">Home</a></nav>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">Animation</button>
@@ -34,80 +28,111 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
   <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
-  </div>
+<div class="anim-box"><canvas id="c" width="720" height="380"></canvas>
+<div style="margin-top:12px;">
+<button class="btn" id="pb" onclick="togglePlay()">Pause</button>
+<button class="btn" onclick="setSpeed(0.5)">Slow</button>
+<button class="btn" onclick="setSpeed(1)">Normal</button>
+<button class="btn" onclick="setSpeed(2)">Fast</button>
+</div></div>
+<div class="tb"><h3>What you are seeing</h3><p>The inner vessel contains pharmaceutical product (being heated or cooled). Heating/cooling fluid (steam, hot water, or brine) circulates through the JACKET (space between inner vessel and outer shell). An AGITATOR inside mixes the product continuously -- improving heat transfer to the vessel wall and ensuring uniform temperature throughout the batch.</p><div class="kf">Key Point: The Jacketed Vessel is the most common heating/cooling equipment in pharmaceutical batch manufacturing. Indirect heat transfer through the vessel wall keeps the heating/cooling medium completely separate from the product -- essential for contamination prevention.</div></div>
 </div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>A vessel with a double-wall jacket through which heating or cooling fluid circulates. The pharmaceutical product inside is heated or cooled by conduction through the vessel wall. An agitator mixes the product to improve heat transfer and uniformity.</p>
-  <div class="key-fact">Key Point: The Jacketed Vessel is the most common heating and cooling equipment in pharmaceutical batch manufacturing - used for reactions, dissolution, mixing, crystallisation, and sterilisation. The jacket provides indirect heat transfer keeping heating medium separate from product.</div>
-</div>
-</div>
-<div id="theory" class="panel">
-  <div class="theory-box"><h3>Jacketed Vessel - Principle</h3>
-    <p>A vessel with a double-wall jacket through which heating or cooling fluid circulates. The pharmaceutical product inside is heated or cooled by conduction through the vessel wall. An agitator mixes the product to improve heat transfer and uniformity.</p>
-    <div class="key-fact">Key Fact: The Jacketed Vessel is the most common heating and cooling equipment in pharmaceutical batch manufacturing - used for reactions, dissolution, mixing, crystallisation, and sterilisation. The jacket provides indirect heat transfer keeping heating medium separate from product.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 11 - Heat Transfer for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
-</div>
-<div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Jacketed Vessel?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) A vessel with a double-wall jacket through which heating or cooling fluid circulates. The pharmaceut...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. The Jacketed Vessel is the most common heating and cooling equipment in pharmaceutical batch manufacturing - used for reactions, dissolution, mixing, crystallisation, and sterilisation. The jacket provides indirect heat transfer keeping heating medium separate from product.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Jacketed Vessel is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) The Jacketed Vessel is the most common heating and cooling equipment in pharmaceutical batch manufac...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. A vessel with a double-wall jacket through which heating or cooling fluid circulates. The pharmaceutical product inside is heated or cooled by conduction through the vessel wall. An agitator mixes the product to improve heat transfer and uniformity.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
-</div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Jacketed Vessel</footer>
+<div id="theory" class="panel"><div class="tb"><h3>What you are seeing</h3><p>The inner vessel contains pharmaceutical product (being heated or cooled). Heating/cooling fluid (steam, hot water, or brine) circulates through the JACKET (space between inner vessel and outer shell). An AGITATOR inside mixes the product continuously -- improving heat transfer to the vessel wall and ensuring uniform temperature throughout the batch.</p><div class="kf">Key Point: The Jacketed Vessel is the most common heating/cooling equipment in pharmaceutical batch manufacturing. Indirect heat transfer through the vessel wall keeps the heating/cooling medium completely separate from the product -- essential for contamination prevention.</div></div></div>
+<div id="mcq" class="panel"><div class="mc"><div class="mq">Q1. The agitator in a jacketed vessel improves heat transfer because:</div>
+<button class="opt" onclick="cho(this,false)">A) It generates heat by friction to supplement jacket heating</button>
+<button class="opt" onclick="cho(this,true)" data-c>B) It continuously sweeps fresh cool/warm product against the heated/cooled vessel wall, replacing the stagnant boundary layer -- increasing the product-side heat transfer coefficient (hi) and ensuring uniform temperature throughout the batch</button>
+<button class="opt" onclick="cho(this,false)">C) It pumps heating fluid through the jacket faster</button>
+<button class="opt" onclick="cho(this,false)">D) It increases the surface area of the vessel wall</button>
+<div class="exp">Correct. Stagnant boundary layer concept: without agitation, a layer of liquid adjacent to the vessel wall reaches thermal equilibrium with the wall -- no further heat transfer to bulk liquid. Agitator continuously replaces this stagnant layer with fresh bulk liquid -- maintaining high temperature gradient -- rapid, uniform heating/cooling. Agitator type: anchor agitator for viscous products; pitched blade or Rushton for low-viscosity liquids.</div></div><div class="mc"><div class="mq">Q2. Half-pipe jacket design is preferred over conventional jacket in pharmaceutical manufacturing because:</div>
+<button class="opt" onclick="cho(this,false)">A) Half-pipe is cheaper to fabricate</button>
+<button class="opt" onclick="cho(this,true)" data-c>B) Half-pipe jacket allows higher jacket pressure (steam pressure up to 12 bar) for higher temperature processing, higher jacket-side velocity for better heat transfer, and easier inspection and repair of the jacket welds from outside</button>
+<button class="opt" onclick="cho(this,false)">C) Half-pipe jacket holds more fluid so heating is faster</button>
+<button class="opt" onclick="cho(this,false)">D) Half-pipe jacket is easier to insulate</button>
+<div class="exp">Correct. Conventional jacket: annular space around vessel -- jacket fluid can bypass without contacting all surfaces (channelling) -- uneven heating. Half-pipe jacket: semicircular pipes welded in a helical spiral around the vessel exterior -- jacket fluid forced to flow in one path along the entire vessel surface -- no channelling -- uniform heat distribution. Also: higher pressure rating (reduces steam condensate problems) and each weld is accessible for inspection (GMP requirement for pressure vessel certification).</div></div>
+<div class="sb" id="sc" style="display:none"><h2 id="st" style="color:#1B4F72;"></h2><button class="btn" onclick="resetMCQ()">Try Again</button></div></div>
+<footer>2025 Pharmaceutical Engineering BP304T -- Jacketed Vessel</footer>
 <script>
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function cho(el,ok){const card=el.closest('.mc');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(ok){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-c]').classList.add('correct');}card.querySelector('.exp').style.display='block';_a++;const t=document.querySelectorAll('.mc').length;if(_a===t){document.getElementById('sc').style.display='block';document.getElementById('st').textContent='Score: '+_s+'/'+t+(_s===t?' Perfect!':'');}}
+function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.exp').forEach(e=>e.style.display='none');document.getElementById('sc').style.display='none';}
+const C=document.getElementById('c'),ctx=C.getContext('2d'),W=720,H=380;
+let run=true,sp=1,fr=0;
+function togglePlay(){run=!run;document.getElementById('pb').textContent=run?'Pause':'Play';if(run)loop();}
+function setSpeed(s){sp=s;}
+
+// Jacketed vessel -- vessel with jacket, agitator rotating, fluid heating/cooling
+let agAngle=0;
+const jacket=[];
+for(let i=0;i<25;i++) jacket.push({angle:Math.random()*Math.PI*2,r:155+Math.random()*20,col:Math.random()<0.5?'rgba(231,76,60,0.5)':'rgba(231,120,30,0.4)'});
+const product=[];
+for(let i=0;i<30;i++) product.push({x:230+Math.random()*260,y:130+Math.random()*170,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,col:'rgba(46,204,113,0.55)'});
+
+function step(){
+  fr++;agAngle+=0.04*sp;
+  jacket.forEach(j=>{j.angle+=0.01*sp;if(j.angle>Math.PI*2)j.angle-=Math.PI*2;});
+  product.forEach(p=>{
+    // Circular mixing
+    const dx=p.x-360,dy=p.y-220;const dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist>0){p.vx+=(-dy/dist)*0.03*sp;p.vy+=(dx/dist)*0.03*sp;}
+    p.vx*=0.97;p.vy*=0.97;
+    p.x+=p.vx*sp;p.y+=p.vy*sp;
+    if(p.x<230)p.x=230;if(p.x>490)p.x=490;if(p.y<130)p.y=130;if(p.y>310)p.y=310;
+  });
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Jacketed Vessel_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 11 - Heat Transfer',18,48);
+  const CX=360,CY=215;
+
+  // Outer jacket
+  ctx.beginPath();ctx.ellipse(CX,CY,175,175,0,0,Math.PI*2);ctx.fillStyle='rgba(44,62,80,0.5)';ctx.fill();ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.stroke();
+
+  // Jacket fluid particles
+  jacket.forEach(j=>{
+    const x=CX+j.r*Math.cos(j.angle);const y=CY+j.r*Math.sin(j.angle)*0.9;
+    ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.fillStyle=j.col;ctx.fill();
+  });
+
+  // Inner vessel
+  ctx.beginPath();ctx.ellipse(CX,CY,135,135,0,0,Math.PI*2);ctx.fillStyle='rgba(20,40,70,0.85)';ctx.fill();ctx.strokeStyle='#5D6D7E';ctx.lineWidth=3;ctx.stroke();
+
+  // Product particles (being mixed)
+  product.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,3.5,0,Math.PI*2);ctx.fillStyle=p.col;ctx.fill();});
+
+  // Agitator shaft and blades
+  ctx.strokeStyle='rgba(127,140,141,0.8)';ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(CX,CY-215);ctx.lineTo(CX,CY);ctx.stroke();
+  ctx.save();ctx.translate(CX,CY);ctx.rotate(agAngle);
+  // Anchor agitator blades
+  ctx.strokeStyle='rgba(149,165,166,0.85)';ctx.lineWidth=5;
+  ctx.beginPath();
+  ctx.moveTo(-90,-50);ctx.lineTo(-90,80);ctx.lineTo(90,80);ctx.lineTo(90,-50);
+  ctx.moveTo(-90,0);ctx.lineTo(90,0);
+  ctx.stroke();
+  ctx.restore();
+
+  // Jacket inlet/outlet
+  ctx.strokeStyle='rgba(231,76,60,0.8)';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(CX-175,CY-60);ctx.lineTo(CX-210,CY-60);ctx.stroke();
+  ctx.fillStyle='#E74C3C';ctx.font='9px Arial';ctx.textAlign='right';ctx.fillText('STEAM/HOT WATER IN',CX-215,CY-57);
+  ctx.strokeStyle='rgba(149,165,166,0.7)';
+  ctx.beginPath();ctx.moveTo(CX-175,CY+60);ctx.lineTo(CX-210,CY+60);ctx.stroke();
+  ctx.fillStyle='#888';ctx.textAlign='right';ctx.fillText('CONDENSATE OUT',CX-215,CY+63);
+
+  // Product inlet/outlet
+  ctx.strokeStyle='rgba(52,152,219,0.6)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(CX+80,CY-140);ctx.lineTo(CX+80,CY-170);ctx.stroke();
+  ctx.fillStyle='#3498DB';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('PRODUCT',CX+80,CY-178);
+
+  // Motor symbol
+  ctx.beginPath();ctx.arc(CX,CY-225,22,0,Math.PI*2);ctx.fillStyle='rgba(44,62,80,0.9)';ctx.fill();ctx.strokeStyle='#4A90D9';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='white';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('M',CX,CY-221);
+
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(8,8,200,68);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Jacketed Vessel',16,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Jacket: steam/hot water/brine',16,46);ctx.fillText('Anchor agitator for uniform mixing',16,62);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function loop(){if(run)step();draw();if(run)requestAnimationFrame(loop);}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>

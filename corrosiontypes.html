@@ -1,113 +1,243 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Types of Corrosion - Pharmaceutical Engineering</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<title>Types of Corrosion – Pharmaceutical Engineering</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
-header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
-.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
-.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
-.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
-canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
-.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Types of Corrosion</h1><p>Pharmaceutical Engineering BP304T - Chapter 14 - Corrosion</p></header>
-<nav><a href="index.html">Home</a></nav>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0d1a;color:#fff;font-family:Arial,sans-serif;display:flex;flex-direction:column;align-items:center}
+h1{font-size:1.1rem;padding:8px;color:#AED6F1;text-align:center}
+.tabs{display:flex;gap:4px;margin-bottom:6px}
+.tab{padding:6px 18px;border-radius:6px 6px 0 0;cursor:pointer;background:#1a1a2e;border:1px solid #4A90D9;color:#AED6F1;font-size:0.85rem}
+.tab.active{background:#4A90D9;color:#fff}
+.panel{display:none;width:720px}
+.panel.active{display:block}
+canvas{display:block;background:#1a1a2e;border-radius:0 8px 8px 8px;border:1px solid #4A90D9}
+.controls{display:flex;gap:8px;margin:6px 0;justify-content:center}
+button{padding:5px 16px;border-radius:5px;border:none;background:#4A90D9;color:#fff;cursor:pointer;font-size:0.82rem}
+button:hover{background:#1F618D}
+.theory{background:#1a1a2e;border-radius:8px;padding:16px;font-size:0.88rem;line-height:1.6;border:1px solid #4A90D9;width:720px}
+.theory h2{color:#4A90D9;margin-bottom:8px;font-size:1rem}
+.theory h3{color:#AED6F1;margin-top:10px;margin-bottom:4px;font-size:0.92rem}
+.mcq{background:#1a1a2e;border-radius:8px;padding:16px;width:720px;border:1px solid #4A90D9}
+.mcq h2{color:#4A90D9;margin-bottom:10px;font-size:1rem}
+.question{margin-bottom:14px}
+.question p{margin-bottom:6px;font-size:0.88rem}
+.opts label{display:block;margin:3px 0;cursor:pointer;font-size:0.85rem;padding:3px 6px;border-radius:4px}
+.opts label:hover{background:#1F618D}
+.opts label.correct{background:#1e7e34;color:#fff}
+.opts label.wrong{background:#721c24;color:#fff}
+footer{font-size:0.75rem;color:#555;margin:8px 0 4px}
+</style></head><body>
+<h1>Types of Corrosion — Pharmaceutical Equipment</h1>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
+  <div class="tab active" onclick="showTab('anim')">Animation</div>
+  <div class="tab" onclick="showTab('theory')">Theory</div>
+  <div class="tab" onclick="showTab('mcq')">MCQs</div>
 </div>
-<div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
-  </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>Metal surfaces in pharmaceutical equipment undergo corrosion by chemical or electrochemical reactions. Types: uniform corrosion (entire surface); pitting corrosion (localised deep pits); crevice corrosion (in gaps); galvanic corrosion (two dissimilar metals); stress corrosion cracking; intergranular corrosion.</p>
-  <div class="key-fact">Key Point: Pitting corrosion in stainless steel SS316L is the most serious pharmaceutical equipment corrosion: chloride ions attack passive oxide layer, creating deep pits that harbour bacteria, causing contamination risk. PRE (Pitting Resistance Equivalent) must be greater than 26 for pharmaceutical SS316L.</div>
+
+<!-- ANIMATION TAB -->
+<div class="panel active" id="anim">
+<canvas id="cv" width="720" height="380"></canvas>
+<div class="controls">
+  <button onclick="running=!running;this.textContent=running?'Pause':'Play'">Pause</button>
+  <button onclick="t=0">Reset</button>
 </div>
 </div>
-<div id="theory" class="panel">
-  <div class="theory-box"><h3>Types of Corrosion - Principle</h3>
-    <p>Metal surfaces in pharmaceutical equipment undergo corrosion by chemical or electrochemical reactions. Types: uniform corrosion (entire surface); pitting corrosion (localised deep pits); crevice corrosion (in gaps); galvanic corrosion (two dissimilar metals); stress corrosion cracking; intergranular corrosion.</p>
-    <div class="key-fact">Key Fact: Pitting corrosion in stainless steel SS316L is the most serious pharmaceutical equipment corrosion: chloride ions attack passive oxide layer, creating deep pits that harbour bacteria, causing contamination risk. PRE (Pitting Resistance Equivalent) must be greater than 26 for pharmaceutical SS316L.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 14 - Corrosion for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+
+<!-- THEORY TAB -->
+<div class="panel" id="theory">
+<div class="theory">
+<h2>Types of Corrosion in Pharmaceutical Equipment</h2>
+<p>Corrosion is the degradation of metals by chemical or electrochemical reaction with the environment. In pharmaceutical manufacturing, corrosion can contaminate products and damage equipment.</p>
+<h3>1. Uniform / General Corrosion</h3>
+<p>Metal surface corrodes uniformly across the whole area. Predictable and manageable. Common in mild steel exposed to acids.</p>
+<h3>2. Pitting Corrosion</h3>
+<p>Localised attack forming deep pits while the rest of the surface remains intact. Dangerous because pits are hard to detect. Common in stainless steel exposed to chlorides.</p>
+<h3>3. Crevice Corrosion</h3>
+<p>Occurs in confined spaces (gaskets, flanges, under deposits) where oxygen is depleted. Creates differential aeration cells.</p>
+<h3>4. Galvanic Corrosion</h3>
+<p>When two dissimilar metals are in contact in an electrolyte. The less noble metal (anode) corrodes preferentially. Prevented by avoiding dissimilar metal contacts.</p>
+<h3>5. Stress Corrosion Cracking (SCC)</h3>
+<p>Combination of tensile stress and corrosive environment causes cracking. Can be sudden and catastrophic. Common in austenitic stainless steel in chloride environments.</p>
+<h3>Prevention</h3>
+<p>Use SS316L for pharmaceutical contact parts. Apply passivation (citric/nitric acid treatment). Regular inspection and electropolishing of surfaces.</p>
 </div>
-<div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Types of Corrosion?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Metal surfaces in pharmaceutical equipment undergo corrosion by chemical or electrochemical reaction...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Pitting corrosion in stainless steel SS316L is the most serious pharmaceutical equipment corrosion: chloride ions attack passive oxide layer, creating deep pits that harbour bacteria, causing contamination risk. PRE (Pitting Resistance Equivalent) must be greater than 26 for pharmaceutical SS316L.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Types of Corrosion is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Pitting corrosion in stainless steel SS316L is the most serious pharmaceutical equipment corrosion: ...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. Metal surfaces in pharmaceutical equipment undergo corrosion by chemical or electrochemical reactions. Types: uniform corrosion (entire surface); pitting corrosion (localised deep pits); crevice corrosion (in gaps); galvanic corrosion (two dissimilar metals); stress corrosion cracking; intergranular corrosion.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Types of Corrosion</footer>
+
+<!-- MCQ TAB -->
+<div class="panel" id="mcq">
+<div class="mcq">
+<h2>MCQs — Types of Corrosion</h2>
+<div class="question"><p>1. Which type of corrosion forms deep localised holes while surrounding metal remains intact?</p>
+<div class="opts">
+  <label onclick="cho(this,false)">A. Uniform corrosion</label>
+  <label onclick="cho(this,true)" data-c>B. Pitting corrosion</label>
+  <label onclick="cho(this,false)">C. Galvanic corrosion</label>
+  <label onclick="cho(this,false)">D. Crevice corrosion</label>
+</div></div>
+<div class="question"><p>2. Galvanic corrosion occurs when:</p>
+<div class="opts">
+  <label onclick="cho(this,false)">A. Metal is exposed to air</label>
+  <label onclick="cho(this,false)">B. Temperature is very high</label>
+  <label onclick="cho(this,true)" data-c>C. Two dissimilar metals are in contact in an electrolyte</label>
+  <label onclick="cho(this,false)">D. pH exceeds 10</label>
+</div></div>
+<div class="question"><p>3. SS316L is preferred in pharmaceutical equipment because:</p>
+<div class="opts">
+  <label onclick="cho(this,false)">A. It is the cheapest metal</label>
+  <label onclick="cho(this,true)" data-c>B. It has superior corrosion resistance including chloride resistance</label>
+  <label onclick="cho(this,false)">C. It has the highest tensile strength</label>
+  <label onclick="cho(this,false)">D. It is magnetic</label>
+</div></div>
+<div class="question"><p>4. Which corrosion type is most likely in a flanged pipe joint?</p>
+<div class="opts">
+  <label onclick="cho(this,false)">A. Stress corrosion cracking</label>
+  <label onclick="cho(this,false)">B. Uniform corrosion</label>
+  <label onclick="cho(this,true)" data-c>C. Crevice corrosion</label>
+  <label onclick="cho(this,false)">D. Pitting corrosion</label>
+</div></div>
+</div>
+</div>
+
+<footer>© 2025 Pharmaceutical Engineering BP304T</footer>
+
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
-function draw(){
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Types of Corrosion_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 14 - Corrosion',18,48);
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d');
+const W=720,H=380;
+let t=0,running=true;
+
+// 4 corrosion types shown side by side
+// Each panel: metal surface with animated corrosion effect
+
+function drawPanel(x, y, w, h, label, type, tt){
+  // Panel background
+  ctx.fillStyle='rgba(20,30,50,0.85)';
+  ctx.fillRect(x,y,w,h);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=1.5;
+  ctx.strokeRect(x,y,w,h);
+
+  // Label
+  ctx.fillStyle='#AED6F1';ctx.font='bold 11px Arial';ctx.textAlign='center';
+  ctx.fillText(label,x+w/2,y+14);
+
+  // Metal surface base
+  const mx=x+8, my=y+22, mw=w-16, mh=30;
+  ctx.fillStyle='#7f8c8d';ctx.fillRect(mx,my,mw,mh);
+  // Shiny highlight
+  ctx.fillStyle='rgba(255,255,255,0.15)';ctx.fillRect(mx,my,mw,8);
+
+  if(type==='uniform'){
+    // Uniform: whole surface gets rusty layer growing
+    const depth = Math.min(28,(tt%120)/120*28);
+    ctx.fillStyle=`rgba(139,69,19,${0.3+depth/60})`;
+    ctx.fillRect(mx,my+mh-depth,mw,depth);
+    // rust colour
+    for(let i=0;i<6;i++){
+      ctx.fillStyle=`rgba(180,${60+i*10},10,0.5)`;
+      ctx.fillRect(mx+i*(mw/6),my+mh-depth,mw/6-1,depth);
+    }
+    ctx.fillStyle='#E74C3C';ctx.font='9px Arial';ctx.textAlign='center';
+    ctx.fillText('uniform attack',x+w/2,y+h-6);
+
+  } else if(type==='pitting'){
+    // Pitting: a few deep holes growing
+    const pits=[{px:0.25,d:1},{px:0.5,d:1.3},{px:0.75,d:0.8}];
+    pits.forEach(p=>{
+      const px=mx+p.px*mw;
+      const depth=Math.min(18,(tt%100)/100*18*p.d);
+      const pw=6+depth*0.4;
+      // pit hole
+      ctx.fillStyle='#1a1a2e';
+      ctx.beginPath();ctx.ellipse(px,my+mh,pw/2,depth,0,Math.PI,2*Math.PI);ctx.fill();
+      // rust rim
+      ctx.strokeStyle='#E67E22';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.ellipse(px,my+mh,pw/2+2,depth+1,0,Math.PI,2*Math.PI);ctx.stroke();
+    });
+    ctx.fillStyle='#E67E22';ctx.font='9px Arial';ctx.textAlign='center';
+    ctx.fillText('localised pits',x+w/2,y+h-6);
+
+  } else if(type==='galvanic'){
+    // Galvanic: two metals, one corroding
+    const midX=mx+mw/2;
+    ctx.fillStyle='#95a5a6';ctx.fillRect(mx,my,mw/2,mh); // metal A (anode)
+    ctx.fillStyle='#bdc3c7';ctx.fillRect(midX,my,mw/2,mh); // metal B (cathode)
+    ctx.strokeStyle='#F39C12';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(midX,my);ctx.lineTo(midX,my+mh);ctx.stroke();
+    // corrosion on anode side
+    const corr=(tt%80)/80;
+    ctx.fillStyle=`rgba(139,69,19,${0.6*corr})`;
+    ctx.fillRect(mx,my+mh-corr*20,mw/2-1,corr*20);
+    // electrons arrow
+    ctx.strokeStyle='#F1C40F';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+    const ax=mx+mw/2-5+Math.sin(tt*0.08)*3;
+    ctx.beginPath();ctx.moveTo(mx+5,my+mh/2);ctx.lineTo(midX+mw/2-5,my+mh/2);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#F1C40F';ctx.font='8px Arial';ctx.textAlign='left';
+    ctx.fillText('e⁻',midX-10,my+mh/2-3);
+    ctx.fillStyle='#E74C3C';ctx.font='8px Arial';ctx.textAlign='center';
+    ctx.fillText('A(−)',mx+mw/4,my-3);
+    ctx.fillStyle='#2ECC71';ctx.fillText('B(+)',midX+mw/4,my-3);
+    ctx.fillStyle='#E74C3C';ctx.font='9px Arial';ctx.textAlign='center';
+    ctx.fillText('anode corrodes',x+w/2,y+h-6);
+
+  } else if(type==='stress'){
+    // SCC: cracks propagating under stress
+    const crack=(tt%120)/120;
+    // Stress arrows
+    ctx.strokeStyle='#E74C3C';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(mx+mw/2,my-8);ctx.lineTo(mx+mw/2,my+2);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(mx+mw/2-4,my-4);ctx.lineTo(mx+mw/2,my-8);ctx.lineTo(mx+mw/2+4,my-4);ctx.stroke();
+    // Crack
+    const ck=crack*mh;
+    ctx.strokeStyle='#E74C3C';ctx.lineWidth=1.5;
+    ctx.beginPath();
+    ctx.moveTo(mx+mw/2,my);
+    ctx.lineTo(mx+mw/2+2,my+ck*0.3);
+    ctx.lineTo(mx+mw/2-1,my+ck*0.6);
+    ctx.lineTo(mx+mw/2+1,my+ck);
+    ctx.stroke();
+    ctx.fillStyle='#E74C3C';ctx.font='9px Arial';ctx.textAlign='center';
+    ctx.fillText('SCC crack',x+w/2,y+h-6);
+  }
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+
+  // Title
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,270,48);
+  ctx.fillStyle='white';ctx.font='bold 13px Arial';ctx.textAlign='left';
+  ctx.fillText('Types of Corrosion',18,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Pharmaceutical Equipment Protection',18,46);
+
+  // Draw 4 panels in 2x2 grid
+  const pw=320,ph=140,gap=10;
+  const startX=10,startY=70;
+
+  drawPanel(startX,           startY,      pw, ph, '1. Uniform Corrosion',    'uniform', t);
+  drawPanel(startX+pw+gap,    startY,      pw, ph, '2. Pitting Corrosion',    'pitting', t);
+  drawPanel(startX,           startY+ph+gap,pw, ph, '3. Galvanic Corrosion',  'galvanic', t);
+  drawPanel(startX+pw+gap,    startY+ph+gap,pw, ph, '4. Stress Corrosion Cracking','stress', t);
+
+  // Bottom info
+  ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(10,355,700,20);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.textAlign='center';
+  ctx.fillText('Prevention: Use SS316L • Passivation • Electropolishing • Avoid dissimilar metal contacts',360,368);
+}
+
+function step(){t++;}
+function loop(){if(running)step();draw();requestAnimationFrame(loop);}
 loop();
-</script>
-</body>
-</html>
+function showTab(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(tb=>tb.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab')[['anim','theory','mcq'].indexOf(id)].classList.add('active');
+}
+function cho(el,ok){
+  const opts=el.parentElement.querySelectorAll('label');
+  opts.forEach(o=>o.classList.remove('correct','wrong'));
+  el.classList.add(ok?'correct':'wrong');
+  if(!ok)el.parentElement.querySelector('[data-c]').classList.add('correct');
+}
+</script></body></html>

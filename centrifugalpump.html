@@ -1,113 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Centrifugal Pump - Pharmaceutical Engineering</title>
-<style>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Centrifugal Pump</title><style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
+nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;}
 .tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
 .panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
 .anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
 canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Centrifugal Pump</h1><p>Pharmaceutical Engineering BP304T - Chapter 16 - Fluid Mechanics</p></header>
+.tb{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
+.tb h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
+.tb p,.tb li{line-height:1.8;font-size:0.95em;color:#333;}.tb ul{padding-left:22px;margin-top:8px;}
+.kf{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px;margin:12px 0;font-size:0.93em;}
+.mc{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}.mq{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
+.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;}
+.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
+.exp{display:none;margin-top:10px;padding:10px;background:#FEF9E7;border-radius:6px;font-size:0.9em;border-left:3px solid #F39C12;}
+.sb{text-align:center;padding:20px;background:white;border-radius:10px;margin-top:10px;}
+footer{text-align:center;padding:16px;color:#888;font-size:0.8em;background:white;margin-top:16px;}
+</style></head><body>
+<header><h1>Centrifugal Pump</h1><p>Pharmaceutical Engineering BP304T -- Chapter 16 -- Fluid Mechanics</p></header>
 <nav><a href="index.html">Home</a></nav>
 <div class="tabs">
-  <button class="tab active" onclick="showTab('anim',this)">Animation</button>
-  <button class="tab" onclick="showTab('theory',this)">Theory</button>
-  <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
+  <button class="tab active" onclick="sT('anim',this)">Animation</button>
+  <button class="tab" onclick="sT('theory',this)">Theory</button>
+  <button class="tab" onclick="sT('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
-  </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>An impeller rotates at high speed inside a volute casing. Liquid enters at the impeller centre and is thrown outward by centrifugal force into the volute. Kinetic energy converts to pressure energy (Bernoulli). Pumps low-viscosity pharmaceutical liquids continuously at high flow rates.</p>
-  <div class="key-fact">Key Point: Centrifugal pumps are the most common liquid transfer equipment in pharmaceutical manufacturing. Sanitary (hygienic) design: no dead legs, crevice-free, CIP-compatible, USP Class VI elastomers. Flow rate adjusted by impeller speed (VFD) or control valve.</div>
-</div>
+<div class="anim-box"><canvas id="c" width="720" height="380"></canvas>
+<div style="margin-top:12px;">
+<button class="btn" id="pb" onclick="tP()">Pause</button>
+<button class="btn" onclick="sS(0.5)">Slow</button>
+<button class="btn" onclick="sS(1)">Normal</button>
+<button class="btn" onclick="sS(2)">Fast</button>
+</div></div>
+<div class="tb"><h3>What you are seeing</h3><p>An impeller with curved vanes rotates at high speed inside a volute casing. Liquid enters at the impeller EYE (centre) and is thrown outward by centrifugal force into the volute. As liquid decelerates in the widening volute, kinetic energy converts to pressure energy (Bernoulli). High-pressure liquid exits through the discharge nozzle.</p><div class="kf">Key Point: The centrifugal pump converts mechanical rotation (kinetic energy) into fluid pressure (potential energy). Flow rate adjustable by valve or VFD (variable frequency drive). Cannot pump gases or vapour -- loses prime if suction side contains air.</div></div>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Centrifugal Pump - Principle</h3>
-    <p>An impeller rotates at high speed inside a volute casing. Liquid enters at the impeller centre and is thrown outward by centrifugal force into the volute. Kinetic energy converts to pressure energy (Bernoulli). Pumps low-viscosity pharmaceutical liquids continuously at high flow rates.</p>
-    <div class="key-fact">Key Fact: Centrifugal pumps are the most common liquid transfer equipment in pharmaceutical manufacturing. Sanitary (hygienic) design: no dead legs, crevice-free, CIP-compatible, USP Class VI elastomers. Flow rate adjusted by impeller speed (VFD) or control valve.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 16 - Fluid Mechanics for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+<div class="tb"><h3>Centrifugal Pump -- Theory</h3><ul><li><strong>Impeller:</strong> 2-6 backward-curved vanes; SS 316L for pharmaceutical service; 1000-3500 rpm</li><li><strong>Volute:</strong> Spiral casing that decelerates fluid and converts velocity to pressure</li><li><strong>Shaft seal:</strong> Mechanical seal prevents liquid leaking along shaft; single or double seal for pharmaceutical</li><li><strong>Sanitary design:</strong> No dead legs; Ra less than 0.8 micrometres; crevice-free; CIP/SIP compatible; USP Class VI seals</li><li><strong>Use:</strong> Transfer of WFI, process water, buffer solutions, cleaning agents in pharmaceutical plants</li></ul><div class="kf">Key Point: The centrifugal pump converts mechanical rotation (kinetic energy) into fluid pressure (potential energy). Flow rate adjustable by valve or VFD (variable frequency drive). Cannot pump gases or vapour -- loses prime if suction side contains air.</div></div>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Centrifugal Pump?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) An impeller rotates at high speed inside a volute casing. Liquid enters at the impeller centre and i...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Centrifugal pumps are the most common liquid transfer equipment in pharmaceutical manufacturing. Sanitary (hygienic) design: no dead legs, crevice-free, CIP-compatible, USP Class VI elastomers. Flow rate adjusted by impeller speed (VFD) or control valve.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Centrifugal Pump is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Centrifugal pumps are the most common liquid transfer equipment in pharmaceutical manufacturing. San...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. An impeller rotates at high speed inside a volute casing. Liquid enters at the impeller centre and is thrown outward by centrifugal force into the volute. Kinetic energy converts to pressure energy (Bernoulli). Pumps low-viscosity pharmaceutical liquids continuously at high flow rates.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
-</div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Centrifugal Pump</footer>
+<div class="mc"><div class="mq">Q1. The centrifugal pump raises liquid pressure by:</div>
+<button class="opt" onclick="ch(this,false)">A) Incorrect option</button>
+<button class="opt" onclick="ch(this,true)" data-c>B) Converting kinetic energy (high velocity from rotating impeller) into pressure energy (potential energy) in the volute -- as liquid decelerates in the expanding volute cross-section, its velocity decreases and pressure increases (Bernoulli principle)</button>
+<button class="opt" onclick="ch(this,false)">C) Another incorrect option</button>
+<button class="opt" onclick="ch(this,false)">D) Yet another incorrect option</button>
+<div class="exp">Correct. Bernoulli equation: P + 0.5*rho*v^2 = constant. In impeller: low P, high v (liquid thrown outward fast). In volute: v decreases as cross-section widens, so P increases. Pump head H = v^2/(2g) converted to pressure. Centrifugal pump characteristic: at zero flow, max head; at max flow, zero head -- operation point where pump curve meets system curve.</div></div>
+<div class="mc"><div class="mq">Q2. A centrifugal pump in pharmaceutical WFI distribution operates with a variable frequency drive (VFD) rather than a control valve because:</div>
+<button class="opt" onclick="ch(this,false)">A) Incorrect option</button>
+<button class="opt" onclick="ch(this,true)" data-c>B) VFD adjusts pump speed to match demand -- reduces energy consumption by up to 50% (energy proportional to speed cubed) -- avoids pressure drop across a throttling valve -- eliminates potential deadleg in the valve body -- preferred for sanitary service</button>
+<button class="opt" onclick="ch(this,false)">C) Another incorrect option</button>
+<button class="opt" onclick="ch(this,false)">D) Yet another incorrect option</button>
+<div class="exp">Correct. Affinity laws: Q proportional to N (speed); H proportional to N^2; Power proportional to N^3. Reducing pump speed by 20% reduces power by 49% -- huge energy saving vs throttling valve (which wastes energy as heat across the valve). Also: no deadleg in valve body (hygienic concern in WFI systems); smoother pressure control; reduced wear on impeller and seals at lower speed.</div></div>
+<div class="sb" id="sc" style="display:none"><h2 id="st" style="color:#1B4F72;"></h2><button class="btn" onclick="rM()">Try Again</button></div></div>
+<footer>2025 Pharmaceutical Engineering BP304T -- Centrifugal Pump</footer>
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+function sT(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+function ch(el,ok){const card=el.closest('.mc');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(ok){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-c]').classList.add('correct');}card.querySelector('.exp').style.display='block';_a++;const t=document.querySelectorAll('.mc').length;if(_a===t){document.getElementById('sc').style.display='block';document.getElementById('st').textContent='Score: '+_s+'/'+t+(_s===t?' Perfect!':'');}}
+function rM(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.exp').forEach(e=>e.style.display='none');document.getElementById('sc').style.display='none';}
+const C=document.getElementById('c'),ctx=C.getContext('2d'),W=720,H=380;
+let run=true,sp=1,fr=0;
+function tP(){run=!run;document.getElementById('pb').textContent=run?'Pause':'Play';if(run)loop();}
+function sS(s){sp=s;}
+
+// Centrifugal pump -- rotating impeller, volute casing, liquid being thrown outward
+let impAngle=0;
+const liqParts=[];
+for(let i=0;i<35;i++) liqParts.push({r:5+Math.random()*10,angle:Math.random()*Math.PI*2,vr:0.3+Math.random()*0.5,inVolute:false,voluteAngle:0,voluteR:0});
+
+function step(){
+  fr++;impAngle+=0.08*sp;
+  liqParts.forEach(p=>{
+    if(!p.inVolute){
+      p.r+=p.vr*sp;p.angle+=0.06*sp;
+      if(p.r>75){p.inVolute=true;p.voluteAngle=p.angle;p.voluteR=80;}
+    } else {
+      p.voluteAngle-=0.02*sp;p.voluteR+=0.3*sp;
+      if(p.voluteR>130){p.inVolute=false;p.r=3+Math.random()*8;p.angle=Math.random()*Math.PI*2;}
+    }
+  });
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Centrifugal Pump_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 16 - Fluid Mechanics',18,48);
+  const CX=300,CY=200;
+
+  // Volute casing (spiral)
+  ctx.beginPath();
+  for(let a=0;a<Math.PI*2;a+=0.05){
+    const r=82+a*15;
+    const x=CX+r*Math.cos(a);const y=CY+r*Math.sin(a)*0.9;
+    a===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=5;ctx.stroke();
+  ctx.fillStyle='rgba(26,50,90,0.6)';ctx.beginPath();ctx.arc(CX,CY,160,0,Math.PI*2);ctx.fill();
+
+  // Discharge pipe (right side)
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=8;
+  ctx.beginPath();ctx.moveTo(CX+160,CY);ctx.lineTo(CX+220,CY);ctx.stroke();
+  ctx.fillStyle='#3498DB';ctx.font='9px Arial';ctx.textAlign='left';ctx.fillText('HIGH PRESSURE',CX+225,CY+4);
+
+  // Suction (top inlet)
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=8;
+  ctx.beginPath();ctx.moveTo(CX,CY-160);ctx.lineTo(CX,CY-220);ctx.stroke();
+  ctx.fillStyle='#888';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('SUCTION (EYE)',CX,CY-225);
+
+  // Liquid particles
+  liqParts.forEach(p=>{
+    let x,y;
+    if(!p.inVolute){x=CX+p.r*Math.cos(p.angle);y=CY+p.r*Math.sin(p.angle)*0.85;}
+    else{x=CX+p.voluteR*Math.cos(p.voluteAngle);y=CY+p.voluteR*Math.sin(p.voluteAngle)*0.85;}
+    ctx.beginPath();ctx.arc(x,y,3.5,0,Math.PI*2);
+    const speed=p.inVolute?0.3:Math.min(1,p.r/75);
+    ctx.fillStyle=`rgba(52,${Math.round(152-speed*80)},${Math.round(219-speed*100)},0.75)`;ctx.fill();
+  });
+
+  // Impeller
+  ctx.save();ctx.translate(CX,CY);ctx.rotate(impAngle);
+  ctx.strokeStyle='rgba(127,140,141,0.8)';ctx.lineWidth=3;
+  for(let i=0;i<5;i++){
+    const a=i*Math.PI*2/5;
+    ctx.beginPath();
+    ctx.moveTo(Math.cos(a)*8,Math.sin(a)*8);
+    ctx.quadraticCurveTo(Math.cos(a+0.5)*45,Math.sin(a+0.5)*45,Math.cos(a+1.0)*68,Math.sin(a+1.0)*68);
+    ctx.stroke();
+  }
+  ctx.beginPath();ctx.arc(0,0,10,0,Math.PI*2);ctx.fillStyle='#5D6D7E';ctx.fill();
+  ctx.restore();
+
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(8,8,200,68);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Centrifugal Pump',16,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Impeller throws liquid into volute',16,46);ctx.fillText('KE -> PE (Bernoulli) -> pressure rise',16,62);
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function loop(){if(run)step();draw();if(run)requestAnimationFrame(loop);}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>

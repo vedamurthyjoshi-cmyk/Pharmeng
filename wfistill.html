@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>WFI Multi-Effect Still - Pharmaceutical Engineering</title>
+<title>WFI Multi-Effect Still — Pharmaceutical Engineering</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
 header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
@@ -14,7 +14,7 @@ canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
 .btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
 .theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
 .theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
+.theory-box p,.theory-box li{line-height:1.8;font-size:0.95em;color:#333;}.theory-box ul{padding-left:22px;margin-top:8px;}
 .key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
 .mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
 .mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
@@ -26,7 +26,7 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 </style>
 </head>
 <body>
-<header><h1>WFI Multi-Effect Still</h1><p>Pharmaceutical Engineering BP304T - Chapter 10 - Distillation</p></header>
+<header><h1>WFI Multi-Effect Still</h1><p>Pharmaceutical Engineering BP304T - Chapter 10 — Distillation</p></header>
 <nav><a href="index.html">Home</a></nav>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">Animation</button>
@@ -35,7 +35,7 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 </div>
 <div id="anim" class="panel active">
 <div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
+  <canvas id="c" width="720" height="400"></canvas>
   <div style="margin-top:14px;">
     <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
     <button class="btn" onclick="setSpeed(0.5)">Slow</button>
@@ -45,66 +45,142 @@ footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:whit
 </div>
 <div class="theory-box">
   <h3>What you are seeing</h3>
-  <p>Multiple-effect falling film evaporator designed to produce Water for Injection. Feed water boils, vapour (free from non-volatile impurities, bacteria, endotoxins) passes to next effect. Final vapour condenses as WFI meeting IP/USP specifications.</p>
-  <div class="key-fact">Key Point: WFI Still produces pyrogen-free endotoxin-free water because distillation removes all non-volatile contaminants. IP specification: WFI conductivity 1.3 microS/cm at 25 degrees C, endotoxins 0.25 EU/mL maximum, sterile and pyrogen-free.</div>
+  <p>Three effects (evaporator bodies) connected in series. Steam enters Effect 1 (left, hottest). Purified water boils and produces vapour which passes to Effect 2 as heating medium. Effect 2 vapour heats Effect 3. Each effect operates at progressively lower pressure and temperature. Final vapour from Effect 3 condenses as pure sterile WFI.</p>
+  <div class="key-fact">Key Point: 1 kg of steam in a 7-effect still produces approximately 6.5 kg of WFI — far more energy-efficient than a single-effect still. WFI specification (IP/USP): conductivity less than or equal to 1.3 microS/cm at 25 degrees C, endotoxins less than 0.25 EU/mL, sterile and pyrogen-free.</div>
 </div>
 </div>
-<div id="theory" class="panel">
-  <div class="theory-box"><h3>WFI Multi-Effect Still - Principle</h3>
-    <p>Multiple-effect falling film evaporator designed to produce Water for Injection. Feed water boils, vapour (free from non-volatile impurities, bacteria, endotoxins) passes to next effect. Final vapour condenses as WFI meeting IP/USP specifications.</p>
-    <div class="key-fact">Key Fact: WFI Still produces pyrogen-free endotoxin-free water because distillation removes all non-volatile contaminants. IP specification: WFI conductivity 1.3 microS/cm at 25 degrees C, endotoxins 0.25 EU/mL maximum, sterile and pyrogen-free.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 10 - Distillation for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
-</div>
+<div id="theory" class="panel"><div class="theory-box"><h3>WFI Multi-Effect Still — Principle</h3>
+    <p>Three effects (evaporator bodies) connected in series. Steam enters Effect 1 (left, hottest). Purified water boils and produces vapour which passes to Effect 2 as heating medium. Effect 2 vapour heats Effect 3. Each effect operates at progressively lower pressure and temperature. Final vapour from Effect 3 condenses as pure sterile WFI.</p>
+    <div class="key-fact">Key Point: 1 kg of steam in a 7-effect still produces approximately 6.5 kg of WFI — far more energy-efficient than a single-effect still. WFI specification (IP/USP): conductivity less than or equal to 1.3 microS/cm at 25 degrees C, endotoxins less than 0.25 EU/mL, sterile and pyrogen-free.</div>
+    <p style="margin-top:12px;color:#666;font-style:italic;">See your textbook Chapter 10 — Distillation for complete construction details and pharmaceutical applications.</p>
+    </div></div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of WFI Multi-Effect Still?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Multiple-effect falling film evaporator designed to produce Water for Injection. Feed water boils, v...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. WFI Still produces pyrogen-free endotoxin-free water because distillation removes all non-volatile contaminants. IP specification: WFI conductivity 1.3 microS/cm at 25 degrees C, endotoxins 0.25 EU/mL maximum, sterile and pyrogen-free.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of WFI Multi-Effect Still is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) WFI Still produces pyrogen-free endotoxin-free water because distillation removes all non-volatile c...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. Multiple-effect falling film evaporator designed to produce Water for Injection. Feed water boils, vapour (free from non-volatile impurities, bacteria, endotoxins) passes to next effect. Final vapour condenses as WFI meeting IP/USP specifications.</div>
-  </div>
+<div class="mcq-card"><div class="mcq-q">Q1. WFI (Water for Injection) must be produced by distillation (or membrane technology in USP 2017+) rather than purification alone because:</div><button class="opt" onclick="choose(this,false)">A) Distillation adds minerals to water making it safer for injection</button>
+<button class="opt" onclick="choose(this,true)" data-correct>B) Distillation removes all non-volatile contaminants including bacterial endotoxins (pyrogenic lipopolysaccharides) which pass through most filters but cannot vaporise — they remain in the still pot while pure water vapour distils over</button>
+<button class="opt" onclick="choose(this,false)">C) Purification systems cannot remove inorganic salts from water</button>
+<button class="opt" onclick="choose(this,false)">D) Distillation increases the pH of water to the required specification</button>
+<div class="explanation">Correct. Endotoxin removal is the critical requirement: bacterial endotoxins (LPS, MW 10,000-100,000 Da) are non-volatile — cannot vaporise even at 100 degrees C. They are left behind in the still pot while pure water vapour passes to the condenser. This is why distillation is definitive for WFI. Modern alternative (USP General Chapter 1231 since 2017): membrane purification (nanofiltration + ultrafiltration + UV treatment + electrodeionisation) can also produce WFI-grade water. However IP (Indian Pharmacopoeia) still requires distillation as the only acceptable method for WFI.</div></div>
+<div class="mcq-card"><div class="mcq-q">Q2. In a triple-effect WFI still, Effect 2 is heated by:</div><button class="opt" onclick="choose(this,false)">A) A separate steam supply dedicated to Effect 2</button>
+<button class="opt" onclick="choose(this,true)" data-correct>B) The vapour produced in Effect 1 — this vapour (at slightly lower temperature and pressure than the original steam) condenses in the jacket of Effect 2, transferring its latent heat to evaporate water in Effect 2</button>
+<button class="opt" onclick="choose(this,false)">C) Electrical heating elements</button>
+<button class="opt" onclick="choose(this,false)">D) The condensed water (WFI) from Effect 1</button>
+<div class="explanation">Correct. Multiple effect principle: vapour from Effect 1 (at T1, P1) is used as heating medium for Effect 2 (at T2 < T1, P2 < P1). Effect 2 operates at lower pressure so its boiling point is lower — the vapour from Effect 1 can condense and give up its latent heat to boil water in Effect 2. This steam economy (using vapour as heating medium) repeats: Effect 2 vapour heats Effect 3. Result: one unit of primary steam produces approximately N units of WFI in an N-effect still. For 7-effect still: 1 kg steam produces approximately 6.5 kg WFI — 6.5x more efficient than single effect.</div></div>
+
   <div class="score-box" id="score" style="display:none">
     <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
     <button class="btn" onclick="resetMCQ()">Try Again</button>
   </div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - WFI Multi-Effect Still</footer>
+<footer>2025 Pharmaceutical Engineering BP304T - WFI Multi-Effect Still</footer>
 <script>
 function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
 let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
+function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' Perfect!':' Review and try again.');}}
 function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
+let running=true,speedMult=1;
 function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
 function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
+const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+
+let t=0;
+// Three effects
+const EFFECTS=[{x:180,label:'Effect 1',T:'120C',P:'2 bar'},{x:380,label:'Effect 2',T:'90C',P:'0.7 bar'},{x:580,label:'Effect 3',T:'65C',P:'0.25 bar'}];
+// Vapour particles between effects
+const vapour=[];
+for(let i=0;i<25;i++) vapour.push({eff:Math.floor(Math.random()*2),prog:Math.random(),vy:-0.5-Math.random()*0.4,alpha:0.6});
+// WFI drops from condenser
+const wfiDrops=[];
+for(let i=0;i<8;i++) wfiDrops.push({y:200+Math.random()*100,vy:0.6+Math.random()*0.4});
+// Feed particles flowing through effects
+const feed=[];
+for(let i=0;i<10;i++) feed.push({eff:0,x:130+Math.random()*40,vx:0.3+Math.random()*0.2});
+
+function step(){
+  t+=speedMult;
+  vapour.forEach(v=>{
+    v.prog+=0.008*speedMult;
+    if(v.prog>1){v.prog=0;v.eff=Math.floor(Math.random()*2);v.alpha=0.6;}
+  });
+  wfiDrops.forEach(d=>{d.y+=d.vy*speedMult;if(d.y>330){d.y=200+Math.random()*30;}});
+}
+
 function draw(){
   ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('WFI Multi-Effect Still_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 10 - Distillation',18,48);
+  
+  // Draw three effects
+  EFFECTS.forEach((eff,ei)=>{
+    // Effect body
+    const tempCol=ei===0?'rgba(231,76,60,0.3)':ei===1?'rgba(230,126,34,0.3)':'rgba(52,152,219,0.3)';
+    ctx.fillStyle=tempCol;ctx.fillRect(eff.x-60,100,120,230);
+    ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.strokeRect(eff.x-60,100,120,230);
+    
+    // Temperature and pressure label
+    ctx.fillStyle='white';ctx.font='bold 11px Arial';ctx.textAlign='center';
+    ctx.fillText(eff.label,eff.x,92);
+    ctx.fillStyle='#AED6F1';ctx.font='9px Arial';
+    ctx.fillText(eff.T+' / '+eff.P,eff.x,82);
+    
+    // Liquid level in effect (with bubbles)
+    ctx.fillStyle='rgba(52,152,219,0.3)';ctx.fillRect(eff.x-58,200,116,128);
+    // Boiling bubbles
+    for(let b=0;b<5;b++){
+      const bx=eff.x-40+b*20;
+      const by=220+Math.sin(t*0.08+b+ei)*20;
+      ctx.beginPath();ctx.arc(bx,by,3,0,Math.PI*2);
+      ctx.strokeStyle='rgba(255,255,255,0.4)';ctx.lineWidth=1.5;ctx.stroke();
+    }
+  });
+  
+  // Steam inlet to Effect 1
+  ctx.strokeStyle='#E74C3C';ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(80,150);ctx.lineTo(120,150);ctx.stroke();
+  ctx.fillStyle='#E74C3C';ctx.font='10px Arial';ctx.textAlign='right';ctx.fillText('STEAM IN',115,145);
+  
+  // Vapour connections between effects (top pipes)
+  ctx.strokeStyle='#AED6F1';ctx.lineWidth=5;
+  ctx.beginPath();ctx.moveTo(120,120);ctx.lineTo(320,120);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(320,120);ctx.lineTo(520,120);ctx.stroke();
+  
+  // Vapour arrows
+  ctx.fillStyle='rgba(255,255,255,0.6)';ctx.font='11px Arial';ctx.textAlign='center';
+  ctx.fillText('Vapour (heating medium)',250,108);
+  ctx.fillText('Vapour (heating medium)',450,108);
+  
+  // Moving vapour dots in pipes
+  vapour.forEach(v=>{
+    const x1=EFFECTS[v.eff].x+60+v.prog*200;
+    ctx.beginPath();ctx.arc(x1,120,3,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${v.alpha})`;ctx.fill();
+  });
+  
+  // Condensate from Effect 1 jacket
+  ctx.strokeStyle='rgba(149,165,166,0.6)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(120,180);ctx.lineTo(80,180);ctx.stroke();
+  ctx.fillStyle='#888';ctx.textAlign='right';ctx.fillText('Condensate',75,185);
+  
+  // Feed water inlet
+  ctx.strokeStyle='#3498DB';ctx.lineWidth=3;
+  ctx.beginPath();ctx.moveTo(120,300);ctx.lineTo(580,300);ctx.stroke();
+  ctx.fillStyle='#3498DB';ctx.font='10px Arial';ctx.textAlign='center';ctx.fillText('Purified Water Feed',350,295);
+  
+  // WFI outlet (from condenser after Effect 3)
+  ctx.strokeStyle='#2ECC71';ctx.lineWidth=4;
+  ctx.beginPath();ctx.moveTo(640,120);ctx.lineTo(680,120);ctx.lineTo(680,350);ctx.stroke();
+  ctx.fillStyle='#2ECC71';ctx.font='10px Arial';ctx.textAlign='left';ctx.fillText('WFI',685,235);
+  wfiDrops.forEach(d=>{ctx.beginPath();ctx.arc(680,d.y,3,0,Math.PI*2);ctx.fillStyle='rgba(46,204,113,0.8)';ctx.fill();});
+  
+  // Concentrate discharge
+  EFFECTS.forEach((eff,ei)=>{
+    ctx.strokeStyle='rgba(243,156,18,0.6)';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(eff.x-60,330);ctx.lineTo(eff.x-60,380);ctx.stroke();
+  });
+  ctx.fillStyle='#F39C12';ctx.font='9px Arial';ctx.textAlign='center';ctx.fillText('Concentrate removed',350,395);
+  
+  // Labels
+  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,220,65);
+  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('WFI Multi-Effect Still',18,30);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('3 effects shown (7 effects typical)',18,48);ctx.fillText('1 kg steam = 6.5 kg WFI (7-effect)',18,64);
 }
 function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
 loop();

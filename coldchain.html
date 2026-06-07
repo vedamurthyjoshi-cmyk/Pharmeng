@@ -1,113 +1,243 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Pharmaceutical Cold Chain - Pharmaceutical Engineering</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cold Chain | Pharmaceutical Engineering</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Arial,sans-serif;background:#f0f4f8;}
-header{background:#1B4F72;color:white;padding:16px 20px;}header h1{font-size:1.3em;}header p{font-size:0.85em;opacity:0.8;margin-top:4px;}
-nav{background:#2E86C1;padding:10px 20px;}nav a{color:white;text-decoration:none;font-size:0.9em;margin-right:16px;}
-.tabs{display:flex;background:white;border-bottom:3px solid #1B4F72;}.tab{padding:12px 24px;cursor:pointer;font-weight:bold;color:#555;font-size:0.95em;border:none;background:none;}.tab.active{color:#1B4F72;border-bottom:3px solid #1B4F72;margin-bottom:-3px;}
-.panel{display:none;padding:20px;max-width:860px;margin:0 auto;}.panel.active{display:block;}
-.anim-box{background:white;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);margin-bottom:20px;text-align:center;}
-canvas{border-radius:8px;background:#1a1a2e;max-width:100%;}
-.btn{background:#1B4F72;color:white;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:0.95em;margin:4px;}.btn:hover{background:#2E86C1;}
-.theory-box{background:white;border-radius:10px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:16px;}
-.theory-box h3{color:#1B4F72;margin-bottom:10px;font-size:1.05em;border-bottom:2px solid #EBF5FB;padding-bottom:6px;}
-.theory-box p{line-height:1.8;font-size:0.95em;color:#333;}
-.key-fact{background:#EAFAF1;border:1px solid #A9DFBF;border-radius:8px;padding:12px 16px;margin:12px 0;font-size:0.93em;}
-.mcq-card{background:white;border-radius:10px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.mcq-q{font-weight:bold;margin-bottom:12px;color:#1B4F72;}
-.opt{display:block;width:100%;padding:10px 14px;margin:6px 0;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:0.93em;text-align:left;background:white;transition:all 0.2s;}
-.opt:hover{background:#EBF5FB;border-color:#1B4F72;}.opt.correct{background:#EAFAF1!important;border-color:#27AE60!important;color:#1E8449;}.opt.wrong{background:#FDEDEC!important;border-color:#E74C3C!important;color:#922B21;}
-.explanation{display:none;margin-top:12px;padding:12px;background:#FEF9E7;border-radius:6px;font-size:0.9em;line-height:1.6;border-left:3px solid #F39C12;}
-.score-box{text-align:center;padding:24px;background:white;border-radius:10px;margin-top:10px;}
-footer{text-align:center;padding:20px;color:#888;font-size:0.8em;background:white;margin-top:20px;}
-</style>
-</head>
-<body>
-<header><h1>Pharmaceutical Cold Chain</h1><p>Pharmaceutical Engineering BP304T - Chapter 13 - Material Handling</p></header>
-<nav><a href="index.html">Home</a></nav>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d0d1a;color:#eee;font-family:Arial,sans-serif;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+h1{font-size:1.2rem;padding:10px;color:#AED6F1;text-align:center}
+.tabs{display:flex;gap:6px;margin-bottom:8px}
+.tab{padding:7px 18px;border:none;border-radius:6px 6px 0 0;cursor:pointer;font-size:0.9rem;background:#1a1a2e;color:#aaa}
+.tab.active{background:#1F4E79;color:#fff}
+canvas{border-radius:8px;display:block}
+.panel{display:none;max-width:720px;width:100%;background:#111827;border-radius:0 8px 8px 8px;padding:16px;line-height:1.7}
+.panel.active{display:block}
+.panel h2{color:#AED6F1;margin-bottom:8px;font-size:1rem}
+.panel p,.panel li{font-size:0.88rem;color:#ccc;margin-bottom:6px}
+.panel ul{padding-left:18px}
+.mcq{margin-bottom:14px}
+.mcq p{font-size:0.88rem;color:#ddd;margin-bottom:6px}
+.mcq button{display:block;width:100%;text-align:left;margin:3px 0;padding:6px 10px;background:#1a1a2e;border:1px solid #333;border-radius:5px;color:#ccc;cursor:pointer;font-size:0.83rem}
+.mcq button:hover{background:#1F4E79}
+.right{background:#145a32!important;color:#fff!important}
+.wrong{background:#7b241c!important;color:#fff!important}
+.controls{display:flex;gap:8px;margin:8px 0}
+.controls button{padding:6px 14px;border:none;border-radius:5px;background:#1F4E79;color:#fff;cursor:pointer;font-size:0.85rem}
+footer{font-size:0.75rem;color:#555;padding:10px;text-align:center}
+</style></head><body>
+<h1>Cold Chain Management — Temperature-Controlled Supply</h1>
 <div class="tabs">
   <button class="tab active" onclick="showTab('anim',this)">Animation</button>
   <button class="tab" onclick="showTab('theory',this)">Theory</button>
   <button class="tab" onclick="showTab('mcq',this)">MCQs</button>
 </div>
 <div id="anim" class="panel active">
-<div class="anim-box">
-  <canvas id="c" width="720" height="360"></canvas>
-  <div style="margin-top:14px;">
-    <button class="btn" id="playBtn" onclick="togglePlay()">Pause</button>
-    <button class="btn" onclick="setSpeed(0.5)">Slow</button>
-    <button class="btn" onclick="setSpeed(1)">Normal</button>
-    <button class="btn" onclick="setSpeed(2)">Fast</button>
+  <div class="controls">
+    <button onclick="toggleRun()">⏯ Pause/Play</button>
+    <button onclick="resetAnim()">↺ Reset</button>
   </div>
-</div>
-<div class="theory-box">
-  <h3>What you are seeing</h3>
-  <p>Temperature-controlled supply chain for biologics, vaccines, and temperature-sensitive pharmaceuticals. Key temperatures: 2-8 degrees C (refrigerated); -20 degrees C (frozen); -80 degrees C (ultra-cold for mRNA vaccines). Data loggers record temperature every 5-15 minutes throughout distribution.</p>
-  <div class="key-fact">Key Point: Cold chain failure is the number 1 cause of vaccine spoilage globally. Mean Kinetic Temperature (MKT) calculation determines if a temperature excursion has compromised product. WHO PQS certifies cold chain equipment for global vaccine distribution.</div>
-</div>
+  <canvas id="c" width="720" height="380"></canvas>
 </div>
 <div id="theory" class="panel">
-  <div class="theory-box"><h3>Pharmaceutical Cold Chain - Principle</h3>
-    <p>Temperature-controlled supply chain for biologics, vaccines, and temperature-sensitive pharmaceuticals. Key temperatures: 2-8 degrees C (refrigerated); -20 degrees C (frozen); -80 degrees C (ultra-cold for mRNA vaccines). Data loggers record temperature every 5-15 minutes throughout distribution.</p>
-    <div class="key-fact">Key Fact: Cold chain failure is the number 1 cause of vaccine spoilage globally. Mean Kinetic Temperature (MKT) calculation determines if a temperature excursion has compromised product. WHO PQS certifies cold chain equipment for global vaccine distribution.</div>
-    <p style="margin-top:16px;color:#666;font-style:italic;">Refer to your textbook Chapter 13 - Material Handling for complete construction details, working, advantages, disadvantages, and pharmaceutical applications.</p>
-  </div>
+  <h2>Pharmaceutical Cold Chain</h2>
+  <p>The cold chain is an unbroken temperature-controlled supply chain that ensures temperature-sensitive pharmaceutical products (vaccines, biologics, insulin) remain within specified conditions from manufacture to patient.</p>
+  <h2>Temperature Categories</h2>
+  <ul>
+    <li><strong>Room temperature:</strong> 15–25°C — most tablets, capsules</li>
+    <li><strong>Refrigerated (CRT):</strong> +2 to +8°C — vaccines, insulin, many biologics</li>
+    <li><strong>Frozen:</strong> −15 to −25°C — some vaccines (varicella, MMR)</li>
+    <li><strong>Ultra-cold:</strong> −60 to −80°C — mRNA vaccines (e.g. Pfizer-BioNTech COVID-19)</li>
+    <li><strong>Cryogenic:</strong> −150°C and below — cell/gene therapies in liquid nitrogen</li>
+  </ul>
+  <h2>Cold Chain Elements</h2>
+  <ul>
+    <li>Cold store warehouse → refrigerated transport vehicle → distribution hub</li>
+    <li>Qualified thermal packaging (insulated shippers, phase-change materials)</li>
+    <li>Continuous temperature data loggers and real-time monitoring</li>
+    <li>Mean Kinetic Temperature (MKT) calculations for excursion assessment</li>
+    <li>ICH Q1A and WHO guidelines for temperature excursion management</li>
+  </ul>
 </div>
 <div id="mcq" class="panel">
-  <div class="mcq-card">
-    <div class="mcq-q">Q1. Which statement best describes the principle of Pharmaceutical Cold Chain?</div>
-    <button class="opt" onclick="choose(this,false)">A) It relies on filtration through a membrane to separate components</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Temperature-controlled supply chain for biologics, vaccines, and temperature-sensitive pharmaceutica...</button>
-    <button class="opt" onclick="choose(this,false)">C) It uses electromagnetic radiation to process pharmaceutical materials</button>
-    <button class="opt" onclick="choose(this,false)">D) It operates exclusively at cryogenic temperatures below -196 degrees C</button>
-    <div class="explanation">Correct. Cold chain failure is the number 1 cause of vaccine spoilage globally. Mean Kinetic Temperature (MKT) calculation determines if a temperature excursion has compromised product. WHO PQS certifies cold chain equipment for global vaccine distribution.</div>
-  </div>
-  <div class="mcq-card">
-    <div class="mcq-q">Q2. A key pharmaceutical significance of Pharmaceutical Cold Chain is:</div>
-    <button class="opt" onclick="choose(this,false)">A) It requires no energy input and operates spontaneously</button>
-    <button class="opt" onclick="choose(this,true)" data-correct>B) Cold chain failure is the number 1 cause of vaccine spoilage globally. Mean Kinetic Temperature (MKT...</button>
-    <button class="opt" onclick="choose(this,false)">C) It can process all pharmaceutical materials without any limitations</button>
-    <button class="opt" onclick="choose(this,false)">D) It was invented specifically for pharmaceutical use in the 20th century</button>
-    <div class="explanation">Correct. Temperature-controlled supply chain for biologics, vaccines, and temperature-sensitive pharmaceuticals. Key temperatures: 2-8 degrees C (refrigerated); -20 degrees C (frozen); -80 degrees C (ultra-cold for mRNA vaccines). Data loggers record temperature every 5-15 minutes throughout distribution.</div>
-  </div>
-  <div class="score-box" id="score" style="display:none">
-    <h2 id="scoreText" style="color:#1B4F72;margin-bottom:16px;"></h2>
-    <button class="btn" onclick="resetMCQ()">Try Again</button>
-  </div>
+  <div class="mcq"><p>1. Refrigerated pharmaceutical products require storage at:</p>
+    <button onclick="cho(this,0)">a) 0 to +5°C</button>
+    <button data-c="1" onclick="cho(this,1)">b) +2 to +8°C</button>
+    <button onclick="cho(this,0)">c) +8 to +15°C</button>
+    <button onclick="cho(this,0)">d) −20°C</button></div>
+  <div class="mcq"><p>2. Mean Kinetic Temperature (MKT) is used to:</p>
+    <button onclick="cho(this,0)">a) Calculate the coldest point in transit</button>
+    <button data-c="1" onclick="cho(this,1)">b) Assess the impact of temperature excursions on product stability</button>
+    <button onclick="cho(this,0)">c) Set the thermostat of cold stores</button>
+    <button onclick="cho(this,0)">d) Calibrate data loggers</button></div>
+  <div class="mcq"><p>3. mRNA vaccines (e.g. COVID-19) require storage at approximately:</p>
+    <button onclick="cho(this,0)">a) +2 to +8°C</button>
+    <button onclick="cho(this,0)">b) −20°C</button>
+    <button data-c="1" onclick="cho(this,1)">c) −70°C (ultra-cold)</button>
+    <button onclick="cho(this,0)">d) −196°C (liquid nitrogen)</button></div>
+  <div class="mcq"><p>4. A temperature data logger in a cold-chain shipment records:</p>
+    <button data-c="1" onclick="cho(this,1)">a) Continuous temperature vs time throughout transit</button>
+    <button onclick="cho(this,0)">b) Only the minimum temperature reached</button>
+    <button onclick="cho(this,0)">c) GPS location only</button>
+    <button onclick="cho(this,0)">d) Product weight changes</button></div>
 </div>
-<footer>Copyright 2025 Pharmaceutical Engineering BP304T - Pharmaceutical Cold Chain</footer>
+<footer>© 2025 Pharmaceutical Engineering BP304T</footer>
 <script>
-function showTab(id,btn){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-let _s=0,_a=0;
-function choose(el,correct){const card=el.closest('.mcq-card');if(card.querySelector('.correct')||card.querySelector('.wrong'))return;if(correct){el.classList.add('correct');_s++;}else{el.classList.add('wrong');card.querySelector('[data-correct]').classList.add('correct');}card.querySelector('.explanation').style.display='block';_a++;const t=document.querySelectorAll('.mcq-card').length;if(_a===t){document.getElementById('score').style.display='block';document.getElementById('scoreText').textContent='Score: '+_s+' / '+t+(_s===t?' - Perfect!':' - Review and try again.');}}
-function resetMCQ(){_s=0;_a=0;document.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));document.querySelectorAll('.explanation').forEach(e=>e.style.display='none');document.getElementById('score').style.display='none';}
-const canvas=document.getElementById('c');const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
-let running=true,speedMult=1,t=0;
-function togglePlay(){running=!running;document.getElementById('playBtn').textContent=running?'Pause':'Play';if(running)loop();}
-function setSpeed(s){speedMult=s;}
-const particles=[];
-const cols=['#3498DB','#2ECC71','#E74C3C','#F39C12','#9B59B6','#1ABC9C'];
-for(let i=0;i<55;i++) particles.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*1.8,vy:(Math.random()-0.5)*1.8,r:2+Math.random()*5,col:cols[Math.floor(Math.random()*cols.length)]});
-function step(){t+=speedMult;particles.forEach(p=>{p.x+=p.vx*speedMult;p.y+=p.vy*speedMult;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;});}
-function draw(){
-  ctx.clearRect(0,0,W,H);ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#4A90D9';ctx.lineWidth=4;ctx.fillStyle='rgba(74,144,217,0.05)';
-  ctx.beginPath();ctx.roundRect(70,50,580,260,10);ctx.fill();ctx.stroke();
-  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.col;ctx.globalAlpha=0.75;ctx.fill();ctx.globalAlpha=1;});
-  ctx.save();ctx.translate(W/2,H/2);ctx.rotate(t*0.012);
-  ctx.strokeStyle='rgba(174,214,241,0.18)';ctx.lineWidth=1.5;ctx.setLineDash([6,8]);
-  ctx.beginPath();ctx.arc(0,0,110,0,Math.PI*2);ctx.stroke();
-  ctx.beginPath();ctx.arc(0,0,60,0,Math.PI*2);ctx.stroke();
-  ctx.setLineDash([]);ctx.restore();
-  ctx.fillStyle='rgba(0,0,0,0.65)';ctx.fillRect(10,10,225,60);
-  ctx.fillStyle='white';ctx.font='12px Arial';ctx.textAlign='left';ctx.fillText('Pharmaceutical Cold Chain_SHORT',18,30);
-  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';ctx.fillText('Chapter 13 - Material Handling',18,48);
+function showTab(id,el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');el.classList.add('active');
 }
-function loop(){if(running)step();draw();if(running)requestAnimationFrame(loop);}
+function cho(el,ok){
+  const btns=el.parentElement.querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);el.classList.add(ok?'right':'wrong');
+  if(!ok)btns.forEach(b=>{if(b.dataset.c)b.classList.add('right');});
+}
+
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+const W=720,H=380;
+let t=0,running=true;
+
+// Chain stages
+const stages=[
+  {x:50,y:145,w:90,h:80,label:'COLD\nSTORE',sublabel:'+2–8°C',col:'rgba(41,128,185,0.35)',border:'#2980b9',icon:'❄'},
+  {x:200,y:145,w:90,h:80,label:'REEFER\nTRUCK',sublabel:'+2–8°C',col:'rgba(41,128,185,0.25)',border:'#3498db',icon:'🚛'},
+  {x:350,y:145,w:90,h:80,label:'AIRPORT\nHUB',sublabel:'+2–8°C',col:'rgba(39,174,96,0.25)',border:'#27ae60',icon:'✈'},
+  {x:500,y:145,w:90,h:80,label:'DIST.\nCENTRE',sublabel:'+2–8°C',col:'rgba(142,68,173,0.25)',border:'#8e44ad',icon:'🏭'},
+  {x:625,y:145,w:90,h:80,label:'PHARMACY\n/HOSPITAL',sublabel:'+2–8°C',col:'rgba(231,76,60,0.25)',border:'#e74c3c',icon:'🏥'},
+];
+
+// Moving package along chain
+let pkg={stageIdx:0,frac:0};
+
+// Temperature graph (bottom)
+let tempHistory=[];
+const maxHistory=240;
+let graphT=0;
+
+// Simulate temp: mostly in range, occasional small excursion
+function simTemp(tt){
+  let base=5;
+  // small oscillation + occasional bump
+  base+=Math.sin(tt*0.04)*1.2;
+  if(tt>80&&tt<100)base+=3; // small excursion
+  return base;
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a1a2e';ctx.fillRect(0,0,W,H);
+
+  // Draw chain stages
+  stages.forEach((s,i)=>{
+    ctx.fillStyle=s.col;ctx.fillRect(s.x,s.y,s.w,s.h);
+    ctx.strokeStyle=s.border;ctx.lineWidth=2;ctx.strokeRect(s.x,s.y,s.w,s.h);
+    ctx.fillStyle='#fff';ctx.font='bold 10px Arial';ctx.textAlign='center';
+    s.label.split('\n').forEach((l,li)=>ctx.fillText(l,s.x+s.w/2,s.y+22+li*14));
+    ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+    ctx.fillText(s.sublabel,s.x+s.w/2,s.y+s.h-10);
+    ctx.font='18px serif';ctx.fillText(s.icon,s.x+s.w/2,s.y+s.h-24);
+    // Arrow to next
+    if(i<stages.length-1){
+      ctx.beginPath();ctx.moveTo(s.x+s.w+2,s.y+s.h/2);
+      ctx.lineTo(stages[i+1].x-2,stages[i+1].y+stages[i+1].h/2);
+      ctx.strokeStyle='#f39c12';ctx.lineWidth=2.5;ctx.stroke();
+      ctx.beginPath();
+      const nx=stages[i+1].x-10,ny=stages[i+1].y+stages[i+1].h/2;
+      ctx.moveTo(nx,ny);ctx.lineTo(nx-8,ny-5);ctx.lineTo(nx-8,ny+5);ctx.closePath();
+      ctx.fillStyle='#f39c12';ctx.fill();
+    }
+  });
+
+  // Moving package
+  const si=pkg.stageIdx,s1=stages[si],s2=stages[Math.min(si+1,stages.length-1)];
+  const px=s1.x+s1.w+(s2.x-s1.x-s1.w)*pkg.frac;
+  const py=s1.y+s1.h/2-8;
+  // Package box
+  ctx.fillStyle='#f39c12';ctx.fillRect(px-14,py,28,18);
+  ctx.strokeStyle='#d35400';ctx.lineWidth=1.5;ctx.strokeRect(px-14,py,28,18);
+  ctx.fillStyle='#fff';ctx.font='bold 8px Arial';ctx.textAlign='center';
+  ctx.fillText('VACC',px,py+12);
+  // Data logger blinking dot
+  if(Math.floor(t/20)%2===0){
+    ctx.beginPath();ctx.arc(px+10,py+3,4,0,Math.PI*2);
+    ctx.fillStyle='#2ecc71';ctx.fill();
+  }
+
+  // Temperature graph (bottom half)
+  const gX=30,gY=260,gW=660,gH=100;
+  ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(gX,gY,gW,gH);
+  ctx.strokeStyle='#4A90D9';ctx.lineWidth=1.5;ctx.strokeRect(gX,gY,gW,gH);
+
+  // Y axis (0–15°C)
+  ctx.fillStyle='#aaa';ctx.font='9px Arial';ctx.textAlign='right';
+  [0,2,4,6,8,10,12,14].forEach(tv=>{
+    const ty=gY+gH-(tv/14)*gH;
+    ctx.fillText(tv+'°C',gX-3,ty+3);
+    ctx.strokeStyle='rgba(100,100,100,0.4)';ctx.lineWidth=0.5;
+    ctx.beginPath();ctx.moveTo(gX,ty);ctx.lineTo(gX+gW,ty);ctx.stroke();
+  });
+
+  // Red excursion zone (>8°C)
+  const excY=gY+gH-(8/14)*gH;
+  ctx.fillStyle='rgba(231,76,60,0.1)';ctx.fillRect(gX,gY,gW,excY-gY);
+  ctx.strokeStyle='rgba(231,76,60,0.5)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(gX,excY);ctx.lineTo(gX+gW,excY);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='rgba(231,76,60,0.7)';ctx.font='9px Arial';ctx.textAlign='right';
+  ctx.fillText('EXCURSION LIMIT 8°C',gX+gW-5,excY-4);
+
+  // Min limit (2°C)
+  const minY=gY+gH-(2/14)*gH;
+  ctx.strokeStyle='rgba(52,152,219,0.5)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(gX,minY);ctx.lineTo(gX+gW,minY);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='rgba(52,152,219,0.7)';ctx.font='9px Arial';
+  ctx.fillText('MIN LIMIT 2°C',gX+gW-5,minY+12);
+
+  // Temperature trace
+  if(tempHistory.length>1){
+    ctx.beginPath();
+    tempHistory.forEach((tv,i)=>{
+      const tx=gX+gW-(tempHistory.length-1-i)*(gW/maxHistory);
+      const ty2=gY+gH-(tv/14)*gH;
+      i===0?ctx.moveTo(tx,ty2):ctx.lineTo(tx,ty2);
+    });
+    ctx.strokeStyle='#2ecc71';ctx.lineWidth=2;ctx.stroke();
+    // Colour excursion red
+    tempHistory.forEach((tv,i)=>{
+      if(tv>8){
+        const tx=gX+gW-(tempHistory.length-1-i)*(gW/maxHistory);
+        const ty2=gY+gH-(tv/14)*gH;
+        ctx.beginPath();ctx.arc(tx,ty2,2.5,0,Math.PI*2);
+        ctx.fillStyle='#e74c3c';ctx.fill();
+      }
+    });
+  }
+
+  ctx.fillStyle='#AED6F1';ctx.font='bold 10px Arial';ctx.textAlign='left';
+  ctx.fillText('Temperature Monitor — Data Logger Record',gX,gY-8);
+  ctx.fillStyle='#2ecc71';ctx.font='10px Arial';
+  const curT=tempHistory.length>0?tempHistory[tempHistory.length-1]:5;
+  ctx.fillText('Current: '+curT.toFixed(1)+'°C',gX+gW-90,gY-8);
+
+  // Info box
+  ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(10,10,255,55);
+  ctx.fillStyle='#fff';ctx.font='bold 12px Arial';ctx.textAlign='left';
+  ctx.fillText('Pharmaceutical Cold Chain',18,28);
+  ctx.fillStyle='#AED6F1';ctx.font='10px Arial';
+  ctx.fillText('Unbroken 2–8°C from manufacture to patient',18,46);
+
+  if(running){
+    pkg.frac+=0.004;
+    if(pkg.frac>=1){pkg.frac=0;pkg.stageIdx=(pkg.stageIdx+1)%(stages.length-1);}
+    graphT++;
+    const temp=simTemp(graphT);
+    tempHistory.push(temp);
+    if(tempHistory.length>maxHistory)tempHistory.shift();
+  }
+}
+
+function step(){t++;}
+function loop(){if(running)step();draw();requestAnimationFrame(loop);}
+function toggleRun(){running=!running;}
+function resetAnim(){t=0;pkg={stageIdx:0,frac:0};tempHistory=[];graphT=0;}
 loop();
-</script>
-</body>
-</html>
+</script></body></html>
